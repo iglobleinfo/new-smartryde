@@ -1,0 +1,61 @@
+name: smart_ryde
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cached_network_image: ^3.3.0
+  colorful_safe_area: ^1.0.0
+  cupertino_icons: ^1.0.6
+  device_info_plus: ^9.1.1
+  dio: ^5.4.0
+  fancy_shimmer_image: ^2.0.3
+  file_picker: ^6.1.1
+  firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.7.9
+  flutter_easyloading: ^3.0.5
+  flutter_facebook_auth: ^6.0.3
+  flutter_inapp_purchase: ^5.6.1
+  flutter_widget_from_html: ^0.14.9
+  flutter_local_notifications: ^15.1.0+1
+  flutter_screenutil: 5.8.4
+  flutter_share: ^2.0.0
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  google_sign_in: ^6.2.1
+  image_cropper: ^5.0.1
+  image_picker: ^1.0.5
+  in_app_review: ^2.0.8
+  introduction_screen: ^3.1.12
+  logger: ^2.0.2+1
+  package_info_plus: ^5.0.1
+  the_apple_sign_in: ^1.1.1
+  url_launcher: ^6.2.2
+  intl: ^0.19.0
+  flutter_logger:
+    path: flutter_logger
+  connectivity_plus: ^5.0.2
+  syncfusion_flutter_calendar: ^20.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/fonts/
+
+
