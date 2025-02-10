@@ -1,5 +1,3 @@
-
-
 // Package imports:
 
 import 'package:dio/dio.dart';
@@ -63,7 +61,6 @@ class NetworkExceptions {
                     }
                   }
                 case 401:
-                  // TODO: remove LocalKey_token
                   storage.remove(LOCALKEY_token);
                   PreferenceManger().clearLoginData();
                   Get.offAllNamed(AppRoutes.logIn);
@@ -74,8 +71,7 @@ class NetworkExceptions {
                     return messageData = 'Session expired';
                   }
                 case 403:
-                  // TODO: remove LocalKey_token
-                  // storage.remove(LOCALKEY_token);
+                  storage.remove(LOCALKEY_token);
                   PreferenceManger().clearLoginData();
                   Get.offAllNamed(AppRoutes.logIn);
                   try {

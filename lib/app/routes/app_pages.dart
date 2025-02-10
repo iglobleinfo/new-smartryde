@@ -1,5 +1,4 @@
 import 'package:smart_ryde/app/modules/authentication/views/forget_screen.dart';
-import 'package:smart_ryde/app/modules/authentication/views/login_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/profile_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/register_screen.dart';
 import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
@@ -7,34 +6,27 @@ import 'package:smart_ryde/app/modules/home/views/item_view.dart';
 import 'package:smart_ryde/app/modules/home/views/main_screen.dart';
 import 'package:smart_ryde/app/modules/onboarding/views/onboarding_screen.dart';
 import 'package:smart_ryde/app/modules/splash/views/splash_screen.dart';
-import 'package:smart_ryde/app/routes/app_routes.dart';
-
 import '../../export.dart';
 import '../modules/language/bindings/select_language_binding.dart';
 import '../modules/language/views/select_language_screen.dart';
-import '../modules/new_signin.dart';
-
 
 class AppPages {
-  static const INITIAL = AppRoutes.splash;
+  static const initial = AppRoutes.logIn;
 
   static final routes = [
     GetPage(
-        name: AppRoutes.splash,
-        page: () => SplashScreen(),
-        bindings: [SplashBinding()
-        ],
+      name: AppRoutes.splash,
+      page: () => SplashScreen(),
+      bindings: [SplashBinding()],
     ),
     GetPage(
-      name: AppRoutes.selectLanguage,
-      page: () => SelectLanguageScreen(),
-      binding: SelectLanguageBinding()
-    ),
+        name: AppRoutes.selectLanguage,
+        page: () => SelectLanguageScreen(),
+        binding: SelectLanguageBinding()),
     GetPage(
         name: AppRoutes.onBoarding,
         page: () => OnboardingScreen(),
-        binding: OnBoardingBinding()
-    ),
+        binding: OnBoardingBinding()),
     GetPage(
       name: AppRoutes.logIn,
       page: () => LoginScreen(),
@@ -69,12 +61,6 @@ class AppPages {
       name: AppRoutes.profile,
       page: () => ProfileScreen(),
       bindings: [AuthenticationBinding()],
-    ),  GetPage(
-      name: AppRoutes.newSignIn,
-      page: () => NewSignIn(),
-      bindings: [AuthenticationBinding()],
     ),
   ];
-
-
 }

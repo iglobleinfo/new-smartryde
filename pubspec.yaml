@@ -59,3 +59,13 @@ flutter:
     - assets/fonts/
 
 
+  fonts:
+    - family: Urbanist
+      fonts:
+        - asset: assets/fonts/MazzardL-Bold.otf
+        - asset: assets/fonts/MazzardL-SemiBold.otf
+        - asset: assets/fonts/MazzardL-Light.otf
+        - asset: assets/fonts/MazzardL-Medium.otf
+        - asset: assets/fonts/MazzardL-Regular.otf
+
+

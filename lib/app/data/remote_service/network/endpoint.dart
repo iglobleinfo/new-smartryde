@@ -1,13 +1,14 @@
 
 
-const crashBaseUrl = "http://192.168.2.171/project/";
-const baseUrl = "";
+const crashBaseUrl = "http://hk.igloble.com/minibusapi";
+const baseUrl = "http://hk.igloble.com/minibusapi";
 const website = 'https://pub.dev';
 
-const login = "/Account/Login";
-const socialLogin = "/Account/socialLogin";
-const forget = "/Account/ForgetPassword";
-const myAccount = "/Account/MyAccount";
+const endPointLogin = "/user";
+const endPointSignUp = "/user";
+const endPointSocialLogin = "/Account/socialLogin";
+const endPointForgot = "/Account/ForgetPassword";
+const endPointMyAccount = "/Account/MyAccount";
 const myBook = "/Book/MyBook";
 const lend = "/Book/Lend";
 const returnMyBook = "/Book/ReturnMyBook";
@@ -18,11 +19,11 @@ const plansListEndPt = "/Content/faq";
 const buySubscriptionEndPt = "/Content/faq";
 
 //Social login type const
-const GOOGLE_SIGN_IN = 1;
-const APPLE_SIGN_IN = 2;
-const FB_SIGN_IN = 3;
+const int googleSignIn = 1;
+const int appleSignIn = 2;
+const int fbSignIn = 3;
 
-const APP_ID = "";
+const appId = "";
 
 //Log exceptions and crashes
 const logCrashesExceptionsEndPoint = "/log/exception";

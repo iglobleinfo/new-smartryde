@@ -43,8 +43,6 @@ class SelectLanguageController extends GetxController {
 
   List<CommonLanguageCalenderModel> languageList = [
     CommonLanguageCalenderModel(id: pageTypeEnglish, title: keyEnglish.tr),
-    CommonLanguageCalenderModel(id: pageTypeHindi, title: keyHindi.tr),
-    CommonLanguageCalenderModel(id: pageTypePunjabi, title: keyPunjabi.tr),
   ];
 
   @override

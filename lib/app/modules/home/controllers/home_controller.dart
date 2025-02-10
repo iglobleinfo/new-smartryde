@@ -27,26 +27,6 @@ class HomeController extends GetxController {
   List<PlatformFile>? paths;
   int bottomNavIndex=0;
   List<Item> items=[
-   Item(
-      image:'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
-        title: 'Image 2',
-        description: stringDummyText
-    ),
-    Item(
-      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL6nd9fr0gb40AEwMpEHhiT3qal25CF-3N9E6tnr_ZA_xZd1o5Hzsa0-2EsvyNYwDHiUM&usqp=CAU',
-        title: 'Image 3',
-        description: stringDummyText
-    ),
-    Item(
-      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIBnrkZUFGWgsnF_CfiFFYaOe1nHosyVKW83Tdzpl4VQ55Rxl-HLMEU05gvAiSPIXleUk&usqp=CAU',
-        title: 'Image 4',
-        description: stringDummyText
-    ),
-    Item(
-      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3VUm8bdKu52dwpoXo2PHFMBrs4ypZ4Opey4IxsWym23RxMZeNCV30-KGIWHFiiMIkzcU&usqp=CAU',
-        title: 'Image 5',
-        description: stringDummyText
-    ),
   ];
 
   @override

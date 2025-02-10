@@ -1,6 +1,3 @@
-
-
-
 import '../../../../../export.dart';
 
 class LoginController extends GetxController {
@@ -34,7 +31,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
- super.onClose();
+    super.onClose();
   }
 
   @override
@@ -65,8 +62,8 @@ class LoginController extends GetxController {
   }
 
   /*===================================================================== Password Visibility  ==========================================================*/
-  showOrHidePasswordVisibility(){
-    viewPassword=!viewPassword;
+  showOrHidePasswordVisibility() {
+    viewPassword = !viewPassword;
     update();
   }
 
@@ -74,14 +71,14 @@ class LoginController extends GetxController {
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser =
-    await GoogleSignIn().signIn().onError((error, stackTrace) {
+        await GoogleSignIn().signIn().onError((error, stackTrace) {
       debugPrint(error.toString());
-      toast(stringGoogleSignInCancelled);
+      return toast('stringGoogleSignInCancelled');
     });
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth =
-    await googleUser!.authentication;
+        await googleUser!.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -99,16 +96,15 @@ class LoginController extends GetxController {
         permissions: ['email', 'public_profile'],
         loginBehavior: LoginBehavior.nativeWithFallback).then((value) {
       token = value.accessToken!.tokenString;
-        }).onError((error, stackTrace) {});
+    }).onError((error, stackTrace) {});
 
     if (token == null) return null;
     final facebookAuthCredential = FacebookAuthProvider.credential(token!);
 
-    var cred=await FirebaseAuth.instance
+    var cred = await FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential)
         .onError((error, stackTrace) {
-      toast(error.toString());
-      return Future.value(null);
+      return toast(error.toString());
     });
     return cred;
   }
@@ -121,7 +117,6 @@ class LoginController extends GetxController {
     switch (result.status) {
       case AuthorizationStatus.authorized:
         return result;
-
 
       case AuthorizationStatus.error:
         debugPrint("Sign in failed: ${result.error!.localizedDescription}");
@@ -137,13 +132,15 @@ class LoginController extends GetxController {
     try {
       customLoader.show(Get.overlayContext);
       UserCredential userCredential = await signInWithGoogle();
-      hitSocialLoginApi(userCredential.user, GOOGLE_SIGN_IN);
+      hitSocialLoginApi(userCredential.user, googleSignIn);
     } on FirebaseException catch (e) {
       customLoader.hide();
       toast(e.message);
     } catch (e) {
       customLoader.hide();
-      toast(stringGoogleSignInCancelled, );
+      toast(
+        'stringGoogleSignInCancelled',
+      );
     }
   }
 
@@ -152,17 +149,17 @@ class LoginController extends GetxController {
       customLoader.show(Get.overlayContext);
       UserCredential? userCredential = await signInWithFacebook();
       if (userCredential != null) {
-        hitSocialLoginApi(userCredential.user, FB_SIGN_IN);
+        hitSocialLoginApi(userCredential.user, fbSignIn);
       } else {
         customLoader.hide();
-        toast(stringFbSignInCancelled);
+        toast('stringFbSignInCancelled');
       }
     } on FirebaseException catch (e) {
       customLoader.hide();
       debugPrint(e.message);
     } catch (e) {
       customLoader.hide();
-      toast(stringFbSignInCancelled);
+      toast('stringFbSignInCancelled');
     }
   }
 
@@ -173,14 +170,14 @@ class LoginController extends GetxController {
       customLoader.show(Get.overlayContext);
       hitSocialLoginApi(
         userCredential!.credential!,
-        APPLE_SIGN_IN,
+        appleSignIn,
       );
     } on FirebaseException catch (e) {
       customLoader.hide();
       print(e.message);
     } catch (e) {
       customLoader.hide();
-      toast(stringAppleSignInCancelled);
+      toast('stringAppleSignInCancelled');
     }
   }
 
@@ -228,7 +225,7 @@ class LoginController extends GetxController {
   /*===================================================================== My account details API Call  ==========================================================*/
   hitMyAccountAPI() {
     APIRepository.myAccountApiCall().then((value) {
-      myAccountModel= value;
+      myAccountModel = value;
       storage.write(LOCALKEY_myAccount, myAccountModel);
     }).onError((error, stackTrace) {
       toast(error);
@@ -262,8 +259,4 @@ class LoginController extends GetxController {
       toast(error);
     });
   }
-
-
-
-
 }

@@ -25,7 +25,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                     imageUrl: iconSmallLogo, imageHeight: 70)
                                 .marginOnly(bottom: margin_16),
                             TextView(
-                              text: stringRegister,
+                              text: 'stringRegister',
                               maxLine: 2,
                               textStyle: textStyleTitle(context),
                               textAlign: TextAlign.center,
@@ -39,13 +39,13 @@ class RegisterScreen extends GetView<RegisterController> {
                                     TextFieldWidget(
                                             textController:
                                                 controller.emailController,
-                                            labelText: stringEmail,
+                                            labelText: 'stringEmail',
                                             validate: (value) {
                                               if (value!.isEmpty)
-                                                return stringEmailEmptyValidation;
+                                                return 'stringEmailEmptyValidation';
                                               else if (value.length > 0 &&
                                                   !GetUtils.isEmail(value))
-                                                return stringEmailValidValidation;
+                                                return 'stringEmailValidValidation';
                                               else
                                                 return null;
                                             },
@@ -55,11 +55,11 @@ class RegisterScreen extends GetView<RegisterController> {
                                     TextFieldWidget(
                                         textController:
                                             controller.passwordController,
-                                        labelText: stringPassword,
+                                        labelText: 'stringPassword',
                                         obscureText: true,
                                         validate: (value) {
                                           if (value!.isEmpty)
-                                            return stringPasswordEmptyValidation;
+                                            return 'stringPasswordEmptyValidation';
                                           else
                                             return null;
                                         },
@@ -74,16 +74,16 @@ class RegisterScreen extends GetView<RegisterController> {
                                   controller.hitLoginAPI(context);
                                 }
                               },
-                              buttonText: stringRegister,
+                              buttonText: 'stringRegister',
                             ).marginOnly(bottom: margin_65),
                             GestureDetector(
                               onTap: () {},
                               child: Text.rich(
                                 TextSpan(
-                                    text: stringAlreadyHaveAccount,
+                                    text: 'stringAlreadyHaveAccount',
                                     children: [
                                       TextSpan(
-                                        text: ' $stringSignIn ',
+                                        text: '',
                                         recognizer: new TapGestureRecognizer()
                                           ..onTap = () {
                                             Get.offAllNamed(AppRoutes.logIn);

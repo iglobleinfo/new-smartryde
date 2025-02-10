@@ -52,7 +52,7 @@ class APIRepository {
   /*===================================================================== login API Call  ==========================================================*/
   static Future socialLoginApiCall({Map<String, dynamic>? dataBody}) async {
     try {
-      final response = await dioClient!.post(socialLogin, data: dataBody);
+      final response = await dioClient!.post(endPointSocialLogin, data: dataBody);
       return LoginModel.fromJson(response);
     } catch (e,str) {
       return Future.error(NetworkExceptions.getDioException(e,str));
@@ -61,7 +61,7 @@ class APIRepository {
 
   static Future forgetApiCall({Map<String, dynamic>? dataBody}) async {
     try {
-      final response = await dioClient!.post(forget, data: dataBody);
+      final response = await dioClient!.post(endPointForgot, data: dataBody);
       return MyAccountModel.fromJson(response);
     } catch (e,str) {
       return Future.error(NetworkExceptions.getDioException(e,str));
@@ -70,7 +70,7 @@ class APIRepository {
 
   static Future myAccountApiCall() async {
     try {
-      final response = await dioClient!.post(myAccount);
+      final response = await dioClient!.post(endPointMyAccount);
       return MyAccountModel.fromJson(response);
     } catch (e,str) {
       return Future.error(NetworkExceptions.getDioException(e,str));
@@ -79,7 +79,7 @@ class APIRepository {
 
   static Future faqApiCall() async {
     try {
-      final response = await dioClient!.post(myAccount);
+      final response = await dioClient!.post(endPointMyAccount);
       return MyAccountModel.fromJson(response);
     } catch (e,str) {
       return Future.error(NetworkExceptions.getDioException(e,str));

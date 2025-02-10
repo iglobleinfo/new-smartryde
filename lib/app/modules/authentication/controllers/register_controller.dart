@@ -1,7 +1,4 @@
-
-
-import '../../../../../export.dart';
-
+import 'package:smart_ryde/export.dart';
 
 class RegisterController extends GetxController {
   late TextEditingController emailController;
@@ -59,8 +56,8 @@ class RegisterController extends GetxController {
   }
 
   /*===================================================================== Password Visibility  ==========================================================*/
-  showOrHidePasswordVisibility(){
-    viewPassword=!viewPassword;
+  showOrHidePasswordVisibility() {
+    viewPassword = !viewPassword;
     update();
   }
 
@@ -68,14 +65,15 @@ class RegisterController extends GetxController {
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser =
-    await GoogleSignIn().signIn().onError((error, stackTrace) {
+        await GoogleSignIn().signIn().onError((error, stackTrace) {
       debugPrint(error.toString());
       toast(stringGoogleSignInCancelled);
+      return null;
     });
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth =
-    await googleUser!.authentication;
+        await googleUser!.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -93,16 +91,15 @@ class RegisterController extends GetxController {
         permissions: ['email', 'public_profile'],
         loginBehavior: LoginBehavior.nativeWithFallback).then((value) {
       token = value.accessToken!.tokenString;
-        }).onError((error, stackTrace) {});
+    }).onError((error, stackTrace) {});
 
     if (token == null) return null;
     final facebookAuthCredential = FacebookAuthProvider.credential(token!);
 
-    var cred=await FirebaseAuth.instance
+    var cred = await FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential)
         .onError((error, stackTrace) {
-      toast(error.toString());
-      return Future.value(null);
+      return toast(error.toString());
     });
     return cred;
   }
@@ -115,7 +112,6 @@ class RegisterController extends GetxController {
     switch (result.status) {
       case AuthorizationStatus.authorized:
         return result;
-
 
       case AuthorizationStatus.error:
         debugPrint("Sign in failed: ${result.error!.localizedDescription}");
@@ -131,13 +127,15 @@ class RegisterController extends GetxController {
     try {
       customLoader.show(Get.overlayContext);
       UserCredential userCredential = await signInWithGoogle();
-      hitSocialLoginApi(userCredential.user, GOOGLE_SIGN_IN);
+      hitSocialLoginApi(userCredential.user, googleSignIn);
     } on FirebaseException catch (e) {
       customLoader.hide();
       toast(e.message);
     } catch (e) {
       customLoader.hide();
-      toast(stringGoogleSignInCancelled, );
+      toast(
+        stringGoogleSignInCancelled,
+      );
     }
   }
 
@@ -146,7 +144,7 @@ class RegisterController extends GetxController {
       customLoader.show(Get.overlayContext);
       UserCredential? userCredential = await signInWithFacebook();
       if (userCredential != null) {
-        hitSocialLoginApi(userCredential.user, FB_SIGN_IN);
+        hitSocialLoginApi(userCredential.user, fbSignIn);
       } else {
         customLoader.hide();
         toast(stringFbSignInCancelled);
@@ -167,7 +165,7 @@ class RegisterController extends GetxController {
       customLoader.show(Get.overlayContext);
       hitSocialLoginApi(
         userCredential!.credential!,
-        APPLE_SIGN_IN,
+        appleSignIn,
       );
     } on FirebaseException catch (e) {
       customLoader.hide();
@@ -222,7 +220,7 @@ class RegisterController extends GetxController {
   /*===================================================================== My account details API Call  ==========================================================*/
   hitMyAccountAPI() {
     APIRepository.myAccountApiCall().then((value) {
-      myAccountModel= value;
+      myAccountModel = value;
       storage.write(LOCALKEY_myAccount, myAccountModel);
     }).onError((error, stackTrace) {
       toast(error);
@@ -256,8 +254,4 @@ class RegisterController extends GetxController {
       toast(error);
     });
   }
-
-
-
-
 }

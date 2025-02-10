@@ -4,6 +4,7 @@ import 'package:flutter_logger/FlutterLogger.dart';
 import 'package:smart_ryde/app/data/internet_check/dependency.dart';
 import 'package:smart_ryde/app/routes/app_pages.dart';
 import '../../export.dart';
+import 'app/core/translations/translation_service.dart';
 
 var log = Logger();
 GetStorage storage = GetStorage();
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
        builder: (context, widget)=>GetMaterialApp(
          theme: ThemeConfig.lightTheme,
          initialBinding: SplashBinding(),
-         initialRoute: AppPages.INITIAL,
+         initialRoute: AppPages.initial,
          getPages: AppPages.routes,
          scaffoldMessengerKey: GlobalVariable.navState,
          debugShowCheckedModeBanner: false,

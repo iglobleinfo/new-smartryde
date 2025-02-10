@@ -18,155 +18,52 @@ class MainScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(onWillPop: () {
-      homeController.onWillPop();
-      return Future.value(true);
-    }, child: SafeArea(child: GetBuilder<HomeController>(builder: (controller) {
-      return Scaffold(
-        key: scaffoldKey,
-        resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar(
-          appBarTitleText: 'My Base',
-          leadingIcon: getInkWell(
-              onTap: () {
-                scaffoldKey!.currentState!.openDrawer();
-              },
-              child: AssetImageWidget(
-                imageUrl: iconMenu,
-              ).paddingAll(height_10)),
-        ),
-        drawer: customDrawer(context),
-        body: controller.bottomNavIndex == 2 ? ProfileScreen() : HomeScreen(),
-        bottomNavigationBar: controller.currentViewType == ViewType.bottomNav
-            ? BottomNavigationBar(
-                onTap: (value) {
-                  controller.updateBottomNavIndex(value);
-                },
-                currentIndex: controller.bottomNavIndex,
-                items: const [
-                    BottomNavigationBarItem(label: '', icon: Icon(Icons.home)),
-                    BottomNavigationBarItem(label: '', icon: Icon(Icons.feed)),
-                    BottomNavigationBarItem(
-                        label: '', icon: Icon(Icons.person)),
-                  ])
-            : null,
-      );
-    })));
-  }
-
-  Widget _body() {
-    return Padding(
-        padding:
-            EdgeInsets.only(left: margin_22, right: margin_22, top: margin_16),
-        child: Column(
-          children: [
-            Card(
-              shadowColor: Colors.grey.withValues(alpha: 0.4),
-              elevation: 3,
-              child: TextFieldWidget(
-                  hint: 'search',
-                  onChange: (val) {
-                    controller.search(val);
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        homeController.onWillPop();
+      },
+      child: SafeArea(
+        child: GetBuilder<HomeController>(
+          builder: (controller) {
+            return Scaffold(
+              key: scaffoldKey,
+              resizeToAvoidBottomInset: false,
+              appBar: CustomAppBar(
+                appBarTitleText: 'SmartRyde',
+                leadingIcon: getInkWell(
+                  onTap: () {
+                    scaffoldKey!.currentState!.openDrawer();
                   },
-                  inputAction: TextInputAction.search,
-                  prefixIcon: Container(
-                    padding: EdgeInsets.only(left: margin_15, right: margin_15),
-                    child: AssetImageWidget(
-                        imageUrl: iconSearch, imageHeight: 8, imageWidth: 8),
-                  ),
-                  focusNode: controller.searchFocusNode,
-                  textController: controller.searchController),
-            ).marginOnly(bottom: margin_25),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: MaterialButtonWidget(
-                      onPressed: () {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        controller.onMyBookTap();
-                        controller.hitMyBookAPI();
-                        controller.searchController.clear();
-                      },
-                      buttonText: 'My Books',
-                      textColor: controller.isMyBook.value
-                          ? Colors.white
-                          : colorLightGray,
-                      buttonColor: controller.isMyBook.value
-                          ? colorVioletM
-                          : Colors.transparent),
-                ).marginOnly(right: margin_15),
-                Expanded(
-                  child: MaterialButtonWidget(
-                      onPressed: () {
-                        controller.hitMyBookAPI();
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        controller.onLentBookTap();
-                        controller.searchController.clear();
-                      },
-                      buttonText: 'Books I lent',
-                      textColor: !controller.isMyBook.value
-                          ? Colors.white
-                          : colorLightGray,
-                      buttonColor: !controller.isMyBook.value
-                          ? colorVioletM
-                          : Colors.transparent),
+                  child: AssetImageWidget(
+                    imageUrl: iconMenu,
+                  ).paddingAll(height_10),
                 ),
-              ],
-            ).marginOnly(bottom: margin_15),
-            controller.homeLoader.value
-                ? const Expanded(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                    backgroundColor: colorRussianViolet,
-                    color: colorMistyRose,
-                  )))
-                : Expanded(
-                    child: ListView.separated(
-                        itemCount: 5,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: height_10),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: Get.width,
-                                  height: height_200,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(radius_15),
-                                      color: Colors.black),
-                                  child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.circular(radius_15),
-                                      child: Image.asset(
-                                        iconImg1,
-                                        fit: BoxFit.cover,
-                                      )),
-                                ).marginOnly(bottom: height_10),
-                                TextView(
-                                  text: stringTitle,
-                                  maxLine: 2,
-                                  textStyle: textStyleTitle(context),
-                                ).marginOnly(bottom: height_10),
-                                const ReadMoreTextWidget(
-                                  stringDummyText,
-                                  moreStyle: TextStyle(
-                                      color: colorVioletM,
-                                      fontWeight: FontWeight.bold),
-                                  lessStyle: TextStyle(
-                                      color: colorVioletM,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                  )
-          ],
-        ));
+              ),
+              drawer: customDrawer(context),
+              body: controller.bottomNavIndex == 2
+                  ? ProfileScreen()
+                  : HomeScreen(),
+              bottomNavigationBar:
+                  controller.currentViewType == ViewType.bottomNav
+                      ? BottomNavigationBar(
+                          onTap: (value) {
+                            controller.updateBottomNavIndex(value);
+                          },
+                          currentIndex: controller.bottomNavIndex,
+                          items: const [
+                              BottomNavigationBarItem(
+                                  label: '', icon: Icon(Icons.home)),
+                              BottomNavigationBarItem(
+                                  label: '', icon: Icon(Icons.feed)),
+                              BottomNavigationBarItem(
+                                  label: '', icon: Icon(Icons.person)),
+                            ])
+                      : null,
+            );
+          },
+        ),
+      ),
+    );
   }
 
   customDrawer(BuildContext context) => Drawer(
@@ -262,7 +159,7 @@ Future<void> readBook({path, id, bookController}) async {
   }
   Map locations = data != null ? data['locations'] : Map();
   try {
-    if (await File(path).exists())
+    if (await File(path).exists()) {
       await bookController.openBook(
         path,
         // controller
@@ -273,6 +170,7 @@ Future<void> readBook({path, id, bookController}) async {
         created: data['created'],
         href: data['href'],
       );
+    }
   } catch (e) {
     toast(e);
   }

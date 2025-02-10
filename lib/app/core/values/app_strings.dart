@@ -1,6 +1,21 @@
+/// *********************************************************************\
+/// *********************************************************************\
+/// *********************************************************************\
+/// Smart Ryde App Strings
+const String userLogin = 'userLogin';
+const String pleaseFillUpTheInformationBelow = 'pleaseFillUpTheInformationBelow';
+const String login = 'login';
+const String enterYourContactNumber = 'enterYourContactNumber';
+const String doNotHaveAccountSignUpNow = 'doNotHaveAccountSignUpNow';
+const String byContinuingYouAgreeTo = 'byContinuingYouAgreeTo';
+const String termsOfService = 'termsOfService';
+const String and = 'and';
+const String privacyPolicy = 'privacyPolicy';
+/// **********************************************************************
+/// **********************************************************************
+/// **********************************************************************
 
 
-//Network
 
 const String stringRequestCancelled = "Request cancelled";
 const String stringNotSubType = 'is not a subtype of';
@@ -63,7 +78,7 @@ const String stringPassword = "password";
 const String stringPasswordEmptyValidation = "Please enter password";
 const String stringForgotPassword = "forgot password?";
 const String stringLogin = "login";
-const String stringDontHaveAccount = "Don't have an account? Create an account in";
+const String stringDoNotHaveAccount = "Don't have an account? Create an account in";
 const String stringSignUp = "Sign Up";
 const String stringWebsite = "website";
 const String stringRegister = "Register";

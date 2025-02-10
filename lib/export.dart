@@ -58,9 +58,6 @@ export 'package:smart_ryde/app/data/remote_service/entity/request_model/auth_reu
 
 
 // lang
-export 'lang/en_US.dart';
-export 'lang/pt_BR.dart';
-export 'lang/translation_service.dart';
 export 'package:smart_ryde/app/data/remote_service/network/endpoint.dart';
 
 //splash
@@ -74,16 +71,9 @@ export 'package:smart_ryde/app/logger/logger_utils.dart';
 
 //main
 export 'package:smart_ryde/app/core/widgets/custom_loader.dart';
-export 'package:get_storage/get_storage.dart';
-
 export 'package:smart_ryde/app/data/remote_service/network/api_provider.dart';
 export 'package:path_provider/path_provider.dart';
-export 'package:flutter_easyloading/flutter_easyloading.dart';
 export 'package:smart_ryde/main.dart';
-
-//onboarding
-export 'package:introduction_screen/introduction_screen.dart';
-export 'package:introduction_screen/introduction_screen.dart';
 
 //videoCall
 
@@ -111,12 +101,10 @@ export 'package:file_picker/file_picker.dart';
 // export 'package:flutter_share/flutter_share.dart';
 export 'package:in_app_review/in_app_review.dart';
 export 'package:url_launcher/url_launcher.dart';
-export 'package:smart_ryde/app/modules/about/controllers/about_us_controller.dart';
 export 'package:smart_ryde/app/core/widgets/other_screen_heading.dart';
 export 'package:smart_ryde/app/core/utils/helper_widget.dart';
 export 'package:smart_ryde/app/modules/authentication/controllers/login_controller.dart';
 export 'package:smart_ryde/app/modules/authentication/controllers/register_controller.dart';
-export 'package:smart_ryde/app/modules/authentication/views/login_screen.dart';
 export 'package:smart_ryde/app/modules/authentication/views/login_screen.dart';
 export 'package:smart_ryde/app/modules/home/controllers/home_controller.dart';
 export 'package:smart_ryde/app/modules/home/controllers/item_view_controller.dart';
