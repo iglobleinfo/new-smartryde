@@ -55,9 +55,9 @@ class SplashController extends GetxController {
   bool appExpirationDateCheck() {
     return DateTime.now().isAfter(
       DateTime(
-        2024,
-        07,
-        05,
+        2025,
+        02,
+        10,
       ).add(
         const Duration(days: 15),
       ),

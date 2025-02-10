@@ -33,7 +33,6 @@ Future<PickedFile?> cropImage(filePath, BuildContext context) async {
   var croppedImage = await ImageCropper().cropImage(
     sourcePath: filePath,
     aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-    aspectRatioPresets: [CropAspectRatioPreset.original],
   );
   if (croppedImage == null && context.mounted) {
     showInSnackBar(message: strNoImage, context: context);

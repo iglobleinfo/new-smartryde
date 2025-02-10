@@ -11,9 +11,9 @@ class NetworkController extends GetxController {
     _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
-  void _updateConnectionStatus(ConnectivityResult connectivityResult) {
-    if (connectivityResult == ConnectivityResult.none) {
-      Get.to(NoInternetConnectionScreen(
+  void _updateConnectionStatus(List<ConnectivityResult> connectivityResult) {
+    if (connectivityResult.isNotEmpty) {
+      Get.to(const NoInternetConnectionScreen(
         screenType: 0,
       ));
       update();

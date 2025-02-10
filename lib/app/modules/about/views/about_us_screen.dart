@@ -54,8 +54,8 @@ class AboutUsScreen extends StatelessWidget {
                 final String appLink =
                     'https://play.google.com/store/apps/details?id=${controller.packageName}';
                 final String message = 'Check out this app: $appLink';
-                await FlutterShare.share(
-                    title: 'Share App', linkUrl: appLink, text: message);
+                // await FlutterShare.share(
+                //     title: 'Share App', linkUrl: appLink, text: message);
               },
               description: "If you like us, let other's know"),
           _listTileIconView(

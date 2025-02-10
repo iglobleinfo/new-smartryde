@@ -108,7 +108,7 @@ export 'package:smart_ryde/app/data/local_service/preference/preference_manager.
 
 export 'package:file_picker/file_picker.dart';
 
-export 'package:flutter_share/flutter_share.dart';
+// export 'package:flutter_share/flutter_share.dart';
 export 'package:in_app_review/in_app_review.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:smart_ryde/app/modules/about/controllers/about_us_controller.dart';

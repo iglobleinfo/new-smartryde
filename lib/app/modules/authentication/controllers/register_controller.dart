@@ -92,10 +92,8 @@ class RegisterController extends GetxController {
     await FacebookAuth.instance.login(
         permissions: ['email', 'public_profile'],
         loginBehavior: LoginBehavior.nativeWithFallback).then((value) {
-      if (value != null) {
-        token = value.accessToken!.token;
-      }
-    }).onError((error, stackTrace) {});
+      token = value.accessToken!.tokenString;
+        }).onError((error, stackTrace) {});
 
     if (token == null) return null;
     final facebookAuthCredential = FacebookAuthProvider.credential(token!);
@@ -111,7 +109,7 @@ class RegisterController extends GetxController {
 
   Future signInWithApple() async {
     final AuthorizationResult result = await TheAppleSignIn.performRequests([
-      AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+      const AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
     ]);
 
     switch (result.status) {
@@ -211,7 +209,7 @@ class RegisterController extends GetxController {
         email: forgetEmailController.text.trim().toLowerCase());
     APIRepository.forgetApiCall(dataBody: loginReq).then((value) {
       toast(value.message);
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Get.offAll(() => LoginScreen());
         forgetEmailController.clear();
       });
