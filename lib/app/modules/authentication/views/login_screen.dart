@@ -58,50 +58,27 @@ class LoginScreen extends GetView<LoginController> {
             textStyle: textStyleBodyLarge(context),
           ),
           TextView(
-              text: pleaseFillUpTheInformationBelow.tr,
-              textStyle: textStyleBodySmall(context)),
+            text: pleaseFillUpTheInformationBelow.tr,
+            textStyle: textStyleBodySmall(context),
+          ),
           Form(
-              key: controller.formGlobalKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: TextEditingController(),
-                    decoration: const InputDecoration(
-                      hintText: '+12345678910',
-                      labelText: 'Phone number',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) =>
-                    value != null && value.isNotEmpty
-                        ? null
-                        : 'Required',
+            key: controller.formGlobalKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: TextEditingController(),
+                  decoration: const InputDecoration(
+                    hintText: '+12345678910',
+                    labelText: 'Phone number',
+                    border: OutlineInputBorder(),
                   ),
-                  TextFieldWidget(
-                      textController: controller.passwordController,
-                      labelText: stringPassword,
-                      obscureText: controller.viewPassword,
-                      validate: (value) {
-                        if (value!.isEmpty) {
-                          return stringPasswordEmptyValidation;
-                        } else {
-                          return null;
-                        }
-                      },
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            controller.showOrHidePasswordVisibility();
-                          },
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          icon: Icon(
-                            controller.viewPassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          )),
-                      focusNode: controller.passwordFocusNode),
-                ],
-              )).marginOnly(bottom: margin_10),
+                  validator: (value) =>
+                      value != null && value.isNotEmpty ? null : 'Required',
+                ),
+              ],
+            ),
+          ).marginOnly(bottom: margin_10),
           Align(
             alignment: Alignment.topRight,
             child: InkWell(
@@ -124,9 +101,23 @@ class LoginScreen extends GetView<LoginController> {
               }
             },
           ).marginOnly(bottom: margin_60),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextView(
+                text: doNotHaveAccountSignUpNow.tr,
+                textStyle: textStyleBodySmall(context).copyWith(
+                  color: Colors.blueAccent,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.blueAccent,
+                  decorationThickness: 1,
+                ),
+              ),
+            ],
+          ),
           Text.rich(
             TextSpan(
-              text: doNotHaveAccountSignUpNow,
+              text: doNotHaveAccountSignUpNow.tr,
               children: [
                 TextSpan(
                   text: ' $stringSignUp ',

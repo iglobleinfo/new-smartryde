@@ -14,7 +14,6 @@
 import '../../../../export.dart';
 import '../../../core/translations/local_keys.dart';
 import '../../../core/values/route_arguments.dart';
-import '../../../data/local_service/preference/preference_manager.dart';
 import '../model/language_model.dart';
 
 enum ChooseLanguage { english, hebrew }

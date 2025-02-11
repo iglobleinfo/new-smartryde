@@ -7,14 +7,14 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
-    // update();
     checkInternetAvailable(Get.context!);
     super.onInit();
   }
 
   void checkInternetAvailable(BuildContext context) async {
     final connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.none) {
+    debugPrint('connectivityResult ${connectivityResult.first}');
+    if (connectivityResult.first == ConnectivityResult.none) {
       Get.offAll(
         const NoInternetConnectionScreen(
           screenType: 0,

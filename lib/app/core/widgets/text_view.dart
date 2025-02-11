@@ -6,13 +6,13 @@ class TextView extends StatelessWidget {
   final TextAlign textAlign;
   final int maxLine;
 
-  const TextView(
-      {Key? key,
-        required this.text,
-        required this.textStyle,
-        this.maxLine = 15,
-        this.textAlign = TextAlign.center})
-      : super(key: key);
+  const TextView({
+    super.key,
+    required this.text,
+    required this.textStyle,
+    this.maxLine = 15,
+    this.textAlign = TextAlign.center,
+  });
 
   @override
   Widget build(BuildContext context) {

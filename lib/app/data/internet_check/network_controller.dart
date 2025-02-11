@@ -12,7 +12,7 @@ class NetworkController extends GetxController {
   }
 
   void _updateConnectionStatus(List<ConnectivityResult> connectivityResult) {
-    if (connectivityResult.isNotEmpty) {
+    if (connectivityResult.first == ConnectivityResult.none) {
       Get.to(const NoInternetConnectionScreen(
         screenType: 0,
       ));

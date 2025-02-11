@@ -37,31 +37,32 @@ class RegisterScreen extends GetView<RegisterController> {
                                 child: Column(
                                   children: [
                                     TextFieldWidget(
-                                            textController:
-                                                controller.emailController,
-                                            labelText: 'stringEmail',
-                                            validate: (value) {
-                                              if (value!.isEmpty)
-                                                return 'stringEmailEmptyValidation';
-                                              else if (value.length > 0 &&
-                                                  !GetUtils.isEmail(value))
-                                                return 'stringEmailValidValidation';
-                                              else
-                                                return null;
-                                            },
-                                            focusNode:
-                                                controller.emailFocusNode)
-                                        .marginOnly(bottom: margin_16),
+                                      textController:
+                                          controller.emailController,
+                                      labelText: 'stringEmail',
+                                      validate: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'stringEmailEmptyValidation';
+                                        } else if (value.length > 0 &&
+                                            !GetUtils.isEmail(value)) {
+                                          return 'stringEmailValidValidation';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      focusNode: controller.emailFocusNode,
+                                    ).marginOnly(bottom: margin_16),
                                     TextFieldWidget(
                                         textController:
                                             controller.passwordController,
                                         labelText: 'stringPassword',
                                         obscureText: true,
                                         validate: (value) {
-                                          if (value!.isEmpty)
+                                          if (value!.isEmpty) {
                                             return 'stringPasswordEmptyValidation';
-                                          else
+                                          } else {
                                             return null;
+                                          }
                                         },
                                         focusNode:
                                             controller.passwordFocusNode),
