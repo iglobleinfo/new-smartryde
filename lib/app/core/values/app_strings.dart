@@ -79,7 +79,6 @@ const String stringPasswordEmptyValidation = "Please enter password";
 const String stringForgotPassword = "forgot password?";
 const String stringLogin = "login";
 const String stringDoNotHaveAccount = "Don't have an account? Create an account in";
-const String stringSignUp = "Sign Up";
 const String stringWebsite = "website";
 const String stringRegister = "Register";
 const String stringAlreadyHaveAccount = "Already have an account? ";

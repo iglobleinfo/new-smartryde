@@ -7,7 +7,8 @@ class MaterialButtonWidget extends StatelessWidget {
   final double? buttonRadius;
   final double? minWidth;
   final double? minHeight;
-  final double? padding;
+  final double? verticalPadding;
+  final double? horizontalPadding;
   final onPressed;
   final decoration;
   final elevation;
@@ -20,7 +21,7 @@ class MaterialButtonWidget extends StatelessWidget {
     this.buttonText = "",
     this.buttonColor,
     this.textColor,
-    this.buttonRadius = defaultRaduis,
+    this.buttonRadius,
     this.decoration,
     this.isSocial = false,
     this.onPressed,
@@ -29,7 +30,8 @@ class MaterialButtonWidget extends StatelessWidget {
     this.fontsize,
     this.minWidth,
     this.minHeight,
-    this.padding,
+    this.verticalPadding,
+    this.horizontalPadding,
   }) : super(key: key);
 
   @override
@@ -37,19 +39,22 @@ class MaterialButtonWidget extends StatelessWidget {
     return MaterialButton(
       height: minHeight,
       splashColor: Colors.transparent,
-      minWidth: minWidth ?? Get.width,
-      color: buttonColor ?? colorAppColors,
+      minWidth: minWidth ?? Get.width * 0.45,
+      color: buttonColor ?? appButtonColor,
       elevation: elevation ?? radius_4,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(buttonRadius!)),
+          borderRadius: BorderRadius.circular(buttonRadius ?? 0)),
       onPressed: onPressed,
-      padding: EdgeInsets.symmetric(vertical: padding ?? margin_15),
+      padding: EdgeInsets.symmetric(
+        vertical: verticalPadding ?? margin_12,
+        horizontal: horizontalPadding ?? margin_20,
+      ),
       child: TextView(
         text: buttonText!,
         textStyle: textStyleButton(context).copyWith(
           color: textColor ?? Colors.white,
           fontSize: fontsize,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.normal,
         ),
       ),
     );

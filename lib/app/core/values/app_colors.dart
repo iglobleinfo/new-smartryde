@@ -1,10 +1,11 @@
-
-
-
 import 'package:flutter/material.dart';
 
+
+const Color appButtonColor = Color.fromRGBO(21, 164, 184, 1);
+const Color appClickableTextColor = Color.fromRGBO(21, 164, 184, 1);
+
 const Color colorAppColor = Color.fromRGBO(49, 37, 98, 1.0);
-const Color colorAppColors = Color.fromRGBO(3, 66, 86, 1.0);
+const Color colorAppColors = Color.fromRGBO(59, 154, 197, 1.0);
 const Color colorCottonCandy = Color.fromRGBO(255, 196, 235, 1.0);
 const Color colorPalePurplePantone = Color.fromRGBO(255, 228, 250, 1.0);
 const Color colorMistyRose = Color.fromRGBO(241, 222, 220, 1.0);

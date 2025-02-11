@@ -130,7 +130,7 @@ class ThemeConfig {
         ),
         bodySmall: baseTextTheme.bodySmall?.copyWith(
           color: primaryText,
-          fontSize: font_11,
+          fontSize: font_10,
           fontWeight: FontWeight.w300,
         ),
         labelSmall: baseTextTheme.labelSmall?.copyWith(
@@ -207,7 +207,7 @@ class ThemeConfig {
         background: Colors.white,
         cardBackground: Colors.white,
         primaryText: Colors.black,
-        secondaryText: Colors.white,
+        secondaryText: Colors.black,
         accentColor: colorAppColor,
         divider: colorAppColor,
         buttonBackground: Colors.black38,

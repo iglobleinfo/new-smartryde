@@ -59,7 +59,9 @@ class LoginScreen extends GetView<LoginController> {
           ),
           TextView(
             text: pleaseFillUpTheInformationBelow.tr,
-            textStyle: textStyleBodySmall(context),
+            textStyle: textStyleLabelSmall(context).copyWith(
+              fontWeight: FontWeight.normal,
+            ),
           ),
           Form(
             key: controller.formGlobalKey,
@@ -78,74 +80,70 @@ class LoginScreen extends GetView<LoginController> {
                 ),
               ],
             ),
-          ).marginOnly(bottom: margin_10),
+          ).marginOnly(bottom: margin_30),
           Align(
-            alignment: Alignment.topRight,
-            child: InkWell(
-              onTap: () {
-                Get.toNamed(AppRoutes.forgotPassword);
+            alignment: Alignment.center,
+            child: MaterialButtonWidget(
+              buttonText: stringLogin.tr.toUpperCase(),
+              onPressed: () {
+                if (controller.formGlobalKey.currentState!.validate()) {
+                  Get.offAllNamed(AppRoutes.mainScreen);
+                }
               },
-              child: TextView(
-                text: stringForgotPassword,
-                textStyle: textStyleTitle(context).copyWith(
-                  color: colorRussianViolet,
-                ),
-              ),
             ),
-          ).marginOnly(bottom: margin_15),
-          MaterialButtonWidget(
-            buttonText: stringLogin,
-            onPressed: () {
-              if (controller.formGlobalKey.currentState!.validate()) {
-                Get.offAllNamed(AppRoutes.mainScreen);
-              }
-            },
-          ).marginOnly(bottom: margin_60),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextView(
-                text: doNotHaveAccountSignUpNow.tr,
-                textStyle: textStyleBodySmall(context).copyWith(
-                  color: Colors.blueAccent,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.blueAccent,
-                  decorationThickness: 1,
-                ),
-              ),
-            ],
-          ),
-          Text.rich(
-            TextSpan(
+          ).marginOnly(bottom: margin_20),
+          Align(
+            alignment: Alignment.center,
+            child: TextView(
               text: doNotHaveAccountSignUpNow.tr,
-              children: [
-                TextSpan(
-                  text: ' $stringSignUp ',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Get.offAllNamed(AppRoutes.signUp);
-                    },
-                  style: TextStyle(
-                      color: colorVioletM.shade50,
-                      fontWeight: FontWeight.w800,
-                      fontSize: font_16),
-                  children: [
-                    TextSpan(
-                      text: stringWebsite,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: font_16),
-                    ),
-                  ],
-                )
-              ],
+              textStyle: textStyleBodySmall(context).copyWith(
+                color: appClickableTextColor,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.blueAccent,
+                decorationThickness: 1,
+              ),
             ),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: font_16,
-              fontWeight: FontWeight.w400,
+          ),
+          SizedBox(
+            height: margin_20,
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text.rich(
+              textAlign: TextAlign.center,
+              TextSpan(
+                text: byContinuingYouAgreeTo.tr,
+                children: [
+                  TextSpan(
+                    text: termsOfService.tr,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Get.offAllNamed(AppRoutes.signUp);
+                      },
+                    style: textStyleBodySmall(context).copyWith(
+                      color: appClickableTextColor,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' ${and.tr} ',
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Get.offAllNamed(AppRoutes.signUp);
+                      },
+                  ),
+                  TextSpan(
+                    text: privacyPolicy.tr,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Get.offAllNamed(AppRoutes.signUp);
+                      },
+                    style: textStyleBodySmall(context).copyWith(
+                      color: appClickableTextColor,
+                    ),
+                  ),
+                ],
+              ),
+              style: textStyleBodySmall(context),
             ),
           )
         ],
