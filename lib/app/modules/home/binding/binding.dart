@@ -1,6 +1,3 @@
-
-
-
 import '../../../../export.dart';
 
 class HomeBinding extends Bindings {
@@ -9,11 +6,8 @@ class HomeBinding extends Bindings {
     Get.lazyPut<MainViewController>(
       () => MainViewController(),
     );
- Get.lazyPut<HomeController>(
+    Get.lazyPut<HomeController>(
       () => HomeController(),
-    );
- Get.lazyPut<ItemController>(
-      () => ItemController(),
     );
   }
 }

@@ -1,23 +1,31 @@
-
-
-
 import 'package:smart_ryde/app/modules/splash/controllers/splash_controller.dart';
+import 'package:smart_ryde/export.dart';
 
-import '../../../../../export.dart';
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
-class SplashScreen extends GetView<SplashController> {
   @override
-  Widget build(BuildContext context)
-  {
-    return Scaffold(
-        body: GetBuilder<SplashController>(
-      builder: (controller) {
-        return  Center(
-          child: FlutterLogo(
-            size: height_100,
-          ),
-        );
-      },
-    ));
+  Widget build(BuildContext context) {
+    return GetBuilder(
+        init: SplashController(),
+        builder: (context) {
+          return Scaffold(
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                AssetImageWidget(
+                  imageHeight: Get.height,
+                  imageWidth: Get.width,
+                  imageUrl: imageSplashBackground,
+                  imageFitType: BoxFit.cover,
+                ),
+                AssetImageWidget(
+                  imageUrl: imageSplashLogo,
+                  imageFitType: BoxFit.cover,
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

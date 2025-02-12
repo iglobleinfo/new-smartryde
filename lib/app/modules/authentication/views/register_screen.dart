@@ -22,8 +22,9 @@ class RegisterScreen extends GetView<RegisterController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             AssetImageWidget(
-                                    imageUrl: iconSmallLogo, imageHeight: 70)
-                                .marginOnly(bottom: margin_16),
+                              imageUrl: iconSmallLogo,
+                              imageHeight: 70,
+                            ).marginOnly(bottom: margin_16),
                             TextView(
                               text: 'stringRegister',
                               maxLine: 2,

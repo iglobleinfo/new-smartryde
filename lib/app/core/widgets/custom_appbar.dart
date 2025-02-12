@@ -13,8 +13,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTitle;
   final Function? onTap;
 
-  CustomAppBar({
-    Key? key,
+  const CustomAppBar({
+    super.key,
     this.appBarTitleText,
     this.onTap,
     this.actionWidget,
@@ -26,12 +26,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isBackIcon = true,
     this.centerTitle = false,
     this.bgColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      toolbarHeight: height_65,
       elevation: 0.0,
       bottomOpacity: 0.0,
       leading: isBackIcon! ? _backIcon() : Container(),
@@ -43,11 +42,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ? TextView(
                   text: appBarTitleText ?? "",
                   textAlign: TextAlign.center,
-                  textStyle: textStyleHeadlineMedium(context).copyWith(
-                    fontWeight: FontWeight.w500,
+                  textStyle: textStyleDisplayLarge(context).copyWith(
+                    fontWeight: FontWeight.normal,
                   ),
-                ).paddingOnly(
-                  top: margin_10,
                 )
               : const SizedBox(
                   height: 0,

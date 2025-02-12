@@ -115,7 +115,7 @@ class PushNotificationsManager {
   notificationRedirection(Map data) async {}
 
   void navigateToMain() {
-    Get.offNamed(AppRoutes.mainScreen);
+    // Get.offNamed(AppRoutes.mainScreen);
   }
 }
 

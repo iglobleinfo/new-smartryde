@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:smart_ryde/app/data/internet_check/no_internet_screen.dart';
-import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
 import 'package:smart_ryde/export.dart';
 
 class SplashController extends GetxController {
@@ -30,23 +29,13 @@ class SplashController extends GetxController {
         if (appExpirationDateCheck()) {
           appExpirationDialog(context);
         } else {
-          if (storage.read(LOCALKEY_onboarding) ?? false) {
-            if (storage.read(LOCALKEY_token) != null) {
-              Get.offAll(
-                () => HomeScreen(),
-              );
-            } else {
-              Get.offAllNamed(
-                AppRoutes.mainScreen,
-              );
-            }
-          } else if (storage.read(LOCALKEY_language) ?? false) {
-            Get.offAllNamed(
-              AppRoutes.onBoarding,
+          if (storage.read(LOCALKEY_token) != null) {
+            Get.offAll(
+              AppRoutes.dashboard,
             );
           } else {
             Get.offAllNamed(
-              AppRoutes.onBoarding,
+              AppRoutes.home,
             );
           }
         }

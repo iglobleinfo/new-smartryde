@@ -18,7 +18,6 @@ class NetworkController extends GetxController {
       ));
       update();
     } else {
-      Get.back();
       update();
     }
   }

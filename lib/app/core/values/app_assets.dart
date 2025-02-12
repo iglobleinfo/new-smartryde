@@ -1,5 +1,27 @@
+// Icons Assets
+const String iconBus = 'assets/icons/bus.webp';
+const String iconClock = 'assets/icons/clock.webp';
+const String iconFeedback = 'assets/icons/feedback.webp';
+const String iconInfo = 'assets/icons/info.webp';
+const String iconStar = 'assets/icons/star.webp';
+const String iconSupport = 'assets/icons/support.webp';
+const String iconWallet = 'assets/icons/wallet.webp';
 
+// Images Assets
+const String imageBack = 'assets/images/back.webp';
+const String imageBus = 'assets/images/bus.webp';
+const String imageBusBottom = 'assets/images/bus_bottom.webp';
+const String imageDisabled = 'assets/images/disabled.webp';
+const String imageDriverSteering = 'assets/images/driver_steering';
+const String imageSignUpBackground = 'assets/images/main_signup_background.webp';
+const String imageSplashBackground = 'assets/images/splash_background.webp';
+const String imageSplashLogo = 'assets/images/splash_logo.webp';
+const String imageVisuallyImpaired = 'assets/images/visually-impaired.webp';
+const String imageUser = 'assets/images/user.webp';
+const String imageBusMainLogin = 'assets/images/bus_main_login.png';
+const String imageBusSmallLogin = 'assets/images/bus_small_login.png';
 
+// Old Icons
 const String iconAbout = "assets/icons/about.png";
 const String iconAccount_info = "assets/icons/account_info.png";
 const String iconProfile = "assets/icons/user.png";

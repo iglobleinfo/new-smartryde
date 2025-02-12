@@ -1,7 +1,40 @@
+import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 import 'package:smart_ryde/export.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
+
+  Widget customDrawer(BuildContext context) => Container(
+        color: Colors.white,
+        width: Get.width - 100,
+        height: height_1000,
+        child: Column(
+          children: [
+            profileHeader(context),
+            const Divider(),
+            listTile(
+                context: context,
+                icon: iconClock,
+                text: 'Booking',
+                onTap: () {}),
+            listTile(
+                context: context,
+                icon: iconFeedback,
+                text: 'Drop A Feedback',
+                onTap: () {}),
+            listTile(
+                context: context,
+                icon: iconStar,
+                text: 'Rate Us',
+                onTap: () {}),
+            listTile(
+                context: context,
+                icon: iconInfo,
+                text: stringAboutUs,
+                onTap: () {}),
+          ],
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -9,137 +42,107 @@ class HomeScreen extends GetView<HomeController> {
       onPopInvokedWithResult: (didPop, result) {
         controller.onWillPop();
       },
-      child: SafeArea(
-        child: GetBuilder<HomeController>(
-          builder: (controller) {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: _body(),
-            );
-          },
+      child: AnnotatedRegionWidget(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.dark,
+        child: SafeArea(
+          child: GetBuilder<HomeController>(
+            builder: (controller) {
+              return Scaffold(
+                key: controller.scaffoldKey,
+                resizeToAvoidBottomInset: false,
+                appBar: CustomAppBar(
+                  appBarTitleText: 'SmartRyde',
+                  leadingIcon: getInkWell(
+                    onTap: () {
+                      controller.scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Icon(Icons.more_vert_rounded).paddingAll(height_10),
+                  ),
+                ),
+                drawer: customDrawer(context),
+                body: Stack(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        AssetImageWidget(
+                          imageUrl: imageBusMainLogin,
+                        ),
+                      ],
+                    ),
+
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
-  Widget _body() {
-    return Padding(
-      padding:
-          EdgeInsets.only(left: margin_22, right: margin_22, top: margin_16),
-      child: Column(
-        children: [
-          TextFieldWidget(
-                  hint: 'Search',
-                  onChange: (val) {
-                    controller.search(val);
-                  },
-                  inputAction: TextInputAction.search,
-                  prefixIcon: Container(
-                    padding: EdgeInsets.only(left: margin_15, right: margin_15),
-                    child: AssetImageWidget(
-                        imageUrl: iconSearch, imageHeight: 8, imageWidth: 8),
-                  ),
-                  focusNode: controller.searchFocusNode,
-                  textController: controller.searchController)
-              .marginOnly(bottom: margin_25),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  listTile({context, text, icon, onTap}) => InkWell(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Expanded(
-                child: MaterialButtonWidget(
-                        onPressed: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          controller.onMyBookTap();
-                          controller.hitMyBookAPI();
-                          controller.searchController.clear();
-                        },
-                        buttonText: 'My Books',
-                        textColor: controller.isMyBook.value
-                            ? Colors.white
-                            : Colors.grey.shade300,
-                        buttonColor: controller.isMyBook.value
-                            ? colorVioletM
-                            : Colors.grey.shade400)
-                    .marginOnly(right: margin_15),
-              ),
-              Expanded(
-                child: MaterialButtonWidget(
-                        onPressed: () {
-                          controller.hitMyBookAPI();
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          controller.onLentBookTap();
-                          controller.searchController.clear();
-                        },
-                        buttonText: 'Books I lent',
-                        textColor: !controller.isMyBook.value
-                            ? Colors.white
-                            : Colors.grey.shade300,
-                        buttonColor: !controller.isMyBook.value
-                            ? colorVioletM
-                            : Colors.grey.shade400)
-                    .marginOnly(left: margin_15),
-              ),
+              AssetImageWidget(
+                      imageUrl: icon,
+                      imageHeight: 25,
+                      imageWidth: 25,
+                      imageFitType: BoxFit.contain)
+                  .marginOnly(right: margin_10),
+              Text(
+                text,
+                style: textStyleDisplayMedium(context).copyWith(
+                  fontWeight: FontWeight.normal,
+                ),
+              )
             ],
-          ).marginOnly(bottom: margin_15),
-          controller.homeLoader.value
-              ? const Expanded(
-                  child: Center(
-                      child: CircularProgressIndicator(
-                  backgroundColor: colorRussianViolet,
-                  color: colorMistyRose,
-                )))
-              : Expanded(
-                  child: ListView.separated(
-                    itemCount: controller.items.length,
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: height_10),
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          getInkWell(
-                            onTap: () {
-                              Get.toNamed(AppRoutes.itemView,
-                                  arguments: controller.items[index]);
-                            },
-                            child: Container(
-                              width: Get.width,
-                              height: height_200,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(radius_15),
-                                  color: Colors.black),
-                              child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.circular(radius_15),
-                                  child: cachedImage(
-                                      controller.items[index].image,
-                                      boxFit: BoxFit.cover)),
-                            ),
-                          ).marginOnly(bottom: height_10),
-                          TextView(
-                            text: controller.items[index].title ?? '',
-                            maxLine: 2,
-                            textStyle: textStyleTitle(context),
-                          ).marginOnly(bottom: height_10),
-                          ReadMoreTextWidget(
-                            controller.items[index].description ?? '',
-                            style: textStyleTitle(context)
-                                .copyWith(fontWeight: FontWeight.w400),
-                            moreStyle: const TextStyle(
-                                color: colorVioletM,
-                                fontWeight: FontWeight.bold),
-                            lessStyle: const TextStyle(
-                                color: colorVioletM,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+          ),
+        ),
+        onTap: () {
+          onTap();
+        },
+      );
+
+  Widget profileHeader(context) => Container(
+        height: height_120,
+        color: primaryColor,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: InkWell(
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                cachedImage(
+                  url: '',
+                  placeholder: Image.asset(imageUser),
+                  height: 40,
+                  width: 40,
+                ),
+                Text(
+                  'Please Login/Signup',
+                  style: textStyleDisplayMedium(context).copyWith(
+                      fontWeight: FontWeight.normal, color: Colors.white),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 17,
+                  color: Colors.white,
                 )
-        ],
-      ),
-    );
-  }
+              ],
+            ),
+          ),
+          onTap: () {
+            Get.toNamed(AppRoutes.logIn);
+          },
+        ),
+      );
 }

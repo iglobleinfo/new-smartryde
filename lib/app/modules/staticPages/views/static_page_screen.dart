@@ -23,17 +23,17 @@ class StaticPageScreen extends StatelessWidget {
                       ))
                     : Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: homeController.isfaq.value
-                            ? ListView.builder(
-                                itemBuilder: (context, index) => customTile(
-                                  question:
-                                      controller.faqList?[index]?.question,
-                                  answer: controller.faqList?[index]?.answer,
-                                  context: context,
-                                ),
-                                itemCount: controller.faqList?.length ?? 0,
-                              )
-                            : Container(),
+                        // child: homeController.isfaq.value
+                        //     ? ListView.builder(
+                        //         itemBuilder: (context, index) => customTile(
+                        //           question:
+                        //               controller.faqList?[index]?.question,
+                        //           answer: controller.faqList?[index]?.answer,
+                        //           context: context,
+                        //         ),
+                        //         itemCount: controller.faqList?.length ?? 0,
+                        //       )
+                        child: Container(),
                       )
                 : Padding(
                     padding: const EdgeInsets.all(16.0),

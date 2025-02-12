@@ -14,8 +14,7 @@ class LoginScreen extends GetView<LoginController> {
       child: Row(
         children: [
           InkWell(
-            onTap: ()
-            {
+            onTap: () {
               Get.back();
             },
             child: Icon(
@@ -84,12 +83,6 @@ class LoginScreen extends GetView<LoginController> {
                   textController: TextEditingController(),
                   shadow: true,
                   hint: enterYourContactNumber.tr,
-                  // decoration: const InputDecoration(
-                  //   hintText: '+12345678910',
-                  //   labelText: 'Phone number',
-                  // ),
-                  // validator: (value) =>
-                  //     value != null && value.isNotEmpty ? null : 'Required',
                 ),
               ],
             ),
@@ -100,7 +93,7 @@ class LoginScreen extends GetView<LoginController> {
               buttonText: stringLogin.tr.toUpperCase(),
               onPressed: () {
                 if (controller.formGlobalKey.currentState!.validate()) {
-                  Get.offAllNamed(AppRoutes.mainScreen);
+                  // Get.offAllNamed(AppRoutes.mainScreen);
                 }
               },
             ),

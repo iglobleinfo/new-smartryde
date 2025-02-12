@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -42,30 +40,36 @@ imageNetworkProvider(name) => NetworkImage(name);
 
 imageFileProvider(name) => FileImage(name);
 
-Widget cachedImage(
-  url, {
+Widget cachedImage({
+  String? url,
   double? height,
   double? width,
-  BoxFit boxFit = BoxFit.contain,
+  Widget? placeholder,
+  BoxFit boxFit = BoxFit.cover,
 }) {
-  return CachedNetworkImage(
-      width: width,
-      height: height,
-      fit: boxFit,
-      imageUrl: url ?? "",
-      placeholder: (context, url) => Center(
-            child: CupertinoActivityIndicator(),
-          ),
-      errorWidget: (context, url, error) => Center(
-            child: Icon(
-              Icons.error_rounded,
-              color: Colors.grey,
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(height ?? 0),
+    child: CachedNetworkImage(
+        width: width,
+        height: height,
+        fit: boxFit,
+        imageUrl: url ?? "",
+        progressIndicatorBuilder: (context, url, progress) => Center(
+              child: CupertinoActivityIndicator(),
             ),
-          ));
+        errorWidget: (context, url, error) =>
+            placeholder ??
+            Center(
+              child: Icon(
+                Icons.error_rounded,
+                color: Colors.grey,
+              ),
+            )),
+  );
 }
 
-Widget cachedImageWithView(
-  url, {
+Widget cachedImageWithView({
+  String? url,
   double? height,
   double? width,
   var tag,

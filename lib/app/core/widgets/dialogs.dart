@@ -43,8 +43,9 @@ logoutDialog(BuildContext context) {
                   shrinkWrap: true,
                   children: [
                     AssetImageWidget(
-                            imageUrl: iconSmallLogo, imageHeight: height_70)
-                        .marginOnly(bottom: height_10),
+                      imageUrl: iconSmallLogo,
+                      imageHeight: height_70,
+                    ).marginOnly(bottom: height_10),
                     TextView(
                       text: stringLogoutHeading,
                       textStyle: textStyleTitle(context),

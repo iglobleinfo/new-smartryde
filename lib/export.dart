@@ -86,8 +86,6 @@ export 'package:smart_ryde/model/responseModal/myaccount_model.dart';
 //Bindings
 export 'package:smart_ryde/app/modules/authentication/binding/binding.dart';
 export 'package:smart_ryde/app/modules/home/binding/binding.dart';
-export 'package:smart_ryde/app/modules/onboarding/binding/binding.dart';
-export 'package:smart_ryde/app/modules/splash/binding/binding.dart';
 export 'package:smart_ryde/app/modules/about/controllers/about_us_controller.dart';
 
 //Controllers
@@ -107,5 +105,4 @@ export 'package:smart_ryde/app/modules/authentication/controllers/login_controll
 export 'package:smart_ryde/app/modules/authentication/controllers/register_controller.dart';
 export 'package:smart_ryde/app/modules/authentication/views/login_screen.dart';
 export 'package:smart_ryde/app/modules/home/controllers/home_controller.dart';
-export 'package:smart_ryde/app/modules/home/controllers/item_view_controller.dart';
 export 'package:smart_ryde/app/modules/home/controllers/main_view_controller.dart';

@@ -51,7 +51,7 @@ const String stringAppleSignInCancelled = 'Apple Sign In Cancelled';
 
 const String stringDummyText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-const String stringChooseMedia = "Please select an image";
+const String stringChooseMedia = "Please select an images";
 
 const String stringLogout = "Logout";
 const String stringLogoutHeading = "Do you really want to log out?";
@@ -85,4 +85,4 @@ const String stringAlreadyHaveAccount = "Already have an account? ";
 const String stringSignIn = "Sign In";
 const String stringFAQs = "FAQs";
 const String stringAboutUs = "About Us";
-const String strNoImage = "No image selected";
+const String strNoImage = "No images selected";

@@ -14,10 +14,10 @@ var tempDir;
 
 class GlobalVariable {
   static final GlobalKey<ScaffoldMessengerState> navState =
-  GlobalKey<ScaffoldMessengerState>();
+      GlobalKey<ScaffoldMessengerState>();
 
   static final GlobalKey<NavigatorState> navigatorState =
-  GlobalKey<NavigatorState>();
+      GlobalKey<NavigatorState>();
 }
 
 Future<void> main() async {
@@ -39,16 +39,15 @@ Future<void> main() async {
     statusBarColor: colorLightGray,
   ));
 
-
   PlatformDispatcher.instance.onError = (error, stack) {
-    reportCrash(error.toString()+'\n'+stack.toString());
+    reportCrash('$error\n$stack');
     return true;
   };
 
   FlutterError.onError = (details) async {
     if (details.stack != null) {
       Zone.current.handleUncaughtError(details.exception, details.stack!);
-      reportCrash(details.exception.toString()+'\n'+details.stack.toString());
+      reportCrash('${details.exception}\n${details.stack}');
     } else {
       FlutterError.presentError(details);
     }
@@ -63,9 +62,8 @@ initApp() async {
   });
 }
 
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -79,21 +77,20 @@ class MyApp extends StatelessWidget {
         }
       },
       child: ScreenUtilInit(
-       builder: (context, widget)=>GetMaterialApp(
-         theme: ThemeConfig.lightTheme,
-         initialBinding: SplashBinding(),
-         initialRoute: AppPages.initial,
-         getPages: AppPages.routes,
-         scaffoldMessengerKey: GlobalVariable.navState,
-         debugShowCheckedModeBanner: false,
-         enableLog: true,
-         logWriterCallback: LoggerX.write,
-         locale: TranslationService.locale,
-         fallbackLocale: TranslationService.fallbackLocale,
-         translations: TranslationService(),
-         builder: EasyLoading.init(),
-         defaultTransition: Transition.cupertino,
-       ),
+        builder: (context, widget) => GetMaterialApp(
+          theme: ThemeConfig.lightTheme,
+          initialRoute: AppPages.initial,
+          getPages: AppPages.routes,
+          scaffoldMessengerKey: GlobalVariable.navState,
+          debugShowCheckedModeBanner: false,
+          enableLog: true,
+          logWriterCallback: LoggerX.write,
+          locale: TranslationService.locale,
+          fallbackLocale: TranslationService.fallbackLocale,
+          translations: TranslationService(),
+          builder: EasyLoading.init(),
+          defaultTransition: Transition.cupertino,
+        ),
       ),
     );
   }

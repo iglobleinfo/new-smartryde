@@ -34,7 +34,7 @@ class ProfileScreen extends GetView<LoginController> {
                                 text: 'To manage your account visit',
                                 children: [
                                   TextSpan(
-                                      text: ' Fluter',
+                                      text: 'Fluter',
                                       style: TextStyle(
                                           color: colorVioletM.shade50,
                                           fontWeight: FontWeight.w800,
