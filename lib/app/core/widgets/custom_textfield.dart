@@ -116,20 +116,26 @@ class TextFieldWidget extends StatelessWidget {
       isDense: true,
       filled: true,
       contentPadding: contentPadding ??
-          EdgeInsets.only(left: margin_30, top: margin_10, bottom: margin_10),
+          EdgeInsets.only(left: margin_10, top: margin_10, bottom: margin_10),
       prefixIcon: prefixIcon,
       suffixIcon: isOutined == true ? null : suffixIcon,
       hintText: hint,
       hintStyle: hintStyle ??
-          textStyleBody1(context).copyWith(
-              color: Colors.grey.shade500, fontWeight: FontWeight.w600),
+          textStyleBodySmall(context).copyWith(
+            color: Colors.grey,
+            fontWeight: FontWeight.normal,
+          ),
       labelText: labelText,
-      fillColor: Colors.white,
+      fillColor: appTextFieldBackgroundColor,
       border: decoration ??
           DecoratedInputBorder(
             child: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(radius ?? margin_30),
-                borderSide: BorderSide.none),
+              borderRadius: BorderRadius.circular(radius ?? margin_0),
+              borderSide: BorderSide(
+                color: appTextFieldOutlineColor,
+                width: 1,
+              ),
+            ),
             shadow: BoxShadow(
               color: shadow == true ? Colors.transparent : Colors.grey[200]!,
               blurRadius: margin_2,
@@ -139,8 +145,11 @@ class TextFieldWidget extends StatelessWidget {
       focusedErrorBorder: decoration ??
           DecoratedInputBorder(
             child: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(radius ?? margin_30),
-                borderSide: BorderSide.none),
+              borderRadius: BorderRadius.circular(radius ?? margin_0),
+              borderSide: BorderSide(
+                color: appTextFieldOutlineColor,
+              ),
+            ),
             shadow: BoxShadow(
               color: shadow == true ? Colors.transparent : Colors.grey[200]!,
               blurRadius: margin_2,
@@ -150,8 +159,11 @@ class TextFieldWidget extends StatelessWidget {
       errorBorder: decoration ??
           DecoratedInputBorder(
               child: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(radius ?? margin_30),
-                  borderSide: BorderSide.none),
+                borderRadius: BorderRadius.circular(radius ?? margin_0),
+                borderSide: BorderSide(
+                  color: appTextFieldErrorOutlineColor,
+                ),
+              ),
               shadow: BoxShadow(
                 color: shadow == true ? Colors.transparent : Colors.grey[200]!,
                 blurRadius: margin_2,
@@ -160,8 +172,11 @@ class TextFieldWidget extends StatelessWidget {
       focusedBorder: decoration ??
           DecoratedInputBorder(
               child: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(radius ?? margin_30),
-                  borderSide: BorderSide.none),
+                borderRadius: BorderRadius.circular(radius ?? margin_0),
+                borderSide: BorderSide(
+                  color: appTextFieldOutlineColor,
+                ),
+              ),
               shadow: BoxShadow(
                 color: shadow == true ? Colors.transparent : Colors.grey[200]!,
                 blurRadius: margin_2,
@@ -170,8 +185,11 @@ class TextFieldWidget extends StatelessWidget {
       enabledBorder: decoration ??
           DecoratedInputBorder(
             child: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(radius ?? margin_30),
-                borderSide: BorderSide.none),
+              borderRadius: BorderRadius.circular(radius ?? margin_0),
+              borderSide: BorderSide(
+                color: appTextFieldOutlineColor,
+              ),
+            ),
             shadow: BoxShadow(
               color: shadow == true ? Colors.transparent : Colors.grey[200]!,
               blurRadius: margin_2,

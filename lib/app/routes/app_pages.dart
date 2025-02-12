@@ -11,7 +11,7 @@ import '../modules/language/bindings/select_language_binding.dart';
 import '../modules/language/views/select_language_screen.dart';
 
 class AppPages {
-  static const initial = AppRoutes.logIn;
+  static const initial = AppRoutes.mainScreen;
 
   static final routes = [
     GetPage(

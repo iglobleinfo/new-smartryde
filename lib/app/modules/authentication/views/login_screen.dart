@@ -1,3 +1,5 @@
+import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
+
 import '../../../../../export.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -11,8 +13,14 @@ class LoginScreen extends GetView<LoginController> {
       ),
       child: Row(
         children: [
-          Icon(
-            Icons.arrow_back_rounded,
+          InkWell(
+            onTap: ()
+            {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back_rounded,
+            ),
           ),
         ],
       ),
@@ -24,14 +32,18 @@ class LoginScreen extends GetView<LoginController> {
     return GetBuilder<LoginController>(
       init: LoginController(),
       builder: (controller) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            body: Column(
-              children: [
-                getBackButtonRow(context),
-                loginForm(context: context),
-              ],
+        return AnnotatedRegionWidget(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.dark,
+          child: SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              body: Column(
+                children: [
+                  getBackButtonRow(context),
+                  loginForm(context: context),
+                ],
+              ),
             ),
           ),
         );
@@ -68,15 +80,16 @@ class LoginScreen extends GetView<LoginController> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: [
-                TextFormField(
-                  controller: TextEditingController(),
-                  decoration: const InputDecoration(
-                    hintText: '+12345678910',
-                    labelText: 'Phone number',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) =>
-                      value != null && value.isNotEmpty ? null : 'Required',
+                TextFieldWidget(
+                  textController: TextEditingController(),
+                  shadow: true,
+                  hint: enterYourContactNumber.tr,
+                  // decoration: const InputDecoration(
+                  //   hintText: '+12345678910',
+                  //   labelText: 'Phone number',
+                  // ),
+                  // validator: (value) =>
+                  //     value != null && value.isNotEmpty ? null : 'Required',
                 ),
               ],
             ),

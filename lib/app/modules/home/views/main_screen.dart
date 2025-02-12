@@ -7,6 +7,7 @@ import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
 import 'package:smart_ryde/app/modules/staticPages/controllers/static_page_controller.dart';
 import 'package:smart_ryde/app/modules/staticPages/views/static_page_screen.dart';
 import '../../../../../export.dart';
+import '../../../core/widgets/annotated_region_widget.dart';
 
 class MainScreen extends GetView<HomeController> {
   final StaticPageController staticPageController =
@@ -22,55 +23,61 @@ class MainScreen extends GetView<HomeController> {
       onPopInvokedWithResult: (didPop, result) {
         homeController.onWillPop();
       },
-      child: SafeArea(
-        child: GetBuilder<HomeController>(
-          builder: (controller) {
-            return Scaffold(
-              key: scaffoldKey,
-              resizeToAvoidBottomInset: false,
-              appBar: CustomAppBar(
-                appBarTitleText: 'SmartRyde',
-                leadingIcon: getInkWell(
-                  onTap: () {
-                    scaffoldKey!.currentState!.openDrawer();
-                  },
-                  child: AssetImageWidget(
-                    imageUrl: iconMenu,
-                  ).paddingAll(height_10),
+      child: AnnotatedRegionWidget(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.dark,
+        child: SafeArea(
+          child: GetBuilder<HomeController>(
+            builder: (controller) {
+              return Scaffold(
+                key: scaffoldKey,
+                resizeToAvoidBottomInset: false,
+                appBar: CustomAppBar(
+                  appBarTitleText: 'SmartRyde',
+                  leadingIcon: getInkWell(
+                    onTap: () {
+                      scaffoldKey!.currentState!.openDrawer();
+                    },
+                    child: AssetImageWidget(
+                      imageUrl: iconMenu,
+                    ).paddingAll(height_10),
+                  ),
                 ),
-              ),
-              drawer: customDrawer(context),
-              body: controller.bottomNavIndex == 2
-                  ? ProfileScreen()
-                  : HomeScreen(),
-              bottomNavigationBar:
-                  controller.currentViewType == ViewType.bottomNav
-                      ? BottomNavigationBar(
-                          onTap: (value) {
-                            controller.updateBottomNavIndex(value);
-                          },
-                          currentIndex: controller.bottomNavIndex,
-                          items: const [
-                              BottomNavigationBarItem(
-                                  label: '', icon: Icon(Icons.home)),
-                              BottomNavigationBarItem(
-                                  label: '', icon: Icon(Icons.feed)),
-                              BottomNavigationBarItem(
-                                  label: '', icon: Icon(Icons.person)),
-                            ])
-                      : null,
-            );
-          },
+                drawer: customDrawer(context),
+                body: controller.bottomNavIndex == 2
+                    ? ProfileScreen()
+                    : HomeScreen(),
+                bottomNavigationBar:
+                    controller.currentViewType == ViewType.bottomNav
+                        ? BottomNavigationBar(
+                            onTap: (value) {
+                              controller.updateBottomNavIndex(value);
+                            },
+                            currentIndex: controller.bottomNavIndex,
+                            items: const [
+                                BottomNavigationBarItem(
+                                    label: '', icon: Icon(Icons.home)),
+                                BottomNavigationBarItem(
+                                    label: '', icon: Icon(Icons.feed)),
+                                BottomNavigationBarItem(
+                                    label: '', icon: Icon(Icons.person)),
+                              ])
+                        : null,
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
-  customDrawer(BuildContext context) => Drawer(
+  customDrawer(BuildContext context) => Container(
+        color: Colors.white,
+        width: Get.width - 100,
+        height: height_1000,
         child: Column(
           children: [
-            profileHeader(context, loginController, homeController)
-                .marginOnly(top: margin_30),
+            profileHeader(context, loginController, homeController),
             const Divider(),
             listTile(
                 icon: iconAccount_info,
@@ -200,23 +207,42 @@ listTile({text, icon, onTap}) => InkWell(
     );
 
 Widget profileHeader(context, loginController, homeController) => Container(
+      height: height_100,
+      color: primaryColor,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: InkWell(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextView(
-                text: 'Username',
-                textStyle: textStyleTitle(context),
+              AssetImageWidget(
+                imageUrl: iconAccount_info,
+                imageHeight: 25,
+                imageWidth: 25,
+                imageFitType: BoxFit.fill,
+              ).marginOnly(right: margin_10),
+              Text(
+                'Please Login/Signup',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               ),
-              TextView(
-                text: loginController.myAccountModel?.email ?? '',
-                textStyle: textStyleTitle(context),
+              SizedBox(
+                width: 20,
+              ),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 17,
+                color: Colors.white,
               )
             ],
-          )
-        ],
+          ),
+        ),
+        onTap: () {
+          Get.toNamed(AppRoutes.logIn);
+        },
       ),
     );

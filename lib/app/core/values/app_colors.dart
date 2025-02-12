@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 const Color appButtonColor = Color.fromRGBO(21, 164, 184, 1);
 const Color appClickableTextColor = Color.fromRGBO(21, 164, 184, 1);
+const Color appTextFieldBackgroundColor = Color.fromRGBO(242, 242, 242, 1);
+const Color appTextFieldOutlineColor = Color.fromRGBO(215, 215, 215, 1);
+const Color appTextFieldErrorOutlineColor = Colors.red;
 
 const Color colorAppColor = Color.fromRGBO(49, 37, 98, 1.0);
 const Color colorAppColors = Color.fromRGBO(59, 154, 197, 1.0);
@@ -17,6 +20,7 @@ const Color colorLightGray = Color.fromRGBO(204, 204, 204, 1.0);
 const Color colorCultured = Color.fromRGBO(247, 247, 247, 1.0);
 const Color colorMiddleBlue = Color.fromRGBO(107, 204, 224, 1.0);
 Color textFieldBgClr = Color(0xfffdeee7);
+Color primaryColor = Color(0xff05b2cf);
 
 const colorVioletM = MaterialColor(
   0xFF312562,
