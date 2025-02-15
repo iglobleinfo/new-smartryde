@@ -4,6 +4,7 @@ class RegisterController extends GetxController {
   late TextEditingController emailController;
   late TextEditingController nameController = TextEditingController();
   late TextEditingController numberController= TextEditingController();
+  late TextEditingController countryPickerController = TextEditingController();
   late TextEditingController forgetEmailController;
   late TextEditingController passwordController;
   late FocusNode emailFocusNode;
@@ -23,6 +24,7 @@ class RegisterController extends GetxController {
     emailController = TextEditingController();
     forgetEmailController = TextEditingController();
     passwordController = TextEditingController();
+    countryPickerController.text = '+825';
     emailFocusNode = FocusNode();
     forgetEmailFocusNode = FocusNode();
     passwordFocusNode = FocusNode();

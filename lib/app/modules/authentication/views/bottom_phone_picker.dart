@@ -17,15 +17,22 @@ class BottomPhonePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      height: 200,
+      height: 150,
       child: Column(
         children: [
           SizedBox(
             height: margin_10,
           ),
-          TextView(
-            text: 'Select Country Code',
-            textStyle: textStyleBodyLarge(context),
+          Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              TextView(
+                text: 'Select Country Code',
+                textStyle: textStyleBodyLarge(context),
+              ),
+            ],
           ),
           SizedBox(
             height: margin_10,
@@ -37,7 +44,7 @@ class BottomPhonePicker extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 String country = countryCode[index];
                 return GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     selectedCountryCode.call(country);
                   },
                   child: Padding(
