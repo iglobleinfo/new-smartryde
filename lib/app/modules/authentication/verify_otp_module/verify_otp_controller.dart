@@ -27,4 +27,17 @@ class VerifyOtpController extends GetxController {
       Get.offAllNamed(AppRoutes.home);
     }
   }
+
+  /*===================================================================== SignUp API Call  ==========================================================*/
+  hitGenerateOtpAPI(context) {
+    customLoader.show(context);
+    FocusManager.instance.primaryFocus!.unfocus();
+    APIRepository.generateOtpApi(phoneNumber).then((value) async {
+      customLoader.hide();
+      toast('Opt send successfully');
+    }).onError((error, stackTrace) {
+      customLoader.hide();
+      toast(error);
+    });
+  }
 }

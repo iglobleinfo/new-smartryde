@@ -12,6 +12,7 @@ const Map<String, String> enUS = {
   'and': 'and',
   'privacyPolicy': 'privacy policy',
   'enterYourEmail': 'Enter Your Email',
+  "otpSentDescription": "We have sent the verification code\nto your email address",
   'password': 'Password',
   'pleaseEnterEmailAddress': 'Please enter email address',
   'pleaseEnterValidEmailAddress': 'Please enter valid email address',

@@ -12,10 +12,10 @@ class NetworkExceptions {
   static getDioException(error, stacktrace) {
     reportCrash(error.toString());
     if (error is Exception) {
-      FlutterLogger.getInstance().recordCrash(
-        reportURL: crashBaseUrl + logCrashesExceptionsEndPoint,
-        stackTrace: stacktrace.toString(),
-      );
+      // FlutterLogger.getInstance().recordCrash(
+      //   reportURL: crashBaseUrl + logCrashesExceptionsEndPoint,
+      //   stackTrace: stacktrace.toString(),
+      // );
       try {
         if (error is DioException) {
           switch (error.type) {
