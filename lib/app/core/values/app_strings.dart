@@ -6,6 +6,7 @@ const String userLogin = 'userLogin';
 const String userSignUp = 'userSignUp';
 const String pleaseFillUpTheInformationBelow = 'pleaseFillUpTheInformationBelow';
 const String login = 'login';
+const String strOtpSentDescription = "otpSentDescription";
 const String enterYourContactNumber = 'enterYourContactNumber';
 const String doNotHaveAccountSignUpNow = 'doNotHaveAccountSignUpNow';
 const String byContinuingYouAgreeTo = 'byContinuingYouAgreeTo';

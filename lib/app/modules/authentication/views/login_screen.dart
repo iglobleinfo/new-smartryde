@@ -116,6 +116,11 @@ class LoginScreen extends GetView<LoginController> {
                         maxLength: 10,
                         inputType: TextInputType.number,
                         hint: enterYourContactNumber.tr,
+                        onChange: (value) {
+                          if (controller.phoneNumberController.text == ' ') {
+                            controller.phoneNumberController.text = '';
+                          }
+                        },
                         // validate: (String? value) {
                         //   return null;
                         // },

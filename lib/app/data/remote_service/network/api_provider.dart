@@ -48,6 +48,48 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== signup API Call  ==========================================================*/
+  static Future<LoginResponseModel?> signUpApiCall(
+      {Map<String, dynamic>? dataBody}) async {
+    try {
+      final response = await dioClient!.post(endPointSignUp, data: dataBody);
+      return LoginResponseModel.fromJson(response);
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Generate Otp API Call  ==========================================================*/
+  static Future generateOtpApi(String phoneNumber) async {
+    try {
+      final response = await dioClient!.get(
+        endPointGenerateOtp+phoneNumber,
+        skipAuth: false,
+      );
+      return response;
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+ /*===================================================================== Verify Otp API Call  ==========================================================*/
+  static Future verifyOtpApi(String phoneNumber) async {
+    try {
+      final response = await dioClient!.get(
+        endPointVerifyOtp+phoneNumber,
+        skipAuth: false,
+      );
+      return response;
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== login API Call  ==========================================================*/
   static Future socialLoginApiCall({Map<String, dynamic>? dataBody}) async {
     try {

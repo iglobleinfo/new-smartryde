@@ -4,6 +4,8 @@ const website = 'https://pub.dev';
 
 const endPointLogin = "/user/login";
 const endPointSignUp = "/user";
+const endPointGenerateOtp = "/user/generate-otp/";
+const endPointVerifyOtp = "/user/verify-otp/";
 const endPointSocialLogin = "/Account/socialLogin";
 const endPointForgot = "/Account/ForgetPassword";
 const endPointMyAccount = "/Account/MyAccount";

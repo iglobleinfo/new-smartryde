@@ -172,6 +172,7 @@ class RegisterScreen extends GetView<RegisterController> {
               buttonText: stringSignUp.tr.toUpperCase(),
               onPressed: () {
                 if (formGlobalKey.currentState!.validate()) {
+                  controller.hitSignUpAPI(context);
                   // Get.offAllNamed(AppRoutes.mainScreen);
                 }
               },

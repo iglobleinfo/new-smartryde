@@ -15,6 +15,20 @@ class AuthRequestModel {
     return data;
   }
 
+  static registerReq({
+    required String phoneNumber,
+    required String password,
+    required String email,
+    required String name,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['email'] = email;
+    data['password'] = password;
+    data['name'] = name;
+    data['phone'] = phoneNumber;
+    return data;
+  }
+
   static forgetReq({required String phoneNumber}) {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['username'] = phoneNumber;

@@ -33,11 +33,6 @@ class LoginController extends GetxController {
   }
 
   @override
-  void onClose() {
-    super.onClose();
-  }
-
-  @override
   void dispose() {
     customLoader.hide();
     phoneNumberController.dispose();
@@ -211,6 +206,9 @@ class LoginController extends GetxController {
       customLoader.hide();
       // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
+      Get.offAllNamed(
+        AppRoutes.home,
+      );
       toast('Logged In');
     }).onError((error, stackTrace) {
       customLoader.hide();

@@ -3,13 +3,13 @@ import 'package:smart_ryde/export.dart';
 class RegisterController extends GetxController {
   late TextEditingController emailController;
   late TextEditingController nameController = TextEditingController();
-  late TextEditingController numberController= TextEditingController();
+  late TextEditingController numberController = TextEditingController();
   late TextEditingController countryPickerController = TextEditingController();
   late TextEditingController forgetEmailController;
   late TextEditingController passwordController;
   late FocusNode emailFocusNode;
-  late FocusNode nameFocusNode=FocusNode();
-  late FocusNode numberFocusNode=FocusNode();
+  late FocusNode nameFocusNode = FocusNode();
+  late FocusNode numberFocusNode = FocusNode();
   late FocusNode forgetEmailFocusNode;
   late FocusNode passwordFocusNode;
   late FocusNode loginFocusNode;
@@ -184,20 +184,40 @@ class RegisterController extends GetxController {
 
   //APIs
 
-  /*===================================================================== Login API Call  ==========================================================*/
-  hitLoginAPI(context) {
+  /*===================================================================== SignUp API Call  ==========================================================*/
+  hitSignUpAPI(context) {
     loader.value = true;
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
-    var loginReq = AuthRequestModel.loginReq(
-        phoneNumber: emailController.text.trim().toLowerCase(),
-        password: passwordController.text);
-    APIRepository.loginApiCall(dataBody: loginReq).then((value) async {
+    var loginReq = AuthRequestModel.registerReq(
+      phoneNumber: countryPickerController.text +
+          numberController.text.trim().toLowerCase(),
+      password: passwordController.text,
+      email: emailController.text,
+      name: nameController.text,
+    );
+    APIRepository.signUpApiCall(dataBody: loginReq).then((value) async {
       loginModel = value;
-      customLoader.hide();
       // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
-      // toast(value.message);
+      toast(value?.message);
+      hitGenerateOtpAPI(context);
+    }).onError((error, stackTrace) {
+      customLoader.hide();
+      loader.value = false;
+      toast(error);
+    });
+  }
+
+  /*===================================================================== SignUp API Call  ==========================================================*/
+  hitGenerateOtpAPI(context) {
+    loader.value = true;
+    FocusManager.instance.primaryFocus!.unfocus();
+    APIRepository.generateOtpApi(countryPickerController.text+numberController.text).then((value) async {
+      customLoader.hide();
+      Get.toNamed(AppRoutes.verifyOtp,arguments: {
+        "phoneNumber":countryPickerController.text+numberController.text,
+      });
     }).onError((error, stackTrace) {
       customLoader.hide();
       loader.value = false;

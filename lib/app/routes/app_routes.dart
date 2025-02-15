@@ -3,6 +3,7 @@ abstract class AppRoutes {
   static const selectLanguage = '/selectLanguage';
   static const logIn = '/logIn';
   static const signUp = '/signUp';
+  static const verifyOtp = '/verifyOtp';
   static const forgotPassword = '/forgotPassword';
   static const home = '/home';
   static const onboarding = '/onboarding';

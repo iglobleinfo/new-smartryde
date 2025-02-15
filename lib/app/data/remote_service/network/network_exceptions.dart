@@ -43,11 +43,11 @@ class NetworkExceptions {
                 case 400:
                   Map<String, dynamic> data = error.response?.data;
 
-                  if (data.values.elementAt(0).runtimeType == String) {
-                    return messageData = data.values.elementAt(0);
+                  if (data.values.elementAt(3).runtimeType == String) {
+                    return messageData = data.values.elementAt(3);
                   } else {
-                    Map<String, dynamic> datas = data.values.elementAt(0);
-                    if (data.values.elementAt(0) == null) {
+                    Map<String, dynamic> datas = data.values.elementAt(3);
+                    if (data.values.elementAt(3) == null) {
                       var dataValue = ErrorMessageResponseModel.fromJson(
                               error.response?.data)
                           .message;
