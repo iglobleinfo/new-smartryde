@@ -6,6 +6,7 @@ const Color appClickableTextColor = Color.fromRGBO(21, 164, 184, 1);
 const Color appTextFieldBackgroundColor = Color.fromRGBO(242, 242, 242, 1);
 const Color appTextFieldOutlineColor = Color.fromRGBO(215, 215, 215, 1);
 const Color appTextFieldErrorOutlineColor = Colors.red;
+const Color appFacebookButtonColor = Color.fromRGBO(74, 110, 170, 1);
 
 const Color colorAppColor = Color.fromRGBO(49, 37, 98, 1.0);
 const Color colorAppColors = Color.fromRGBO(59, 154, 197, 1.0);

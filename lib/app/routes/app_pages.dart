@@ -1,5 +1,6 @@
 import 'package:smart_ryde/app/modules/authentication/verify_otp_module/verify_otp_bindings.dart';
 import 'package:smart_ryde/app/modules/authentication/views/forget_screen.dart';
+import 'package:smart_ryde/app/modules/authentication/views/onboarding_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/profile_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/register_screen.dart';
 import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
@@ -18,9 +19,14 @@ class AppPages {
       page: () => SplashScreen(),
     ),
     GetPage(
-        name: AppRoutes.selectLanguage,
-        page: () => SelectLanguageScreen(),
-        binding: SelectLanguageBinding()),
+      name: AppRoutes.selectLanguage,
+      page: () => SelectLanguageScreen(),
+      binding: SelectLanguageBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.onboarding,
+      page: () => OnboardingScreen(),
+    ),
     GetPage(
       name: AppRoutes.logIn,
       page: () => LoginScreen(),

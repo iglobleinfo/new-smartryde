@@ -6,7 +6,6 @@ import '../../../../../export.dart';
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
@@ -84,9 +83,6 @@ class LoginScreen extends GetView<LoginController> {
                         contentPadding: EdgeInsets.all(margin_10),
                         textController: controller.countryPickerController,
                         shadow: true,
-                        validate: (String? value) {
-                          return null;
-                        },
                       ),
                     ),
                     Expanded(
@@ -102,9 +98,6 @@ class LoginScreen extends GetView<LoginController> {
                             controller.phoneNumberController.text = '';
                           }
                         },
-                        // validate: (String? value) {
-                        //   return null;
-                        // },
                       ),
                     ),
                   ],
@@ -138,13 +131,18 @@ class LoginScreen extends GetView<LoginController> {
           ).marginOnly(bottom: margin_20),
           Align(
             alignment: Alignment.center,
-            child: TextView(
-              text: doNotHaveAccountSignUpNow.tr,
-              textStyle: textStyleBodySmall(context).copyWith(
-                color: appClickableTextColor,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.blueAccent,
-                decorationThickness: 1,
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutes.signUp);
+              },
+              child: TextView(
+                text: doNotHaveAccountSignUpNow.tr,
+                textStyle: textStyleBodySmall(context).copyWith(
+                  color: appClickableTextColor,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.blueAccent,
+                  decorationThickness: 1,
+                ),
               ),
             ),
           ),
@@ -160,27 +158,18 @@ class LoginScreen extends GetView<LoginController> {
                 children: [
                   TextSpan(
                     text: termsOfService.tr,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.toNamed(AppRoutes.signUp);
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
                     ),
                   ),
                   TextSpan(
                     text: ' ${and.tr} ',
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.toNamed(AppRoutes.signUp);
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                   ),
                   TextSpan(
                     text: privacyPolicy.tr,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.toNamed(AppRoutes.signUp);
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
                     ),

@@ -43,7 +43,10 @@ class MaterialButtonWidget extends StatelessWidget {
       color: buttonColor ?? appButtonColor,
       elevation: elevation ?? radius_4,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(buttonRadius ?? 0)),
+        borderRadius: BorderRadius.circular(
+          buttonRadius ?? 0,
+        ),
+      ),
       onPressed: onPressed,
       padding: EdgeInsets.symmetric(
         vertical: verticalPadding ?? margin_12,

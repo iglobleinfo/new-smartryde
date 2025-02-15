@@ -25,6 +25,7 @@ class RegisterScreen extends GetView<RegisterController> {
                 body: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomBackButton(),
                       signUpForm(context: context),

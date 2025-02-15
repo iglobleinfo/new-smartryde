@@ -140,7 +140,7 @@ class HomeScreen extends GetView<HomeController> {
             ),
           ),
           onTap: () {
-            Get.toNamed(AppRoutes.logIn);
+            Get.toNamed(AppRoutes.onboarding);
           },
         ),
       );
