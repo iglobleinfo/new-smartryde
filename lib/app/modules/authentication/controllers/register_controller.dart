@@ -17,7 +17,7 @@ class RegisterController extends GetxController {
   MyAccountModel? myAccountModel;
   late CustomLoader customLoader;
   RxBool loader = false.obs;
-  bool viewPassword = false;
+  RxBool viewPassword = RxBool(false);
 
   @override
   void onInit() {
@@ -63,7 +63,7 @@ class RegisterController extends GetxController {
 
   /*===================================================================== Password Visibility  ==========================================================*/
   showOrHidePasswordVisibility() {
-    viewPassword = !viewPassword;
+    viewPassword.value = !viewPassword.value;
     update();
   }
 
@@ -213,10 +213,12 @@ class RegisterController extends GetxController {
   hitGenerateOtpAPI(context) {
     loader.value = true;
     FocusManager.instance.primaryFocus!.unfocus();
-    APIRepository.generateOtpApi(countryPickerController.text+numberController.text).then((value) async {
+    APIRepository.generateOtpApi(
+            countryPickerController.text + numberController.text)
+        .then((value) async {
       customLoader.hide();
-      Get.toNamed(AppRoutes.verifyOtp,arguments: {
-        "phoneNumber":countryPickerController.text+numberController.text,
+      Get.toNamed(AppRoutes.verifyOtp, arguments: {
+        "phoneNumber": countryPickerController.text + numberController.text,
       });
     }).onError((error, stackTrace) {
       customLoader.hide();

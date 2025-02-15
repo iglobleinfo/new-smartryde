@@ -1,31 +1,11 @@
-import 'package:smart_ryde/app/core/utils/validators.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
+import 'package:smart_ryde/app/core/widgets/custom_back_button.dart';
 import 'package:smart_ryde/app/modules/authentication/views/bottom_phone_picker.dart';
 import '../../../../../export.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
-  Widget getBackButtonRow(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: margin_8,
-        vertical: margin_8,
-      ),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_rounded,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +19,9 @@ class LoginScreen extends GetView<LoginController> {
             child: Scaffold(
               backgroundColor: Colors.white,
               body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  getBackButtonRow(context),
+                  CustomBackButton(),
                   loginForm(context: context),
                 ],
               ),
@@ -128,11 +109,21 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                   ],
                 ),
-                TextFieldWidget(
-                  textController: controller.passwordController,
-                  shadow: true,
-                  hint: stringPassword.tr,
-                ),
+                Obx(() {
+                  IconData icon = controller.viewPassword.value
+                      ? Icons.visibility
+                      : Icons.visibility_off;
+                  return TextFieldWidget(
+                    suffixIcon: IconButton(
+                      onPressed: controller.showOrHidePasswordVisibility,
+                      icon: Icon(icon),
+                    ),
+                    obscureText: controller.viewPassword.value,
+                    textController: controller.passwordController,
+                    shadow: true,
+                    hint: stringPassword.tr,
+                  );
+                }),
               ],
             ),
           ).marginOnly(bottom: margin_30),

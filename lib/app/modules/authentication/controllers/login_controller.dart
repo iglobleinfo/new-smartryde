@@ -1,5 +1,4 @@
-import 'package:smart_ryde/app/core/utils/validators.dart'
-    show phoneTextFieldValidator;
+import 'package:smart_ryde/app/core/utils/validators.dart' show phoneTextFieldValidator;
 import '../../../../../export.dart';
 
 class LoginController extends GetxController {
@@ -17,9 +16,10 @@ class LoginController extends GetxController {
   late CustomLoader customLoader;
   RxBool loader = false.obs;
   RxBool isRemember = false.obs;
-  bool viewPassword = false;
+  RxBool viewPassword = RxBool(false);
   final formGlobalKey = GlobalKey<FormState>();
   int maxDigit = 8;
+
   @override
   void onInit() {
     phoneNumberController = TextEditingController();
@@ -60,8 +60,8 @@ class LoginController extends GetxController {
   }
 
   /*===================================================================== Password Visibility  ==========================================================*/
-  showOrHidePasswordVisibility() {
-    viewPassword = !viewPassword;
+  void showOrHidePasswordVisibility() {
+    viewPassword.value = !viewPassword.value;
     update();
   }
 
