@@ -1,18 +1,23 @@
 // Project imports:
 class AuthRequestModel {
-  static loginReq(
-      {String? email, String? password, deviceToken, deviceType, deviceName}) {
+  static loginReq({
+    required String phoneNumber,
+    required String password,
+    deviceToken,
+    deviceType,
+    deviceName,
+  }) {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['username'] = email;
+    data['username'] = phoneNumber;
     data['password'] = password;
     data['fcmToken'] = 'deviceToken';
     data['platform'] = 'android';
     return data;
   }
 
-  static forgetReq({String? email}) {
+  static forgetReq({required String phoneNumber}) {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Email'] = email;
+    data['username'] = phoneNumber;
     return data;
   }
 

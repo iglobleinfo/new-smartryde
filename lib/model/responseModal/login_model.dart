@@ -1,17 +1,46 @@
+import 'dart:convert';
 
+import 'package:smart_ryde/app/modules/authentication/model/login_data_model.dart';
 
-class LoginModel {
-  String? token;
+LoginResponseModel welcomeFromJson(String str) =>
+    LoginResponseModel.fromJson(json.decode(str));
 
-  LoginModel({this.token});
+String welcomeToJson(LoginResponseModel data) => json.encode(data.toJson());
 
-  LoginModel.fromJson(Map<String, dynamic> json) {
-    token = json['token'];
-  }
+class LoginResponseModel {
+  String? timestamp;
+  int? statusCode;
+  LoginDataModel? data;
+  String? message;
+  String? details;
+  bool? status;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    return data;
-  }
+  LoginResponseModel({
+    this.timestamp,
+    this.statusCode,
+    this.data,
+    this.message,
+    this.details,
+    this.status,
+  });
+
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
+      LoginResponseModel(
+        timestamp: json["timestamp"],
+        statusCode: json["statusCode"],
+        data:
+            json["data"] == null ? null : LoginDataModel.fromJson(json["data"]),
+        message: json["message"],
+        details: json["details"],
+        status: json["status"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "timestamp": timestamp,
+        "statusCode": statusCode,
+        "data": data?.toJson(),
+        "message": message,
+        "details": details,
+        "status": status,
+      };
 }

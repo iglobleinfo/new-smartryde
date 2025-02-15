@@ -1,14 +1,15 @@
 import '../../../../../export.dart';
 
 class LoginController extends GetxController {
-  late TextEditingController emailController;
+  late TextEditingController countryPickerController;
+  late TextEditingController phoneNumberController;
   late TextEditingController forgetEmailController;
   late TextEditingController passwordController;
   late FocusNode emailFocusNode;
   late FocusNode forgetEmailFocusNode;
   late FocusNode passwordFocusNode;
   late FocusNode loginFocusNode;
-  LoginModel? loginModel;
+  LoginResponseModel? loginModel;
   MyAccountModel? myAccountModel;
   late CustomLoader customLoader;
   RxBool loader = false.obs;
@@ -17,7 +18,9 @@ class LoginController extends GetxController {
   final formGlobalKey = GlobalKey<FormState>();
   @override
   void onInit() {
-    emailController = TextEditingController();
+    phoneNumberController = TextEditingController();
+    countryPickerController = TextEditingController();
+    countryPickerController.text = '+825';
     forgetEmailController = TextEditingController();
     passwordController = TextEditingController();
     emailFocusNode = FocusNode();
@@ -37,7 +40,7 @@ class LoginController extends GetxController {
   @override
   void dispose() {
     customLoader.hide();
-    emailController.dispose();
+    phoneNumberController.dispose();
     forgetEmailController.dispose();
     passwordController.dispose();
     emailFocusNode.dispose();
@@ -189,15 +192,16 @@ class LoginController extends GetxController {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
     var loginReq = AuthRequestModel.loginReq(
-      email: emailController.text.trim().toLowerCase(),
+      phoneNumber: phoneNumberController.text.trim().toLowerCase(),
       password: passwordController.text,
     );
-    APIRepository.loginApiCall(dataBody: loginReq).then((value) async {
+    APIRepository.loginApiCall(dataBody: loginReq)
+        .then((LoginResponseModel? value) async {
       loginModel = value;
       customLoader.hide();
-      storage.write(LOCALKEY_token, loginModel?.token);
+      // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
-      toast(value.message);
+      toast(value?.message ?? 'Logged In');
     }).onError((error, stackTrace) {
       customLoader.hide();
       loader.value = false;
@@ -209,8 +213,9 @@ class LoginController extends GetxController {
   hitForgetAPI(context) {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
-    var loginReq = AuthRequestModel.loginReq(
-        email: forgetEmailController.text.trim().toLowerCase());
+    var loginReq = AuthRequestModel.forgetReq(
+      phoneNumber: forgetEmailController.text.trim().toLowerCase(),
+    );
     APIRepository.forgetApiCall(dataBody: loginReq).then((value) {
       toast(value?.message, seconds: 1);
       Future.delayed(const Duration(seconds: 2), () {
@@ -251,7 +256,7 @@ class LoginController extends GetxController {
     APIRepository.socialLoginApiCall(dataBody: response).then((value) async {
       loginModel = value;
       customLoader.hide();
-      storage.write(LOCALKEY_token, loginModel?.token);
+      // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
       toast(value.message);
     }).onError((error, stackTrace) {

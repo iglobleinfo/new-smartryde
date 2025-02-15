@@ -38,10 +38,11 @@ class APIRepository {
   }
 
   /*===================================================================== login API Call  ==========================================================*/
-  static Future loginApiCall({Map<String, dynamic>? dataBody}) async {
+  static Future<LoginResponseModel?> loginApiCall(
+      {Map<String, dynamic>? dataBody}) async {
     try {
       final response = await dioClient!.post(endPointLogin, data: dataBody);
-      return LoginModel.fromJson(response);
+      return LoginResponseModel.fromJson(response);
     } catch (e, str) {
       return Future.error(NetworkExceptions.getDioException(e, str));
     }
@@ -52,7 +53,7 @@ class APIRepository {
     try {
       final response =
           await dioClient!.post(endPointSocialLogin, data: dataBody);
-      return LoginModel.fromJson(response);
+      return LoginResponseModel.fromJson(response);
     } catch (e, str) {
       return Future.error(NetworkExceptions.getDioException(e, str));
     }

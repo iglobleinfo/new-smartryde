@@ -96,12 +96,11 @@ class TextFieldWidget extends StatelessWidget {
                 textInputAction: inputAction,
                 onFieldSubmitted: onFieldSubmitted,
                 validator: validate,
-                style: textStyleHeadlineLarge(context).copyWith(
-                    fontSize: font_14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black),
+                style: textStyleBodySmall(context).copyWith(
+                  fontWeight: FontWeight.normal,
+                ),
                 decoration: inputDecoration(context))
-            .marginAll(margin_10),
+            .marginOnly(bottom: 0.5, right: 0.5),
       ],
     );
   }

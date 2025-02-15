@@ -1,5 +1,6 @@
 import 'package:smart_ryde/app/core/utils/validators.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
+import 'package:smart_ryde/app/modules/authentication/views/bottom_phone_picker.dart';
 import '../../../../../export.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -79,13 +80,46 @@ class LoginScreen extends GetView<LoginController> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: [
-                TextFieldWidget(
-                  textController: controller.emailController,
-                  shadow: true,
-                  hint: enterYourEmail.tr,
-                  validate: (String? value) {
-                    return emailTextFieldValidator(value, context);
-                  },
+                Row(
+                  children: [
+                    Container(
+                      constraints: BoxConstraints(
+                        maxWidth: 55,
+                      ),
+                      child: TextFieldWidget(
+                        readOnly: true,
+                        onTap: () {
+                          Get.bottomSheet(
+                            backgroundColor: Colors.white,
+                            BottomPhonePicker(
+                              countryCode: ['+91', '+825'],
+                              selectedCountryCode: (countryCode) {
+                                controller.countryPickerController.text =
+                                    countryCode;
+                                Get.back();
+                              },
+                            ),
+                          );
+                        },
+                        contentPadding: EdgeInsets.all(margin_10),
+                        textController: controller.countryPickerController,
+                        shadow: true,
+                        validate: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: TextFieldWidget(
+                        textController: controller.phoneNumberController,
+                        shadow: true,
+                        hint: enterYourContactNumber.tr,
+                        validate: (String? value) {
+                          return emailTextFieldValidator(value, context);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 TextFieldWidget(
                   textController: controller.passwordController,

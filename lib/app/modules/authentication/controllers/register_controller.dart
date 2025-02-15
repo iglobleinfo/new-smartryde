@@ -8,7 +8,7 @@ class RegisterController extends GetxController {
   late FocusNode forgetEmailFocusNode;
   late FocusNode passwordFocusNode;
   late FocusNode loginFocusNode;
-  LoginModel? loginModel;
+  LoginResponseModel? loginModel;
   MyAccountModel? myAccountModel;
   late CustomLoader customLoader;
   RxBool loader = false.obs;
@@ -184,14 +184,14 @@ class RegisterController extends GetxController {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
     var loginReq = AuthRequestModel.loginReq(
-        email: emailController.text.trim().toLowerCase(),
+        phoneNumber: emailController.text.trim().toLowerCase(),
         password: passwordController.text);
     APIRepository.loginApiCall(dataBody: loginReq).then((value) async {
       loginModel = value;
       customLoader.hide();
-      storage.write(LOCALKEY_token, loginModel?.token);
+      // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
-      toast(value.message);
+      // toast(value.message);
     }).onError((error, stackTrace) {
       customLoader.hide();
       loader.value = false;
@@ -203,8 +203,8 @@ class RegisterController extends GetxController {
   hitForgetAPI(context) {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
-    var loginReq = AuthRequestModel.loginReq(
-        email: forgetEmailController.text.trim().toLowerCase());
+    var loginReq = AuthRequestModel.forgetReq(
+        phoneNumber: forgetEmailController.text.trim().toLowerCase());
     APIRepository.forgetApiCall(dataBody: loginReq).then((value) {
       toast(value.message);
       Future.delayed(const Duration(seconds: 2), () {
@@ -245,7 +245,7 @@ class RegisterController extends GetxController {
     APIRepository.socialLoginApiCall(dataBody: response).then((value) async {
       loginModel = value;
       customLoader.hide();
-      storage.write(LOCALKEY_token, loginModel?.token);
+      // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
       toast(value.message);
     }).onError((error, stackTrace) {
