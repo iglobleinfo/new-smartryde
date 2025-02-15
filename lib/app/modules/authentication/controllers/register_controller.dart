@@ -2,9 +2,13 @@ import 'package:smart_ryde/export.dart';
 
 class RegisterController extends GetxController {
   late TextEditingController emailController;
+  late TextEditingController nameController = TextEditingController();
+  late TextEditingController numberController= TextEditingController();
   late TextEditingController forgetEmailController;
   late TextEditingController passwordController;
   late FocusNode emailFocusNode;
+  late FocusNode nameFocusNode=FocusNode();
+  late FocusNode numberFocusNode=FocusNode();
   late FocusNode forgetEmailFocusNode;
   late FocusNode passwordFocusNode;
   late FocusNode loginFocusNode;

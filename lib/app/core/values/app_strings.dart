@@ -3,6 +3,7 @@
 /// *********************************************************************\
 /// Smart Ryde App Strings
 const String userLogin = 'userLogin';
+const String userSignUp = 'userSignUp';
 const String pleaseFillUpTheInformationBelow = 'pleaseFillUpTheInformationBelow';
 const String login = 'login';
 const String enterYourContactNumber = 'enterYourContactNumber';
@@ -17,6 +18,7 @@ const String stringEmailEmptyValidation = "pleaseEnterEmailAddress";
 const String stringEmailValidValidation = "pleaseEnterValidEmailAddress";
 const String stringPasswordEmptyValidation = "pleaseEnterPassword";
 const String stringPasswordValidValidation = 'pleaseEnterValidPassword';
+const String enterName = 'enterName';
 /// **********************************************************************
 /// **********************************************************************
 /// **********************************************************************
@@ -84,7 +86,7 @@ const String stringForgotPassword = "forgot password?";
 const String stringLogin = "login";
 const String stringDoNotHaveAccount = "Don't have an account? Create an account in";
 const String stringWebsite = "website";
-const String stringRegister = "Register";
+const String stringSignUp = "signup";
 const String stringAlreadyHaveAccount = "Already have an account? ";
 const String stringSignIn = "Sign In";
 const String stringFAQs = "FAQs";

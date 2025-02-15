@@ -57,7 +57,7 @@ class HomeScreen extends GetView<HomeController> {
                     onTap: () {
                       controller.scaffoldKey.currentState!.openDrawer();
                     },
-                    child: Icon(Icons.more_vert_rounded).paddingAll(height_10),
+                    child: Icon(Icons.dehaze_outlined).paddingAll(height_10),
                   ),
                 ),
                 drawer: customDrawer(context),

@@ -5,10 +5,11 @@ class LoginController extends GetxController {
   late TextEditingController phoneNumberController;
   late TextEditingController forgetEmailController;
   late TextEditingController passwordController;
-  late FocusNode emailFocusNode;
-  late FocusNode forgetEmailFocusNode;
-  late FocusNode passwordFocusNode;
-  late FocusNode loginFocusNode;
+  late FocusNode emailFocusNode= FocusNode();
+  late FocusNode forgetEmailFocusNode= FocusNode();
+  late FocusNode phoneFocusNode= FocusNode();
+  late FocusNode passwordFocusNode= FocusNode();
+  late FocusNode loginFocusNode= FocusNode();
   LoginResponseModel? loginModel;
   MyAccountModel? myAccountModel;
   late CustomLoader customLoader;
@@ -16,6 +17,7 @@ class LoginController extends GetxController {
   RxBool isRemember = false.obs;
   bool viewPassword = false;
   final formGlobalKey = GlobalKey<FormState>();
+  int maxDigit= 8;
   @override
   void onInit() {
     phoneNumberController = TextEditingController();
@@ -23,10 +25,6 @@ class LoginController extends GetxController {
     countryPickerController.text = '+825';
     forgetEmailController = TextEditingController();
     passwordController = TextEditingController();
-    emailFocusNode = FocusNode();
-    forgetEmailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
-    loginFocusNode = FocusNode();
     customLoader = CustomLoader();
     debugPrint('initCalled');
     super.onInit();
@@ -192,7 +190,7 @@ class LoginController extends GetxController {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
     var loginReq = AuthRequestModel.loginReq(
-      phoneNumber: phoneNumberController.text.trim().toLowerCase(),
+      phoneNumber: countryPickerController.text+phoneNumberController.text,
       password: passwordController.text,
     );
     APIRepository.loginApiCall(dataBody: loginReq)

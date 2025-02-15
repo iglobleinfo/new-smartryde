@@ -2,6 +2,7 @@ import '../local_keys.dart';
 
 const Map<String, String> enUS = {
   'userLogin': 'User Login',
+  'userSignUp': 'User Signup',
   'pleaseFillUpTheInformationBelow': 'Please Fill Up The Information Below',
   'login': 'Login',
   'enterYourContactNumber': 'Enter Your Contact Number(+8529000000000)',
@@ -16,6 +17,8 @@ const Map<String, String> enUS = {
   'pleaseEnterValidEmailAddress': 'Please enter valid email address',
   'pleaseEnterPassword': 'Please enter password',
   'pleaseEnterValidPassword': 'Password must consist of a special character, number and minimum 8 char',
+  'enterName': 'Enter You Name',
+  'enterEmail': 'Enter email address',
   keyPressToExitApp: "Press one more time to push app into background",
   keyNoResultFound: "No Result Found",
   keyEnglish: "English",

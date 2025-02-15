@@ -15,51 +15,55 @@ class BottomPhonePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: margin_10,
-        ),
-        TextView(
-          text: 'Select Country Code',
-          textStyle: textStyleBodyLarge(context),
-        ),
-        SizedBox(
-          height: margin_10,
-        ),
-        SizedBox(
-          height: Get.height * 0.4,
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              String country = countryCode[index];
-              return GestureDetector(
-                onTap: (){
-                  selectedCountryCode.call(country);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: TextView(
-                    text: country,
-                    textAlign: TextAlign.start,
-                    textStyle: textStyleBodyMedium(context),
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Divider(
-                  height: 0.5,
-                  color: Colors.grey.shade200,
-                ),
-              );
-            },
-            itemCount: countryCode.length,
+    return Container(
+      color: Colors.white,
+      height: 200,
+      child: Column(
+        children: [
+          SizedBox(
+            height: margin_10,
           ),
-        )
-      ],
+          TextView(
+            text: 'Select Country Code',
+            textStyle: textStyleBodyLarge(context),
+          ),
+          SizedBox(
+            height: margin_10,
+          ),
+          SizedBox(
+            height: Get.height * 0.4,
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                String country = countryCode[index];
+                return GestureDetector(
+                  onTap: (){
+                    selectedCountryCode.call(country);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: TextView(
+                      text: country,
+                      textAlign: TextAlign.start,
+                      textStyle: textStyleBodyMedium(context),
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Divider(
+                    height: 0.5,
+                    color: Colors.grey.shade200,
+                  ),
+                );
+              },
+              itemCount: countryCode.length,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

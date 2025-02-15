@@ -1,4 +1,3 @@
-import 'package:smart_ryde/app/core/utils/validators.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 import 'package:smart_ryde/app/modules/authentication/views/bottom_phone_picker.dart';
 import '../../../../../export.dart';
@@ -90,7 +89,6 @@ class LoginScreen extends GetView<LoginController> {
                         readOnly: true,
                         onTap: () {
                           Get.bottomSheet(
-                            backgroundColor: Colors.white,
                             BottomPhonePicker(
                               countryCode: ['+91', '+825'],
                               selectedCountryCode: (countryCode) {
@@ -112,11 +110,14 @@ class LoginScreen extends GetView<LoginController> {
                     Expanded(
                       child: TextFieldWidget(
                         textController: controller.phoneNumberController,
+                        focusNode: controller.phoneFocusNode,
                         shadow: true,
+                        maxLength: 10,
+                        inputType: TextInputType.number,
                         hint: enterYourContactNumber.tr,
-                        validate: (String? value) {
-                          return emailTextFieldValidator(value, context);
-                        },
+                        // validate: (String? value) {
+                        //   return emailTextFieldValidator(value, context);
+                        // },
                       ),
                     ),
                   ],
@@ -171,7 +172,7 @@ class LoginScreen extends GetView<LoginController> {
                     text: termsOfService.tr,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Get.offAllNamed(AppRoutes.signUp);
+                        Get.toNamed(AppRoutes.signUp);
                       },
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
@@ -181,14 +182,14 @@ class LoginScreen extends GetView<LoginController> {
                     text: ' ${and.tr} ',
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Get.offAllNamed(AppRoutes.signUp);
+                        Get.toNamed(AppRoutes.signUp);
                       },
                   ),
                   TextSpan(
                     text: privacyPolicy.tr,
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Get.offAllNamed(AppRoutes.signUp);
+                        Get.toNamed(AppRoutes.signUp);
                       },
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
