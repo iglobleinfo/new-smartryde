@@ -2,6 +2,7 @@ import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 
 import '../../../../../export.dart';
 import '../../../core/utils/validators.dart';
+import 'bottom_phone_picker.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
   final formGlobalKey = GlobalKey<FormState>();
@@ -98,10 +99,53 @@ class RegisterScreen extends GetView<RegisterController> {
                   shadow: true,
                   hint: enterName.tr,
                 ),
-                TextFieldWidget(
-                  textController: controller.numberController,
-                  shadow: true,
-                  hint: enterYourContactNumber.tr,
+                Row(
+                  children: [
+                    Container(
+                      constraints: BoxConstraints(
+                        maxWidth: 55,
+                      ),
+                      child: TextFieldWidget(
+                        readOnly: true,
+                        onTap: () {
+                          Get.bottomSheet(
+                            BottomPhonePicker(
+                              countryCode: ['+91', '+825'],
+                              selectedCountryCode: (countryCode) {
+                                controller.countryPickerController.text =
+                                    countryCode;
+                                Get.back();
+                              },
+                            ),
+                          );
+                        },
+                        contentPadding: EdgeInsets.all(margin_10),
+                        textController: controller.countryPickerController,
+                        shadow: true,
+                        validate: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: TextFieldWidget(
+                        textController: controller.numberController,
+                        focusNode: controller.nameFocusNode,
+                        shadow: true,
+                        maxLength: 10,
+                        inputType: TextInputType.number,
+                        hint: enterYourContactNumber.tr,
+                        onChange: (value) {
+                          if (controller.numberController.text == ' ') {
+                            controller.numberController.text = '';
+                          }
+                        },
+                        // validate: (String? value) {
+                        //   return emailTextFieldValidator(value, context);
+                        // },
+                      ),
+                    ),
+                  ],
                 ),
                 TextFieldWidget(
                   textController: controller.emailController,
