@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 import '../../../export.dart';
 
 toast(message, {int seconds = 1}) => Get.snackbar(
-      'appname',
+      'SmartRyde',
       '$message',
+      snackPosition: SnackPosition.BOTTOM,
       borderRadius: 6.0,
       animationDuration: Duration(seconds: seconds),
-      backgroundColor: colorMistyRose,
-      margin: EdgeInsets.zero,
-      colorText: colorVioletM,
+      backgroundColor: primaryColor,
+      margin: EdgeInsets.all(20),
+      colorText: Colors.white,
     );
