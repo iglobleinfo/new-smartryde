@@ -189,8 +189,9 @@ class LoginController extends GetxController {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
     var loginReq = AuthRequestModel.loginReq(
-        email: emailController.text.trim().toLowerCase(),
-        password: passwordController.text);
+      email: emailController.text.trim().toLowerCase(),
+      password: passwordController.text,
+    );
     APIRepository.loginApiCall(dataBody: loginReq).then((value) async {
       loginModel = value;
       customLoader.hide();

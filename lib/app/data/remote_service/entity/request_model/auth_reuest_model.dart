@@ -1,9 +1,8 @@
-
-
 // Project imports:
 class AuthRequestModel {
-  static loginReq({String? email, String? password, deviceToken,deviceType,deviceName}) {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  static loginReq(
+      {String? email, String? password, deviceToken, deviceType, deviceName}) {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['Email'] = email;
     data['Password'] = password;
     data['LoginForm[device_token]'] = deviceToken;
@@ -13,22 +12,23 @@ class AuthRequestModel {
   }
 
   static forgetReq({String? email}) {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['Email'] = email;
     return data;
   }
 
-  static socialLoginReq(
-      {var userId,
-        var email,
-        var fullName,
-        var username,
-        var provider,
-        var img_url,
-        var deviceToken,
-        var deviceType,
-        var deviceName}) {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  static socialLoginReq({
+    var userId,
+    var email,
+    var fullName,
+    var username,
+    var provider,
+    var img_url,
+    var deviceToken,
+    var deviceType,
+    var deviceName,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['User[userId]'] = userId;
     data['User[email]'] = email;
     data['User[full_name]'] = fullName;
@@ -41,8 +41,14 @@ class AuthRequestModel {
     return data;
   }
 
-  static logCrashErrorReq({error, packageVersion, phoneModel, ip, stackTrace, }) {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  static logCrashErrorReq({
+    error,
+    packageVersion,
+    phoneModel,
+    ip,
+    stackTrace,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['Log[error]'] = error;
     data['Log[link]'] = packageVersion;
     data['Log[referer_link]'] = phoneModel;
@@ -50,5 +56,4 @@ class AuthRequestModel {
     data['Log[description]'] = stackTrace;
     return data;
   }
-
 }

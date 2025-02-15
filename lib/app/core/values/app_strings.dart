@@ -11,6 +11,12 @@ const String byContinuingYouAgreeTo = 'byContinuingYouAgreeTo';
 const String termsOfService = 'termsOfService';
 const String and = 'and';
 const String privacyPolicy = 'privacyPolicy';
+const String enterYourEmail = 'enterYourEmail';
+const String password = 'password';
+const String stringEmailEmptyValidation = "pleaseEnterEmailAddress";
+const String stringEmailValidValidation = "pleaseEnterValidEmailAddress";
+const String stringPasswordEmptyValidation = "pleaseEnterPassword";
+const String stringPasswordValidValidation = 'pleaseEnterValidPassword';
 /// **********************************************************************
 /// **********************************************************************
 /// **********************************************************************
@@ -71,11 +77,9 @@ const String stringAccountDeleteSuccess = "Account Deleted Successfully";
 
 const String stringDownloading = "Downloading...";
 const String stringEmail = "email";
-const String stringEmailEmptyValidation = "Please enter email address";
-const String stringEmailValidValidation = "Please enter valid email address";
+
 const String stringLoginHeading = "Use the email and password that you registered in Flutter website.";
 const String stringPassword = "password";
-const String stringPasswordEmptyValidation = "Please enter password";
 const String stringForgotPassword = "forgot password?";
 const String stringLogin = "login";
 const String stringDoNotHaveAccount = "Don't have an account? Create an account in";

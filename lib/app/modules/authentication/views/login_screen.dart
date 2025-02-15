@@ -1,5 +1,5 @@
+import 'package:smart_ryde/app/core/utils/validators.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
-
 import '../../../../../export.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -80,9 +80,22 @@ class LoginScreen extends GetView<LoginController> {
             child: Column(
               children: [
                 TextFieldWidget(
-                  textController: TextEditingController(),
+                  textController: controller.emailController,
                   shadow: true,
-                  hint: enterYourContactNumber.tr,
+                  hint: enterYourEmail.tr,
+                  validate: (String? value) {
+                    return emailTextFieldValidator(value, context);
+                  },
+                ),
+                TextFieldWidget(
+                  textController: controller.passwordController,
+                  shadow: true,
+                  hint: stringPassword.tr,
+                  validate: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return stringPasswordEmptyValidation.tr;
+                    }
+                  },
                 ),
               ],
             ),
@@ -93,7 +106,7 @@ class LoginScreen extends GetView<LoginController> {
               buttonText: stringLogin.tr.toUpperCase(),
               onPressed: () {
                 if (controller.formGlobalKey.currentState!.validate()) {
-                  // Get.offAllNamed(AppRoutes.mainScreen);
+                  controller.hitLoginAPI(context);
                 }
               },
             ),
