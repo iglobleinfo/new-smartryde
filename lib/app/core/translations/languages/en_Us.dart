@@ -19,6 +19,8 @@ const Map<String, String> enUS = {
   'pleaseEnterValidPassword': 'Password must consist of a special character, number and minimum 8 char',
   'enterName': 'Enter You Name',
   'enterEmail': 'Enter email address',
+  'pleaseEnterPhoneNumber': 'Please enter phone number',
+  'pleaseEnterValidNumber': 'Please enter a valid phone number',
   keyPressToExitApp: "Press one more time to push app into background",
   keyNoResultFound: "No Result Found",
   keyEnglish: "English",

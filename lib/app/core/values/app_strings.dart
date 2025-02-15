@@ -18,6 +18,8 @@ const String stringEmailEmptyValidation = "pleaseEnterEmailAddress";
 const String stringEmailValidValidation = "pleaseEnterValidEmailAddress";
 const String stringPasswordEmptyValidation = "pleaseEnterPassword";
 const String stringPasswordValidValidation = 'pleaseEnterValidPassword';
+const String stringPhoneNumberValidation = 'pleaseEnterPhoneNumber';
+const String stringPhoneNumberValidValidation = 'pleaseEnterValidNumber';
 const String enterName = 'enterName';
 /// **********************************************************************
 /// **********************************************************************

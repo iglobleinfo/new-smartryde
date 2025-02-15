@@ -1,3 +1,4 @@
+import 'package:smart_ryde/app/core/utils/validators.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 import 'package:smart_ryde/app/modules/authentication/views/bottom_phone_picker.dart';
 import '../../../../../export.dart';
@@ -116,7 +117,7 @@ class LoginScreen extends GetView<LoginController> {
                         inputType: TextInputType.number,
                         hint: enterYourContactNumber.tr,
                         // validate: (String? value) {
-                        //   return emailTextFieldValidator(value, context);
+                        //   return null;
                         // },
                       ),
                     ),
@@ -126,11 +127,6 @@ class LoginScreen extends GetView<LoginController> {
                   textController: controller.passwordController,
                   shadow: true,
                   hint: stringPassword.tr,
-                  validate: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return stringPasswordEmptyValidation.tr;
-                    }
-                  },
                 ),
               ],
             ),
@@ -140,9 +136,7 @@ class LoginScreen extends GetView<LoginController> {
             child: MaterialButtonWidget(
               buttonText: stringLogin.tr.toUpperCase(),
               onPressed: () {
-                if (controller.formGlobalKey.currentState!.validate()) {
-                  controller.hitLoginAPI(context);
-                }
+                controller.hitLoginAPI(context);
               },
             ),
           ).marginOnly(bottom: margin_20),

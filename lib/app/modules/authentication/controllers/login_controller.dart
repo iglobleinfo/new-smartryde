@@ -1,3 +1,5 @@
+import 'package:smart_ryde/app/core/utils/validators.dart'
+    show phoneTextFieldValidator;
 import '../../../../../export.dart';
 
 class LoginController extends GetxController {
@@ -5,11 +7,11 @@ class LoginController extends GetxController {
   late TextEditingController phoneNumberController;
   late TextEditingController forgetEmailController;
   late TextEditingController passwordController;
-  late FocusNode emailFocusNode= FocusNode();
-  late FocusNode forgetEmailFocusNode= FocusNode();
-  late FocusNode phoneFocusNode= FocusNode();
-  late FocusNode passwordFocusNode= FocusNode();
-  late FocusNode loginFocusNode= FocusNode();
+  late FocusNode emailFocusNode = FocusNode();
+  late FocusNode forgetEmailFocusNode = FocusNode();
+  late FocusNode phoneFocusNode = FocusNode();
+  late FocusNode passwordFocusNode = FocusNode();
+  late FocusNode loginFocusNode = FocusNode();
   LoginResponseModel? loginModel;
   MyAccountModel? myAccountModel;
   late CustomLoader customLoader;
@@ -17,7 +19,7 @@ class LoginController extends GetxController {
   RxBool isRemember = false.obs;
   bool viewPassword = false;
   final formGlobalKey = GlobalKey<FormState>();
-  int maxDigit= 8;
+  int maxDigit = 8;
   @override
   void onInit() {
     phoneNumberController = TextEditingController();
@@ -186,11 +188,21 @@ class LoginController extends GetxController {
 
   /*===================================================================== Login API Call  ==========================================================*/
   hitLoginAPI(context) {
+    String? result = phoneTextFieldValidator(
+        countryPickerController.text, phoneNumberController.text, context);
+    if (result != null) {
+      toast(result);
+      return;
+    }
+    if (passwordController.text.isEmpty) {
+      toast(stringPasswordEmptyValidation.tr);
+      return;
+    }
     loader.value = true;
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
     var loginReq = AuthRequestModel.loginReq(
-      phoneNumber: countryPickerController.text+phoneNumberController.text,
+      phoneNumber: countryPickerController.text + phoneNumberController.text,
       password: passwordController.text,
     );
     APIRepository.loginApiCall(dataBody: loginReq)
@@ -199,7 +211,7 @@ class LoginController extends GetxController {
       customLoader.hide();
       // storage.write(LOCALKEY_token, loginModel?.token);
       loader.value = false;
-      toast(value?.message ?? 'Logged In');
+      toast('Logged In');
     }).onError((error, stackTrace) {
       customLoader.hide();
       loader.value = false;
