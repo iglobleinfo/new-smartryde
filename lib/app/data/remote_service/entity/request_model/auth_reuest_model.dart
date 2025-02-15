@@ -3,11 +3,10 @@ class AuthRequestModel {
   static loginReq(
       {String? email, String? password, deviceToken, deviceType, deviceName}) {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Email'] = email;
-    data['Password'] = password;
-    data['LoginForm[device_token]'] = deviceToken;
-    data['LoginForm[device_type]'] = deviceType;
-    data['LoginForm[device_name]'] = deviceName;
+    data['username'] = email;
+    data['password'] = password;
+    data['fcmToken'] = 'deviceToken';
+    data['platform'] = 'android';
     return data;
   }
 

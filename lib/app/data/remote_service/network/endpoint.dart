@@ -1,10 +1,8 @@
-
-
 const crashBaseUrl = "http://hk.igloble.com/minibusapi";
 const baseUrl = "http://hk.igloble.com/minibusapi";
 const website = 'https://pub.dev';
 
-const endPointLogin = "/user";
+const endPointLogin = "/user/login";
 const endPointSignUp = "/user";
 const endPointSocialLogin = "/Account/socialLogin";
 const endPointForgot = "/Account/ForgetPassword";

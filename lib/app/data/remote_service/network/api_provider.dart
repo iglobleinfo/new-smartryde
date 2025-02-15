@@ -1,5 +1,3 @@
-
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:smart_ryde/app/data/remote_service/network/network_exceptions.dart';
@@ -42,20 +40,21 @@ class APIRepository {
   /*===================================================================== login API Call  ==========================================================*/
   static Future loginApiCall({Map<String, dynamic>? dataBody}) async {
     try {
-      final response = await dioClient!.post(login, data: dataBody);
+      final response = await dioClient!.post(endPointLogin, data: dataBody);
       return LoginModel.fromJson(response);
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
   /*===================================================================== login API Call  ==========================================================*/
   static Future socialLoginApiCall({Map<String, dynamic>? dataBody}) async {
     try {
-      final response = await dioClient!.post(endPointSocialLogin, data: dataBody);
+      final response =
+          await dioClient!.post(endPointSocialLogin, data: dataBody);
       return LoginModel.fromJson(response);
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -63,8 +62,8 @@ class APIRepository {
     try {
       final response = await dioClient!.post(endPointForgot, data: dataBody);
       return MyAccountModel.fromJson(response);
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -72,8 +71,8 @@ class APIRepository {
     try {
       final response = await dioClient!.post(endPointMyAccount);
       return MyAccountModel.fromJson(response);
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -81,8 +80,8 @@ class APIRepository {
     try {
       final response = await dioClient!.post(endPointMyAccount);
       return MyAccountModel.fromJson(response);
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -90,8 +89,8 @@ class APIRepository {
     try {
       final response = await dioClient!.post(myBook);
       return (response as List).map((p) => HomeModel.fromJson(p)).toList();
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -103,8 +102,8 @@ class APIRepository {
         skipAuth: false,
       );
       return response;
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -114,8 +113,8 @@ class APIRepository {
       final response = await dioClient!.get(buySubscriptionEndPt,
           skipAuth: false, queryParameters: {'id': id});
       return response;
-    } catch (e,str) {
-      return Future.error(NetworkExceptions.getDioException(e,str));
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 
@@ -123,7 +122,8 @@ class APIRepository {
   static Future<ErrorMessageResponseModel?> reportCrashLogApiCall(
       {data}) async {
     try {
-      final res = await Dio().post(crashBaseUrl + logCrashesExceptionsEndPoint,
+      final res = await dioClient!.post(
+          crashBaseUrl + logCrashesExceptionsEndPoint,
           data: FormData.fromMap(data));
       var response = res.data;
       return ErrorMessageResponseModel.fromJson(response);

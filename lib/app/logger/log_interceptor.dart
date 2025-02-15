@@ -65,9 +65,9 @@ class LogInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (request) {
+    // if (request) {
       _printRequestHeader(options);
-    }
+    // }
     if (requestHeader) {
       _printMapAsTable(options.queryParameters, header: 'Query Parameters');
       final requestHeaders = <String, dynamic>{};

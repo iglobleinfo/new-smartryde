@@ -11,12 +11,9 @@
 
 // Project imports:
 
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:smart_ryde/app/data/local_service/local_keys.dart';
 import 'package:smart_ryde/app/logger/log_interceptor.dart' as LogInterceptor;
 import 'package:smart_ryde/export.dart';
-
 
 const _defaultConnectTimeout = Duration();
 const _defaultReceiveTimeout = Duration();
@@ -45,6 +42,7 @@ class DioClient {
       ..httpClientAdapter
       ..options.contentType = setContentType()
       ..options.headers = {
+        'Authorization': appLoginSignUpKey,
         'Content-Type': setContentType(),
       };
 
@@ -52,13 +50,16 @@ class DioClient {
       _dio.interceptors.addAll(interceptors!);
     }
     if (kDebugMode) {
-      _dio.interceptors.add(LogInterceptor.LogInterceptor(
+      _dio.interceptors.add(
+        LogInterceptor.LogInterceptor(
           responseBody: true,
           error: true,
           requestHeader: true,
           responseHeader: false,
           request: false,
-          requestBody: true));
+          requestBody: true,
+        ),
+      );
     }
   }
 
@@ -90,7 +91,7 @@ class DioClient {
     } on FormatException catch (_) {
       throw FormatException("Unable to process the data");
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -108,9 +109,7 @@ class DioClient {
         debugPrint("authorization============ $token");
 
         if (token != null) {
-          if (options == null) {
-            options = Options(headers: {"Authorization": "Token $token"});
-          }
+          options ??= Options(headers: {"Authorization": "Token $token"});
         }
       }
       var response = await _dio.post(
@@ -126,7 +125,7 @@ class DioClient {
     } on FormatException catch (_) {
       throw FormatException("Unable to process the data");
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -153,7 +152,7 @@ class DioClient {
     } on FormatException catch (_) {
       throw FormatException("Unable to process the data");
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }
