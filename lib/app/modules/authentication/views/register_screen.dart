@@ -1,4 +1,5 @@
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
+import 'package:smart_ryde/app/core/widgets/custom_back_button.dart';
 
 import '../../../../../export.dart';
 import '../../../core/utils/validators.dart';
@@ -8,26 +9,6 @@ class RegisterScreen extends GetView<RegisterController> {
   final formGlobalKey = GlobalKey<FormState>();
 
   RegisterScreen({super.key});
-  Widget getBackButtonRow(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: margin_8,
-        vertical: margin_8,
-      ),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(
-              Icons.arrow_back_rounded,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +26,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [
-                      getBackButtonRow(context),
+                      CustomBackButton(),
                       signUpForm(context: context),
                       AssetImageWidget(
                         imageUrl: imageBusMainLogin,
@@ -140,9 +121,6 @@ class RegisterScreen extends GetView<RegisterController> {
                             controller.numberController.text = '';
                           }
                         },
-                        // validate: (String? value) {
-                        //   return emailTextFieldValidator(value, context);
-                        // },
                       ),
                     ),
                   ],
@@ -155,14 +133,21 @@ class RegisterScreen extends GetView<RegisterController> {
                     return emailTextFieldValidator(value, context);
                   },
                 ),
-                TextFieldWidget(
-                  textController: controller.passwordController,
-                  shadow: true,
-                  hint: stringPassword.tr,
-                  validate: (String? value) {
-                    return passwordTextFieldValidator(value, context);
-                  },
-                ),
+                Obx(() {
+                  IconData icon = controller.viewPassword.value
+                      ? Icons.visibility
+                      : Icons.visibility_off;
+                  return TextFieldWidget(
+                    suffixIcon: IconButton(
+                      onPressed: controller.showOrHidePasswordVisibility,
+                      icon: Icon(icon),
+                    ),
+                    obscureText: controller.viewPassword.value,
+                    textController: controller.passwordController,
+                    shadow: true,
+                    hint: stringPassword.tr,
+                  );
+                }),
               ],
             ),
           ).marginOnly(bottom: margin_30),
