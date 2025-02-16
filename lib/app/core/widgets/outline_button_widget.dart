@@ -27,7 +27,7 @@ class OutlineButtonWidget extends StatelessWidget {
       style: ButtonStyle(
         side: WidgetStatePropertyAll(
           BorderSide(
-            width: 2,
+            width: 1,
             color: outlineColor ?? Colors.blue,
           ),
         ),

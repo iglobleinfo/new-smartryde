@@ -107,9 +107,7 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 
-
-
-  Widget getContinueToService(BuildContext context){
+  Widget getContinueToService(BuildContext context) {
     return Column(
       children: [
         SizedBox(
