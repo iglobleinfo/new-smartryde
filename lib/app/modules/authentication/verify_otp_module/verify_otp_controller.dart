@@ -26,7 +26,7 @@ class VerifyOtpController extends GetxController {
     if (successResponse != null) {
       customLoader.hide();
       toast('Otp Verified');
-      Get.offAllNamed(AppRoutes.home);
+      Get.offAllNamed(AppRoutes.onboarding);
     }
   }
 

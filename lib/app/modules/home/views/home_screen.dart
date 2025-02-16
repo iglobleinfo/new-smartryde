@@ -1,4 +1,5 @@
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
+import 'package:smart_ryde/app/modules/authentication/model/login_data_model.dart';
 import 'package:smart_ryde/export.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -54,6 +55,7 @@ class HomeScreen extends GetView<HomeController> {
         statusBarBrightness: Brightness.dark,
         child: SafeArea(
           child: GetBuilder<HomeController>(
+            init: HomeController(),
             builder: (controller) {
               return Scaffold(
                 key: controller.scaffoldKey,
@@ -64,7 +66,10 @@ class HomeScreen extends GetView<HomeController> {
                     onTap: () {
                       controller.scaffoldKey.currentState!.openDrawer();
                     },
-                    child: Icon(Icons.dehaze_outlined).paddingAll(height_10),
+                    child: Icon(
+                      Icons.dehaze_outlined,
+                      size: 26,
+                    ).paddingAll(12),
                   ),
                 ),
                 drawer: customDrawer(context),
@@ -103,7 +108,7 @@ class HomeScreen extends GetView<HomeController> {
               Text(
                 text,
                 style: textStyleDisplayMedium(context)
-                    .copyWith(fontWeight: FontWeight.w500, fontSize: 16),
+                    .copyWith(fontWeight: FontWeight.w500, fontSize: 18),
               )
             ],
           ),
@@ -113,41 +118,89 @@ class HomeScreen extends GetView<HomeController> {
         },
       );
 
-  Widget profileHeader(context) => Container(
-        height: height_120,
-        color: primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: InkWell(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                cachedImage(
-                  url: '',
-                  placeholder: Image.asset(imageUser),
-                  height: 40,
-                  width: 40,
+  Widget profileHeader(context) {
+    return Container(
+      height: 150,
+      color: primaryColor,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: InkWell(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: controller.tempFile != null
+                      ? ClipOval(
+                          child: Image.file(
+                            controller.tempFile!,
+                            fit: BoxFit.fill,
+                            height: 40,
+                            width: 40,
+                          ),
+                        )
+                      : AssetImageWidget(
+                          imageUrl: imageUser,
+                          imageHeight: 40,
+                          imageWidth: 40,
+                          radiusAll: 90,
+                        ),
                 ),
-                Text(
-                  'Please Login/Signup',
-                  style: textStyleDisplayMedium(context).copyWith(
-                      fontWeight: FontWeight.normal, color: Colors.white),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 17,
-                  color: Colors.white,
-                )
-              ],
-            ),
+              ),
+              PreferenceManger().getStatusUserLogin() ?? false
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          controller.userData?.name ?? '',
+                          style: textStyleDisplayMedium(context).copyWith(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          controller.userData?.phone ?? '',
+                          style: textStyleDisplayMedium(context).copyWith(
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Text(
+                      'Please Login/Signup',
+                      style: textStyleDisplayMedium(context).copyWith(
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+              SizedBox(
+                width: 10,
+              ),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 17,
+                color: Colors.white,
+              )
+            ],
           ),
-          onTap: () {
-            Get.toNamed(AppRoutes.onboarding);
-          },
         ),
-      );
+        onTap: () {
+          if (PreferenceManger().getStatusUserLogin() ?? false) {
+            Get.toNamed(AppRoutes.profile);
+          } else {
+            Get.toNamed(AppRoutes.onboarding);
+          }
+        },
+      ),
+    );
+  }
 }

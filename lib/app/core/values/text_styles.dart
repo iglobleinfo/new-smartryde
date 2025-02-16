@@ -58,7 +58,7 @@ TextStyle textStyleBodyMedium(BuildContext context) =>
     Theme.of(context).textTheme.bodyMedium!;
 
 TextStyle textStyleBodySmall(BuildContext context) =>
-    Theme.of(context).textTheme.bodySmall!;
+    Theme.of(context).textTheme.bodyMedium!;
 
 TextStyle textStyleTitleLarge(BuildContext context) =>
     Theme.of(context).textTheme.titleLarge!;

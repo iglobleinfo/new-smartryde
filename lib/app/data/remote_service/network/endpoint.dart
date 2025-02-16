@@ -7,6 +7,7 @@ const endPointSignUp = "/user";
 const endPointGenerateOtp = "/user/generate-otp/";
 const endPointForgotPassword = "/user/forgot-password/";
 const endPointVerifyOtp = "/user/verify-otp/";
+const endPointGetUser = "/user/";
 const endPointSocialLogin = "/Account/socialLogin";
 const endPointForgot = "/Account/ForgetPassword";
 const endPointMyAccount = "/Account/MyAccount";

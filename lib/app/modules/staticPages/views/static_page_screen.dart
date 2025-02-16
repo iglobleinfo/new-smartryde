@@ -6,8 +6,6 @@ class StaticPageScreen extends StatelessWidget {
 
   const StaticPageScreen({Key? key, this.type}) : super(key: key);
 
-  static HomeController homeController = Get.put(HomeController());
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<StaticPageController>(builder: (controller) {

@@ -55,14 +55,16 @@ class LoginScreen extends GetView<LoginController> {
           ),
           TextView(
             text: userLogin.tr,
-            textStyle: textStyleBodyLarge(context),
+            textStyle: textStyleLabelSmall(context).copyWith(fontSize: 19),
           ),
           TextView(
             text: pleaseFillUpTheInformationBelow.tr,
             textStyle: textStyleLabelSmall(context).copyWith(
               fontWeight: FontWeight.normal,
+              fontSize: 15
             ),
           ),
+          SizedBox(height: 15,),
           Form(
             key: controller.formGlobalKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -88,7 +90,7 @@ class LoginScreen extends GetView<LoginController> {
                             ),
                           );
                         },
-                        contentPadding: EdgeInsets.all(margin_10),
+                        // contentPadding: EdgeInsets.all(margin_10),
                         textController: controller.countryPickerController,
                         shadow: true,
                       ),
@@ -167,6 +169,7 @@ class LoginScreen extends GetView<LoginController> {
                 text: doNotHaveAccountSignUpNow.tr,
                 textStyle: textStyleBodySmall(context).copyWith(
                   color: appClickableTextColor,
+                  fontSize: 17,
                   decoration: TextDecoration.underline,
                   decorationColor: Colors.blueAccent,
                   decorationThickness: 1,
@@ -183,11 +186,16 @@ class LoginScreen extends GetView<LoginController> {
               textAlign: TextAlign.center,
               TextSpan(
                 text: byContinuingYouAgreeTo.tr,
+                style:  textStyleBodySmall(context).copyWith(
+                    color: Colors.black,
+                    fontSize: 17
+                ),
                 children: [
                   TextSpan(
                     text: termsOfService.tr,
                     recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
+                      fontSize: 16,
                       color: appClickableTextColor,
                     ),
                   ),
@@ -200,6 +208,7 @@ class LoginScreen extends GetView<LoginController> {
                     recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
+                      fontSize: 16
                     ),
                   ),
                 ],

@@ -50,15 +50,16 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               stringVerificationOTP.tr,
-              style: textStyleDisplayMedium(context),
+              style: textStyleLabelSmall(context).copyWith(fontSize: 19),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               strOtpSentDescription.tr,
-              style: textStyleBodyMedium(context).copyWith(
-                fontWeight: FontWeight.w400,
+              style: textStyleLabelSmall(context).copyWith(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 15
               ),
             ),
           ),

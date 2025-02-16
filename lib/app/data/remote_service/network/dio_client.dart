@@ -129,7 +129,7 @@ class DioClient {
     }
   }
 
-  static Future<dynamic> put(
+  Future<dynamic> put(
     String uri, {
     data,
     Map<String, dynamic>? queryParameters,

@@ -14,6 +14,8 @@ class PreferenceManger {
   static int rating = 0;
   static String size = "";
 
+  static const String isLogin = "isLogin";
+  static const String profile = "profile";
   static const String isFirstLaunch = "isFirstLaunch";
   static const String authToken = "authToken";
   static const String loginResponseModel = "loginResponseModel";
@@ -26,6 +28,38 @@ class PreferenceManger {
   static const String notificationOn = "notificationOn";
   static const String defaultCurrency = "defaultCurrency";
   static const String changeLanguage = "changeLanguage";
+
+  isUserLogin(bool? isUserLogin) {
+    storage.write(isLogin, isUserLogin);
+  }
+
+  getStatusUserLogin() {
+    return storage.read(isLogin);
+  }
+
+  saveProfilePic(String? path) {
+    return storage.write(profile, path);
+  }
+
+  getProfilePic() {
+    return storage.read(profile);
+  }
+
+  saveUserData(LoginDataModel loginDataModel) {
+    storage.write(loginResponseModel, jsonEncode(loginDataModel.toJson()));
+    debugPrint("Saved------M>");
+  }
+
+  Future<LoginDataModel?> getUserData() async {
+    Map<String, dynamic>? userMap;
+    final userStr = await storage.read(loginResponseModel);
+    if (userStr != null) userMap = jsonDecode(userStr);
+    if (userMap != null) {
+      LoginDataModel user = LoginDataModel.fromJson(userMap);
+      return user;
+    }
+    return null;
+  }
 
   firstLaunch(bool? isFirstCheck) {
     storage.write(isFirstLaunch, isFirstCheck);

@@ -30,12 +30,12 @@ class BottomPhonePicker extends StatelessWidget {
               ),
               TextView(
                 text: 'Select Country Code',
-                textStyle: textStyleBodyLarge(context),
+                textStyle: textStyleBodyLarge(context).copyWith(fontSize: 18),
               ),
             ],
           ),
           SizedBox(
-            height: margin_10,
+            height: 11,
           ),
           SizedBox(
             height: Get.height * 0.4,
@@ -52,7 +52,7 @@ class BottomPhonePicker extends StatelessWidget {
                     child: TextView(
                       text: country,
                       textAlign: TextAlign.start,
-                      textStyle: textStyleBodyMedium(context),
+                      textStyle: textStyleBodyMedium(context).copyWith(fontSize: 16),
                     ),
                   ),
                 );

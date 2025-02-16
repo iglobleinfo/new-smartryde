@@ -34,7 +34,7 @@ class _NoInternetConnectionScreenState
               height: height_10,
             ),
             Text(
-              "strNoInternetConnection",
+              "Please check your Internet connection and",
               textAlign: TextAlign.center,
               style: textStyleBodyMedium(context).copyWith(
                   color: Colors.black45,
