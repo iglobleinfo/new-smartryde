@@ -38,52 +38,65 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
     return GetBuilder<VerifyOtpController>(
         init: VerifyOtpController(),
         builder: (controller) {
-      return Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
+          return Scaffold(
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(height: 20),
-                getBackButtonRow(context),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    strOtpSentDescription.tr,
+                Column(
+                  children: [
+                    SizedBox(height: 20),
+                    getBackButtonRow(context),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(
+                        strOtpSentDescription.tr,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    OtpInput(
+                      controller: controller.otpController,
+                      focusNode: controller.otpFocusNode,
+                      focusColor: primaryColor,
+                      onCompleted: controller.changePin,
+                      otpLength: 4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              controller.hitGenerateOtpAPI(context);
+                            },
+                            child: TextView(
+                              text: 'Resend'.tr,
+                              textStyle: textStyleBodySmall(context).copyWith(
+                                fontSize: 15,
+                                color: appClickableTextColor,
+                                fontWeight: FontWeight.w400,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Colors.blueAccent,
+                                decorationThickness: 1,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: MaterialButtonWidget(
+                    buttonText: 'Verify'.toUpperCase(),
+                    onPressed: () {
+                      controller.verifyOtp(context);
+                    },
                   ),
-                ),
-                SizedBox(height: 30),
-                OtpInput(
-                  controller: controller.otpController,
-                  focusNode: controller.otpFocusNode,
-                  focusColor: primaryColor,
-                  onCompleted: controller.changePin,
-                  otpLength: 4,
-                ),
-                TextView(
-                  text: doNotHaveAccountSignUpNow.tr,
-                  textStyle: textStyleBodySmall(context).copyWith(
-                    color: appClickableTextColor,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    decorationColor: Colors.blueAccent,
-                    decorationThickness: 1,
-                  ),
-                ),
+                ).marginOnly(bottom: margin_20),
               ],
             ),
-            Align(
-              alignment: Alignment.center,
-              child: MaterialButtonWidget(
-                buttonText: 'Verify'.toUpperCase(),
-                onPressed: () {
-                  controller.verifyOtp(context);
-                },
-              ),
-            ).marginOnly(bottom: margin_20),
-          ],
-        ),
-      );
-    });
+          );
+        });
   }
 }

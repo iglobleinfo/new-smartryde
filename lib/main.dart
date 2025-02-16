@@ -33,25 +33,25 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
   );
-  FlutterLogger.getInstance()
-      .init(reportURL: crashBaseUrl + logCrashesExceptionsEndPoint);
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: colorLightGray,
-  ));
+  // FlutterLogger.getInstance()
+  //     .init(reportURL: crashBaseUrl + logCrashesExceptionsEndPoint);
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   statusBarColor: colorLightGray,
+  // ));
+  //
+  // PlatformDispatcher.instance.onError = (error, stack) {
+  //   reportCrash('$error\n$stack');
+  //   return true;
+  // };
 
-  PlatformDispatcher.instance.onError = (error, stack) {
-    reportCrash('$error\n$stack');
-    return true;
-  };
-
-  FlutterError.onError = (details) async {
-    if (details.stack != null) {
-      Zone.current.handleUncaughtError(details.exception, details.stack!);
-      reportCrash('${details.exception}\n${details.stack}');
-    } else {
-      FlutterError.presentError(details);
-    }
-  };
+  // FlutterError.onError = (details) async {
+  //   if (details.stack != null) {
+  //     Zone.current.handleUncaughtError(details.exception, details.stack!);
+  //     reportCrash('${details.exception}\n${details.stack}');
+  //   } else {
+  //     FlutterError.presentError(details);
+  //   }
+  // };
 }
 
 initApp() async {

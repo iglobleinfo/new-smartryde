@@ -69,7 +69,9 @@ class OnboardingScreen extends StatelessWidget {
                   Expanded(
                     child: MaterialButtonWidget(
                       buttonText: stringSignUp.tr.toUpperCase(),
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.signUp);
+                      },
                     ),
                   ),
                   SizedBox(
@@ -77,6 +79,9 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: OutlineButtonWidget(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.logIn);
+                      },
                       outlineColor: appButtonColor,
                       text: stringLogin.tr.toUpperCase(),
                       textStyle: textStyleButton(context).copyWith(

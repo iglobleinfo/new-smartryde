@@ -1,5 +1,7 @@
 import 'package:smart_ryde/export.dart';
 
+import '../../../core/utils/validators.dart';
+
 class RegisterController extends GetxController {
   late TextEditingController emailController;
   late TextEditingController nameController = TextEditingController();
@@ -186,6 +188,24 @@ class RegisterController extends GetxController {
 
   /*===================================================================== SignUp API Call  ==========================================================*/
   hitSignUpAPI(context) {
+    if (nameController.text.isEmpty) {
+      toast('Please enter your name'.tr);
+      return;
+    }
+    String? result = phoneTextFieldValidator(
+        countryPickerController.text, numberController.text, context);
+    if (result != null) {
+      toast(result);
+      return;
+    }
+    if (!GetUtils.isEmail(emailController.text)) {
+      toast('Enter a valid email');
+      return;
+    }
+    if (passwordController.text.isEmpty) {
+      toast(stringPasswordEmptyValidation.tr);
+      return;
+    }
     loader.value = true;
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
@@ -194,7 +214,7 @@ class RegisterController extends GetxController {
           numberController.text.trim().toLowerCase(),
       password: passwordController.text,
       email: emailController.text,
-      name: nameController.text,
+      name: nameController.text.trim(),
     );
     APIRepository.signUpApiCall(dataBody: loginReq).then((value) async {
       loginModel = value;

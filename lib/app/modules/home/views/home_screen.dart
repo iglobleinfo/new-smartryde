@@ -96,7 +96,8 @@ class HomeScreen extends GetView<HomeController> {
               Text(
                 text,
                 style: textStyleDisplayMedium(context).copyWith(
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16
                 ),
               )
             ],

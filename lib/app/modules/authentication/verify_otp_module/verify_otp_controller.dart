@@ -34,7 +34,7 @@ class VerifyOtpController extends GetxController {
     FocusManager.instance.primaryFocus!.unfocus();
     APIRepository.generateOtpApi(phoneNumber).then((value) async {
       customLoader.hide();
-      toast('Opt send successfully');
+      toast('OTP send successfully');
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);

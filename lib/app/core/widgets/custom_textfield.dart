@@ -30,6 +30,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool? shadow;
   final bool? obscureText;
   final bool? isOutined;
+  final bool? allowSpacing;
   final Function(String value)? onChange;
   final inputFormatter;
   final errorColor;
@@ -63,6 +64,7 @@ class TextFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.obscureText,
+    this.allowSpacing = true,
     this.onTap,
     this.inputFormatter,
     this.errorColor,
@@ -85,6 +87,7 @@ class TextFieldWidget extends StatelessWidget {
                 cursorColor: courserColor ?? colorAppColor,
                 inputFormatters: inputFormatter ??
                     [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
                       FilteringTextInputFormatter(
                           RegExp(
                               '(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'),
