@@ -26,12 +26,19 @@ class HomeScreen extends GetView<HomeController> {
                 context: context,
                 icon: iconStar,
                 text: 'Rate Us',
-                onTap: () {}),
+                onTap: () async {
+                  final InAppReview inAppReview = InAppReview.instance;
+                  if (await inAppReview.isAvailable()) {
+                    inAppReview.requestReview();
+                  }
+                }),
             listTile(
                 context: context,
                 icon: iconInfo,
-                text: stringAboutUs,
-                onTap: () {}),
+                text: stringAboutUs.tr,
+                onTap: () {
+                  Get.toNamed(AppRoutes.about);
+                }),
           ],
         ),
       );
@@ -95,10 +102,8 @@ class HomeScreen extends GetView<HomeController> {
                   .marginOnly(right: margin_10),
               Text(
                 text,
-                style: textStyleDisplayMedium(context).copyWith(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16
-                ),
+                style: textStyleDisplayMedium(context)
+                    .copyWith(fontWeight: FontWeight.w500, fontSize: 16),
               )
             ],
           ),

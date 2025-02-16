@@ -1,5 +1,3 @@
-
-
 import '../../../../export.dart';
 
 class AboutUsController extends GetxController {

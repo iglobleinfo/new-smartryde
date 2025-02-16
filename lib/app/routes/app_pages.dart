@@ -1,3 +1,4 @@
+import 'package:smart_ryde/app/modules/about/views/about_us_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/verify_otp_module/verify_otp_bindings.dart';
 import 'package:smart_ryde/app/modules/authentication/views/forget_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/onboarding_screen.dart';
@@ -14,6 +15,10 @@ class AppPages {
   static const initial = AppRoutes.splash;
 
   static final routes = [
+    GetPage(
+      name: AppRoutes.about,
+      page: () => AboutUsScreen(),
+    ),
     GetPage(
       name: AppRoutes.splash,
       page: () => SplashScreen(),

@@ -18,12 +18,16 @@ const Map<String, String> enUS = {
   'pleaseEnterEmailAddress': 'Please enter email address',
   'pleaseEnterValidEmailAddress': 'Please enter valid email address',
   'pleaseEnterPassword': 'Please enter password',
-  'pleaseEnterValidPassword': 'Password must consist of a special character, number and minimum 8 char',
+  'pleaseEnterValidPassword':
+      'Password must consist of a special character, number and minimum 8 char',
   'enterName': 'Enter You Name',
   'enterEmail': 'Enter email address',
   'pleaseEnterPhoneNumber': 'Please enter phone number',
   'pleaseEnterValidNumber': 'Please enter a valid phone number',
   'verificationOTP': 'Verification OTP',
+  'aboutUs': 'About Us',
+  'aboutUsDescription':
+      'AN Bus is a local red minibus company aim at providing new type of red minibus service in Hong Kong. The mobile application is deveoped by iGloble. iGloble provides Intelligent and smart Transportation solutions including ticketing for fleets.',
   keyPressToExitApp: "Press one more time to push app into background",
   keyNoResultFound: "No Result Found",
   keyEnglish: "English",

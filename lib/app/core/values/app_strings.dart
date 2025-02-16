@@ -24,6 +24,8 @@ const String stringPhoneNumberValidation = 'pleaseEnterPhoneNumber';
 const String stringPhoneNumberValidValidation = 'pleaseEnterValidNumber';
 const String enterName = 'enterName';
 const String stringVerificationOTP = 'verificationOTP';
+const String stringAboutUs = 'aboutUs';
+const String stringAboutUsDescription = 'aboutUsDescription';
 /// **********************************************************************
 /// **********************************************************************
 /// **********************************************************************
@@ -95,5 +97,4 @@ const String stringSignUp = "signup";
 const String stringAlreadyHaveAccount = "Already have an account? ";
 const String stringSignIn = "Sign In";
 const String stringFAQs = "FAQs";
-const String stringAboutUs = "About Us";
 const String strNoImage = "No images selected";
