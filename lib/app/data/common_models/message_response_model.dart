@@ -7,14 +7,15 @@ class MessageResponseModel {
   var otp;
   var id;
 
-  MessageResponseModel(
-      {this.success,
-      this.message,
-      this.count,
-      this.id,
-      this.copyrighths,
-      this.otp,
-      this.createdOn});
+  MessageResponseModel({
+    this.success,
+    this.message,
+    this.count,
+    this.id,
+    this.copyrighths,
+    this.otp,
+    this.createdOn,
+  });
 
   MessageResponseModel.fromJson(Map json) {
     success = json['success'];
@@ -27,14 +28,14 @@ class MessageResponseModel {
   }
 
   Map toJson() {
-    final Map data = new Map();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    data['count'] = this.count;
-    data['otp'] = this.otp;
-    data['id'] = this.id;
-    data['copyrighths'] = this.copyrighths;
-    data['created_on'] = this.createdOn;
+    final Map data = {};
+    data['success'] = success;
+    data['message'] = message;
+    data['count'] = count;
+    data['otp'] = otp;
+    data['id'] = id;
+    data['copyrighths'] = copyrighths;
+    data['created_on'] = createdOn;
     return data;
   }
 }

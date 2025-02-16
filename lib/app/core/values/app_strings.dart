@@ -23,6 +23,7 @@ const String stringPasswordValidValidation = 'pleaseEnterValidPassword';
 const String stringPhoneNumberValidation = 'pleaseEnterPhoneNumber';
 const String stringPhoneNumberValidValidation = 'pleaseEnterValidNumber';
 const String enterName = 'enterName';
+const String stringVerificationOTP = 'verificationOTP';
 /// **********************************************************************
 /// **********************************************************************
 /// **********************************************************************

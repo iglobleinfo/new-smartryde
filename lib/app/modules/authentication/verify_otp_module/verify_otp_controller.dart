@@ -1,6 +1,5 @@
 import 'package:smart_ryde/export.dart';
 
-
 class VerifyOtpController extends GetxController {
   final TextEditingController otpController = TextEditingController();
 
@@ -12,18 +11,21 @@ class VerifyOtpController extends GetxController {
 
   @override
   void onInit() {
-    phoneNumber = Get.arguments['phoneNumber']??'';
+    // phoneNumber = Get.arguments['phoneNumber'] ?? '';
+    phoneNumber = '+919050793243';
     super.onInit();
   }
 
   Future<void> verifyOtp(context) async {
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
-    MessageResponseModel? successResponse =
-        await APIRepository.verifyOtpApi(otpController.text);
+    var successResponse = await APIRepository.verifyOtpApi(
+      phoneNumber: phoneNumber,
+      otp: otpController.text,
+    );
     if (successResponse != null) {
       customLoader.hide();
-      toast(successResponse.message);
+      toast('Otp Verified');
       Get.offAllNamed(AppRoutes.home);
     }
   }

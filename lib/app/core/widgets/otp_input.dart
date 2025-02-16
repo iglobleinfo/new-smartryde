@@ -18,7 +18,7 @@ class OtpInput extends StatefulWidget {
     required this.focusNode,
     required this.controller,
   }) : assert(otpLength >= 4 && otpLength <= 8,
-  'OTP length must be between 4 and 8');
+            'OTP length must be between 4 and 8');
 
   @override
   createState() => _OtpInputState();
@@ -72,15 +72,15 @@ class _OtpInputState extends State<OtpInput> {
           _focusNode.requestFocus();
         },
         child: SizedBox(
-          width: 71,
-          height: 71,
+          width: 50,
+          height: 50,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
               border: Border.all(
                 color: _controller.text.length == index ||
-                    _controller.text.length > index ||
-                    (_focusNode.hasFocus && index == 0)
+                        _controller.text.length > index ||
+                        (_focusNode.hasFocus && index == 0)
                     ? widget.focusColor // Green border when focused
                     : widget.unFocusColor, // White border when unfocused
                 width: 2.0,
@@ -89,7 +89,7 @@ class _OtpInputState extends State<OtpInput> {
             alignment: Alignment.center,
             child: Text(
               (_focusNode.hasFocus && index == 0 && _controller.text.isEmpty) ||
-                  (_controller.text.length == index && _focusNode.hasFocus)
+                      (_controller.text.length == index && _focusNode.hasFocus)
                   ? "|"
                   : _otpValues[index], // Display each character from the OTP
               // style: AppTheme.of(context).textStyleOtpField,
@@ -102,7 +102,7 @@ class _OtpInputState extends State<OtpInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -121,7 +121,12 @@ class _OtpInputState extends State<OtpInput> {
           decoration: const InputDecoration(
             counterText: '',
             border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
           ),
+
           style: const TextStyle(
               color: Colors.transparent), // Hide the actual input text
           onChanged: (value) {

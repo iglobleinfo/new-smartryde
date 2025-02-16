@@ -65,7 +65,7 @@ class APIRepository {
   static Future generateOtpApi(String phoneNumber) async {
     try {
       final response = await dioClient!.get(
-        endPointGenerateOtp+phoneNumber,
+        endPointGenerateOtp + phoneNumber,
         skipAuth: false,
       );
       return response;
@@ -75,11 +75,18 @@ class APIRepository {
       );
     }
   }
- /*===================================================================== Verify Otp API Call  ==========================================================*/
-  static Future verifyOtpApi(String phoneNumber) async {
+
+  /*===================================================================== Verify Otp API Call  ==========================================================*/
+  static Future verifyOtpApi({
+    required String phoneNumber,
+    required String otp,
+  }) async {
     try {
       final response = await dioClient!.get(
-        endPointVerifyOtp+phoneNumber,
+        endPointVerifyOtp + phoneNumber,
+        queryParameters: {
+          'otp': otp,
+        },
         skipAuth: false,
       );
       return response;
