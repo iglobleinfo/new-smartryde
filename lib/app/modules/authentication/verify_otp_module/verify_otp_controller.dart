@@ -11,8 +11,8 @@ class VerifyOtpController extends GetxController {
 
   @override
   void onInit() {
-    // phoneNumber = Get.arguments['phoneNumber'] ?? '';
-    phoneNumber = '+919050793243';
+    phoneNumber = Get.arguments['phoneNumber'] ?? '';
+    // phoneNumber = '+919050793243';
     super.onInit();
   }
 

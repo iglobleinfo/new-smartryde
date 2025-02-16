@@ -127,7 +127,27 @@ class LoginScreen extends GetView<LoginController> {
                 }),
               ],
             ),
-          ).marginOnly(bottom: margin_30),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutes.forgotPassword);
+              },
+              child: TextView(
+                text: 'Forgot Password?',
+                textStyle: textStyleBodySmall(context).copyWith(
+                  color: appClickableTextColor,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.blueAccent,
+                  decorationThickness: 1,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: margin_30,
+          ),
           Align(
             alignment: Alignment.center,
             child: MaterialButtonWidget(

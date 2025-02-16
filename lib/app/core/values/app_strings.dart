@@ -4,7 +4,8 @@
 /// Smart Ryde App Strings
 const String userLogin = 'userLogin';
 const String userSignUp = 'userSignUp';
-const String pleaseFillUpTheInformationBelow = 'pleaseFillUpTheInformationBelow';
+const String pleaseFillUpTheInformationBelow =
+    'pleaseFillUpTheInformationBelow';
 const String login = 'login';
 const String strOtpSentDescription = "otpSentDescription";
 const String enterYourContactNumber = 'enterYourContactNumber';
@@ -26,11 +27,19 @@ const String enterName = 'enterName';
 const String stringVerificationOTP = 'verificationOTP';
 const String stringAboutUs = 'aboutUs';
 const String stringAboutUsDescription = 'aboutUsDescription';
-/// **********************************************************************
-/// **********************************************************************
-/// **********************************************************************
+const String stringPassword = "password";
+const String stringForgotPassword = "forgotPassword";
+const String stringLogin = "login";
+const String stringNewPassword = 'newPassword';
+const String stringSubmitPassword = 'submitPassword';
+const String stringGetOtp = 'getOtp';
+const String stringEnterOtp = 'enterOtp';
+const String stringOtpEmptyValidation = 'pleaseEnterOtp';
+const String stringPasswordChangedSuccessfully = 'passwordChangedSuccessfully';
 
-
+/// **********************************************************************
+/// **********************************************************************
+/// **********************************************************************
 
 const String stringRequestCancelled = "Request cancelled";
 const String stringNotSubType = 'is not a subtype of';
@@ -50,12 +59,14 @@ const String stringUnexpectedException = 'Unexpected Exceptions';
 const String stringFormatException = 'Format Exceptions';
 const String stringConnectionRefused = 'Connection refused';
 const String stringNetworkUnreachable = 'Network is unreachable';
-const String stringServerMaintenance = "Something went wrong. Please try again later";
+const String stringServerMaintenance =
+    "Something went wrong. Please try again later";
 const String stringPleaseTryAgain = "Please try again later";
 const String stringFailedToConnect = "Failed host lookup";
 
 const String stringDemoExpired = "Demo Expired";
-const String stringAppDemoExpiredDesc = "This application's demo is no longer available. Please reach out to the development team for latest version.";
+const String stringAppDemoExpiredDesc =
+    "This application's demo is no longer available. Please reach out to the development team for latest version.";
 
 const String stringAppName = 'Flutter GetX Base';
 const String stringExitWarning = 'Press again to exit the app';
@@ -64,7 +75,8 @@ const String stringFbSignInCancelled = 'Facebook Sign In Cancelled';
 const String stringGoogleSignInCancelled = 'Google Sign In Cancelled';
 const String stringAppleSignInCancelled = 'Apple Sign In Cancelled';
 
-const String stringDummyText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const String stringDummyText =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 const String stringChooseMedia = "Please select an images";
 
@@ -87,11 +99,11 @@ const String stringAccountDeleteSuccess = "Account Deleted Successfully";
 const String stringDownloading = "Downloading...";
 const String stringEmail = "email";
 
-const String stringLoginHeading = "Use the email and password that you registered in Flutter website.";
-const String stringPassword = "password";
-const String stringForgotPassword = "forgot password?";
-const String stringLogin = "login";
-const String stringDoNotHaveAccount = "Don't have an account? Create an account in";
+const String stringLoginHeading =
+    "Use the email and password that you registered in Flutter website.";
+
+const String stringDoNotHaveAccount =
+    "Don't have an account? Create an account in";
 const String stringWebsite = "website";
 const String stringSignUp = "signup";
 const String stringAlreadyHaveAccount = "Already have an account? ";

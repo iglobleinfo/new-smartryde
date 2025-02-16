@@ -28,6 +28,13 @@ const Map<String, String> enUS = {
   'aboutUs': 'About Us',
   'aboutUsDescription':
       'AN Bus is a local red minibus company aim at providing new type of red minibus service in Hong Kong. The mobile application is deveoped by iGloble. iGloble provides Intelligent and smart Transportation solutions including ticketing for fleets.',
+  'forgotPassword': 'Forgot password?',
+  'newPassword': 'New Password',
+  'submitPassword': 'Submit Password',
+  'getOtp': 'Get OTP',
+  'enterOtp': 'Enter OTP',
+  'pleaseEnterOtp': 'Please enter OTP',
+  'passwordChangedSuccessfully': 'Password Changed Successfully!',
   keyPressToExitApp: "Press one more time to push app into background",
   keyNoResultFound: "No Result Found",
   keyEnglish: "English",

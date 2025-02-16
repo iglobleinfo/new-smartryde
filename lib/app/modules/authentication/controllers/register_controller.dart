@@ -247,24 +247,6 @@ class RegisterController extends GetxController {
     });
   }
 
-  /*===================================================================== Forgot password API Call  ==========================================================*/
-  hitForgetAPI(context) {
-    customLoader.show(context);
-    FocusManager.instance.primaryFocus!.unfocus();
-    var loginReq = AuthRequestModel.forgetReq(
-        phoneNumber: forgetEmailController.text.trim().toLowerCase());
-    APIRepository.forgetApiCall(dataBody: loginReq).then((value) {
-      toast(value.message);
-      Future.delayed(const Duration(seconds: 2), () {
-        Get.offAll(() => LoginScreen());
-        forgetEmailController.clear();
-      });
-    }).onError((error, stackTrace) {
-      customLoader.hide();
-      toast(error);
-    });
-  }
-
   /*===================================================================== My account details API Call  ==========================================================*/
   hitMyAccountAPI() {
     APIRepository.myAccountApiCall().then((value) {

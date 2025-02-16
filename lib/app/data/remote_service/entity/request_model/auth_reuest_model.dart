@@ -29,9 +29,15 @@ class AuthRequestModel {
     return data;
   }
 
-  static forgetReq({required String phoneNumber}) {
+  static forgetReq({
+    required String phoneNumber,
+    required String otp,
+    required String password,
+  }) {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['username'] = phoneNumber;
+    data['otp'] = otp;
+    data['newPassword'] = password;
     return data;
   }
 

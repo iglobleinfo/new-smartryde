@@ -76,6 +76,22 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== Forgot Password Api  ==========================================================*/
+  static Future forgotPasswordApi(Map<String, dynamic> data) async {
+    try {
+      final response = await dioClient!.post(
+        endPointForgotPassword,
+        skipAuth: false,
+        data: data,
+      );
+      return response;
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== Verify Otp API Call  ==========================================================*/
   static Future verifyOtpApi({
     required String phoneNumber,

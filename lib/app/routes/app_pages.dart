@@ -1,9 +1,9 @@
 import 'package:smart_ryde/app/modules/about/views/about_us_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/verify_otp_module/verify_otp_bindings.dart';
-import 'package:smart_ryde/app/modules/authentication/views/forget_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/onboarding_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/profile_screen.dart';
 import 'package:smart_ryde/app/modules/authentication/views/register_screen.dart';
+import 'package:smart_ryde/app/modules/forgot_password/forgot_password_screen.dart';
 import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
 import 'package:smart_ryde/app/modules/splash/views/splash_screen.dart';
 import '../../export.dart';
@@ -51,8 +51,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.forgotPassword,
-      page: () => ForgetScreen(),
-      bindings: [AuthenticationBinding()],
+      page: () => ForgotPasswordScreen(),
     ),
     GetPage(
       name: AppRoutes.home,
