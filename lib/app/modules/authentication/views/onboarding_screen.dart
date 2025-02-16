@@ -10,29 +10,33 @@ class OnboardingScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Stack(
-              children: [
-                AssetImageWidget(
-                  imageUrl: imageSignUpBackground,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: margin_20,
-                    left: margin_5,
+            Expanded(
+              child: Stack(
+                children: [
+                  AssetImageWidget(
+                    imageHeight: double.infinity,
+                    imageFitType: BoxFit.cover,
+                    imageUrl: imageSignUpBackground,
                   ),
-                  child: TextView(
-                    text: 'WELCOME ONBOARD TO\nSmartRyde',
-                    textAlign: TextAlign.start,
-                    textStyle: textStyleDisplayLarge(context).copyWith(
-                      fontWeight: FontWeight.w500,
-                      // fontSize: 25
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: margin_20,
+                      left: margin_5,
                     ),
-                  ),
-                )
-              ],
+                    child: TextView(
+                      text: 'WELCOME ONBOARD TO\nSmartRyde',
+                      textAlign: TextAlign.start,
+                      textStyle: textStyleDisplayLarge(context).copyWith(
+                        fontWeight: FontWeight.w500,
+                        // fontSize: 25
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
-              height: margin_20,
+              height: margin_20.h,
             ),
             TextView(
               text: 'Please Login/Signup',
@@ -41,7 +45,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: margin_15,
+              height: margin_15.h,
             ),
             MaterialButtonWidget(
               minWidth: Get.width * 0.9,
@@ -50,7 +54,7 @@ class OnboardingScreen extends StatelessWidget {
               onPressed: () {},
             ),
             SizedBox(
-              height: margin_15,
+              height: margin_15.h,
             ),
             TextView(
               text: 'OR',
@@ -59,7 +63,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: margin_15,
+              height: margin_15.h,
             ),
             SizedBox(
               width: Get.width * 0.9,
@@ -69,11 +73,13 @@ class OnboardingScreen extends StatelessWidget {
                   Expanded(
                     child: MaterialButtonWidget(
                       buttonText: stringSignUp.tr.toUpperCase(),
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.signUp);
+                      },
                     ),
                   ),
                   SizedBox(
-                    width: margin_10,
+                    width: margin_10.h,
                   ),
                   Expanded(
                     child: OutlineButtonWidget(
@@ -87,10 +93,56 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            getContinueToService(context),
+            SizedBox(
+              height: margin_20.h,
             )
           ],
         ),
       ),
+    );
+  }
+
+
+
+  Widget getContinueToService(BuildContext context){
+    return Column(
+      children: [
+        SizedBox(
+          height: margin_30,
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Text.rich(
+            textAlign: TextAlign.center,
+            TextSpan(
+              text: byContinuingYouAgreeTo.tr,
+              children: [
+                TextSpan(
+                  text: termsOfService.tr,
+                  recognizer: TapGestureRecognizer()..onTap = () {},
+                  style: textStyleBodySmall(context).copyWith(
+                    color: appClickableTextColor,
+                  ),
+                ),
+                TextSpan(
+                  text: ' ${and.tr} ',
+                  recognizer: TapGestureRecognizer()..onTap = () {},
+                ),
+                TextSpan(
+                  text: privacyPolicy.tr,
+                  recognizer: TapGestureRecognizer()..onTap = () {},
+                  style: textStyleBodySmall(context).copyWith(
+                    color: appClickableTextColor,
+                  ),
+                ),
+              ],
+            ),
+            style: textStyleBodySmall(context),
+          ),
+        )
+      ],
     );
   }
 }

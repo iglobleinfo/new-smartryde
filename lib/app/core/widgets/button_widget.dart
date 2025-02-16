@@ -41,7 +41,7 @@ class MaterialButtonWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       minWidth: minWidth ?? Get.width * 0.45,
       color: buttonColor ?? appButtonColor,
-      elevation: elevation ?? radius_4,
+      elevation: elevation ?? 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
           buttonRadius ?? 0,
