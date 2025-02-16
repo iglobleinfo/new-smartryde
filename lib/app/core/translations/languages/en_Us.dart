@@ -7,6 +7,7 @@ const Map<String, String> enUS = {
   'login': 'Login',
   'enterYourContactNumber': 'Enter Your Contact Number(+8529000000000)',
   'doNotHaveAccountSignUpNow': 'Don\'t have an account? Signup Now',
+  'alreadyHaveAccountSignInNow': 'Already have an account? Login',
   'byContinuingYouAgreeTo': 'By Continuing, You agree to our\n',
   'termsOfService': 'Terms Of Service',
   'and': 'and',

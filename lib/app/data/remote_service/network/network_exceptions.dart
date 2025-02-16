@@ -10,7 +10,7 @@ class NetworkExceptions {
   static String messageData = "";
 
   static getDioException(error, stacktrace) {
-    reportCrash(error.toString());
+    // reportCrash(error.toString());
     if (error is Exception) {
       // FlutterLogger.getInstance().recordCrash(
       //   reportURL: crashBaseUrl + logCrashesExceptionsEndPoint,

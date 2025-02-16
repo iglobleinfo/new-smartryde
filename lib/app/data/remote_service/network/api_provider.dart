@@ -84,6 +84,7 @@ class APIRepository {
       );
       return response;
     } catch (e, str) {
+      customLoader.hide();
       toast('Incorrect OTP');
       return Future.error(
         NetworkExceptions.getDioException(e, str),

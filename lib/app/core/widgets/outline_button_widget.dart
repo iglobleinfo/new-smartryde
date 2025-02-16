@@ -9,6 +9,7 @@ class OutlineButtonWidget extends StatelessWidget {
     this.textStyle,
     this.verticalPadding,
     this.horizontalPadding,
+    this.onTap,
   });
 
   final Color? outlineColor;
@@ -17,11 +18,12 @@ class OutlineButtonWidget extends StatelessWidget {
   final TextStyle? textStyle;
   final double? verticalPadding;
   final double? horizontalPadding;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: null,
+      onPressed: onTap,
       style: ButtonStyle(
         side: WidgetStatePropertyAll(
           BorderSide(

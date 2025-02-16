@@ -9,6 +9,7 @@ const String login = 'login';
 const String strOtpSentDescription = "otpSentDescription";
 const String enterYourContactNumber = 'enterYourContactNumber';
 const String doNotHaveAccountSignUpNow = 'doNotHaveAccountSignUpNow';
+const String alreadyHaveAccountSignInNow = 'alreadyHaveAccountSignInNow';
 const String byContinuingYouAgreeTo = 'byContinuingYouAgreeTo';
 const String termsOfService = 'termsOfService';
 const String and = 'and';

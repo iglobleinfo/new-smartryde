@@ -79,6 +79,20 @@ class RegisterScreen extends GetView<RegisterController> {
                 TextFieldWidget(
                   textController: controller.nameController,
                   shadow: true,
+                  allowSpacing: false,
+                  inputFormatter: [
+                    FilteringTextInputFormatter(
+                        RegExp(
+                            '(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])'),
+                        allow: false),
+                  ],
+                  inputType: TextInputType.text,
+                  maxLength: 40,
+                  onChange: (value) {
+                    if (controller.nameController.text == ' ') {
+                      controller.nameController.text = '';
+                    }
+                  },
                   hint: enterName.tr,
                 ),
                 Row(
@@ -130,9 +144,9 @@ class RegisterScreen extends GetView<RegisterController> {
                   textController: controller.emailController,
                   shadow: true,
                   hint: enterYourEmail.tr,
-                  validate: (String? value) {
-                    return emailTextFieldValidator(value, context);
-                  },
+                  // validate: (String? value) {
+                  //   return emailTextFieldValidator(value, context);
+                  // },
                 ),
                 Obx(() {
                   IconData icon = controller.viewPassword.value
@@ -158,26 +172,30 @@ class RegisterScreen extends GetView<RegisterController> {
               buttonText: stringSignUp.tr.toUpperCase(),
               onPressed: () {
                 if (formGlobalKey.currentState!.validate()) {
-                  controller.hitSignUpAPI(context);
-                  // Get.offAllNamed(AppRoutes.mainScreen);
+                    controller.hitSignUpAPI(context);
                 }
               },
             ),
           ).marginOnly(bottom: margin_20),
-          Align(
-            alignment: Alignment.center,
-            child: TextView(
-              text: doNotHaveAccountSignUpNow.tr,
-              textStyle: textStyleBodySmall(context).copyWith(
-                color: appClickableTextColor,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.blueAccent,
-                decorationThickness: 1,
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.center,
+          //   child: GestureDetector(
+          //     onTap: () {
+          //       Get.offNamed(AppRoutes.logIn);
+          //     },
+          //     child: TextView(
+          //       text: alreadyHaveAccountSignInNow.tr,
+          //       textStyle: textStyleBodySmall(context).copyWith(
+          //         color: appClickableTextColor,
+          //         decoration: TextDecoration.underline,
+          //         decorationColor: Colors.blueAccent,
+          //         decorationThickness: 1,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SizedBox(
-            height: margin_20,
+            height: margin_10,
           ),
           Align(
             alignment: Alignment.center,
@@ -188,27 +206,18 @@ class RegisterScreen extends GetView<RegisterController> {
                 children: [
                   TextSpan(
                     text: termsOfService.tr,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.toNamed(AppRoutes.signUp);
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
                     ),
                   ),
                   TextSpan(
                     text: ' ${and.tr} ',
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.toNamed(AppRoutes.signUp);
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                   ),
                   TextSpan(
                     text: privacyPolicy.tr,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Get.toNamed(AppRoutes.signUp);
-                      },
+                    recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
                     ),

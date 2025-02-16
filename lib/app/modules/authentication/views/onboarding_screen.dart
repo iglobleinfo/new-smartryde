@@ -83,6 +83,9 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: OutlineButtonWidget(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.logIn);
+                      },
                       outlineColor: appButtonColor,
                       text: stringLogin.tr.toUpperCase(),
                       textStyle: textStyleButton(context).copyWith(

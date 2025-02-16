@@ -8,26 +8,34 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
-      init: LoginController(),
-      builder: (controller) {
-        return AnnotatedRegionWidget(
-          statusBarColor: primaryColor,
-          statusBarBrightness: Brightness.dark,
-          child: SafeArea(
-            child: Scaffold(
-              backgroundColor: Colors.white,
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomBackButton(),
-                  loginForm(context: context),
-                ],
+    return SafeArea(
+      child: GetBuilder<LoginController>(
+        init: LoginController(),
+        builder: (controller) {
+          return AnnotatedRegionWidget(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.dark,
+            child: SafeArea(
+              child: Scaffold(
+                backgroundColor: Colors.white,
+                body: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomBackButton(),
+                      loginForm(context: context),
+                      AssetImageWidget(
+                        imageUrl: imageBusMainLogin,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
