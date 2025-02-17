@@ -77,7 +77,7 @@ class ProfileController extends GetxController {
       } catch (e) {
         Get.put(MyProfileController()).getData();
       }
-      Get.back();
+      Get.until((route) => route.isFirst);
       toast('Profile updated successfully');
       update();
     }).onError((error, stackTrace) {
