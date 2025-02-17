@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
                   imageFitType: BoxFit.cover,
                 ),
                 AssetImageWidget(
-                  imageHeight: 100,
+                  imageHeight: Get.height * 0.35,
                   imageUrl: imageSplashLogo,
                   imageFitType: BoxFit.cover,
                 ),
