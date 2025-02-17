@@ -115,6 +115,32 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== update API Call  ==========================================================*/
+  static Future<LoginResponseModel?> updateProfileApiCall(
+      {Map<String, dynamic>? dataBody}) async {
+    try {
+      final response = await dioClient!.put(endPointSignUp, data: dataBody);
+      return LoginResponseModel.fromJson(response);
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
+    }
+  }
+
+  /*===================================================================== Generate Otp API Call  ==========================================================*/
+  static Future getUserApi(String userId) async {
+    try {
+      final response = await dioClient!.get(
+        endPointGetUser + userId,
+        skipAuth: false,
+      );
+      return LoginResponseModel.fromJson(response);
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== login API Call  ==========================================================*/
   static Future socialLoginApiCall({Map<String, dynamic>? dataBody}) async {
     try {
@@ -200,24 +226,24 @@ class APIRepository {
     }
   }
 }
-
-reportCrash(stackTrace) async {
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  String version = packageInfo.version;
-  CustomLoader customLoader = CustomLoader();
-  var req = AuthRequestModel.logCrashErrorReq(
-      error: packageInfo.packageName,
-      packageVersion: version,
-      phoneModel: APIRepository.deviceName,
-      ip: APIRepository.deviceVersion,
-      stackTrace: stackTrace);
-  debugPrint('Log req: $req', wrapWidth: 1000);
-  await APIRepository.reportCrashLogApiCall(data: req).then((value) async {
-    customLoader.hide();
-    if (value != null) {}
-  }).onError((error, stackTrace) {
-    customLoader.hide();
-    initApp();
-    toast(error.toString());
-  });
-}
+//
+// reportCrash(stackTrace) async {
+//   PackageInfo packageInfo = await PackageInfo.fromPlatform();
+//   String version = packageInfo.version;
+//   CustomLoader customLoader = CustomLoader();
+//   var req = AuthRequestModel.logCrashErrorReq(
+//       error: packageInfo.packageName,
+//       packageVersion: version,
+//       phoneModel: APIRepository.deviceName,
+//       ip: APIRepository.deviceVersion,
+//       stackTrace: stackTrace);
+//   debugPrint('Log req: $req', wrapWidth: 1000);
+//   await APIRepository.reportCrashLogApiCall(data: req).then((value) async {
+//     customLoader.hide();
+//     if (value != null) {}
+//   }).onError((error, stackTrace) {
+//     customLoader.hide();
+//     initApp();
+//     toast(error.toString());
+//   });
+// }

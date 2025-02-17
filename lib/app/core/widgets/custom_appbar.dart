@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       bottomOpacity: 0.0,
       leading: isBackIcon! ? _backIcon() : Container(),
       centerTitle: false,
-      leadingWidth: width_50,
+      leadingWidth: 60,
       surfaceTintColor: Colors.transparent,
       title: appBarTitleWidget ??
           (appBarTitleText != "" || appBarTitleText != null
@@ -44,6 +44,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   textAlign: TextAlign.center,
                   textStyle: textStyleDisplayLarge(context).copyWith(
                     fontWeight: FontWeight.normal,
+                    fontSize: 22
                   ),
                 )
               : const SizedBox(
@@ -62,8 +63,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: InkWell(
         child: leadingIcon ??
             AssetImageWidget(
-              imageUrl: (isDrawerIcon == true ? iconMenu : iconBack),
-              imageWidth: isDrawerIcon == true ? height_65 : height_20,
+              imageUrl: (isDrawerIcon == true ? iconMenu : imageBack),
+              imageWidth: isDrawerIcon == true ? height_65 : height_15,
               imageHeight: isDrawerIcon == true ? height_65 : height_20,
             ).paddingOnly(
               top: topPadding ?? margin_15,

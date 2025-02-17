@@ -20,8 +20,8 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: margin_20,
-                      left: margin_5,
+                      top: 22,
+                      left: 15,
                     ),
                     child: TextView(
                       text: 'WELCOME ONBOARD TO\nSmartRyde',

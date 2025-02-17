@@ -59,12 +59,13 @@ class RegisterScreen extends GetView<RegisterController> {
           ),
           TextView(
             text: userSignUp.tr,
-            textStyle: textStyleBodyLarge(context),
+            textStyle: textStyleLabelSmall(context).copyWith(fontSize: 19),
           ),
           TextView(
             text: pleaseFillUpTheInformationBelow.tr,
             textStyle: textStyleLabelSmall(context).copyWith(
               fontWeight: FontWeight.normal,
+                fontSize: 15
             ),
           ),
           Form(
@@ -115,7 +116,7 @@ class RegisterScreen extends GetView<RegisterController> {
                             ),
                           );
                         },
-                        contentPadding: EdgeInsets.all(margin_10),
+                        // contentPadding: EdgeInsets.all(margin_10),
                         textController: controller.countryPickerController,
                         shadow: true,
                         validate: (String? value) {
@@ -203,12 +204,17 @@ class RegisterScreen extends GetView<RegisterController> {
               textAlign: TextAlign.center,
               TextSpan(
                 text: byContinuingYouAgreeTo.tr,
+                style:  textStyleBodySmall(context).copyWith(
+                    color: Colors.black,
+                    fontSize: 17
+                ),
                 children: [
                   TextSpan(
                     text: termsOfService.tr,
                     recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
+                        fontSize: 17
                     ),
                   ),
                   TextSpan(
@@ -220,6 +226,7 @@ class RegisterScreen extends GetView<RegisterController> {
                     recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
+                        fontSize: 17
                     ),
                   ),
                 ],

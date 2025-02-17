@@ -56,7 +56,7 @@ class MaterialButtonWidget extends StatelessWidget {
         text: buttonText!,
         textStyle: textStyleButton(context).copyWith(
           color: textColor ?? Colors.white,
-          fontSize: fontsize,
+          fontSize: fontsize??16,
           fontWeight: FontWeight.normal,
         ),
       ),

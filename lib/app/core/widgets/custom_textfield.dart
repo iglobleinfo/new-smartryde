@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget {
   final double? width;
   final double? radius;
   final Color? color;
+  final Color? textColor;
   final Color? courserColor;
   final validate;
   final hintStyle;
@@ -60,6 +61,7 @@ class TextFieldWidget extends StatelessWidget {
     this.minLine = 1,
     this.maxLength,
     this.color,
+    this.textColor,
     this.hideBorder = true,
     this.suffixIcon,
     this.prefixIcon,
@@ -99,11 +101,13 @@ class TextFieldWidget extends StatelessWidget {
                 textInputAction: inputAction,
                 onFieldSubmitted: onFieldSubmitted,
                 validator: validate,
-                style: textStyleBodySmall(context).copyWith(
-                  fontWeight: FontWeight.normal,
+                style: textStyleBodyMedium(context).copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: textColor ?? Colors.black,
+                  fontSize: 15.5
                 ),
                 decoration: inputDecoration(context))
-            .marginOnly(bottom: 0.5, right: 0.5),
+            .marginOnly(bottom: 0.8, right: 0.5),
       ],
     );
   }
@@ -118,7 +122,7 @@ class TextFieldWidget extends StatelessWidget {
       isDense: true,
       filled: true,
       contentPadding: contentPadding ??
-          EdgeInsets.only(left: margin_10, top: margin_10, bottom: margin_10),
+          EdgeInsets.only(left: 12, top: 12, bottom: 12),
       prefixIcon: prefixIcon,
       suffixIcon: isOutined == true ? null : suffixIcon,
       hintText: hint,
@@ -126,6 +130,7 @@ class TextFieldWidget extends StatelessWidget {
           textStyleBodySmall(context).copyWith(
             color: Colors.grey,
             fontWeight: FontWeight.normal,
+            fontSize: 15
           ),
       labelText: labelText,
       fillColor: appTextFieldBackgroundColor,

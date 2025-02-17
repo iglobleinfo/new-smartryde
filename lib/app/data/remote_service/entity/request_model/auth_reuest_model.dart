@@ -29,6 +29,20 @@ class AuthRequestModel {
     return data;
   }
 
+  static profileReq({
+    required String phoneNumber,
+    required String userId,
+    required String email,
+    required String name,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['email'] = email;
+    data['id'] = userId;
+    data['name'] = name;
+    data['phone'] = phoneNumber;
+    return data;
+  }
+
   static forgetReq({
     required String phoneNumber,
     required String otp,

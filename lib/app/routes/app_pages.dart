@@ -8,6 +8,7 @@ import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
 import 'package:smart_ryde/app/modules/splash/views/splash_screen.dart';
 import '../../export.dart';
 import '../modules/authentication/verify_otp_module/verify_otp_page.dart';
+import '../modules/authentication/views/my_profile.dart';
 import '../modules/language/bindings/select_language_binding.dart';
 import '../modules/language/views/select_language_screen.dart';
 
@@ -59,8 +60,13 @@ class AppPages {
       bindings: [HomeBinding()],
     ),
     GetPage(
-      name: AppRoutes.profile,
+      name: AppRoutes.editProfile,
       page: () => ProfileScreen(),
+      bindings: [AuthenticationBinding()],
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => MyProfileScreen(),
       bindings: [AuthenticationBinding()],
     ),
   ];

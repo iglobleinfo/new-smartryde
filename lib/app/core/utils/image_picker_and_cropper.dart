@@ -5,26 +5,26 @@ import 'package:image_picker/image_picker.dart';
 
 import '../values/app_global_values.dart';
 
-Future<PickedFile?> imageFromCamera(BuildContext context) async {
+Future<XFile?> imageFromCamera(BuildContext context) async {
   var pickedFile = await ImagePicker()
       .pickImage(source: ImageSource.camera, imageQuality: 100);
   if (pickedFile == null && context.mounted) {
     showInSnackBar(message: strNoImage, context: context);
   } else if (context.mounted) {
-    return cropImage(pickedFile?.path, context);
+    return pickedFile;
   }
   return null;
 }
 
 /*=================================================================== Image Pick Using Gallery ===================================================*/
 
-Future<PickedFile?> imageFromGallery(BuildContext context) async {
+Future<XFile?> imageFromGallery(BuildContext context) async {
   var pickedFile = await ImagePicker()
       .pickImage(source: ImageSource.gallery, imageQuality: 100);
   if (pickedFile == null && context.mounted) {
     showInSnackBar(message: strNoImage, context: context);
   } else if (context.mounted) {
-    return cropImage(pickedFile?.path, context);
+    return pickedFile;
   }
   return null;
 }

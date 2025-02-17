@@ -1,4 +1,5 @@
-import 'package:smart_ryde/app/core/utils/validators.dart' show phoneTextFieldValidator;
+import 'package:smart_ryde/app/core/utils/validators.dart'
+    show phoneTextFieldValidator;
 import '../../../../../export.dart';
 
 class LoginController extends GetxController {
@@ -204,11 +205,11 @@ class LoginController extends GetxController {
         .then((LoginResponseModel? value) async {
       loginModel = value;
       customLoader.hide();
-      // storage.write(LOCALKEY_token, loginModel?.token);
+      PreferenceManger().isUserLogin(true);
+      PreferenceManger().saveUserData(loginModel!.data!);
       loader.value = false;
-      Get.offAllNamed(
-        AppRoutes.home,
-      );
+      Get.find<HomeController>().getData();
+      Get.until((Route route) => route.isFirst);
       toast('Logged In');
     }).onError((error, stackTrace) {
       customLoader.hide();

@@ -89,7 +89,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                             ),
                           );
                         },
-                        contentPadding: EdgeInsets.all(margin_10),
+                        // contentPadding: EdgeInsets.all(margin_10),
                         textController: controller.countryPickerController,
                         shadow: true,
                       ),

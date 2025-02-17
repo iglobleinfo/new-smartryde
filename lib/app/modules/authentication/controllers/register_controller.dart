@@ -69,7 +69,7 @@ class RegisterController extends GetxController {
     update();
   }
 
-  /*===================================================================== Social Login  ==========================================================*/
+  /*===================================================================== Social signupo  ==========================================================*/
   Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser =
@@ -229,7 +229,7 @@ class RegisterController extends GetxController {
     });
   }
 
-  /*===================================================================== SignUp API Call  ==========================================================*/
+  /*===================================================================== Generate OTP API Call  ==========================================================*/
   hitGenerateOtpAPI(context) {
     loader.value = true;
     FocusManager.instance.primaryFocus!.unfocus();
