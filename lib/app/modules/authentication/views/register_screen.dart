@@ -21,19 +21,23 @@ class RegisterScreen extends GetView<RegisterController> {
             statusBarBrightness: Brightness.dark,
             child: SafeArea(
               child: Scaffold(
+                resizeToAvoidBottomInset: false,
                 backgroundColor: Colors.white,
-                body: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomBackButton(),
-                      signUpForm(context: context),
-                      AssetImageWidget(
-                        imageUrl: imageBusMainLogin,
-                      ),
-                    ],
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  leading: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CustomBackButton(),
                   ),
+                ),
+                body: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    AssetImageWidget(
+                      imageUrl: imageBusMainLogin,
+                    ),
+                    signUpForm(context: context),
+                  ],
                 ),
               ),
             ),
@@ -63,10 +67,8 @@ class RegisterScreen extends GetView<RegisterController> {
           ),
           TextView(
             text: pleaseFillUpTheInformationBelow.tr,
-            textStyle: textStyleLabelSmall(context).copyWith(
-              fontWeight: FontWeight.normal,
-                fontSize: 15
-            ),
+            textStyle: textStyleLabelSmall(context)
+                .copyWith(fontWeight: FontWeight.normal, fontSize: 15),
           ),
           Form(
             key: formGlobalKey,
@@ -151,8 +153,8 @@ class RegisterScreen extends GetView<RegisterController> {
                 ),
                 Obx(() {
                   IconData icon = controller.viewPassword.value
-                      ? Icons.visibility
-                      : Icons.visibility_off;
+                      ? Icons.visibility_off
+                      : Icons.visibility;
                   return TextFieldWidget(
                     suffixIcon: IconButton(
                       onPressed: controller.showOrHidePasswordVisibility,
@@ -173,7 +175,7 @@ class RegisterScreen extends GetView<RegisterController> {
               buttonText: stringSignUp.tr.toUpperCase(),
               onPressed: () {
                 if (formGlobalKey.currentState!.validate()) {
-                    controller.hitSignUpAPI(context);
+                  controller.hitSignUpAPI(context);
                 }
               },
             ),
@@ -204,18 +206,14 @@ class RegisterScreen extends GetView<RegisterController> {
               textAlign: TextAlign.center,
               TextSpan(
                 text: byContinuingYouAgreeTo.tr,
-                style:  textStyleBodySmall(context).copyWith(
-                    color: Colors.black,
-                    fontSize: 17
-                ),
+                style: textStyleBodySmall(context)
+                    .copyWith(color: Colors.black, fontSize: 17),
                 children: [
                   TextSpan(
                     text: termsOfService.tr,
                     recognizer: TapGestureRecognizer()..onTap = () {},
-                    style: textStyleBodySmall(context).copyWith(
-                      color: appClickableTextColor,
-                        fontSize: 17
-                    ),
+                    style: textStyleBodySmall(context)
+                        .copyWith(color: appClickableTextColor, fontSize: 17),
                   ),
                   TextSpan(
                     text: ' ${and.tr} ',
@@ -224,10 +222,8 @@ class RegisterScreen extends GetView<RegisterController> {
                   TextSpan(
                     text: privacyPolicy.tr,
                     recognizer: TapGestureRecognizer()..onTap = () {},
-                    style: textStyleBodySmall(context).copyWith(
-                      color: appClickableTextColor,
-                        fontSize: 17
-                    ),
+                    style: textStyleBodySmall(context)
+                        .copyWith(color: appClickableTextColor, fontSize: 17),
                   ),
                 ],
               ),

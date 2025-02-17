@@ -17,19 +17,25 @@ class LoginScreen extends GetView<LoginController> {
             statusBarBrightness: Brightness.dark,
             child: SafeArea(
               child: Scaffold(
+                resizeToAvoidBottomInset: false,
                 backgroundColor: Colors.white,
-                body: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomBackButton(),
-                      loginForm(context: context),
-                      AssetImageWidget(
-                        imageUrl: imageBusMainLogin,
-                      ),
-                    ],
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  leading: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CustomBackButton(),
                   ),
+                ),
+                body: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    AssetImageWidget(
+                      imageWidth: Get.width,
+                      imageFitType: BoxFit.fill,
+                      imageUrl: imageBusMainLogin,
+                    ),
+                    loginForm(context: context),
+                  ],
                 ),
               ),
             ),
@@ -59,12 +65,12 @@ class LoginScreen extends GetView<LoginController> {
           ),
           TextView(
             text: pleaseFillUpTheInformationBelow.tr,
-            textStyle: textStyleLabelSmall(context).copyWith(
-              fontWeight: FontWeight.normal,
-              fontSize: 15
-            ),
+            textStyle: textStyleLabelSmall(context)
+                .copyWith(fontWeight: FontWeight.normal, fontSize: 15),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           Form(
             key: controller.formGlobalKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -114,8 +120,8 @@ class LoginScreen extends GetView<LoginController> {
                 ),
                 Obx(() {
                   IconData icon = controller.viewPassword.value
-                      ? Icons.visibility
-                      : Icons.visibility_off;
+                      ? Icons.visibility_off
+                      : Icons.visibility;
                   return TextFieldWidget(
                     suffixIcon: IconButton(
                       onPressed: controller.showOrHidePasswordVisibility,
@@ -130,6 +136,9 @@ class LoginScreen extends GetView<LoginController> {
               ],
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
@@ -138,10 +147,11 @@ class LoginScreen extends GetView<LoginController> {
               },
               child: TextView(
                 text: 'Forgot Password?',
-                textStyle: textStyleBodySmall(context).copyWith(
+                textStyle: textStyleLabelLarge(context).copyWith(
                   color: appClickableTextColor,
                   decoration: TextDecoration.underline,
                   decorationColor: Colors.blueAccent,
+                  fontSize: 14,
                   decorationThickness: 1,
                 ),
               ),
@@ -158,7 +168,9 @@ class LoginScreen extends GetView<LoginController> {
                 controller.hitLoginAPI(context);
               },
             ),
-          ).marginOnly(bottom: margin_20),
+          ).marginOnly(
+            bottom: margin_20,
+          ),
           Align(
             alignment: Alignment.center,
             child: GestureDetector(
@@ -186,9 +198,9 @@ class LoginScreen extends GetView<LoginController> {
               textAlign: TextAlign.center,
               TextSpan(
                 text: byContinuingYouAgreeTo.tr,
-                style:  textStyleBodySmall(context).copyWith(
-                    color: Colors.black,
-                    fontSize: 17
+                style: textStyleBodySmall(context).copyWith(
+                  color: Colors.black,
+                  fontSize: 17,
                 ),
                 children: [
                   TextSpan(
@@ -208,7 +220,7 @@ class LoginScreen extends GetView<LoginController> {
                     recognizer: TapGestureRecognizer()..onTap = () {},
                     style: textStyleBodySmall(context).copyWith(
                       color: appClickableTextColor,
-                      fontSize: 16
+                      fontSize: 16,
                     ),
                   ),
                 ],

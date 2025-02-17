@@ -19,7 +19,7 @@ class RegisterController extends GetxController {
   MyAccountModel? myAccountModel;
   late CustomLoader customLoader;
   RxBool loader = false.obs;
-  RxBool viewPassword = RxBool(false);
+  RxBool viewPassword = RxBool(true);
 
   @override
   void onInit() {

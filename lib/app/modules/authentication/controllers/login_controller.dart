@@ -17,7 +17,7 @@ class LoginController extends GetxController {
   late CustomLoader customLoader;
   RxBool loader = false.obs;
   RxBool isRemember = false.obs;
-  RxBool viewPassword = RxBool(false);
+  RxBool viewPassword = RxBool(true);
   final formGlobalKey = GlobalKey<FormState>();
   int maxDigit = 8;
 

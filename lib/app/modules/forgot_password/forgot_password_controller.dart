@@ -13,7 +13,7 @@ class ForgotPasswordController extends GetxController {
   final TextEditingController countryPickerController = TextEditingController();
   final TextEditingController otpTextController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  RxBool viewPassword = RxBool(false);
+  RxBool viewPassword = RxBool(true);
 
   @override
   void onInit() {

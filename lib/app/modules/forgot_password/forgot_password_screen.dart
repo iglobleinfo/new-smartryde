@@ -11,6 +11,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -119,8 +120,8 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                 ),
                 Obx(() {
                   IconData icon = controller.viewPassword.value
-                      ? Icons.visibility
-                      : Icons.visibility_off;
+                      ? Icons.visibility_off
+                      : Icons.visibility;
                   return TextFieldWidget(
                     suffixIcon: IconButton(
                       onPressed: controller.showOrHidePasswordVisibility,
@@ -130,7 +131,7 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
                     textController: controller.passwordController,
                     shadow: true,
                     maxLength: 10,
-                    inputType: TextInputType.number,
+                    inputType: TextInputType.text,
                     hint: stringNewPassword.tr,
                   );
                 }),

@@ -124,18 +124,24 @@ class OnboardingScreen extends StatelessWidget {
                   text: termsOfService.tr,
                   recognizer: TapGestureRecognizer()..onTap = () {},
                   style: textStyleBodySmall(context).copyWith(
+                    fontSize: 16,
                     color: appClickableTextColor,
                   ),
                 ),
                 TextSpan(
                   text: ' ${and.tr} ',
                   recognizer: TapGestureRecognizer()..onTap = () {},
+                  style: textStyleBodySmall(context).copyWith(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
                 TextSpan(
                   text: privacyPolicy.tr,
                   recognizer: TapGestureRecognizer()..onTap = () {},
                   style: textStyleBodySmall(context).copyWith(
                     color: appClickableTextColor,
+                    fontSize: 16,
                   ),
                 ),
               ],
