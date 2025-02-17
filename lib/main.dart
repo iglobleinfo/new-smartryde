@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter_logger/FlutterLogger.dart';
 import 'package:smart_ryde/app/data/internet_check/dependency.dart';
 import 'package:smart_ryde/app/routes/app_pages.dart';
 import '../../export.dart';

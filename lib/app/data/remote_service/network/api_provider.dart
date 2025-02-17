@@ -1,11 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:smart_ryde/app/data/remote_service/network/network_exceptions.dart';
 import 'package:smart_ryde/model/error_response_model.dart';
 import 'package:smart_ryde/model/responseModal/home_model.dart';
-import 'package:smart_ryde/model/responseModal/login_model.dart';
-import 'package:smart_ryde/model/responseModal/myaccount_model.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../../export.dart';
 import 'dio_client.dart';

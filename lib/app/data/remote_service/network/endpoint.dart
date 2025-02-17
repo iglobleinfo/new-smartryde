@@ -1,11 +1,14 @@
-const crashBaseUrl = "http://hk.igloble.com/minibusapi";
-const baseUrl = "http://hk.igloble.com/minibusapi";
+// const crashBaseUrl = "http://hk.igloble.com/minibusapi";
+// const baseUrl = "http://hk.igloble.com/minibusapi";
 const website = 'https://pub.dev';
+
+const crashBaseUrl = "http://216.48.181.94:8083";
+const baseUrl = "http://216.48.181.94:8083";
 
 const endPointLogin = "/user/login";
 const endPointSignUp = "/user";
 const endPointGenerateOtp = "/user/generate-otp/";
-const endPointForgotPassword = "/user/forgot-password/";
+const endPointForgotPassword = "/user/forgot-password";
 const endPointVerifyOtp = "/user/verify-otp/";
 const endPointGetUser = "/user/";
 const endPointSocialLogin = "/Account/socialLogin";
