@@ -74,6 +74,7 @@ class ProfileController extends GetxController {
       PreferenceManger().saveUserData(loginModel!.data!);
       try {
         Get.find<MyProfileController>().getData();
+        Get.find<HomeController>().getData();
       } catch (e) {
         Get.put(MyProfileController()).getData();
       }
