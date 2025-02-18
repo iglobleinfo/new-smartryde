@@ -1,7 +1,5 @@
 import 'package:smart_ryde/app/modules/authentication/controllers/my_profile_controller.dart';
-
 import '../../../../../export.dart';
-import '../../../core/utils/validators.dart';
 import '../../authentication/model/login_data_model.dart';
 
 class ProfileController extends GetxController {
