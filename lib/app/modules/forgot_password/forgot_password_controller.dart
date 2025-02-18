@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:smart_ryde/app/core/utils/validators.dart';
@@ -14,6 +16,10 @@ class ForgotPasswordController extends GetxController {
   final TextEditingController otpTextController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   RxBool viewPassword = RxBool(true);
+  Timer? timer;
+  RxBool canSendOTP = RxBool(true);
+  int totalDuration = 30;
+  RxInt remainingDuration = RxInt(30);
 
   @override
   void onInit() {
@@ -34,6 +40,19 @@ class ForgotPasswordController extends GetxController {
             '${countryPickerController.text}${phoneNumberController.text}')
         .then((value) async {
       customLoader.hide();
+      canSendOTP.value = false;
+      update();
+      timer = Timer.periodic(const Duration(seconds: 1), (t) {
+        if (remainingDuration.value > 0) {
+          remainingDuration.value--;
+          update();
+        } else {
+          timer?.cancel();
+          remainingDuration.value = totalDuration;
+          canSendOTP.value = true;
+          update();
+        }
+      });
       toast('OTP send successfully');
     }).onError((error, stackTrace) {
       customLoader.hide();
@@ -68,8 +87,7 @@ class ForgotPasswordController extends GetxController {
     );
     customLoader.show(context);
     FocusManager.instance.primaryFocus!.unfocus();
-    APIRepository.forgotPasswordApi(forgotRequest)
-        .then((value) async {
+    APIRepository.forgotPasswordApi(forgotRequest).then((value) async {
       customLoader.hide();
       Get.back();
       toast(stringPasswordChangedSuccessfully.tr);

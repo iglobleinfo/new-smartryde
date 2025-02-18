@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
                 children: [
                   AssetImageWidget(
                     imageHeight: double.infinity,
-                    imageFitType: BoxFit.cover,
+                    imageFitType: BoxFit.fill,
                     imageUrl: imageSignUpBackground,
                   ),
                   Padding(
@@ -28,7 +28,6 @@ class OnboardingScreen extends StatelessWidget {
                       textAlign: TextAlign.start,
                       textStyle: textStyleDisplayLarge(context).copyWith(
                         fontWeight: FontWeight.w500,
-                        // fontSize: 25
                       ),
                     ),
                   )
@@ -44,24 +43,24 @@ class OnboardingScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(
-              height: margin_15.h,
-            ),
-            MaterialButtonWidget(
-              minWidth: Get.width * 0.9,
-              buttonColor: appFacebookButtonColor,
-              buttonText: 'PROCEED USING FACEBOOK',
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: margin_15.h,
-            ),
-            TextView(
-              text: 'OR',
-              textStyle: textStyleDisplayLarge(context).copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            // SizedBox(
+            //   height: margin_15.h,
+            // ),
+            // MaterialButtonWidget(
+            //   minWidth: Get.width * 0.9,
+            //   buttonColor: appFacebookButtonColor,
+            //   buttonText: 'PROCEED USING FACEBOOK',
+            //   onPressed: () {},
+            // ),
+            // SizedBox(
+            //   height: margin_15.h,
+            // ),
+            // TextView(
+            //   text: 'OR',
+            //   textStyle: textStyleDisplayLarge(context).copyWith(
+            //     fontWeight: FontWeight.w500,
+            //   ),
+            // ),
             SizedBox(
               height: margin_15.h,
             ),

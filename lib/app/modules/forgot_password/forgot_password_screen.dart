@@ -138,6 +138,22 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
               ],
             ),
           ),
+          Offstage(
+            offstage: controller.canSendOTP.value,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: margin_5,
+                ),
+                Obx(
+                  () => Text(
+                    getFormattedTime(controller.remainingDuration.value),
+                  ),
+                )
+              ],
+            ),
+          ),
           SizedBox(
             height: margin_30,
           ),
@@ -151,22 +167,31 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
           SizedBox(
             height: margin_10,
           ),
-          SizedBox(
-            width: double.infinity,
-            child: OutlineButtonWidget(
-              onTap: () {
-                controller.hitGenerateOtpAPI(context);
-              },
-              outlineColor: appButtonColor,
-              text: stringGetOtp.tr.toUpperCase(),
-              textStyle: textStyleButton(context).copyWith(
-                color: appButtonColor,
-                fontWeight: FontWeight.normal,
+          Offstage(
+            offstage: !controller.canSendOTP.value,
+            child: SizedBox(
+              width: double.infinity,
+              child: OutlineButtonWidget(
+                onTap: () {
+                  controller.hitGenerateOtpAPI(context);
+                },
+                outlineColor: appButtonColor,
+                text: stringGetOtp.tr.toUpperCase(),
+                textStyle: textStyleButton(context).copyWith(
+                  color: appButtonColor,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  String getFormattedTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }
