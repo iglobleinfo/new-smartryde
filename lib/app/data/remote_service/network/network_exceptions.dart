@@ -99,9 +99,9 @@ class NetworkExceptions {
               // TODO: Handle this case.
               break;
             case DioExceptionType.badResponse:
-              // TODO: Handle this case.
-              break;
             case DioExceptionType.connectionError:
+              return messageData =
+              'Something went wrong, Please try again later.';
               // TODO: Handle this case.
               break;
           }

@@ -13,6 +13,8 @@ class BookSeatController extends GetxController {
   bool isLoader = true;
 
   BusList? busData;
+  String? fromName;
+  String? toName;
 
   BusListResponseModel? busListResponseModel;
   List<BusList> busList = [];
@@ -26,6 +28,8 @@ class BookSeatController extends GetxController {
     busData = Get.arguments['busData'];
     fromId = Get.arguments['fromId'];
     toId = Get.arguments['toId'];
+    fromName = Get.arguments['fromName'];
+    toName = Get.arguments['toName'];
     super.onInit();
   }
 
@@ -55,7 +59,7 @@ class BookSeatController extends GetxController {
     FocusManager.instance.primaryFocus!.unfocus();
     APIRepository.bookTicketApi(bookingRequest).then((value) async {
       customLoader.hide();
-      Get.to(BookingConfirmScreen());
+      Get.to(BookingConfirmScreen(stopName: fromName??'',));
       toast('Booked successfully'.tr);
     }).onError((error, stackTrace) {
       customLoader.hide();

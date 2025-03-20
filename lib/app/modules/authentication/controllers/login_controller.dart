@@ -1,5 +1,6 @@
 import 'package:smart_ryde/app/core/utils/validators.dart'
     show phoneTextFieldValidator;
+import 'package:smart_ryde/app/modules/home_booking/controller/home_booking_controller.dart';
 import '../../../../../export.dart';
 
 class LoginController extends GetxController {
@@ -209,6 +210,7 @@ class LoginController extends GetxController {
       PreferenceManger().saveUserData(loginModel!.data!);
       loader.value = false;
       Get.find<HomeController>().getData();
+      Get.find<HomeBookingController>().hitGetDistrict();
       Get.until((Route route) => route.isFirst);
       toast('Logged In');
     }).onError((error, stackTrace) {

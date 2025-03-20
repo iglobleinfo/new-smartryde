@@ -384,6 +384,8 @@ class BusListScreen extends GetView<BusController> {
                                                                       .fromId,
                                                               'toId': controller
                                                                   .toId,
+                                                              'fromName': controller.fromName,
+                                                              'toName': controller.toName,
                                                             });
                                                       },
                                                       child: Container(

@@ -5,7 +5,9 @@ import '../../../export.dart';
 import '../../core/widgets/annotated_region_widget.dart';
 
 class BookingConfirmScreen extends StatelessWidget {
-  const BookingConfirmScreen({super.key});
+  const BookingConfirmScreen({super.key, required this.stopName});
+
+  final String stopName;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class BookingConfirmScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextView(
                   text:
-                      'Your Bus Will arrive at Hanley Villa. Please reach the stop 3 minutes before the schedule arrival time.',
+                      'Your Bus Will arrive at $stopName. Please reach the stop 3 minutes before the schedule arrival time.',
                   textStyle: textStyleLabelSmall(context).copyWith(
                     fontSize: 18,
                     color: Colors.white,

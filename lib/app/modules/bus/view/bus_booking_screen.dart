@@ -213,11 +213,8 @@ class BusBookingScreen extends GetView<BookSeatController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         TextView(
-                                          text: controller.busData!.enRouteName!
-                                              .split(')')
-                                              .first
-                                              .split('(')
-                                              .last,
+                                          text: controller.fromName??'',
+                                          textAlign: TextAlign.start,
                                           textStyle:
                                               textStyleLabelSmall(context)
                                                   .copyWith(
@@ -232,12 +229,8 @@ class BusBookingScreen extends GetView<BookSeatController> {
                                           height: 35,
                                         ),
                                         TextView(
-                                          text: controller.busData!.enRouteName!
-                                              .split('to')
-                                              .last
-                                              .split('(')
-                                              .last
-                                              .replaceAll(')', ''),
+                                          text: controller.toName??'',
+                                          textAlign: TextAlign.start,
                                           textStyle:
                                               textStyleLabelSmall(context)
                                                   .copyWith(
