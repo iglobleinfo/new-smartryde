@@ -1,5 +1,9 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:smart_ryde/app/data/remote_service/network/network_exceptions.dart';
+import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
+import 'package:smart_ryde/app/modules/home_booking/models/district_model.dart';
+import 'package:smart_ryde/app/modules/home_booking/models/region_model.dart';
+import 'package:smart_ryde/app/modules/home_booking/models/stop_model.dart';
 import 'package:smart_ryde/model/error_response_model.dart';
 import 'package:smart_ryde/model/responseModal/home_model.dart';
 
@@ -130,6 +134,98 @@ class APIRepository {
         skipAuth: false,
       );
       return LoginResponseModel.fromJson(response);
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get District API Call  ==========================================================*/
+  static Future<DistrictResponseModel?> getDistrictApi() async {
+    try {
+      var response = await dioClient!.get(
+        endPointGetDistrict,
+        skipAuth: false,
+      );
+      DistrictResponseModel districtResponseModel =
+          DistrictResponseModel.fromJson(response);
+      return districtResponseModel;
+    } catch (e, str) {
+      debugPrint('Error:$e');
+      debugPrint('StackTrace:$str');
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get Region API Call  ==========================================================*/
+  static Future<RegionResponseModel?> getRegionApi(int districtId) async {
+    try {
+      var response = await dioClient!.get(
+        endPointGetRegion + districtId.toString(),
+        skipAuth: false,
+      );
+      RegionResponseModel regionResponseModel =
+          RegionResponseModel.fromJson(response);
+      return regionResponseModel;
+    } catch (e, str) {
+      debugPrint('Error:$e');
+      debugPrint('StackTrace:$str');
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get Stop API Call  ==========================================================*/
+  static Future<StopResponseModel?> getStopApi(int regionId) async {
+    try {
+      var response = await dioClient!.get(endPointGetStop,
+          skipAuth: false, queryParameters: {'region': regionId});
+      StopResponseModel stopResponseModel =
+          StopResponseModel.fromJson(response);
+      return stopResponseModel;
+    } catch (e, str) {
+      debugPrint('Error:$e');
+      debugPrint('StackTrace:$str');
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get Bus List API Call  ==========================================================*/
+  static Future<BusListResponseModel?> getBusListApi(int fromId, int toId, String selectedDate) async {
+    try {
+      var response = await dioClient!
+          .get(endPointGetBusList, skipAuth: false, queryParameters: {
+        'fromStopId': fromId,
+        'toStopId': toId,
+        'journeyDate': selectedDate,
+      });
+      BusListResponseModel busListResponseModel =
+          BusListResponseModel.fromJson(response);
+      return busListResponseModel;
+    } catch (e, str) {
+      debugPrint('Error:$e');
+      debugPrint('StackTrace:$str');
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Book Ticket Api  ==========================================================*/
+  static Future bookTicketApi(Map<String, dynamic> data) async {
+    try {
+      final response = await dioClient!.post(
+        endPointBookTicket,
+        skipAuth: false,
+        data: data,
+      );
+      return response;
     } catch (e, str) {
       return Future.error(
         NetworkExceptions.getDioException(e, str),

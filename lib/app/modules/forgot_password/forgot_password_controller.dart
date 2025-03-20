@@ -79,6 +79,7 @@ class ForgotPasswordController extends GetxController {
       return;
     }
 
+
     // Hit The Forgot Password Api
     var forgotRequest = AuthRequestModel.forgetReq(
       phoneNumber: countryPickerController.text + phoneNumberController.text,

@@ -1,10 +1,11 @@
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
-import 'package:smart_ryde/app/modules/authentication/model/login_data_model.dart';
-import 'package:smart_ryde/app/modules/home_booking/view/home_booking_screen.dart';
+import 'package:smart_ryde/app/modules/home_destination/view/home_destination_screen.dart';
 import 'package:smart_ryde/export.dart';
 
-class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({super.key});
+import '../controllers/home_controller_2.dart';
+
+class HomeScreen2 extends GetView<HomeController2> {
+  const HomeScreen2({super.key});
 
   Widget customDrawer(BuildContext context) => Container(
         color: Colors.white,
@@ -47,49 +48,47 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        controller.onWillPop();
-      },
-      child: AnnotatedRegionWidget(
-        statusBarColor: primaryColor,
-        statusBarBrightness: Brightness.dark,
-        child: SafeArea(
-          child: GetBuilder<HomeController>(
-            init: HomeController(),
-            builder: (controller) {
-              return Scaffold(
-                key: controller.scaffoldKey,
-                resizeToAvoidBottomInset: false,
-                appBar: CustomAppBar(
-                  appBarTitleText: 'SmartRyde',
-                  leadingIcon: getInkWell(
-                    onTap: () {
-                      controller.scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Icon(
-                      Icons.dehaze_outlined,
-                      size: 26,
-                    ).paddingAll(12),
+    return AnnotatedRegionWidget(
+      statusBarColor: primaryColor,
+      statusBarBrightness: Brightness.dark,
+      child: SafeArea(
+        child: GetBuilder<HomeController2>(
+          init: HomeController2(),
+          builder: (controller) {
+            return Scaffold(
+              key: controller.scaffoldKey,
+              resizeToAvoidBottomInset: false,
+              appBar: CustomAppBar(
+                appBarTitleText: 'SmartRyde',
+                leadingIcon: getInkWell(
+                  onTap: () {
+                    controller.scaffoldKey.currentState!.openDrawer();
+                  },
+                  child: Icon(
+                    Icons.dehaze_outlined,
+                    size: 26,
+                  ).paddingAll(12),
+                ),
+              ),
+              drawer: customDrawer(context),
+              body: Stack(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      AssetImageWidget(
+                        imageUrl: imageBusMainLogin,
+                      ),
+                      HomeDestinyScreen(
+                        matchId: controller.matchId ?? '',
+                        pickUpName: controller.pickUpName ?? '',
+                      )
+                    ],
                   ),
-                ),
-                drawer: customDrawer(context),
-                body: Stack(
-                  children: [
-                    Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        AssetImageWidget(
-                          imageUrl: imageBusMainLogin,
-                        ),
-                        HomeBookingScreen()
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

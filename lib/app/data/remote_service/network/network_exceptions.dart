@@ -85,7 +85,9 @@ class NetworkExceptions {
                 case 408:
                   return messageData = stringRequestTimeOut;
                 case 500:
-                  return messageData = stringInternalServerError;
+                  return messageData =
+                      'Something went wrong, Please try again later.';
+                // return messageData = stringInternalServerError;
                 case 503:
                   return messageData = stringInternetServiceUnavailable;
                 default:

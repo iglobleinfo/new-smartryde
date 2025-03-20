@@ -104,7 +104,7 @@ class TextFieldWidget extends StatelessWidget {
                 style: textStyleBodyMedium(context).copyWith(
                   fontWeight: FontWeight.w500,
                   color: textColor ?? Colors.black,
-                  fontSize: 15.5
+                  fontSize: 17
                 ),
                 decoration: inputDecoration(context))
             .marginOnly(bottom: 0.8, right: 0.5),

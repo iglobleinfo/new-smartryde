@@ -36,6 +36,8 @@ const String stringGetOtp = 'getOtp';
 const String stringEnterOtp = 'enterOtp';
 const String stringOtpEmptyValidation = 'pleaseEnterOtp';
 const String stringPasswordChangedSuccessfully = 'passwordChangedSuccessfully';
+const String stringSelectPickup = 'selectPickUp';
+const String stringSelectDestination = 'selectDestination';
 
 /// **********************************************************************
 /// **********************************************************************

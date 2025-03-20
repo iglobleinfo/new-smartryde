@@ -27,7 +27,7 @@ const Map<String, String> enUS = {
   'verificationOTP': 'Verification OTP',
   'aboutUs': 'About Us',
   'aboutUsDescription':
-      'AN Bus is a local red minibus company aim at providing new type of red minibus service in Hong Kong. The mobile application is deveoped by iGloble. iGloble provides Intelligent and smart Transportation solutions including ticketing for fleets.',
+      'AN Bus is a local red minibus company aim at providing new type of red minibus service in Hong Kong. The mobile application is developed by iGloble. iGloble provides Intelligent and smart Transportation solutions including ticketing for fleets.',
   'forgotPassword': 'Forgot password?',
   'newPassword': 'New Password',
   'submitPassword': 'Submit Password',
@@ -35,6 +35,8 @@ const Map<String, String> enUS = {
   'enterOtp': 'Enter OTP',
   'pleaseEnterOtp': 'Please enter OTP',
   'passwordChangedSuccessfully': 'Password Changed Successfully!',
+  'selectPickUp': 'Select Your Pickup Stop',
+  'selectDestination': 'Select Your Destination Stop',
   keyPressToExitApp: "Press one more time to push app into background",
   keyNoResultFound: "No Result Found",
   keyEnglish: "English",

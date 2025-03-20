@@ -9,6 +9,8 @@ const String iconWallet = 'assets/icons/wallet.webp';
 
 // Images Assets
 const String imageBack = 'assets/images/back.webp';
+const String imageBus2 = 'assets/images/bus3.png';
+const String imageBusRoute = 'assets/images/bus_route.png';
 const String imageBus = 'assets/images/bus.webp';
 const String imageBusBottom = 'assets/images/bus_bottom.webp';
 const String imageDisabled = 'assets/images/disabled.webp';

@@ -1,4 +1,5 @@
 import '../../../export.dart';
+import '../utils/projectutils/navigation_service.dart';
 
 int defaultItemCount = 10;
 
@@ -6,6 +7,8 @@ var log = Logger();
 GetStorage storage = GetStorage();
 
 final GlobalKey<NavigatorState> navState = GlobalKey<NavigatorState>();
+// Create an instance of NavigationService
+ final NavigationService navigationService = NavigationService();
 
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerState =
     GlobalKey<ScaffoldMessengerState>();

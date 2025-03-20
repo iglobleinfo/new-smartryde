@@ -1,7 +1,9 @@
+import 'package:smart_ryde/app/core/values/app_global_values.dart';
 import 'package:smart_ryde/app/data/internet_check/dependency.dart';
 import 'package:smart_ryde/app/routes/app_pages.dart';
 import '../../export.dart';
 import 'app/core/translations/translation_service.dart';
+import 'app/core/utils/projectutils/navigation_service.dart';
 
 var log = Logger();
 GetStorage storage = GetStorage();
@@ -12,6 +14,9 @@ var tempDir;
 class GlobalVariable {
   static final GlobalKey<ScaffoldMessengerState> navState =
       GlobalKey<ScaffoldMessengerState>();
+
+  // // Create a global instance of NavigationService
+  // static final NavigationService navigationService = NavigationService();
 
   static final GlobalKey<NavigatorState> navigatorState =
       GlobalKey<NavigatorState>();
@@ -75,6 +80,7 @@ class MyApp extends StatelessWidget {
       },
       child: ScreenUtilInit(
         builder: (context, widget) => GetMaterialApp(
+          navigatorKey: navigationService.navigatorKey, // Link the navigator key
           theme: ThemeConfig.lightTheme,
           initialRoute: AppPages.initial,
           getPages: AppPages.routes,

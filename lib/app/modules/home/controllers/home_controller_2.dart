@@ -1,18 +1,22 @@
 import '../../../../../export.dart';
 import '../../authentication/model/login_data_model.dart';
 
-class HomeController extends GetxController {
+class HomeController2 extends GetxController {
   late Dio dio;
   CustomLoader customLoader = CustomLoader();
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   LoginDataModel? userData;
   File? tempFile;
+  String? matchId;
+  String? pickUpName;
 
   @override
   void onInit() {
     dio = Dio();
     getData();
+    matchId = Get.arguments['matchId']??'';
+    pickUpName = Get.arguments['pickupStop']??'';
     super.onInit();
   }
 
@@ -32,34 +36,9 @@ class HomeController extends GetxController {
     FocusManager.instance.primaryFocus!.unfocus();
     APIRepository.getUserApi(userData!.id.toString()).then((value) async {
       customLoader.hide();
-      update();
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);
     });
-  }
-
-  Future<bool> onWillPop() {
-    debugPrint(backPressCounter.toString());
-    if (backPressCounter < 1) {
-      Get.snackbar(
-        stringAppName,
-        stringExitWarning,
-        borderRadius: 6.0,
-        backgroundColor: colorMistyRose,
-        margin: EdgeInsets.zero,
-        colorText: colorVioletM,
-      );
-      backPressCounter++;
-      Future.delayed(Duration(milliseconds: 1500), () {
-        backPressCounter--;
-      });
-      return Future.value(false);
-    } else {
-      if (GetPlatform.isAndroid) {
-        SystemNavigator.pop();
-      }
-      return Future.value(true);
-    }
   }
 }

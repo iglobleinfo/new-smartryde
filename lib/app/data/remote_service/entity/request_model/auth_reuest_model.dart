@@ -55,6 +55,25 @@ class AuthRequestModel {
     return data;
   }
 
+  static bookTicketReq({
+    required String bookedBy,
+    required int fromStopId,
+    required int toStopId,
+    required int totalSeat,
+    required int tripRecordId,
+    required int userId,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['bookedBy'] = bookedBy;
+    data['fromStopId'] = fromStopId;
+    data['toStopId'] = toStopId;
+    data['totalSeat'] = totalSeat;
+    data['tripRecordId'] = tripRecordId;
+    data['userId'] = userId;
+    {}
+    return data;
+  }
+
   static socialLoginReq({
     var userId,
     var email,
