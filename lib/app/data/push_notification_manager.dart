@@ -17,9 +17,9 @@ class PushNotificationsManager {
 
   factory PushNotificationsManager() => _instance;
   static final PushNotificationsManager _instance =
-  PushNotificationsManager._();
+      PushNotificationsManager._();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  new FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   bool _initialized = false;
 
@@ -31,7 +31,6 @@ class PushNotificationsManager {
       await _firebaseMessaging.requestPermission(alert: true, sound: true);
       await _firebaseMessaging.setForegroundNotificationPresentationOptions(
           alert: true, badge: true, sound: true);
-
       // For testing purposes, print the Firebase Messaging token
       await _firebaseMessaging.getToken().then((value) {
         deviceToken = value!;
@@ -74,9 +73,9 @@ class PushNotificationsManager {
 
       flutterLocalNotificationsPlugin.initialize(platform,
           onDidReceiveNotificationResponse: (NotificationResponse data) {
-            debugPrint("message3 local ${message.data['detail']}");
-            notificationRedirection(message.data);
-          });
+        debugPrint("message3 local ${message.data['detail']}");
+        notificationRedirection(message.data);
+      });
 
       if (Platform.isAndroid) {
         var androidPlatformChannelSpecifics = AndroidNotificationDetails(

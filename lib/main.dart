@@ -3,7 +3,6 @@ import 'package:smart_ryde/app/data/internet_check/dependency.dart';
 import 'package:smart_ryde/app/routes/app_pages.dart';
 import '../../export.dart';
 import 'app/core/translations/translation_service.dart';
-import 'app/core/utils/projectutils/navigation_service.dart';
 
 var log = Logger();
 GetStorage storage = GetStorage();
@@ -14,10 +13,6 @@ var tempDir;
 class GlobalVariable {
   static final GlobalKey<ScaffoldMessengerState> navState =
       GlobalKey<ScaffoldMessengerState>();
-
-  // // Create a global instance of NavigationService
-  // static final NavigationService navigationService = NavigationService();
-
   static final GlobalKey<NavigatorState> navigatorState =
       GlobalKey<NavigatorState>();
 }
