@@ -16,4 +16,6 @@ abstract class AppRoutes {
   static const busList = '/busList';
   static const busBooking = '/busBooking';
   static const newSignIn = '/videoCallScreen';
+  static const liveTracking = '/liveTracking';
+  static const busLocation = '/busLocation';
 }

@@ -3,6 +3,10 @@
         android:label="SmartRyde"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAtypADq341GhxktfoTe71eK81Ko_LhTTM"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
