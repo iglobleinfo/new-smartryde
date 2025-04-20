@@ -25,6 +25,19 @@ class _StopLocationPageState extends State<StopLocationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        appBarTitleText: 'Stop Location',
+        leadingIcon: getInkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back_outlined,
+            color: Colors.grey,
+            size: 26,
+          ),
+        ),
+      ),
       body: Obx(
         () {
           Set<Marker> markers = controller.markers;

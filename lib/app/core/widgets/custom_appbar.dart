@@ -59,7 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   _backIcon() {
     return Align(
-      alignment: Alignment.topLeft,
+      alignment: Alignment.center,
       child: InkWell(
         child: leadingIcon ??
             AssetImageWidget(
