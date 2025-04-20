@@ -9,6 +9,7 @@ import 'package:smart_ryde/app/modules/forgot_password/forgot_password_screen.da
 import 'package:smart_ryde/app/modules/home/views/home_screen.dart';
 import 'package:smart_ryde/app/modules/live_tracking/live_tracking_screen.dart';
 import 'package:smart_ryde/app/modules/splash/views/splash_screen.dart';
+import 'package:smart_ryde/app/modules/stop_locations/stop_location_page.dart';
 import '../../export.dart';
 import '../modules/authentication/verify_otp_module/verify_otp_page.dart';
 import '../modules/authentication/views/my_profile.dart';
@@ -18,7 +19,7 @@ import '../modules/language/bindings/select_language_binding.dart';
 import '../modules/language/views/select_language_screen.dart';
 
 class AppPages {
-  static const initial = AppRoutes.splash;
+  static const initial = AppRoutes.busLocation;
 
   static final routes = [
     GetPage(
@@ -92,6 +93,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.liveTracking,
       page: () => LiveTrackingScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.busLocation,
+      page: () => StopLocationPage(),
     ),
   ];
 }

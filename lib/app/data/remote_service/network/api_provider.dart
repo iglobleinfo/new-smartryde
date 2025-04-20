@@ -182,7 +182,7 @@ class APIRepository {
   /*===================================================================== Get Stop API Call  ==========================================================*/
   static Future<StopResponseModel?> getStopApi(int regionId) async {
     try {
-      var response = await dioClient!.get(endPointGetStop,
+      var response = await dioClient!.get(endPointGetStopByRegion,
           skipAuth: false, queryParameters: {'region': regionId});
       StopResponseModel stopResponseModel =
           StopResponseModel.fromJson(response);
@@ -196,8 +196,35 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== Get Stop API Call By Route==========================================================*/
+  static Future<StopResponseModel?> getStopByRoute({
+    required int routeId,
+    required String deptNo,
+  }) async {
+    try {
+      var response = await dioClient!.get(
+        endPointGetStopByRoute,
+        skipAuth: false,
+        queryParameters: {
+          'routeId': routeId,
+          'deptNo': deptNo,
+        },
+      );
+      StopResponseModel stopResponseModel =
+          StopResponseModel.fromJson(response);
+      return stopResponseModel;
+    } catch (e, str) {
+      debugPrint('Error:$e');
+      debugPrint('StackTrace:$str');
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== Get Bus List API Call  ==========================================================*/
-  static Future<BusListResponseModel?> getBusListApi(int fromId, int toId, String selectedDate) async {
+  static Future<BusListResponseModel?> getBusListApi(
+      int fromId, int toId, String selectedDate) async {
     try {
       var response = await dioClient!
           .get(endPointGetBusList, skipAuth: false, queryParameters: {

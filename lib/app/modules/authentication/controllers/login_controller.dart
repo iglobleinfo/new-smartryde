@@ -166,7 +166,6 @@ class LoginController extends GetxController {
   Future logInApple() async {
     try {
       AuthorizationResult? userCredential = await signInWithApple();
-
       customLoader.show(Get.overlayContext);
       hitSocialLoginApi(
         userCredential!.credential!,

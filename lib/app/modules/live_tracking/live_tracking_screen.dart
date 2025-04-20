@@ -27,8 +27,10 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
     return Scaffold(
       body: Obx(
         () => GoogleMap(
-          initialCameraPosition:
-              CameraPosition(target: controller.currentLatLng.value, zoom: 5),
+          initialCameraPosition: CameraPosition(
+            target: controller.currentLatLng.value,
+            zoom: 5,
+          ),
           onMapCreated: controller.onMapInitialize,
           polylines: controller.polyLines,
           myLocationEnabled: true,
