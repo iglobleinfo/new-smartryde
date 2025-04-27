@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:smart_ryde/app/data/remote_service/network/mqtt_client.dart';
 
 class LiveTrackingController extends GetxController {
   GoogleMapController? _mapController;
@@ -9,10 +10,12 @@ class LiveTrackingController extends GetxController {
   double _currentLong = 11.0746;
   final List<LatLng> polylineCoordinates = [];
   final RxSet<Polyline> polyLines = RxSet();
+  MqttService mqttService = MqttService();
 
   @override
   void onInit() {
     initializeLocationTracking();
+    mqttService.connect();
     super.onInit();
   }
 

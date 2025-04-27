@@ -8,7 +8,7 @@ var log = Logger();
 GetStorage storage = GetStorage();
 CustomLoader customLoader = CustomLoader();
 TextTheme textTheme = Theme.of(Get.context!).textTheme;
-var tempDir;
+Directory? tempDir;
 
 class GlobalVariable {
   static final GlobalKey<ScaffoldMessengerState> navState =
@@ -22,33 +22,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   APIRepository();
   DependencyInjection.init();
-  // await Firebase.initializeApp();
-  // FirebaseMessaging?.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  // await PushNotificationsManager().init(); //activate push notification
   await GetStorage.init();
   tempDir = await getTemporaryDirectory();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
   );
-  // FlutterLogger.getInstance()
-  //     .init(reportURL: crashBaseUrl + logCrashesExceptionsEndPoint);
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //   statusBarColor: colorLightGray,
-  // ));
-  //
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   reportCrash('$error\n$stack');
-  //   return true;
-  // };
-
-  // FlutterError.onError = (details) async {
-  //   if (details.stack != null) {
-  //     Zone.current.handleUncaughtError(details.exception, details.stack!);
-  //     reportCrash('${details.exception}\n${details.stack}');
-  //   } else {
-  //     FlutterError.presentError(details);
-  //   }
-  // };
 }
 
 initApp() async {

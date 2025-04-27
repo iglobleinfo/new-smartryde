@@ -19,7 +19,7 @@ import '../modules/language/bindings/select_language_binding.dart';
 import '../modules/language/views/select_language_screen.dart';
 
 class AppPages {
-  static const initial = AppRoutes.busLocation;
+  static const initial = AppRoutes.liveTracking;
 
   static final routes = [
     GetPage(
