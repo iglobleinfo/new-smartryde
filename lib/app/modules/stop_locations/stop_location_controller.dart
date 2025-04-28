@@ -12,12 +12,21 @@ class StopLocationController extends GetxController {
   final List<LatLng> polylineCoordinates = [];
   final RxSet<Polyline> polyLines = RxSet();
   final RxSet<Marker> markers = RxSet(); // ✅ Marker set
+  BitmapDescriptor? _customStopIcons;
 
   List<StopList> stopList = [];
 
-  void onMapInitialize(GoogleMapController controller) {
+  Future<void> onMapInitialize(GoogleMapController controller) async {
     _mapController = controller;
+    await _loadCustomMarker();
     fetchStopTracks();
+  }
+
+  Future<void> _loadCustomMarker() async {
+    _customStopIcons = await BitmapDescriptor.asset(
+      ImageConfiguration(size: Size(48, 48)),
+      'assets/images/bus.webp', // your asset path
+    );
   }
 
   Future<void> fetchStopTracks() async {
@@ -49,7 +58,7 @@ class StopLocationController extends GetxController {
           markerId: MarkerId('${stop.id}'),
           position: latLng,
           infoWindow: InfoWindow(title: stop.ename ?? 'Stop'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+          icon: _customStopIcons!,
         ),
       );
       markers.refresh();
