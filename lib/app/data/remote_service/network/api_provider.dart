@@ -1,5 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:smart_ryde/app/data/remote_service/network/network_exceptions.dart';
+import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
 import 'package:smart_ryde/app/modules/home_booking/models/district_model.dart';
 import 'package:smart_ryde/app/modules/home_booking/models/region_model.dart';
@@ -124,6 +125,16 @@ class APIRepository {
     } catch (e, str) {
       return Future.error(NetworkExceptions.getDioException(e, str));
     }
+  } /*===================================================================== feedback API Call  ==========================================================*/
+
+  static Future<MessageResponseModel?> addFeedbackApiCall(
+      {Map<String, dynamic>? dataBody}) async {
+    try {
+      final response = await dioClient!.post(endPointFeedback, data: dataBody);
+      return MessageResponseModel.fromJson(response);
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
+    }
   }
 
   /*===================================================================== Generate Otp API Call  ==========================================================*/
@@ -135,6 +146,23 @@ class APIRepository {
       );
       return LoginResponseModel.fromJson(response);
     } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get My Bookings API Call  ==========================================================*/
+  static Future<BookingListResponse?> getMyBookingApi(String userId) async {
+    try {
+      final response = await dioClient!.get(
+        endPointGetMyBooking + userId,
+        skipAuth: false,
+      );
+      return BookingListResponse.fromJson(response);
+    } catch (e, str) {
+      debugPrint(e.toString());
+      debugPrint(str.toString());
       return Future.error(
         NetworkExceptions.getDioException(e, str),
       );

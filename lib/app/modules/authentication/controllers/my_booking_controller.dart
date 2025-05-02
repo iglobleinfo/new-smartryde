@@ -1,8 +1,11 @@
 import 'package:intl/intl.dart';
+import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
 import 'package:smart_ryde/export.dart';
 
-class BusController extends GetxController {
+import '../model/login_data_model.dart';
+
+class MyBookingController extends GetxController {
   late TextEditingController destiny1Controller = TextEditingController();
   late TextEditingController destiny2Controller = TextEditingController();
   late TextEditingController region1Controller = TextEditingController();
@@ -38,20 +41,17 @@ class BusController extends GetxController {
     },
   ];
 
-  BusListResponseModel? busListResponseModel;
-  List<BusList> busList = [];
-  int? fromId;
-  int? toId;
-  String? fromName;
-  String? toName;
+  BookingListResponse? bookingListResponse;
+  List<BookingList> bookingList = [];
+  List<BookingList> currentBookingList = [];
+  List<BookingList> cancelledBookingList = [];
+  List<BookingList> pastBookingList = [];
+  LoginDataModel? userData;
 
   @override
   void onInit() {
     customLoader = CustomLoader();
-    fromId = Get.arguments['fromId'];
-    toId = Get.arguments['toId'];
-    fromName = Get.arguments['fromName'];
-    toName = Get.arguments['toName'];
+
     super.onInit();
   }
 
@@ -63,22 +63,34 @@ class BusController extends GetxController {
 
   @override
   void onReady() {
-    hitGetBusList();
+    hitGetBookingList();
     update();
   }
 
-  Future<void> hitGetBusList() async {
+  Future<void> hitGetBookingList() async {
+    userData = await PreferenceManger().getUserData();
     isLoader = true;
-    APIRepository.getBusListApi(fromId!, toId!, selectedDate)
-        .then((BusListResponseModel? value) async {
-      busListResponseModel = value;
-      if (busListResponseModel?.data != null) {
-        busList.addAll(busListResponseModel?.data?.busList ?? []);
+    APIRepository.getMyBookingApi(userData!.id.toString())
+        .then((BookingListResponse? value) async {
+      bookingListResponse = value;
+      if (bookingListResponse?.data != null) {
+        bookingList.addAll(bookingListResponse!.data ?? []);
+        for (int i = 0; i < bookingList.length; i++) {
+          if (bookingList[i].canceled ?? false) {
+            cancelledBookingList.add(bookingList[i]);
+          } else if (bookingList[i].tripEnd ?? false) {
+            pastBookingList.add(bookingList[i]);
+          } else if (!(bookingList[i].tripEnd ?? false) &&
+              !(bookingList[i].canceled ?? false)) {
+            currentBookingList.add(bookingList[i]);
+          }
+        }
       }
       isLoader = false;
       update();
     }).onError((error, stackTrace) {
       isLoader = false;
+      debugPrint(stackTrace.toString());
       customLoader.hide();
       toast(error);
     });

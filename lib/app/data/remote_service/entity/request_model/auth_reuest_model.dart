@@ -42,6 +42,26 @@ class AuthRequestModel {
     data['phone'] = phoneNumber;
     return data;
   }
+  static feedbackReq({
+    required String phoneNumber,
+    required String userId,
+    required String email,
+    required String feedbackType,
+    required String incidentDetails,
+    required String name,
+    required String route,
+    required String incidentDate,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['emailId'] = email;
+    data['feedbackType'] = feedbackType;
+    data['incidentDetails'] = incidentDetails;
+    data['incidentDate'] = incidentDate;
+    data['route'] = route;
+    data['name'] = name;
+    data['phone'] = phoneNumber;
+    return data;
+  }
 
   static forgetReq({
     required String phoneNumber,

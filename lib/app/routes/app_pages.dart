@@ -12,6 +12,8 @@ import 'package:smart_ryde/app/modules/splash/views/splash_screen.dart';
 import 'package:smart_ryde/app/modules/stop_locations/stop_location_page.dart';
 import '../../export.dart';
 import '../modules/authentication/verify_otp_module/verify_otp_page.dart';
+import '../modules/authentication/views/feedback_screen.dart';
+import '../modules/authentication/views/my_booking.dart';
 import '../modules/authentication/views/my_profile.dart';
 import '../modules/bus/view/bus_booking_screen.dart';
 import '../modules/home/views/home_screen2.dart';
@@ -19,7 +21,7 @@ import '../modules/language/bindings/select_language_binding.dart';
 import '../modules/language/views/select_language_screen.dart';
 
 class AppPages {
-  static const initial = AppRoutes.busLocation;
+  static const initial = AppRoutes.splash;
 
   static final routes = [
     GetPage(
@@ -97,6 +99,14 @@ class AppPages {
     GetPage(
       name: AppRoutes.busLocation,
       page: () => StopLocationPage(),
+    ),
+    GetPage(
+      name: AppRoutes.feedback,
+      page: () => FeedbackScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.myBooking,
+      page: () => MyBookingListScreen(),
     ),
   ];
 }

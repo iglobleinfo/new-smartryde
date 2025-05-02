@@ -19,12 +19,16 @@ class HomeScreen2 extends GetView<HomeController2> {
                 context: context,
                 icon: iconClock,
                 text: 'Booking',
-                onTap: () {}),
+                onTap: () {
+                  Get.toNamed(AppRoutes.myBooking);
+                }),
             listTile(
                 context: context,
                 icon: iconFeedback,
                 text: 'Drop A Feedback',
-                onTap: () {}),
+                onTap: () {
+                  Get.toNamed(AppRoutes.feedback);
+                }),
             listTile(
                 context: context,
                 icon: iconStar,
