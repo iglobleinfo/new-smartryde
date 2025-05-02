@@ -29,22 +29,14 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
         () => GoogleMap(
           initialCameraPosition: CameraPosition(
             target: controller.currentLatLng.value,
-            zoom: 5,
+            zoom: 18,
           ),
           onMapCreated: controller.onMapInitialize,
           polylines: controller.polyLines,
           myLocationEnabled: true,
+          markers: controller.markers,
           myLocationButtonEnabled: true,
         ),
-      ),
-      floatingActionButton: Row(
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              controller.initializeLocationTracking();
-            },
-          ),
-        ],
       ),
     );
   }

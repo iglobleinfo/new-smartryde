@@ -35,6 +35,8 @@ dependencies:
   in_app_review: ^2.0.10
   introduction_screen: ^3.1.14
   logger: ^2.5.0
+  # mqtt_client: ^10.8.0
+  mqtt_client: ^10.0.0
   package_info_plus: ^8.2.1
   the_apple_sign_in: ^1.1.1
   url_launcher: ^6.3.1
