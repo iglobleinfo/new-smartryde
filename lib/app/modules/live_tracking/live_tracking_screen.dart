@@ -25,6 +25,19 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        appBarTitleText: 'Live Tracking',
+        leadingIcon: getInkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Icon(
+            Icons.arrow_back_outlined,
+            color: Colors.grey,
+            size: 26,
+          ),
+        ),
+      ),
       body: Obx(
         () => GoogleMap(
           initialCameraPosition: CameraPosition(
@@ -43,6 +56,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
 
   @override
   void dispose() {
+    controller.dispose();
     Get.delete<LiveTrackingController>(
       tag: tag,
     );

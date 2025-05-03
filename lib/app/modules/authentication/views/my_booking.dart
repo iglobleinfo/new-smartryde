@@ -325,7 +325,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                       AppRoutes.liveTracking,
                                                       arguments: {
                                                         'busNumber':
-                                                            busData.busNumber
+                                                            busData.ticketId
                                                       },
                                                     );
                                                   },

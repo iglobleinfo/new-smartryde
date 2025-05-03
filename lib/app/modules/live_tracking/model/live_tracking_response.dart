@@ -19,9 +19,9 @@ class LiveTrackingResponse {
   bool? hasDtc;
   String? fuelType;
   String? lastGps;
-  Null lastPid;
-  Null lastDtc;
-  Null lastSnap;
+  var lastPid;
+  var lastDtc;
+  var lastSnap;
   bool? ota;
   bool? geofenceEnable;
   int? targetPerDay;
@@ -125,7 +125,7 @@ class LiveTrackingResponse {
     port = json['port'];
     productId = json['productId'];
     vehicleDetails = json['vehicleDetails'] != null
-        ? new VehicleDetails.fromJson(json['vehicleDetails'])
+        ? VehicleDetails.fromJson(json['vehicleDetails'])
         : null;
     gpsOnly = json['gpsOnly'];
   }

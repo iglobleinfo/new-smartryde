@@ -18,16 +18,13 @@ class LiveTrackingController extends GetxController {
   RxSet<Marker> markers = RxSet<Marker>();
 
   Rx<LiveTrackingResponse?> liveTrackingResponse = Rx(null);
-  String busNumber='';
+  String busNumber = '';
 
   @override
   Future<void> onInit() async {
-    if(Get.arguments!=null)
-      {
-        busNumber=Get.arguments['busNumber'];
-        debugPrint('jshwjhdsqjsdhnwqjswsj');
-        debugPrint(busNumber);
-      }
+    if (Get.arguments != null) {
+      busNumber = Get.arguments['busNumber'];
+    }
     super.onInit();
   }
 
@@ -51,13 +48,9 @@ class LiveTrackingController extends GetxController {
     initializeLocationTracking();
 
     // Then repeat every 15 seconds
-    _locationUpdateTimer = Timer.periodic(Duration(seconds: 10), (_) {
+    _locationUpdateTimer = Timer.periodic(Duration(seconds: 5), (_) {
       initializeLocationTracking();
     });
-  }
-
-  void stopLocationTracking() {
-    _locationUpdateTimer?.cancel();
   }
 
   void initializeLocationTracking() async {
@@ -78,17 +71,14 @@ class LiveTrackingController extends GetxController {
         double currentLng = liveTrackingResponse.lng!;
         currentLatLng.value = LatLng(currentLat, currentLng);
         // Animate the camera to the new location
-        _mapController?.animateCamera(CameraUpdate.newLatLng(currentLatLng.value));
-        // _mapController
-        //     ?.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        //   target: currentLatLng.value,
-        //   zoom: 18,
-        // )));
+        _mapController?.animateCamera(
+          CameraUpdate.newLatLng(currentLatLng.value),
+        );
         // Update or add marker
         updateLiveMarker(currentLatLng.value);
       }
-    } catch (e) {
-      print('Error fetching location: $e');
+    } catch (e, st) {
+      debugPrint('Error fetching location: $e $st');
     }
   }
 
