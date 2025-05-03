@@ -12,6 +12,7 @@ const endPointForgotPassword = "/user/forgot-password";
 const endPointVerifyOtp = "/user/verify-otp/";
 const endPointGetUser = "/user/";
 const endPointGetMyBooking = "/user/my-bookings/";
+const endPointCancelBooking = "/booking/cancel/";
 const endPointGetDistrict = "/route-stop/district/list";
 const endPointGetRegion = "/route-stop/region/list/";
 const endPointGetStopByRegion = "/route-stop/stop/list/byregion";

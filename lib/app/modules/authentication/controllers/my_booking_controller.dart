@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
 import 'package:smart_ryde/export.dart';
+import 'package:smart_ryde/model/error_response_model.dart';
 
 import '../model/login_data_model.dart';
 
@@ -70,6 +71,10 @@ class MyBookingController extends GetxController {
   Future<void> hitGetBookingList() async {
     userData = await PreferenceManger().getUserData();
     isLoader = true;
+    bookingList.clear();
+    currentBookingList.clear();
+    cancelledBookingList.clear();
+    pastBookingList.clear();
     APIRepository.getMyBookingApi(userData!.id.toString())
         .then((BookingListResponse? value) async {
       bookingListResponse = value;
@@ -87,6 +92,21 @@ class MyBookingController extends GetxController {
         }
       }
       isLoader = false;
+      update();
+    }).onError((error, stackTrace) {
+      isLoader = false;
+      debugPrint(stackTrace.toString());
+      customLoader.hide();
+      toast(error);
+    });
+    update();
+  }
+
+  Future<void> hitCancelBooking(String ticketId) async {
+    APIRepository.cancelBookingApi(
+            endPointCancelBooking + ticketId, userData!.id.toString())
+        .then((ErrorMessageResponseModel? value) async {
+      hitGetBookingList();
       update();
     }).onError((error, stackTrace) {
       isLoader = false;

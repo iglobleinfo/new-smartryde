@@ -169,6 +169,27 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== Get My Bookings API Call  ==========================================================*/
+  static Future<ErrorMessageResponseModel?> cancelBookingApi(
+      String endPoint, String userId) async {
+    try {
+      final response = await dioClient!.get(
+        endPoint,
+        queryParameters: {
+          'userId': userId,
+        },
+        skipAuth: false,
+      );
+      return ErrorMessageResponseModel.fromJson(response);
+    } catch (e, str) {
+      debugPrint(e.toString());
+      debugPrint(str.toString());
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== Get District API Call  ==========================================================*/
   static Future<DistrictResponseModel?> getDistrictApi() async {
     try {

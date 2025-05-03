@@ -18,9 +18,16 @@ class LiveTrackingController extends GetxController {
   RxSet<Marker> markers = RxSet<Marker>();
 
   Rx<LiveTrackingResponse?> liveTrackingResponse = Rx(null);
+  String busNumber='';
 
   @override
   Future<void> onInit() async {
+    if(Get.arguments!=null)
+      {
+        busNumber=Get.arguments['busNumber'];
+        debugPrint('jshwjhdsqjsdhnwqjswsj');
+        debugPrint(busNumber);
+      }
     super.onInit();
   }
 
@@ -61,7 +68,7 @@ class LiveTrackingController extends GetxController {
       };
 
       Response response = await dio
-          .get('https://api.iotasmart.com/userdeviceservice/v1/device/4078');
+          .get('https://api.iotasmart.com/userdeviceservice/v1/device/$busNumber');
 
       if (response.statusCode == 200) {
         LiveTrackingResponse liveTrackingResponse =
