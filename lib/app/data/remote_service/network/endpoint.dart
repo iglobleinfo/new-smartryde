@@ -13,6 +13,7 @@ const endPointVerifyOtp = "/user/verify-otp/";
 const endPointGetUser = "/user/";
 const endPointGetMyBooking = "/user/my-bookings/";
 const endPointCancelBooking = "/booking/cancel/";
+const endPointDeleteCancelBooking = "/booking/delete-canceled";
 const endPointGetDistrict = "/route-stop/district/list";
 const endPointGetRegion = "/route-stop/region/list/";
 const endPointGetStopByRegion = "/route-stop/stop/list/byregion";

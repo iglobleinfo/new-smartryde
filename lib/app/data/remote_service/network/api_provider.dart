@@ -169,6 +169,24 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== Delete Cancel All Bookings API Call  ==========================================================*/
+  static Future<ErrorMessageResponseModel?> deleteCancelBookingApi(String userId) async {
+    try {
+      final response = await dioClient!.get(
+        endPointDeleteCancelBooking,
+        skipAuth: false,
+        queryParameters: {'userId':userId},
+      );
+      return ErrorMessageResponseModel.fromJson(response);
+    } catch (e, str) {
+      debugPrint(e.toString());
+      debugPrint(str.toString());
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== Get My Bookings API Call  ==========================================================*/
   static Future<ErrorMessageResponseModel?> cancelBookingApi(
       String endPoint, String userId) async {

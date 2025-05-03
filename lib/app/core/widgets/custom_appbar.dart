@@ -12,6 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? isBackIcon;
   final bool? centerTitle;
   final Function? onTap;
+  final Color? textColor;
 
   const CustomAppBar({
     super.key,
@@ -26,6 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isBackIcon = true,
     this.centerTitle = false,
     this.bgColor,
+    this.textColor,
   });
 
   @override
@@ -44,6 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   textAlign: TextAlign.center,
                   textStyle: textStyleDisplayLarge(context).copyWith(
                     fontWeight: FontWeight.normal,
+                    color: textColor??Colors.black,
                     fontSize: 22
                   ),
                 )

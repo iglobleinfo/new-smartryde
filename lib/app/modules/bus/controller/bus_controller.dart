@@ -13,6 +13,8 @@ class BusController extends GetxController {
   String selectedDate = DateFormat('yyyy-MM-dd')
       .format(DateTime.parse(DateTime.now().toString()));
 
+  bool isBookmark=false;
+
   bool isLoader = true;
 
   List<Map<String, dynamic>> dateList = [

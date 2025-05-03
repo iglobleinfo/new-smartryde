@@ -6,7 +6,7 @@ import 'package:smart_ryde/model/error_response_model.dart';
 
 import '../model/login_data_model.dart';
 
-class MyBookingController extends GetxController {
+class MyBookingController extends GetxController  {
   late TextEditingController destiny1Controller = TextEditingController();
   late TextEditingController destiny2Controller = TextEditingController();
   late TextEditingController region1Controller = TextEditingController();
@@ -16,6 +16,10 @@ class MyBookingController extends GetxController {
 
   String selectedDate = DateFormat('yyyy-MM-dd')
       .format(DateTime.parse(DateTime.now().toString()));
+
+  late TabController tabController;
+
+  int index = 0;
 
   bool isLoader = true;
 
@@ -52,7 +56,6 @@ class MyBookingController extends GetxController {
   @override
   void onInit() {
     customLoader = CustomLoader();
-
     super.onInit();
   }
 
@@ -105,6 +108,20 @@ class MyBookingController extends GetxController {
   Future<void> hitCancelBooking(String ticketId) async {
     APIRepository.cancelBookingApi(
             endPointCancelBooking + ticketId, userData!.id.toString())
+        .then((ErrorMessageResponseModel? value) async {
+      hitGetBookingList();
+      update();
+    }).onError((error, stackTrace) {
+      isLoader = false;
+      debugPrint(stackTrace.toString());
+      customLoader.hide();
+      toast(error);
+    });
+    update();
+  }
+
+  Future<void> hitDeleteAllCancelBooking() async {
+    APIRepository.deleteCancelBookingApi( userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
       hitGetBookingList();
       update();

@@ -22,7 +22,22 @@ class MyBookingListScreen extends GetView<MyBookingController> {
             return Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: CustomAppBar(
-                // appBarTitleText: 'SmartRyde',
+                appBarTitleText: 'Booking',
+                textColor: primaryColor,
+                actionWidget: [
+                 getInkWell(
+                          onTap: () {
+                            controller.hitDeleteAllCancelBooking();
+                          },
+                          child: Text(
+                            'Delete All',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ).paddingAll(12),
+                        ),
+                ],
                 leadingIcon: getInkWell(
                   onTap: () {
                     Get.back();
@@ -38,8 +53,10 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15.w,
+                      vertical: 10.h,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -118,6 +135,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
     return GetBuilder<MyBookingController>(
         init: MyBookingController(),
         builder: (controller) {
+          controller.index = 0;
           return controller.isLoader
               ? Center(
                   child: CircularProgressIndicator(
@@ -402,6 +420,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
     return GetBuilder<MyBookingController>(
         init: MyBookingController(),
         builder: (controller) {
+          controller.index = 1;
           return controller.isLoader
               ? Center(
                   child: CircularProgressIndicator(
@@ -682,6 +701,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
     return GetBuilder<MyBookingController>(
         init: MyBookingController(),
         builder: (controller) {
+          controller.index=2;
           return controller.isLoader
               ? Center(
                   child: CircularProgressIndicator(

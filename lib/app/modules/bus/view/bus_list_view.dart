@@ -20,6 +20,29 @@ class BusListScreen extends GetView<BusController> {
             return Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: CustomAppBar(
+                actionWidget: [
+                  getInkWell(
+                    onTap: () {
+                      controller.isBookmark=!controller.isBookmark;
+                      controller.update();
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          controller.isBookmark
+                              ? Icons.bookmark
+                              : Icons.bookmark_border,
+                          color: Colors.black,
+                          size: 26,
+                        ),
+                        Text(
+                          'Bookmark',
+                          style: TextStyle(fontSize: 18),
+                        )
+                      ],
+                    ).paddingAll(12),
+                  ),
+                ],
                 // appBarTitleText: 'SmartRyde',
                 leadingIcon: getInkWell(
                   onTap: () {
@@ -140,7 +163,7 @@ class BusListScreen extends GetView<BusController> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           AssetImageWidget(
-                            imageUrl:imageBus2,
+                            imageUrl: imageBus2,
                             imageHeight: 105,
                           ),
                           SizedBox(
@@ -170,98 +193,178 @@ class BusListScreen extends GetView<BusController> {
                           BusList busData = controller.busList[index];
                           return Column(
                             children: [
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: busData.totalSeat == 0
-                                      ? Colors.grey
-                                      : Colors.white,
-                                  // border: Border.all(
-                                  //   width: 0.5,
-                                  // ),
-                                  // borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              AssetImageWidget(
-                                                imageUrl:imageBus2,
-                                                imageHeight: 55,
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              TextView(
-                                                text: busData.busNumber ?? '',
-                                                textStyle:
-                                                    textStyleLabelSmall(context)
-                                                        .copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
+                              GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                    AppRoutes.busLocation,
+                                    arguments: {
+                                      'routeId': busData.routeId,
+                                      'dNumber': busData.deptNo,
+                                    },
+                                  );
+                                },
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: busData.totalSeat == 0
+                                        ? Colors.grey
+                                        : Colors.white,
+                                    // border: Border.all(
+                                    //   width: 0.5,
+                                    // ),
+                                    // borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                AssetImageWidget(
+                                                  imageUrl: imageBus2,
+                                                  imageHeight: 55,
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              busData.totalSeat != 0
-                                                  ? SizedBox(
-                                                      height: 40,
-                                                    )
-                                                  : GestureDetector(
-                                                      onTap: () {},
-                                                      child: Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        color: primaryColor,
-                                                        width: 120,
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                TextView(
+                                                  text: busData.busNumber ?? '',
+                                                  textStyle:
+                                                      textStyleLabelSmall(
+                                                              context)
+                                                          .copyWith(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                busData.totalSeat != 0
+                                                    ? SizedBox(
                                                         height: 40,
-                                                        child: TextView(
-                                                          text:
-                                                              'Sorry, The Bus Is Full',
-                                                          textStyle:
-                                                              textStyleLabelSmall(
-                                                                      context)
-                                                                  .copyWith(
-                                                            fontSize: 12,
-                                                            letterSpacing: 0,
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                      )
+                                                    : GestureDetector(
+                                                        onTap: () {},
+                                                        child: Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          color: primaryColor,
+                                                          width: 120,
+                                                          height: 40,
+                                                          child: TextView(
+                                                            text:
+                                                                'Sorry, The Bus Is Full',
+                                                            textStyle:
+                                                                textStyleLabelSmall(
+                                                                        context)
+                                                                    .copyWith(
+                                                              fontSize: 12,
+                                                              letterSpacing: 0,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 150,
+                                                  child: TextView(
+                                                    text: controller.fromName ??
+                                                        '' /*busData.enRouteName!
+                                                        .split(')')
+                                                        .first
+                                                        .split('(')
+                                                        .last*/
+                                                    ,
+                                                    textAlign: TextAlign.start,
+                                                    maxLine: 2,
+                                                    textStyle:
+                                                        textStyleLabelSmall(
+                                                                context)
+                                                            .copyWith(
+                                                      fontSize: 12,
+                                                      color:
+                                                          busData.totalSeat == 0
+                                                              ? Colors.white
+                                                              : Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: 150,
-                                                child: TextView(
-                                                  text:controller.fromName??'' /*busData.enRouteName!
-                                                      .split(')')
+                                                  ),
+                                                ),
+                                                Image.asset(
+                                                  imageBusRoute,
+                                                  color: busData.totalSeat == 0
+                                                      ? Colors.white
+                                                      : primaryColor,
+                                                  height: 35,
+                                                ),
+                                                SizedBox(
+                                                  width: 150,
+                                                  child: TextView(
+                                                    textAlign: TextAlign.start,
+                                                    text: controller.toName ??
+                                                        '' /*busData.enRouteName!
+                                                        .split('to')
+                                                        .last
+                                                        .split('(')
+                                                        .last
+                                                        .replaceAll(')', '')*/
+                                                    ,
+                                                    textStyle:
+                                                        textStyleLabelSmall(
+                                                                context)
+                                                            .copyWith(
+                                                      fontSize: 12,
+                                                      color:
+                                                          busData.totalSeat == 0
+                                                              ? Colors.white
+                                                              : Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                TextView(
+                                                  text: busData.deptTime
+                                                      .toString()
+                                                      .split(' ')
+                                                      .last
+                                                      .split('.')
                                                       .first
-                                                      .split('(')
-                                                      .last*/,
-                                                  textAlign: TextAlign.start,
-                                                  maxLine: 2,
+                                                      .replaceAll(':00', ''),
                                                   textStyle:
                                                       textStyleLabelSmall(
                                                               context)
@@ -274,24 +377,8 @@ class BusListScreen extends GetView<BusController> {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                              ),
-                                              Image.asset(
-                                                imageBusRoute,
-                                                color: busData.totalSeat == 0
-                                                    ? Colors.white
-                                                    : primaryColor,
-                                                height: 35,
-                                              ),
-                                              SizedBox(
-                                                width: 150,
-                                                child: TextView(
-                                                  textAlign: TextAlign.start,
-                                                  text: controller.toName??''/*busData.enRouteName!
-                                                      .split('to')
-                                                      .last
-                                                      .split('(')
-                                                      .last
-                                                      .replaceAll(')', '')*/,
+                                                TextView(
+                                                  text: 'Schedule Time',
                                                   textStyle:
                                                       textStyleLabelSmall(
                                                               context)
@@ -300,119 +387,87 @@ class BusListScreen extends GetView<BusController> {
                                                     color:
                                                         busData.totalSeat == 0
                                                             ? Colors.white
-                                                            : Colors.black,
+                                                            : Colors.black26,
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              TextView(
-                                                text: busData.deptTime
-                                                    .toString()
-                                                    .split(' ')
-                                                    .last
-                                                    .split('.')
-                                                    .first
-                                                    .replaceAll(':00', ''),
-                                                textStyle:
-                                                    textStyleLabelSmall(context)
-                                                        .copyWith(
-                                                  fontSize: 12,
-                                                  color: busData.totalSeat == 0
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontWeight: FontWeight.w400,
+                                                SizedBox(
+                                                  height: 5,
                                                 ),
-                                              ),
-                                              TextView(
-                                                text: 'Schedule Time',
-                                                textStyle:
-                                                    textStyleLabelSmall(context)
-                                                        .copyWith(
-                                                  fontSize: 12,
-                                                  color: busData.totalSeat == 0
-                                                      ? Colors.white
-                                                      : Colors.black26,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                color: primaryColor,
-                                                width: 80,
-                                                height: 30,
-                                                child: TextView(
-                                                  text:
-                                                      'ETA:${busData.deptTime.toString().split(' ').last.split('.').first.replaceAll(':00', '')}',
-                                                  textStyle:
-                                                      textStyleLabelSmall(
-                                                              context)
-                                                          .copyWith(
-                                                    fontSize: 13,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w400,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  color: primaryColor,
+                                                  width: 80,
+                                                  height: 30,
+                                                  child: TextView(
+                                                    text:
+                                                        'ETA:${busData.deptTime.toString().split(' ').last.split('.').first.replaceAll(':00', '')}',
+                                                    textStyle:
+                                                        textStyleLabelSmall(
+                                                                context)
+                                                            .copyWith(
+                                                      fontSize: 13,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              busData.totalSeat == 0
-                                                  ? SizedBox()
-                                                  : GestureDetector(
-                                                      onTap: () {
-                                                        Get.toNamed(
-                                                            AppRoutes
-                                                                .busBooking,
-                                                            arguments: {
-                                                              'busData':
-                                                                  busData,
-                                                              'fromId':
-                                                                  controller
-                                                                      .fromId,
-                                                              'toId': controller
-                                                                  .toId,
-                                                              'fromName': controller.fromName,
-                                                              'toName': controller.toName,
-                                                            });
-                                                      },
-                                                      child: Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        color: primaryColor,
-                                                        width: 100,
-                                                        height: 30,
-                                                        child: TextView(
-                                                          text: 'Book Now',
-                                                          textStyle:
-                                                              textStyleLabelSmall(
-                                                                      context)
-                                                                  .copyWith(
-                                                            fontSize: 13,
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.w400,
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                busData.totalSeat == 0
+                                                    ? SizedBox()
+                                                    : GestureDetector(
+                                                        onTap: () {
+                                                          Get.toNamed(
+                                                              AppRoutes
+                                                                  .busBooking,
+                                                              arguments: {
+                                                                'busData':
+                                                                    busData,
+                                                                'fromId':
+                                                                    controller
+                                                                        .fromId,
+                                                                'toId':
+                                                                    controller
+                                                                        .toId,
+                                                                'fromName':
+                                                                    controller
+                                                                        .fromName,
+                                                                'toName':
+                                                                    controller
+                                                                        .toName,
+                                                              });
+                                                        },
+                                                        child: Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          color: primaryColor,
+                                                          width: 100,
+                                                          height: 30,
+                                                          child: TextView(
+                                                            text: 'Book Now',
+                                                            textStyle:
+                                                                textStyleLabelSmall(
+                                                                        context)
+                                                                    .copyWith(
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

@@ -7,6 +7,20 @@ import 'package:smart_ryde/app/modules/home_booking/models/stop_model.dart';
 import 'package:smart_ryde/main.dart';
 
 class StopLocationController extends GetxController {
+  int? routeId;
+  String? dNumber;
+
+  @override
+  void onInit() {
+    if (Get.arguments != null) {
+      routeId = Get.arguments['routeId'] ?? 0;
+      dNumber = Get.arguments['dNumber'] ?? '';
+      debugPrint('jshwjhdsqjsdhnwqjswsj');
+      debugPrint(dNumber);
+    }
+    super.onInit();
+  }
+
   GoogleMapController? _mapController;
   Rx<LatLng> currentLatLng = Rx(LatLng(49.4543, 11.0746));
   final List<LatLng> polylineCoordinates = [];
@@ -24,7 +38,9 @@ class StopLocationController extends GetxController {
 
   Future<void> _loadCustomMarker() async {
     _customStopIcons = await BitmapDescriptor.asset(
-      ImageConfiguration(size: Size(48, 48)),
+      ImageConfiguration(
+        size: Size(48, 48),
+      ),
       'assets/images/bus.webp', // your asset path
     );
   }
@@ -33,8 +49,8 @@ class StopLocationController extends GetxController {
     stopList.clear();
     customLoader.show(Get.overlayContext);
     APIRepository.getStopByRoute(
-      routeId: 14,
-      deptNo: 'AN1S142225',
+      routeId: routeId ?? 0,
+      deptNo: dNumber ?? '',
     ).then((StopResponseModel? stopResponseModel) async {
       stopList.addAll(stopResponseModel?.data ?? []);
       customLoader.hide();
