@@ -20,7 +20,9 @@ class HomeScreen2 extends GetView<HomeController2> {
                 icon: iconClock,
                 text: 'Booking',
                 onTap: () {
-                  Get.toNamed(AppRoutes.myBooking);
+                  if (PreferenceManger().getStatusUserLogin() ?? false) {
+                    Get.toNamed(AppRoutes.myBooking);
+                  }
                 }),
             listTile(
                 context: context,
