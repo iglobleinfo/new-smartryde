@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/live_tracking_response.dart';
 
 class LiveTrackingController extends GetxController {
@@ -18,12 +19,12 @@ class LiveTrackingController extends GetxController {
   RxSet<Marker> markers = RxSet<Marker>();
 
   Rx<LiveTrackingResponse?> liveTrackingResponse = Rx(null);
-  String busNumber = '';
+  late BookingList busData;
 
   @override
   Future<void> onInit() async {
     if (Get.arguments != null) {
-      busNumber = Get.arguments['busNumber'];
+      busData = Get.arguments['busData'];
     }
     super.onInit();
   }
@@ -60,8 +61,8 @@ class LiveTrackingController extends GetxController {
         "token": "IOTASMART",
       };
 
-      Response response = await dio
-          .get('https://api.iotasmart.com/userdeviceservice/v1/device/$busNumber');
+      Response response = await dio.get(
+          'https://api.iotasmart.com/userdeviceservice/v1/device/${busData.busNumber}');
 
       if (response.statusCode == 200) {
         LiveTrackingResponse liveTrackingResponse =
