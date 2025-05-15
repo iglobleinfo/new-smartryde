@@ -21,8 +21,11 @@ class HomeBookingController extends GetxController {
   RegionResponseModel? regionResponseModel;
   StopResponseModel? stopResponseModel;
   List<DistrictList> districtList = [];
+  List<DistrictList> districtList2 = [];
   List<RegionList> regionList = [];
+  List<RegionList> regionList2 = [];
   List<StopList> stopList = [];
+  List<StopList> stopList2 = [];
 
   @override
   void onInit() {
@@ -53,7 +56,15 @@ class HomeBookingController extends GetxController {
     FocusManager.instance.primaryFocus!.unfocus();
     APIRepository.getDistrictApi().then((DistrictResponseModel? value) async {
       districtResponseModel = value;
-      districtList.addAll(districtResponseModel?.data ?? []);
+      // districtList.addAll(districtResponseModel?.data ?? []);
+      districtList2.addAll(districtResponseModel?.data ?? []);
+      if (districtList2.isNotEmpty) {
+        districtList.add(districtList2[0]);
+        districtList.add(districtList2[1]);
+        districtList[0].nameEng = 'Delhi';
+        districtList[1].nameEng = 'Bihar';
+      }
+      update();
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);
@@ -63,9 +74,19 @@ class HomeBookingController extends GetxController {
   Future<void> hitGetRegion() async {
     FocusManager.instance.primaryFocus!.unfocus();
     regionList.clear();
-    APIRepository.getRegionApi(pickUp1DistrictId!).then((RegionResponseModel? value) async {
+    APIRepository.getRegionApi(pickUp1DistrictId!)
+        .then((RegionResponseModel? value) async {
       regionResponseModel = value;
-      regionList.addAll(regionResponseModel?.data ?? []);
+      // regionList.addAll(regionResponseModel?.data ?? []);
+      regionList2.addAll(regionResponseModel?.data ?? []);
+      if (regionList2.isNotEmpty) {
+        regionList.add(regionList2[0]);
+        regionList.add(regionList2[1]);
+        regionList[0].nameEng = 'Okhla vihar';
+        regionList[1].nameEng = 'Patna';
+      }
+
+      update();
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);
@@ -75,9 +96,17 @@ class HomeBookingController extends GetxController {
   Future<void> hitGetStop() async {
     stopList.clear();
     FocusManager.instance.primaryFocus!.unfocus();
-    APIRepository.getStopApi(pickUp1RegionId!).then((StopResponseModel? value) async {
+    APIRepository.getStopApi(pickUp1RegionId!)
+        .then((StopResponseModel? value) async {
       stopResponseModel = value;
-      stopList.addAll(stopResponseModel?.data ?? []);
+      stopList2.addAll(stopResponseModel?.data ?? []);
+      if (stopList2.isNotEmpty) {
+        stopList.add(stopList2[0]);
+        stopList.add(stopList2[1]);
+        stopList[0].ename = 'Okhla Bus stop';
+        stopList[1].ename = 'Bailey Road';
+      }
+      update();
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);

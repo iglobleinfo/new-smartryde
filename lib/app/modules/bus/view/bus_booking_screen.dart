@@ -112,7 +112,8 @@ class BusBookingScreen extends GetView<BookSeatController> {
                               ),
                               Expanded(
                                 child: TextView(
-                                  text: 'HK\$0',
+                                  // text: 'HK\$0',
+                                  text: 'INR 50',
                                   textStyle:
                                       textStyleLabelSmall(context).copyWith(
                                     fontSize: 14,
