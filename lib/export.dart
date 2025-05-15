@@ -33,12 +33,12 @@ export 'package:introduction_screen/introduction_screen.dart';
 export 'package:get_storage/get_storage.dart';
 export 'package:flutter_easyloading/flutter_easyloading.dart';
 export 'package:flutter_local_notifications/flutter_local_notifications.dart';
-export 'package:firebase_messaging/firebase_messaging.dart' hide AuthorizationStatus;
-export 'package:firebase_auth/firebase_auth.dart';
-export 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-export 'package:google_sign_in/google_sign_in.dart';
-export 'package:the_apple_sign_in/the_apple_sign_in.dart' hide ButtonStyle;
-export 'package:firebase_core/firebase_core.dart';
+// export 'package:firebase_messaging/firebase_messaging.dart' hide AuthorizationStatus;
+// export 'package:firebase_auth/firebase_auth.dart';
+// export 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+// export 'package:google_sign_in/google_sign_in.dart';
+// export 'package:the_apple_sign_in/the_apple_sign_in.dart' hide ButtonStyle;
+// export 'package:firebase_core/firebase_core.dart';
 export 'package:package_info_plus/package_info_plus.dart';
 
 

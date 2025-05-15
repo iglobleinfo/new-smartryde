@@ -45,10 +45,10 @@ class SplashController extends GetxController {
     return DateTime.now().isAfter(
       DateTime(
         2025,
-        04,
-        20,
+        05,
+        11,
       ).add(
-        const Duration(days: 15),
+        const Duration(days: 30),
       ),
     );
   }
