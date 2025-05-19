@@ -5,12 +5,15 @@ import 'package:get/get.dart' hide Response;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/live_tracking_response.dart';
+import 'package:smart_ryde/app/core/services/mqtt_service.dart';
 
 class LiveTrackingController extends GetxController {
   GoogleMapController? _mapController;
   final List<LatLng> polylineCoordinates = [];
   final RxSet<Polyline> polyLines = RxSet();
   Rx<LatLng> currentLatLng = Rx(LatLng(49.4543, 11.0746));
+  final mqttService = MqttService();
+
 
   Timer? _locationUpdateTimer;
   Marker? _liveTrackingMarker;
@@ -60,6 +63,7 @@ class LiveTrackingController extends GetxController {
       dio.options.headers = {
         "token": "IOTASMART",
       };
+      mqttService.connect('27833');
 
       Response response = await dio.get(
           'https://api.iotasmart.com/userdeviceservice/v1/device/${busData.busNumber}');
