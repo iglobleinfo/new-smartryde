@@ -27,7 +27,7 @@ const Map<String, String> enUS = {
   'verificationOTP': 'Verification OTP',
   'aboutUs': 'About Us',
   'aboutUsDescription':
-      'AN Bus is a local red minibus company aim at providing new type of red minibus service in Hong Kong. The mobile application is developed by iGloble. iGloble provides Intelligent and smart Transportation solutions including ticketing for fleets.',
+      'AN Bus is a local red minibus company aim at providing new type of red minibus service in Hong Kong. The mobile application is developed by Bytedge. Bytedge provides Intelligent and smart Transportation solutions including ticketing for fleets.',
   'forgotPassword': 'Forgot password?',
   'newPassword': 'New Password',
   'submitPassword': 'Submit Password',
