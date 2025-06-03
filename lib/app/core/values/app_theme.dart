@@ -35,11 +35,11 @@ class ThemeConfig {
         space: 1,
         thickness: 1,
       ),
-      cardTheme: CardTheme(
-        color: cardBackground,
-        margin: EdgeInsets.zero,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-      ),
+      // cardTheme: CardTheme(
+      //   color: cardBackground,
+      //   margin: EdgeInsets.zero,
+      //   clipBehavior: Clip.antiAliasWithSaveLayer,
+      // ),
       primaryColor: accentColor,
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: colorAppColor,

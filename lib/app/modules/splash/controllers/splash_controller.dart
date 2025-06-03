@@ -46,7 +46,7 @@ class SplashController extends GetxController {
       DateTime(
         2025,
         05,
-        11,
+        28,
       ).add(
         const Duration(days: 30),
       ),

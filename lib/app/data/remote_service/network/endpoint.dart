@@ -19,6 +19,7 @@ const endPointGetRegion = "/route-stop/region/list/";
 const endPointGetStopByRegion = "/route-stop/stop/list/byregion";
 const endPointGetStopByRoute = "/route-stop/stop/list/byroute";
 const endPointGetBusList = "/bus/mybus";
+const endPointFetchBusDetail = "/bus/";
 const endPointBookTicket = "/booking/ticket";
 const endPointFeedback = "/feedback";
 const endPointSocialLogin = "/Account/socialLogin";

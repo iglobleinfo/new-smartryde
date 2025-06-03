@@ -1,27 +1,26 @@
 import 'dart:async';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
-import 'package:smart_ryde/app/modules/live_tracking/model/live_tracking_response.dart';
+import 'package:smart_ryde/app/modules/live_tracking/model/bus_detail_response.dart';
 import 'package:smart_ryde/app/core/services/mqtt_service.dart';
+
+import '../../../export.dart';
 
 class LiveTrackingController extends GetxController {
   GoogleMapController? _mapController;
   final List<LatLng> polylineCoordinates = [];
   final RxSet<Polyline> polyLines = RxSet();
   Rx<LatLng> currentLatLng = Rx(LatLng(49.4543, 11.0746));
-  final mqttService = MqttService();
+  MqttService mqttService = MqttService();
+  StreamSubscription<TrackData>? _mqttStream;
 
-
-  Timer? _locationUpdateTimer;
   Marker? _liveTrackingMarker;
   BitmapDescriptor? _customBusIcon;
 
   RxSet<Marker> markers = RxSet<Marker>();
 
-  Rx<LiveTrackingResponse?> liveTrackingResponse = Rx(null);
   late BookingList busData;
 
   @override
@@ -35,7 +34,7 @@ class LiveTrackingController extends GetxController {
   Future<void> onMapInitialize(GoogleMapController controller) async {
     _mapController = controller;
     await _loadCustomMarker();
-    startLocationTracking();
+    await _fetchIotaSmartDeviceId();
   }
 
   Future<void> _loadCustomMarker() async {
@@ -45,49 +44,39 @@ class LiveTrackingController extends GetxController {
     );
   }
 
-  void startLocationTracking() {
-    if (_locationUpdateTimer != null) return;
-
-    // Fetch immediately
-    initializeLocationTracking();
-
-    // Then repeat every 15 seconds
-    _locationUpdateTimer = Timer.periodic(Duration(seconds: 5), (_) {
-      initializeLocationTracking();
+  Future<void> _fetchIotaSmartDeviceId() async {
+    String busNumber = busData.busNumber;
+    APIRepository.fetchBusDetail(busData.busNumber)
+        .then((BusDetailResponse? busDetail) {
+      if (busDetail?.data?.iotaSmartDeviceId != null) {
+        startLocationTracking(busDetail!.data!.iotaSmartDeviceId!, busNumber);
+      }
+    }).onError((error, stackTrace) {
+      customLoader.hide();
+      toast(error);
     });
   }
 
-  void initializeLocationTracking() async {
-    try {
-      Dio dio = Dio();
-      dio.options.headers = {
-        "token": "IOTASMART",
-      };
-      mqttService.connect('27833');
-
-      Response response = await dio.get(
-          'https://api.iotasmart.com/userdeviceservice/v1/device/${busData.busNumber}');
-
-      if (response.statusCode == 200) {
-        LiveTrackingResponse liveTrackingResponse =
-            LiveTrackingResponse.fromJson(response.data);
-        this.liveTrackingResponse.value = liveTrackingResponse;
-        double currentLat = liveTrackingResponse.lat!;
-        double currentLng = liveTrackingResponse.lng!;
-        currentLatLng.value = LatLng(currentLat, currentLng);
-        // Animate the camera to the new location
-        _mapController?.animateCamera(
-          CameraUpdate.newLatLng(currentLatLng.value),
-        );
-        // Update or add marker
-        updateLiveMarker(currentLatLng.value);
-      }
-    } catch (e, st) {
-      debugPrint('Error fetching location: $e $st');
-    }
+  void startLocationTracking(
+    String iotaSmartId,
+    String busNumber,
+  ) {
+    // Fetch immediately
+    mqttService.connect(iotaSmartId, busNumber);
+    _mqttStream = mqttService.mqttMessages.listen((TrackData data) {
+      double currentLat = data.lat!;
+      double currentLng = data.lon!;
+      currentLatLng.value = LatLng(currentLat, currentLng);
+      // Update or add marker
+      updateLiveMarker(currentLatLng.value);
+    });
   }
 
   void updateLiveMarker(LatLng position) {
+    // Animate the camera to the new location
+    _mapController?.animateCamera(
+      CameraUpdate.newLatLng(currentLatLng.value),
+    );
     _liveTrackingMarker = Marker(
       markerId: MarkerId('liveTracking'),
       position: position,
@@ -99,7 +88,8 @@ class LiveTrackingController extends GetxController {
 
   @override
   void dispose() {
-    _locationUpdateTimer?.cancel();
+    mqttService.disconnectClient();
+    _mqttStream?.cancel();
     super.dispose();
   }
 }

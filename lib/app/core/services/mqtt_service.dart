@@ -1,59 +1,110 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
+class TrackData {
+  double? lat;
+  double? lon;
+  bool? isTripRunning;
+
+  TrackData({this.lat, this.lon, this.isTripRunning});
+
+  TrackData.fromJson(Map<String, dynamic> json) {
+    lat = json['lat'];
+    lon = json['lon'];
+    isTripRunning = json['isTripRunning'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['lat'] = lat;
+    data['lon'] = lon;
+    data['isTripRunning'] = isTripRunning;
+    return data;
+  }
+}
+
 class MqttService {
-  final client = MqttServerClient('52.66.130.18', '');
+  MqttServerClient? _client;
 
-  Future<void> connect(String topic) async {
-    client.port = 1883;
-    client.logging(on: true);
-    client.keepAlivePeriod = 20;
-    client.onDisconnected = onDisconnected;
-    client.onConnected = onConnected;
-    client.onSubscribed = onSubscribed;
-    client.pongCallback = pong;
+  // stream controller for mqtt data
+  final StreamController<TrackData> _mqttStreamData =
+      StreamController<TrackData>();
 
-    client.connectionMessage = MqttConnectMessage()
-        .withClientIdentifier('flutter_client_${DateTime.now().millisecondsSinceEpoch}')
+  // stream for outside listening
+  Stream<TrackData> get mqttMessages => _mqttStreamData.stream;
+
+  Future<void> connect(String iotaId, String busNumber) async {
+    String topic;
+    if (iotaId == '0') {
+      _client = MqttServerClient('hk.igloble.com', '');
+      topic = busNumber;
+    } else {
+      _client = MqttServerClient('52.66.130.18', '');
+      topic = iotaId;
+    }
+
+    _client?.port = 1883;
+    _client?.logging(on: true);
+    _client?.keepAlivePeriod = 20;
+    _client?.onDisconnected = onDisconnected;
+    _client?.onConnected = onConnected;
+    _client?.onSubscribed = onSubscribed;
+    _client?.pongCallback = pong;
+
+    _client?.connectionMessage = MqttConnectMessage()
+        .withClientIdentifier(
+            'flutter_client_${DateTime.now().millisecondsSinceEpoch}')
         .startClean()
         .withWillQos(MqttQos.atLeastOnce);
 
     try {
-      await client.connect();
+      await _client?.connect();
     } catch (e) {
-      print('MQTT connection error: $e');
-      client.disconnect();
+      log('MQTT connection error: $e');
+      _client?.disconnect();
     }
 
-    if (client.connectionStatus?.state == MqttConnectionState.connected) {
-      print('MQTT Connected');
-      client.subscribe(topic, MqttQos.atLeastOnce);
+    if (_client?.connectionStatus?.state == MqttConnectionState.connected) {
+      log('MQTT Connected');
+      _client?.subscribe(topic, MqttQos.atLeastOnce);
+      _client?.updates?.listen((List<MqttReceivedMessage<MqttMessage>> c) {
+        if (c.isNotEmpty) {
+          final recMess = c[0].payload as MqttPublishMessage;
+          String message =
+              MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+          TrackData trackData = TrackData.fromJson(jsonDecode(message));
+          log('trackData ${trackData.toJson()}');
+          _mqttStreamData.add(trackData);
+        }
+      });
     } else {
-      print('Connection failed: ${client.connectionStatus}');
-      client.disconnect();
+      log('Connection failed: ${_client?.connectionStatus}');
+      _client?.disconnect();
     }
-
-    client.updates?.listen((List<MqttReceivedMessage<MqttMessage?>>? c) {
-      final recMess = c![0].payload as MqttPublishMessage;
-      final message =
-          MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      print('MQTT Message: topic: <${c[0].topic}>, message: <$message>');
-    });
   }
 
   void onDisconnected() {
-    print('MQTT Disconnected');
+    log('MQTT Disconnected');
   }
 
   void onConnected() {
-    print('MQTT Connected Callback');
+    log('MQTT Connected Callback');
   }
 
   void onSubscribed(String topic) {
-    print('Subscribed to $topic');
+    log('Subscribed to $topic');
   }
 
   void pong() {
-    print('Ping response received');
+    log('Ping response received');
+  }
+
+  void disconnectClient() {
+    _mqttStreamData.close();
+    _client?.disconnect();
   }
 }

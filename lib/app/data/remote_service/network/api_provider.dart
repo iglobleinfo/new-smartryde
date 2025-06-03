@@ -9,6 +9,7 @@ import 'package:smart_ryde/model/error_response_model.dart';
 import 'package:smart_ryde/model/responseModal/home_model.dart';
 
 import '../../../../export.dart';
+import '../../../modules/live_tracking/model/bus_detail_response.dart';
 import 'dio_client.dart';
 
 class APIRepository {
@@ -170,12 +171,13 @@ class APIRepository {
   }
 
   /*===================================================================== Delete Cancel All Bookings API Call  ==========================================================*/
-  static Future<ErrorMessageResponseModel?> deleteCancelBookingApi(String userId) async {
+  static Future<ErrorMessageResponseModel?> deleteCancelBookingApi(
+      String userId) async {
     try {
       final response = await dioClient!.get(
         endPointDeleteCancelBooking,
         skipAuth: false,
-        queryParameters: {'userId':userId},
+        queryParameters: {'userId': userId},
       );
       return ErrorMessageResponseModel.fromJson(response);
     } catch (e, str) {
@@ -218,6 +220,25 @@ class APIRepository {
       DistrictResponseModel districtResponseModel =
           DistrictResponseModel.fromJson(response);
       return districtResponseModel;
+    } catch (e, str) {
+      debugPrint('Error:$e');
+      debugPrint('StackTrace:$str');
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get District API Call  ==========================================================*/
+  static Future<BusDetailResponse?> fetchBusDetail(String? busNumber) async {
+    try {
+      var response = await dioClient!.get(
+        '$endPointFetchBusDetail$busNumber',
+        skipAuth: false,
+      );
+      BusDetailResponse? busDetailResponse =
+          BusDetailResponse.fromJson(response);
+      return busDetailResponse;
     } catch (e, str) {
       debugPrint('Error:$e');
       debugPrint('StackTrace:$str');
