@@ -6,7 +6,8 @@ import 'package:smart_ryde/model/error_response_model.dart';
 
 import '../model/login_data_model.dart';
 
-class MyBookingController extends GetxController  {
+class MyBookingController extends GetxController
+    with GetTickerProviderStateMixin {
   late TextEditingController destiny1Controller = TextEditingController();
   late TextEditingController destiny2Controller = TextEditingController();
   late TextEditingController region1Controller = TextEditingController();
@@ -55,6 +56,7 @@ class MyBookingController extends GetxController  {
 
   @override
   void onInit() {
+    tabController = TabController(length: 3, vsync: this);
     customLoader = CustomLoader();
     super.onInit();
   }
@@ -121,7 +123,7 @@ class MyBookingController extends GetxController  {
   }
 
   Future<void> hitDeleteAllCancelBooking() async {
-    APIRepository.deleteCancelBookingApi( userData!.id.toString())
+    APIRepository.deleteCancelBookingApi(userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
       hitGetBookingList();
       update();
@@ -131,6 +133,11 @@ class MyBookingController extends GetxController  {
       customLoader.hide();
       toast(error);
     });
+    update();
+  }
+
+  void onTabChange(int selectedIndex) {
+    index = selectedIndex;
     update();
   }
 }

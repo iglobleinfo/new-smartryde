@@ -1,8 +1,5 @@
-import 'package:intl/intl.dart';
-import 'package:smart_ryde/app/core/values/route_arguments.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
-import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
 import 'package:smart_ryde/export.dart';
 
 import '../controllers/my_booking_controller.dart';
@@ -25,18 +22,19 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                 appBarTitleText: 'Booking',
                 textColor: primaryColor,
                 actionWidget: [
-                 getInkWell(
-                          onTap: () {
-                            controller.hitDeleteAllCancelBooking();
-                          },
-                          child: Text(
-                            'Delete All',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ).paddingAll(12),
+                  if (controller.index == 1)
+                    getInkWell(
+                      onTap: () {
+                        controller.hitDeleteAllCancelBooking();
+                      },
+                      child: Text(
+                        'Delete All',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
                         ),
+                      ).paddingAll(12),
+                    ),
                 ],
                 leadingIcon: getInkWell(
                   onTap: () {
@@ -49,86 +47,87 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                   ).paddingAll(12),
                 ),
               ),
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.w,
-                      vertical: 10.h,
+              body: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.w,
+                  vertical: 10.h,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextView(
+                      text: 'Select a trip that suits your preference',
+                      textStyle: textStyleLabelSmall(context).copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextView(
-                          text: 'Select a trip that suits your preference',
-                          textStyle: textStyleLabelSmall(context).copyWith(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        DefaultTabController(
-                          length: 3,
-                          child: Column(
-                            children: [
-                              Container(
-                                color: Colors.white,
-                                child: TabBar(
-                                  labelColor: primaryColor,
-                                  unselectedLabelColor: primaryColor,
-                                  indicatorColor: primaryColor,
-                                  labelStyle: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                  unselectedLabelStyle: TextStyle(fontSize: 16),
-                                  indicatorSize: TabBarIndicatorSize.tab,
-                                  indicator: UnderlineTabIndicator(
-                                    borderSide: BorderSide(
-                                        width: 2, color: primaryColor),
-                                    insets: EdgeInsets.zero,
-                                  ),
-                                  tabs: [
-                                    Tab(
-                                      text: 'Current',
-                                    ),
-                                    Tab(
-                                      text: 'Cancelled',
-                                    ),
-                                    Tab(
-                                      text: 'Past',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: Get.height - 250,
-                                child: TabBarView(
-                                  children: [
-                                    currentBookingList(context),
-                                    cancelledBookingList(context),
-                                    pastBookingList(context),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                      ],
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                ],
+                    DefaultTabController(
+                      length: 3,
+                      child: Column(
+                        children: [
+                          Container(
+                            color: Colors.white,
+                            child: TabBar(
+                              labelColor: primaryColor,
+                              unselectedLabelColor: primaryColor,
+                              indicatorColor: primaryColor,
+                              labelStyle: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              unselectedLabelStyle: TextStyle(fontSize: 16),
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              indicator: UnderlineTabIndicator(
+                                borderSide:
+                                    BorderSide(width: 2, color: primaryColor),
+                                insets: EdgeInsets.zero,
+                              ),
+                              tabs: [
+                                Tab(
+                                  text: 'Current',
+                                ),
+                                Tab(
+                                  text: 'Cancelled',
+                                ),
+                                Tab(
+                                  text: 'Past',
+                                ),
+                              ],
+                              onTap: controller.onTabChange,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Expanded(
+                      child: _buildCurrentTabContent(context),
+                    )
+                  ],
+                ),
               ),
             );
           },
         ),
       ),
     );
+  }
+
+  Widget _buildCurrentTabContent(BuildContext context) {
+    switch (controller.index) {
+      case 0:
+        return currentBookingList(context);
+      case 1:
+        return cancelledBookingList(context);
+      case 2:
+        return pastBookingList(context);
+      default:
+        return SizedBox.shrink(); // Fallback widget
+    }
   }
 
   Widget currentBookingList(context) {
@@ -700,7 +699,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
     return GetBuilder<MyBookingController>(
         init: MyBookingController(),
         builder: (controller) {
-          controller.index=2;
+          controller.index = 2;
           return controller.isLoader
               ? Center(
                   child: CircularProgressIndicator(
