@@ -45,8 +45,8 @@ class LiveTrackingController extends GetxController {
   }
 
   Future<void> _fetchIotaSmartDeviceId() async {
-    String busNumber = busData.busNumber;
-    APIRepository.fetchBusDetail(busData.busNumber)
+    String busNumber = 'YX2984';
+    APIRepository.fetchBusDetail(busNumber)
         .then((BusDetailResponse? busDetail) {
       if (busDetail?.data?.iotaSmartDeviceId != null) {
         startLocationTracking(busDetail!.data!.iotaSmartDeviceId!, busNumber);
