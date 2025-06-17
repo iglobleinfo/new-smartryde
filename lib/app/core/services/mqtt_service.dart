@@ -4,38 +4,24 @@ import 'dart:developer';
 
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
+import 'package:smart_ryde/app/modules/live_tracking/model/hkglobal_data.dart';
+import 'package:smart_ryde/app/modules/live_tracking/model/smart_ryde_data.dart';
 
-class TrackData {
-  double? lat;
-  double? lon;
-  bool? isTripRunning;
 
-  TrackData({this.lat, this.lon, this.isTripRunning});
-
-  TrackData.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lon = json['lon'];
-    isTripRunning = json['isTripRunning'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['lat'] = lat;
-    data['lon'] = lon;
-    data['isTripRunning'] = isTripRunning;
-    return data;
-  }
-}
 
 class MqttService {
   MqttServerClient? _client;
 
   // stream controller for mqtt data
-  final StreamController<TrackData> _mqttStreamData =
-      StreamController<TrackData>();
+  final StreamController<TrackData> _hkStreamController =
+      StreamController<TrackData>.broadcast();
+  // stream for mqtt data
+  final StreamController<SmartRydeData> _sRStreamController =
+      StreamController<SmartRydeData>.broadcast();
 
   // stream for outside listening
-  Stream<TrackData> get mqttMessages => _mqttStreamData.stream;
+  Stream<TrackData> get hkStreamData => _hkStreamController.stream;
+  Stream<SmartRydeData> get sRStreamData => _sRStreamController.stream;
 
   Future<void> connect(String iotaId, String busNumber) async {
     String topic;
@@ -76,9 +62,15 @@ class MqttService {
           final recMess = c[0].payload as MqttPublishMessage;
           String message =
               MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-          TrackData trackData = TrackData.fromJson(jsonDecode(message));
-          log('trackData ${trackData.toJson()}');
-          _mqttStreamData.add(trackData);
+          log('Received message on topic ${c[0].topic}: $message');   
+          if(iotaId == '0'){
+            SmartRydeData smartRydeData = SmartRydeData.fromJson(jsonDecode(message));
+            log('smartRydeData ${smartRydeData.toJson()}');
+            _sRStreamController.add(smartRydeData);
+          }else{
+            log('Received message on topic ${c[0].topic}: $message');
+            _hkStreamController.add(TrackData.fromJson(jsonDecode(message)));
+          }
         }
       });
     } else {
@@ -104,7 +96,8 @@ class MqttService {
   }
 
   void disconnectClient() {
-    _mqttStreamData.close();
+    _hkStreamController.close();
+    _sRStreamController.close();
     _client?.disconnect();
   }
 }

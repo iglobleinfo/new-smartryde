@@ -46,7 +46,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
             GoogleMap(
               initialCameraPosition: CameraPosition(
                 target: controller.currentLatLng.value,
-                zoom: 18,
+                zoom: 11,
               ),
               onMapCreated: controller.onMapInitialize,
               polylines: controller.polyLines,
@@ -54,7 +54,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
               markers: controller.markers,
               myLocationButtonEnabled: true,
             ),
-            busDetail(context),
+            // busDetail(context),
           ],
         ),
       ),

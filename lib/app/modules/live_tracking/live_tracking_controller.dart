@@ -1,22 +1,24 @@
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart' hide Response;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/bus_detail_response.dart';
 import 'package:smart_ryde/app/core/services/mqtt_service.dart';
-
+import 'package:smart_ryde/app/modules/live_tracking/model/hkglobal_data.dart';
+import 'package:smart_ryde/app/modules/live_tracking/model/smart_ryde_data.dart';
 import '../../../export.dart';
 
 class LiveTrackingController extends GetxController {
   GoogleMapController? _mapController;
   final List<LatLng> polylineCoordinates = [];
   final RxSet<Polyline> polyLines = RxSet();
-  Rx<LatLng> currentLatLng = Rx(LatLng(49.4543, 11.0746));
+  Rx<LatLng> currentLatLng = Rx(LatLng(22.3193, 114.1694));
   MqttService mqttService = MqttService();
-  StreamSubscription<TrackData>? _mqttStream;
+  // Stream for receiving MQTT messages
+  StreamSubscription<TrackData>? _trackDataStream;
+  StreamSubscription<SmartRydeData>? _smartRydeStream;
 
   Marker? _liveTrackingMarker;
+  LatLng? _previousPosition;
+
   BitmapDescriptor? _customBusIcon;
 
   RxSet<Marker> markers = RxSet<Marker>();
@@ -40,12 +42,12 @@ class LiveTrackingController extends GetxController {
   Future<void> _loadCustomMarker() async {
     _customBusIcon = await BitmapDescriptor.asset(
       ImageConfiguration(size: Size(48, 48)),
-      'assets/images/bus.webp', // your asset path
+      'assets/images/bus.webp',
     );
   }
 
   Future<void> _fetchIotaSmartDeviceId() async {
-    String busNumber = busData.busNumber;
+    String busNumber = 'YX2984';
     APIRepository.fetchBusDetail(busNumber)
         .then((BusDetailResponse? busDetail) {
       if (busDetail?.data?.iotaSmartDeviceId != null) {
@@ -63,33 +65,72 @@ class LiveTrackingController extends GetxController {
   ) {
     // Fetch immediately
     mqttService.connect(iotaSmartId, busNumber);
-    _mqttStream = mqttService.mqttMessages.listen((TrackData data) {
+    _trackDataStream = mqttService.hkStreamData.listen((TrackData data) {
       double currentLat = data.lat!;
       double currentLng = data.lon!;
       currentLatLng.value = LatLng(currentLat, currentLng);
       // Update or add marker
-      updateLiveMarker(currentLatLng.value);
+      moveMarkerSmoothly(currentLatLng.value);
+    });
+    _smartRydeStream = mqttService.sRStreamData.listen((SmartRydeData data) {
+      double currentLat = data.lastGps!.lastgps!.latitude!;
+      double currentLng = data.lastGps!.lastgps!.longitude!;
+      currentLatLng.value = LatLng(currentLat, currentLng);
+      // Update or add marker
+      moveMarkerSmoothly(currentLatLng.value);
     });
   }
 
-  void updateLiveMarker(LatLng position) {
-    // Animate the camera to the new location
-    _mapController?.animateCamera(
-      CameraUpdate.newLatLng(currentLatLng.value),
-    );
-    _liveTrackingMarker = Marker(
+  void moveMarkerSmoothly(LatLng newPosition) {
+    if (_previousPosition == null) {
+      _previousPosition = newPosition;
+      _updateMarker(newPosition);
+      return;
+    }
+
+    const int steps = 60;
+    const Duration stepDuration = Duration(milliseconds: 16);
+
+    double latDiff = newPosition.latitude - _previousPosition!.latitude;
+    double lngDiff = newPosition.longitude - _previousPosition!.longitude;
+
+    int currentStep = 0;
+
+    Timer.periodic(stepDuration, (timer) {
+      if (currentStep >= steps) {
+        timer.cancel();
+        _previousPosition = newPosition;
+        return;
+      }
+
+      double lat =
+          _previousPosition!.latitude + (latDiff * (currentStep / steps));
+      double lng =
+          _previousPosition!.longitude + (lngDiff * (currentStep / steps));
+      LatLng interpolated = LatLng(lat, lng);
+
+      _updateMarker(interpolated);
+      currentStep++;
+    });
+  }
+
+  void _updateMarker(LatLng position) {
+    final marker = Marker(
       markerId: MarkerId('liveTracking'),
       position: position,
       icon: _customBusIcon!,
+      anchor: Offset(0.5, 0.5),
     );
-    markers.clear();
-    markers.add(_liveTrackingMarker!);
+    _liveTrackingMarker = marker;
+    markers.removeWhere((m) => m.markerId == marker.markerId);
+    markers.add(marker);
   }
 
   @override
   void dispose() {
     mqttService.disconnectClient();
-    _mqttStream?.cancel();
+    _trackDataStream?.cancel();
+    _smartRydeStream?.cancel();
     super.dispose();
   }
 }
