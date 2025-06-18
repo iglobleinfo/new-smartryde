@@ -6,7 +6,8 @@ import 'package:smart_ryde/app/modules/live_tracking/model/hkglobal_data.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/smart_ryde_data.dart';
 import '../../../export.dart';
 
-class LiveTrackingController extends GetxController {
+class LiveTrackingController extends GetxController
+    with GetTickerProviderStateMixin {
   GoogleMapController? _mapController;
   final List<LatLng> polylineCoordinates = [];
   final RxSet<Polyline> polyLines = RxSet();
@@ -15,9 +16,6 @@ class LiveTrackingController extends GetxController {
   // Stream for receiving MQTT messages
   StreamSubscription<TrackData>? _trackDataStream;
   StreamSubscription<SmartRydeData>? _smartRydeStream;
-
-  Marker? _liveTrackingMarker;
-  LatLng? _previousPosition;
 
   BitmapDescriptor? _customBusIcon;
 
@@ -30,6 +28,10 @@ class LiveTrackingController extends GetxController {
     if (Get.arguments != null) {
       busData = Get.arguments['busData'];
     }
+    // Timer.periodic(const Duration(seconds: 2), (Timer? timer) {
+    //   moveMarkerSmoothly(LatLng(currentLatLng.value.latitude + 0.001,
+    //       currentLatLng.value.longitude + 0.001));
+    // });
     super.onInit();
   }
 
@@ -47,7 +49,7 @@ class LiveTrackingController extends GetxController {
   }
 
   Future<void> _fetchIotaSmartDeviceId() async {
-    String busNumber = 'YX2984';
+    String busNumber = busData.busNumber;
     APIRepository.fetchBusDetail(busNumber)
         .then((BusDetailResponse? busDetail) {
       if (busDetail?.data?.iotaSmartDeviceId != null) {
@@ -81,49 +83,25 @@ class LiveTrackingController extends GetxController {
     });
   }
 
-  void moveMarkerSmoothly(LatLng newPosition) {
-    if (_previousPosition == null) {
-      _previousPosition = newPosition;
-      _updateMarker(newPosition);
-      return;
-    }
-
-    const int steps = 60;
-    const Duration stepDuration = Duration(milliseconds: 16);
-
-    double latDiff = newPosition.latitude - _previousPosition!.latitude;
-    double lngDiff = newPosition.longitude - _previousPosition!.longitude;
-
-    int currentStep = 0;
-
-    Timer.periodic(stepDuration, (timer) {
-      if (currentStep >= steps) {
-        timer.cancel();
-        _previousPosition = newPosition;
-        return;
-      }
-
-      double lat =
-          _previousPosition!.latitude + (latDiff * (currentStep / steps));
-      double lng =
-          _previousPosition!.longitude + (lngDiff * (currentStep / steps));
-      LatLng interpolated = LatLng(lat, lng);
-
-      _updateMarker(interpolated);
-      currentStep++;
-    });
-  }
-
-  void _updateMarker(LatLng position) {
+  Future<void> moveMarkerSmoothly(LatLng newPosition) async {
+    debugPrint('NewPosition Value ${newPosition.toJson()}');
     final marker = Marker(
       markerId: MarkerId('liveTracking'),
-      position: position,
+      position: newPosition,
       icon: _customBusIcon!,
-      anchor: Offset(0.5, 0.5),
     );
-    _liveTrackingMarker = marker;
-    markers.removeWhere((m) => m.markerId == marker.markerId);
+    currentLatLng.value = newPosition;
     markers.add(marker);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _mapController?.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: newPosition,
+            zoom: 18,
+          ),
+        ),
+      ); // ensure initial position is centered
+    });
   }
 
   @override

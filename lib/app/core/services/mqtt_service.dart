@@ -7,8 +7,6 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/hkglobal_data.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/smart_ryde_data.dart';
 
-
-
 class MqttService {
   MqttServerClient? _client;
 
@@ -62,14 +60,15 @@ class MqttService {
           final recMess = c[0].payload as MqttPublishMessage;
           String message =
               MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-          log('Received message on topic ${c[0].topic}: $message');   
-          if(iotaId == '0'){
-            SmartRydeData smartRydeData = SmartRydeData.fromJson(jsonDecode(message));
-            log('smartRydeData ${smartRydeData.toJson()}');
-            _sRStreamController.add(smartRydeData);
-          }else{
+          log('Received message on topic ${c[0].topic}: $message');
+          if (iotaId == '0') {
             log('Received message on topic ${c[0].topic}: $message');
             _hkStreamController.add(TrackData.fromJson(jsonDecode(message)));
+          } else {
+            SmartRydeData smartRydeData =
+                SmartRydeData.fromJson(jsonDecode(message));
+            log('smartRydeData ${smartRydeData.toJson()}');
+            _sRStreamController.add(smartRydeData);
           }
         }
       });

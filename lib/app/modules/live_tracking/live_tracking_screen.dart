@@ -1,3 +1,4 @@
+import 'package:animated_marker/animated_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_ryde/app/modules/live_tracking/live_tracking_controller.dart';
 import '../../../export.dart';
@@ -43,18 +44,25 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
         () => Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: controller.currentLatLng.value,
-                zoom: 11,
-              ),
-              onMapCreated: controller.onMapInitialize,
-              polylines: controller.polyLines,
-              myLocationEnabled: true,
-              markers: controller.markers,
-              myLocationButtonEnabled: true,
+            AnimatedMarker(
+              staticMarkers: controller.markers,
+              animatedMarkers: controller.markers,
+              duration: const Duration(seconds: 1),
+              fps: 30,
+              curve: Curves.easeOut,
+              builder: (context, animatedMarkers) {
+                return GoogleMap(
+                  key: ValueKey('GoogleMap'),
+                  onMapCreated: controller.onMapInitialize,
+                  initialCameraPosition: CameraPosition(
+                    target: controller.currentLatLng.value,
+                    zoom: 18,
+                  ),
+                  markers: animatedMarkers,
+                );
+              },
             ),
-            // busDetail(context),
+            busDetail(context),
           ],
         ),
       ),
