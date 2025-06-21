@@ -7,6 +7,7 @@ const baseUrl = "http://216.48.181.94:8083";
 
 const endPointLogin = "/user/login";
 const endPointSignUp = "/user";
+// const endPointSignUp = "/user";
 const endPointGenerateOtp = "/user/generate-otp/";
 const endPointForgotPassword = "/user/forgot-password";
 const endPointVerifyOtp = "/user/verify-otp/";
