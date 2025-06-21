@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
+import 'package:smart_ryde/app/modules/bus_route/bus_route_page.dart';
 import 'package:smart_ryde/export.dart';
 
 import '../controller/bus_controller.dart';
@@ -195,12 +196,11 @@ class BusListScreen extends GetView<BusController> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.toNamed(
-                                    AppRoutes.busLocation,
-                                    arguments: {
-                                      'routeId': busData.routeId,
-                                      'dNumber': busData.deptNo,
-                                    },
+                                  showBusRouteSheet(
+                                    context: context,
+                                    busData: busData,
+                                    fromName: controller.fromName ?? '',
+                                    toName: controller.toName ?? '',
                                   );
                                 },
                                 child: DecoratedBox(
@@ -208,10 +208,6 @@ class BusListScreen extends GetView<BusController> {
                                     color: busData.totalSeat == 0
                                         ? Colors.grey
                                         : Colors.white,
-                                    // border: Border.all(
-                                    //   width: 0.5,
-                                    // ),
-                                    // borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(15),

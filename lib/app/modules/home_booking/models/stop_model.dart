@@ -53,6 +53,7 @@ class StopList {
   double? latitude;
   double? longitude;
   int? radius;
+  String? deptTime;
   DateTime? creatingTime;
   bool? deleted;
   bool? active;
@@ -67,6 +68,7 @@ class StopList {
     this.latitude,
     this.longitude,
     this.radius,
+    this.deptTime,
     this.creatingTime,
     this.deleted,
     this.active,
@@ -82,6 +84,7 @@ class StopList {
     latitude: json["latitude"]?.toDouble(),
     longitude: json["longitude"]?.toDouble(),
     radius: json["radius"],
+    deptTime: json["deptTime"],
     creatingTime: json["creatingTime"] == null ? null : DateTime.parse(json["creatingTime"]),
     deleted: json["deleted"],
     active: json["active"],
@@ -97,6 +100,7 @@ class StopList {
     "latitude": latitude,
     "longitude": longitude,
     "radius": radius,
+    "deptTime": deptTime,
     "creatingTime": creatingTime?.toIso8601String(),
     "deleted": deleted,
     "active": active,
