@@ -41,7 +41,7 @@ class StopLocationController extends GetxController {
       ImageConfiguration(
         size: Size(48, 48),
       ),
-      'assets/images/bus.webp', // your asset path
+      'assets/images/bus_stop.jpg', // your asset path
     );
   }
 

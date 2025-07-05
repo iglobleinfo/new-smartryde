@@ -94,6 +94,25 @@ class AuthRequestModel {
     return data;
   }
 
+  static bookMarkReq({
+    required String actionType,
+    required int fromStopId,
+    required int toStopId,
+    required int routeId,
+    required int bookmarkId,
+    required int userId,
+  }) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['actionType'] = actionType;
+    data['fromStopId'] = fromStopId;
+    data['toStopId'] = toStopId;
+    data['routeId'] = routeId;
+    data['userId'] = userId;
+    data['bookmarkId'] = bookmarkId;
+    {}
+    return data;
+  }
+
   static socialLoginReq({
     var userId,
     var email,

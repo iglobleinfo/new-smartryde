@@ -24,7 +24,7 @@ class BusListScreen extends GetView<BusController> {
                 actionWidget: [
                   getInkWell(
                     onTap: () {
-                      controller.isBookmark=!controller.isBookmark;
+                      controller.hitBookmarkApi(context);
                       controller.update();
                     },
                     child: Row(

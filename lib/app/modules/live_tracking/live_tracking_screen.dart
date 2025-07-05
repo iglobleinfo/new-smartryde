@@ -48,7 +48,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
               staticMarkers: controller.markers,
               animatedMarkers: controller.markers,
               duration: const Duration(seconds: 1),
-              fps: 30,
+              fps: 15,
               curve: Curves.easeOut,
               builder: (context, animatedMarkers) {
                 return GoogleMap(

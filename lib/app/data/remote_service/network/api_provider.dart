@@ -9,6 +9,7 @@ import 'package:smart_ryde/model/error_response_model.dart';
 import 'package:smart_ryde/model/responseModal/home_model.dart';
 
 import '../../../../export.dart';
+import '../../../../model/responseModal/bookmark_response_model.dart';
 import '../../../modules/live_tracking/model/bus_detail_response.dart';
 import 'dio_client.dart';
 
@@ -147,6 +148,25 @@ class APIRepository {
       );
       return LoginResponseModel.fromJson(response);
     } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Get Bookmark API Call  ==========================================================*/
+  static Future getBookmarkApi(String userId) async {
+    try {
+      final response = await dioClient!.get(
+        endPointGetBookMark,
+        queryParameters: {
+          'userId': userId,
+        },
+        skipAuth: false,
+      );
+      return BookmarkListResponseModel.fromJson(response);
+    } catch (e, str) {
+      debugPrint(str.toString());
       return Future.error(
         NetworkExceptions.getDioException(e, str),
       );
@@ -337,6 +357,22 @@ class APIRepository {
     try {
       final response = await dioClient!.post(
         endPointBookTicket,
+        skipAuth: false,
+        data: data,
+      );
+      return response;
+    } catch (e, str) {
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  /*===================================================================== Bookmark Api  ==========================================================*/
+  static Future bookMarkApi(Map<String, dynamic> data) async {
+    try {
+      final response = await dioClient!.post(
+        endPointSaveBookMark,
         skipAuth: false,
         data: data,
       );
