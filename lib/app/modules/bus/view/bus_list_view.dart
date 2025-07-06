@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
 import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
 import 'package:smart_ryde/app/modules/bus_route/bus_route_page.dart';
+import 'package:smart_ryde/app/modules/home_booking/controller/home_booking_controller.dart';
 import 'package:smart_ryde/export.dart';
 
 import '../controller/bus_controller.dart';
@@ -47,7 +48,9 @@ class BusListScreen extends GetView<BusController> {
                 // appBarTitleText: 'SmartRyde',
                 leadingIcon: getInkWell(
                   onTap: () {
-                    Get.back();
+                    debugPrint('dsddsdsdsds');
+                    Get.find<HomeBookingController>().hitGetBookmark();
+                    Get.back(result: true);
                   },
                   child: Icon(
                     Icons.arrow_back_outlined,
