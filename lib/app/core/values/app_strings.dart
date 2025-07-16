@@ -63,6 +63,21 @@ const String keyNoBusSelectedTryLater = 'noBusSelectedTryLater';
 const String keyTotalBookedSeats = 'keyTotalBookedSeats';
 const String keyBookingNo = 'keyBookingNo';
 const String keySorryBusFull = 'keySorryBusFull';
+const String keyAboutYourExperienceInRides = 'keyAboutYourExperienceInRides';
+const String keyTypeOfFeedback = 'keyTypeOfFeedback';
+const String keyCommendation = 'keyCommendation';
+const String keyComplaint = 'keyComplaint';
+const String keySuggestion = 'keySuggestion';
+const String keySelect = 'keySelect';
+const String keyMr = 'keyMr';
+const String keyMs = 'keyMs';
+const String keyMrs = 'keyMrs';
+const String keySelectRoute = 'keySelectRoute';
+const String keySelectDate = 'keySelectDate';
+const String keyIncidentDetails = 'keyIncidentDetails';
+const String keySubmit = 'keySubmit';
+const String keySelectAnOption = 'keySelectAnOption';
+const String keyClose = 'keyClose';
 
 
 /// **********************************************************************

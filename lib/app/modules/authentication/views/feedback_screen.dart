@@ -4,8 +4,6 @@ import 'package:smart_ryde/app/modules/authentication/views/helper_bottomsheet.d
 import '../../../../../export.dart';
 import '../../home_booking/bottomsheets/destiny_bottomsheet.dart';
 import '../controllers/feedback_controller.dart';
-import '../controllers/profile_controller.dart';
-import 'bottom_phone_picker.dart';
 
 class FeedbackScreen extends GetView<FeedbackController> {
   final formGlobalKey = GlobalKey<FormState>();
@@ -26,7 +24,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                 height: 30,
               ),
               TextView(
-                text: 'Drop A Feedback',
+                text: keyDropAFeedback.tr,
                 maxLine: 1,
                 textStyle: textStyleTitle(context).copyWith(
                   fontSize: 20,
@@ -34,7 +32,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                 ),
               ).marginOnly(bottom: margin_5),
               TextView(
-                text: 'Tell us about your experience during our rides.',
+                text: keyAboutYourExperienceInRides.tr,
                 maxLine: 1,
                 textStyle: textStyleTitle(context).copyWith(
                   fontSize: 15,
@@ -49,7 +47,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TextFieldWidget(
-                      hint: 'Type of feedback',
+                      hint: keyTypeOfFeedback.tr,
                       suffixIcon: Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: Colors.grey,
@@ -58,7 +56,11 @@ class FeedbackScreen extends GetView<FeedbackController> {
                       onTap: () {
                         Get.bottomSheet(
                           HelperBottomsheet(
-                            list: ['Commendation', 'Complaint', 'Suggestion'],
+                            list: [
+                              keyCommendation.tr,
+                              keyComplaint.tr,
+                              keySuggestion.tr,
+                            ],
                             selectedValue: (countryCode) {
                               controller.feedbackController.text = countryCode;
                               Get.back();
@@ -80,12 +82,16 @@ class FeedbackScreen extends GetView<FeedbackController> {
                             maxWidth: 65,
                           ),
                           child: TextFieldWidget(
-                            hint: 'Select',
+                            hint: keySelect.tr,
                             readOnly: true,
                             onTap: () {
                               Get.bottomSheet(
                                 HelperBottomsheet(
-                                  list: ['Mr', 'Ms', 'Mrs'],
+                                  list: [
+                                    keyMr.tr,
+                                    keyMs.tr,
+                                    keyMrs.tr,
+                                  ],
                                   selectedValue: (countryCode) {
                                     controller.countryPickerController.text =
                                         countryCode;
@@ -166,7 +172,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                     ),
                     TextFieldWidget(
                       textColor: Colors.grey,
-                      hint: 'Select Route',
+                      hint: keySelectRoute.tr,
                       hintStyle: textStyleBodyMedium(context).copyWith(
                           fontWeight: FontWeight.w400,
                           color: Colors.grey,
@@ -202,7 +208,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                     ),
                     TextFieldWidget(
                       textColor: Colors.grey,
-                      hint: 'Select Date',
+                      hint: keySelectDate.tr,
                       hintStyle: textStyleBodyMedium(context).copyWith(
                           fontWeight: FontWeight.w400,
                           color: Colors.grey,
@@ -243,16 +249,18 @@ class FeedbackScreen extends GetView<FeedbackController> {
                           controller.incidentController.text = '';
                         }
                       },
-                      hint: 'Incident Details',
+                      hint: keyIncidentDetails.tr,
                     ),
-                    SizedBox(height: 15,),
+                    SizedBox(
+                      height: 15,
+                    ),
                     Align(
                       alignment: Alignment.center,
                       child: MaterialButtonWidget(
                         minWidth: 150,
                         minHeight: 50,
                         fontsize: 14,
-                        buttonText: 'Submit'.tr.toUpperCase(),
+                        buttonText: keySubmit.tr.toUpperCase(),
                         onPressed: () {
                           if (formGlobalKey.currentState!.validate()) {
                             controller.hitAddFeedbackAPI(context);
@@ -273,7 +281,8 @@ class FeedbackScreen extends GetView<FeedbackController> {
   Future<void> _selectDateTime(BuildContext context) async {
     final ThemeData themedata = Theme.of(context).copyWith(
       colorScheme: ColorScheme.light(
-        primary: primaryColor, // Header background color// Header text color// Body text color
+        primary:
+            primaryColor, // Header background color// Header text color// Body text color
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -312,7 +321,8 @@ class FeedbackScreen extends GetView<FeedbackController> {
           pickedTime.minute,
         );
 
-        controller.dateTimeController.text=finalDateTime.toString().split('.').first;
+        controller.dateTimeController.text =
+            finalDateTime.toString().split('.').first;
         controller.update();
 
         print("Selected DateTime: $finalDateTime");
@@ -320,7 +330,6 @@ class FeedbackScreen extends GetView<FeedbackController> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
