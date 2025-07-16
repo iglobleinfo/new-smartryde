@@ -124,7 +124,11 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                         SizedBox(
                           width: 150,
                           child: TextView(
-                            text: bookmarkData.fromStopEnName ?? 'N/A',
+                            text: appLanguage == Language.en
+                                ? bookmarkData.fromStopEnName ?? 'N/A'
+                                : appLanguage == Language.sch
+                                    ? bookmarkData.fromStopSchName ?? '不适用'
+                                    : bookmarkData.fromStopChName ?? '不適用',
                             textAlign: TextAlign.start,
                             maxLine: 2,
                             textStyle: textStyleLabelSmall(context).copyWith(
@@ -156,7 +160,11 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                           width: 150,
                           child: TextView(
                             textAlign: TextAlign.start,
-                            text: bookmarkData.toStopEnName ?? 'N/A',
+                            text: appLanguage == Language.en
+                                ? bookmarkData.toStopEnName ?? 'N/A'
+                                : appLanguage == Language.sch
+                                    ? bookmarkData.toStopSchName ?? '不适用'
+                                    : bookmarkData.toStopChName ?? '不適用',
                             textStyle: textStyleLabelSmall(context).copyWith(
                               fontSize: 13,
                               color: Colors.black,
@@ -212,8 +220,7 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                               .toString()),
                           'fromName':
                               controller.bookmarkList[index].fromStopEnName,
-                          'toName':
-                              controller.bookmarkList[index].toStopEnName,
+                          'toName': controller.bookmarkList[index].toStopEnName,
                         });
                       },
                       child: Container(

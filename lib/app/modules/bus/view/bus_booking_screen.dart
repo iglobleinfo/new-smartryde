@@ -36,20 +36,20 @@ class BusBookingScreen extends GetView<BookSeatController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    SizedBox(
                       height: Get.height - 170,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextView(
-                            text: 'Select Number Of Seat',
+                            text: keySelectNumberOfSeat.tr,
                             textStyle: textStyleLabelSmall(context).copyWith(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                           TextView(
-                            text: 'Reserve seats that suits your preferences.',
+                            text: keyReserveSeats.tr,
                             textStyle: textStyleLabelSmall(context).copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w300,
@@ -74,7 +74,7 @@ class BusBookingScreen extends GetView<BookSeatController> {
                             children: [
                               Expanded(
                                 child: TextView(
-                                  text: 'Selected Seats',
+                                  text: keySelectedSeats.tr,
                                   textStyle:
                                       textStyleLabelSmall(context).copyWith(
                                     fontSize: 15,
@@ -102,7 +102,7 @@ class BusBookingScreen extends GetView<BookSeatController> {
                             children: [
                               Expanded(
                                 child: TextView(
-                                  text: 'Booking Amount',
+                                  text: keyBookingAmount.tr,
                                   textStyle:
                                       textStyleLabelSmall(context).copyWith(
                                     fontSize: 15,
@@ -126,8 +126,7 @@ class BusBookingScreen extends GetView<BookSeatController> {
                             onTap: () {
                               if (controller
                                   .seatPickerController.text.isEmpty) {
-                                toast(
-                                    'Please select number of normal seats before proceeding');
+                                toast(keySelectNormalSeatsPrompt.tr);
                               } else {
                                 controller.hitBookingApi(context);
                               }
@@ -138,7 +137,7 @@ class BusBookingScreen extends GetView<BookSeatController> {
                               width: 100,
                               height: 40,
                               child: TextView(
-                                text: 'Book Now',
+                                text: keyBookNow.tr,
                                 textStyle:
                                     textStyleLabelSmall(context).copyWith(
                                   fontSize: 13,
@@ -167,121 +166,115 @@ class BusBookingScreen extends GetView<BookSeatController> {
         builder: (controller) {
           return Expanded(
             child: Column(
-                    children: [
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          // border: Border.all(
-                          //   width: 0.5,
-                          // ),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+              children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    // border: Border.all(
+                    //   width: 0.5,
+                    // ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  imageBus2,
+                                  height: 55,
+                                ),
+                                TextView(
+                                  text: controller.busData?.busNumber ?? '',
+                                  textStyle:
+                                      textStyleLabelSmall(context).copyWith(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: Get.width - 140,
+                              color: Colors.grey.shade100,
+                              padding: EdgeInsets.all(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        imageBus2,
-                                        height: 55,
-                                      ),
-                                      TextView(
-                                        text:
-                                            controller.busData?.busNumber ?? '',
-                                        textStyle: textStyleLabelSmall(context)
-                                            .copyWith(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
+                                  TextView(
+                                    text: controller.fromName ?? '',
+                                    textAlign: TextAlign.start,
+                                    textStyle:
+                                        textStyleLabelSmall(context).copyWith(
+                                      fontSize: 13,
+                                      color: Colors.black26,
+                                      fontWeight: FontWeight.w300,
+                                    ),
                                   ),
-                                  SizedBox(
-                                    width: 10,
+                                  Image.asset(
+                                    imageBusRoute,
+                                    color: primaryColor,
+                                    height: 35,
                                   ),
-                                  Container(
-                                    width: Get.width - 140,
-                                    color: Colors.grey.shade100,
-                                    padding: EdgeInsets.all(10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        TextView(
-                                          text: controller.fromName??'',
-                                          textAlign: TextAlign.start,
-                                          textStyle:
-                                              textStyleLabelSmall(context)
-                                                  .copyWith(
-                                            fontSize: 13,
-                                            color: Colors.black26,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                        Image.asset(
-                                          imageBusRoute,
-                                          color: primaryColor,
-                                          height: 35,
-                                        ),
-                                        TextView(
-                                          text: controller.toName??'',
-                                          textAlign: TextAlign.start,
-                                          textStyle:
-                                              textStyleLabelSmall(context)
-                                                  .copyWith(
-                                            fontSize: 13,
-                                            color: Colors.black26,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                      ],
+                                  TextView(
+                                    text: controller.toName ?? '',
+                                    textAlign: TextAlign.start,
+                                    textStyle:
+                                        textStyleLabelSmall(context).copyWith(
+                                      fontSize: 13,
+                                      color: Colors.black26,
+                                      fontWeight: FontWeight.w300,
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      TextFieldWidget(
-                        textColor: Colors.grey,
-                        hint: 'Select Number Of Seat',
-                        hintStyle: textStyleBodyMedium(context).copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
-                            fontSize: 17),
-                        readOnly: true,
-                        suffixIcon: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: Colors.grey,
-                        ),
-                        onTap: () {
-                          Get.bottomSheet(
-                            SeatPicker(
-                              list: ['1', '2', '3', '4', '5'],
-                              selectedSeat: (countryCode) {
-                                controller.seatPickerController.text =
-                                    countryCode;
-                                controller.update();
-                                Get.back();
-                              },
                             ),
-                          );
-                        },
-                        // contentPadding: EdgeInsets.all(margin_10),
-                        textController: controller.seatPickerController,
-                        shadow: true,
-                        validate: (String? value) {
-                          return null;
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                TextFieldWidget(
+                  textColor: Colors.grey,
+                  hint: keySelectNumberOfSeat.tr,
+                  hintStyle: textStyleBodyMedium(context).copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                      fontSize: 17),
+                  readOnly: true,
+                  suffixIcon: Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: Colors.grey,
+                  ),
+                  onTap: () {
+                    Get.bottomSheet(
+                      SeatPicker(
+                        list: ['1', '2', '3', '4', '5'],
+                        selectedSeat: (countryCode) {
+                          controller.seatPickerController.text = countryCode;
+                          controller.update();
+                          Get.back();
                         },
                       ),
-                    ],
-                  ),
+                    );
+                  },
+                  // contentPadding: EdgeInsets.all(margin_10),
+                  textController: controller.seatPickerController,
+                  shadow: true,
+                  validate: (String? value) {
+                    return null;
+                  },
+                ),
+              ],
+            ),
           );
         });
   }

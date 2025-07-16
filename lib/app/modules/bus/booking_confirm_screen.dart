@@ -42,7 +42,7 @@ class BookingConfirmScreen extends StatelessWidget {
                 height: 20,
               ),
               TextView(
-                text: 'Ride Confirmed',
+                text: keyRideConfirmed.tr,
                 textStyle: textStyleLabelSmall(context).copyWith(
                   fontSize: 25,
                   color: Colors.white,
@@ -56,7 +56,7 @@ class BookingConfirmScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: TextView(
                   text:
-                      'Your Bus Will arrive at $stopName. Please reach the stop 3 minutes before the schedule arrival time.',
+                      '${keyYourBusArrive.tr} $stopName${keyReach3MinBefore.tr}',
                   textStyle: textStyleLabelSmall(context).copyWith(
                     fontSize: 18,
                     color: Colors.white,
@@ -79,7 +79,7 @@ class BookingConfirmScreen extends StatelessWidget {
                   Get.until((Route route) => route.isFirst);
                 },
                 child: TextView(
-                  text: 'GOT IT',
+                  text: keyGotIt.tr,
                   textStyle: textStyleLabelSmall(context).copyWith(
                     fontSize: 18,
                     color: Colors.white,

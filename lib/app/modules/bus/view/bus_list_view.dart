@@ -446,7 +446,7 @@ class BusListScreen extends GetView<BusController> {
                                                           width: 100,
                                                           height: 30,
                                                           child: TextView(
-                                                            text: 'Book Now',
+                                                            text: keyBookNow.tr,
                                                             textStyle:
                                                                 textStyleLabelSmall(
                                                                         context)
