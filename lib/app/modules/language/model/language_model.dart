@@ -1,31 +1,27 @@
-class  CommonLanguageCalenderModel{
-  int? id;
-  String? title;
+import '../../../core/values/app_constant.dart' show Language;
 
+class LanguageModel {
+  Language language;
+  String name;
 
-  CommonLanguageCalenderModel({this.id,this.title});
+  LanguageModel({
+    required this.language,
+    required this.name,
+  });
 }
 
-class LoginTypeModel{
+class LoginTypeModel {
   String? title;
   String? asset;
-  bool isSelect=false;
-
+  bool isSelect = false;
 
   LoginTypeModel(this.title, this.asset, {this.isSelect = false});
-
-
 }
 
-
-class ButtonTypeModel{
+class ButtonTypeModel {
   String? title;
   String? asset;
-  bool isSelect=false;
-
+  bool isSelect = false;
 
   ButtonTypeModel(this.title, this.asset, {this.isSelect = false});
-
-
-
 }

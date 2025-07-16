@@ -1,22 +1,7 @@
-/*
- *
- *  * @copyright : ToXSL Technologies Pvt. Ltd. < www.toxsl.com >
- *  * @author     : Shiv Charan Panjeta < shiv@toxsl.com >
- *  * All Rights Reserved.
- *  * Proprietary and confidential :  All information contained herein is, and remains
- *  * the property of ToXSL Technologies Pvt. Ltd. and its partners.
- *  * Unauthorized copying of this file, via any medium is strictly prohibited.
- *
- */
-
-
+import 'package:smart_ryde/app/modules/language/model/language_model.dart';
 
 import '../../../../export.dart';
-import '../../../core/translations/local_keys.dart';
 import '../../../core/values/route_arguments.dart';
-import '../model/language_model.dart';
-
-enum ChooseLanguage { english, hebrew }
 
 class SelectLanguageController extends GetxController {
   RxInt selectedLanguage = 1.obs;
@@ -26,9 +11,9 @@ class SelectLanguageController extends GetxController {
 
   int selectedLangIndex = 0;
 
-  Rx<ChooseLanguage> selectLanguage = ChooseLanguage.english.obs;
+  Rx<Language> selectLanguage = Rx(Language.en);
 
-  final PreferenceManger _preferenceManger = Get.put(PreferenceManger());
+  final PreferenceManger _preferenceManger = PreferenceManger();
 
   navigateToNextScreen() {
     if (isDrawerType.value == true) {
@@ -36,20 +21,13 @@ class SelectLanguageController extends GetxController {
     } else {
       Get.toNamed(AppRoutes.logIn);
     }
-
-    //  applyChanged();
   }
 
-  List<CommonLanguageCalenderModel> languageList = [
-    CommonLanguageCalenderModel(id: pageTypeEnglish, title: keyEnglish.tr),
+  List<LanguageModel> languageList = [
+    LanguageModel(language: Language.en, name: keyEnglish.tr),
+    LanguageModel(language: Language.sch, name: keySimplifiedChinese.tr),
+    LanguageModel(language: Language.tch, name: keyTraditionalChinese.tr),
   ];
-
-  @override
-  void onReady() {
-    _preferenceManger.getLocalLanguageData().then((value) {
-      selectLanguage.value = value;
-    });
-  }
 
   @override
   void onInit() {
@@ -62,16 +40,11 @@ class SelectLanguageController extends GetxController {
   }
 
   //=====================================change language function=================
-  void changeLanguage(ChooseLanguage language) async {
+  void changeLanguage(Language language) async {
     selectLanguage.value = language;
-  }
-
-  applyChanged() {
-    if (selectLanguage.value == ChooseLanguage.english) {
-      Get.updateLocale(Locale('en', 'US'));
-    } else {
-      Get.updateLocale(Locale('he', 'HB'));
-    }
-    _preferenceManger.saveLocalLanguageData(selectLanguage.value);
+    appLanguage = language;
+    await _preferenceManger.saveLanguageCode(language.name);
+    Get.updateLocale(Locale(language.name));
+    Get.back();
   }
 }

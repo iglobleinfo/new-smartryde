@@ -38,6 +38,19 @@ const String stringOtpEmptyValidation = 'pleaseEnterOtp';
 const String stringPasswordChangedSuccessfully = 'passwordChangedSuccessfully';
 const String stringSelectPickup = 'selectPickUp';
 const String stringSelectDestination = 'selectDestination';
+const String keyEnglish = "keyEnglish";
+const String keySimplifiedChinese = "keySimplifiedChinese";
+const String keyTraditionalChinese = "keyTraditionalChinese";
+const String keyPressToExitApp = "keyPressToExitApp";
+const String keyNoResultFound = "keyNoResultFound";
+const String keySelectLanguage = "keySelectLanguage";
+const String keyChangeLanguage = "keyChangeLanguage";
+const String keyPreferredLang = "keyPreferredLang";
+const String keyBooking = 'keyBooking';
+const String keyDropAFeedback = 'keyDropAFeedback';
+const String keyRateUs = 'keyRateUs';
+const String keyLoginSignUp = 'keyLoginSignUp';
+
 
 /// **********************************************************************
 /// **********************************************************************
@@ -100,10 +113,8 @@ const String stringAccountDeleteSuccess = "Account Deleted Successfully";
 
 const String stringDownloading = "Downloading...";
 const String stringEmail = "email";
-
 const String stringLoginHeading =
     "Use the email and password that you registered in Flutter website.";
-
 const String stringDoNotHaveAccount =
     "Don't have an account? Create an account in";
 const String stringWebsite = "website";
@@ -112,3 +123,4 @@ const String stringAlreadyHaveAccount = "Already have an account? ";
 const String stringSignIn = "Sign In";
 const String stringFAQs = "FAQs";
 const String strNoImage = "No images selected";
+

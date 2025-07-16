@@ -1,4 +1,3 @@
-import '../local_keys.dart';
 
 const Map<String, String> zhCN = {
   'userLogin': '用户登录',
@@ -36,10 +35,10 @@ const Map<String, String> zhCN = {
   'passwordChangedSuccessfully': '密码修改成功！',
   'selectPickUp': '选择上车站点',
   'selectDestination': '选择目的地站点',
-  keyPressToExitApp: "再按一次将应用程序移至后台",
-  keyNoResultFound: "未找到结果",
-  keyEnglish: "英语",
-  keySelectLanguage: "选择语言",
-  keyChangeLanguage: "更改语言",
-  keyPreferredLang: "首选语言",
+  'keyPressToExitApp': "再按一次将应用程序移至后台",
+  'keyNoResultFound': "未找到结果",
+  'keyEnglish': "英语",
+  'keySelectLanguage': "选择语言",
+  'keyChangeLanguage': "更改语言",
+  'keyPreferredLang': "首选语言",
 };

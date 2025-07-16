@@ -9,6 +9,7 @@ GetStorage storage = GetStorage();
 CustomLoader customLoader = CustomLoader();
 TextTheme textTheme = Theme.of(Get.context!).textTheme;
 Directory? tempDir;
+Language appLanguage = Language.en;
 
 class GlobalVariable {
   static final GlobalKey<ScaffoldMessengerState> navState =
@@ -24,6 +25,7 @@ Future<void> main() async {
   DependencyInjection.init();
   await GetStorage.init();
   tempDir = await getTemporaryDirectory();
+  appLanguage = await PreferenceManger().getSavedLanguage();
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
   );
@@ -53,7 +55,8 @@ class MyApp extends StatelessWidget {
       },
       child: ScreenUtilInit(
         builder: (context, widget) => GetMaterialApp(
-          navigatorKey: navigationService.navigatorKey, // Link the navigator key
+          navigatorKey:
+              navigationService.navigatorKey, // Link the navigator key
           theme: ThemeConfig.lightTheme,
           initialRoute: AppPages.initial,
           getPages: AppPages.routes,
@@ -61,7 +64,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           enableLog: true,
           logWriterCallback: LoggerX.write,
-          locale: TranslationService.locale,
+          locale: TranslationService.getLocaleFromLanguage(appLanguage),
           fallbackLocale: TranslationService.fallbackLocale,
           translations: TranslationService(),
           builder: EasyLoading.init(),

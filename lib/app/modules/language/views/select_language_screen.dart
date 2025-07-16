@@ -9,131 +9,130 @@
  *
  */
 
+import 'package:smart_ryde/app/modules/language/model/language_model.dart';
+
 import '../../../../export.dart';
-import '../../../core/translations/local_keys.dart';
-import '../../../core/utils/helper_widget.dart';
-import '../../../core/widgets/annotated_region_widget.dart';
-import '../../../core/widgets/authentication_screen_heading.dart';
-import '../../../core/widgets/screen_heading.dart';
+import '../../../core/widgets/custom_back_button.dart';
 import '../controllers/select_language_controller.dart';
 
-class SelectLanguageScreen extends StatelessWidget {
-  final controller = Get.put(SelectLanguageController());
+class SelectLanguageScreen extends GetView<SelectLanguageController> {
+  const SelectLanguageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SelectLanguageController>(
-        init: SelectLanguageController(),
-        builder: (controller) {
-          return AnnotatedRegionWidget(
-            statusBarColor: Colors.white,
-            statusBarBrightness: Brightness.light,
-            child: SafeArea(
-              top: true,
-              child: Scaffold(
-                extendBodyBehindAppBar: true,
-                backgroundColor: Colors.white,
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    InkWell(
-                            splashColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () {
-                              onWillPop(context);
-                            },
-                            child: SizedBox())
-                        .marginOnly(top: margin_20)
-                        .marginSymmetric(horizontal: margin_15)
-                        .paddingOnly(bottom: margin_10),
-                    Expanded(child: Center(child: _bodyWidget())),
-                  ],
-                ),
-              ),
+      init: SelectLanguageController(),
+      builder: (controller) {
+        return Scaffold(
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: margin_16,
+              // horizontal: margin_10,
             ),
-          );
-        });
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                CustomBackButton(),
+                languageSelection(context: context),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
-  Widget _bodyWidget() => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          controller.isDrawerType.value == false
-              ? Center(
-                  child: AuthenticationScreenHeading(
-                    title: keySelectLanguage.tr,
-                    alignmentGeometry: Alignment.center,
-                    textAlign: TextAlign.center,
-                  ).paddingOnly(
-                      bottom: margin_10, left: margin_15, right: margin_15),
-                )
-              : Center(
-                  child: ScreenHeading(
-                    title: keyChangeLanguage.tr,
-                  ).paddingOnly(
-                      bottom: margin_10, left: margin_15, right: margin_15),
-                ),
-          chooseLanguage(),
-          _selectLangSection(),
-        ],
-      ).marginOnly(top: margin_20);
-
-  _selectLangSection() => SizedBox(
-        width: Get.width,
-        child: ListView.separated(
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemBuilder: (BuildContext context, int index) => InkWell(
-            onTap: () {
-              controller.selectedLangIndex =
-                  controller.languageList[index].id ?? 0;
-              Timer(Duration(milliseconds: 200), () {
-                controller.navigateToNextScreen();
-              });
-              controller.update();
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: margin_20, horizontal: margin_15),
-              margin: EdgeInsets.symmetric(
-                  vertical: margin_8, horizontal: margin_70),
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade100,
-                        blurRadius: 2,
-                        spreadRadius: 2)
-                  ],
-                  color: controller.selectedLangIndex ==
-                          controller.languageList[index].id
-                      ? colorAppColor
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(radius_50)),
-              child: Align(
-                  alignment: Alignment.center,
-                  child: TextView(
-                      text: controller.languageList[index].title.toString(),
-                      textStyle: textStyleBodyMedium(context).copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: font_17,
-                          color: controller.selectedLangIndex ==
-                                  controller.languageList[index].id
-                              ? Colors.white
-                              : Colors.black))),
+  Widget languageSelection({
+    required BuildContext context,
+  }) {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 15,
             ),
-          ),
-          separatorBuilder: (BuildContext context, int index) => SizedBox(
-            height: height_10,
-          ),
-          itemCount: controller.languageList.length,
+            TextView(
+              text: keyChangeLanguage.tr,
+              maxLine: 1,
+              textStyle: textStyleTitle(context).copyWith(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ).marginOnly(left: margin_10),
+            TextView(
+              text: keySelectLanguage.tr,
+              maxLine: 1,
+              textStyle: textStyleTitle(context).copyWith(
+                fontSize: 12,
+                fontWeight: FontWeight.w300,
+              ),
+            ).marginOnly(left: margin_10),
+            SizedBox(
+              height: margin_15,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: controller.languageList.length,
+              itemBuilder: (BuildContext context, int index) {
+                LanguageModel model = controller.languageList[index];
+                return InkWell(
+                  onTap: () {
+                    controller.changeLanguage(model.language);
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(margin_12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  model.language.name.toUpperCase(),
+                                  style: textStyleTitle(context).copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: margin_10,
+                                ),
+                                Text(
+                                  model.name,
+                                  style: textStyleTitle(context).copyWith(
+                                    fontSize: 14,
+                                    color: Colors.grey.shade700,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Icon(
+                              Icons.arrow_circle_right_outlined,
+                            )
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        height: 0.5,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         ),
-      );
-
-  chooseLanguage() => TextView(
-          text: keyPreferredLang.tr,
-          textStyle: textStyleBodyLarge(Get.context!)
-              .copyWith(fontWeight: FontWeight.w500, fontSize: font_15))
-      .paddingOnly(left: margin_15, bottom: margin_80);
+      ),
+    );
+  }
 }

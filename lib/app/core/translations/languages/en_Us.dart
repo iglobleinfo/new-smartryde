@@ -1,5 +1,3 @@
-import '../local_keys.dart';
-
 const Map<String, String> enUS = {
   'userLogin': 'User Login',
   'userSignUp': 'User Signup',
@@ -37,10 +35,16 @@ const Map<String, String> enUS = {
   'passwordChangedSuccessfully': 'Password Changed Successfully!',
   'selectPickUp': 'Select Your Pickup Stop',
   'selectDestination': 'Select Your Destination Stop',
-  keyPressToExitApp: "Press one more time to push app into background",
-  keyNoResultFound: "No Result Found",
-  keyEnglish: "English",
-  keySelectLanguage: "Select Language",
-  keyChangeLanguage: "Change Language",
-  keyPreferredLang: "Preferred Language",
+  'keyPressToExitApp': "Press one more time to push app into background",
+  'keyNoResultFound': "No Result Found",
+  'keyEnglish': "English",
+  'keySimplifiedChinese': "Simplified Chinese",
+  'keyTraditionalChinese': "Traditional Chinese",
+  'keySelectLanguage': "Select Language",
+  'keyChangeLanguage': "Change Language",
+  'keyPreferredLang': "Preferred Language",
+  'keyBooking': "Booking",
+  'keyDropAFeedback': "Drop A Feedback",
+  'keyRateUs': "Rate Us",
+  'keyLoginSignUp': "Please Login/Signup",
 };

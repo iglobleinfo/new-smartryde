@@ -1,7 +1,6 @@
 import '../../../../export.dart';
 import '../../../modules/authentication/model/login_data_model.dart';
 import '../../../modules/authentication/model/remember_me.dart';
-import '../../../modules/language/controllers/select_language_controller.dart';
 
 double lowerValue = 50;
 double upperValue = 1000;
@@ -27,7 +26,7 @@ class PreferenceManger {
   static const String rememberMeTeacher = "rememberMeTeacher";
   static const String notificationOn = "notificationOn";
   static const String defaultCurrency = "defaultCurrency";
-  static const String changeLanguage = "changeLanguage";
+  static const String currentLanguage = "currentLanguage";
 
   isUserLogin(bool? isUserLogin) {
     storage.write(isLogin, isUserLogin);
@@ -134,38 +133,19 @@ class PreferenceManger {
     return storage.read(notificationOn);
   }
 
-  Future<ChooseLanguage> getLocalLanguageData() async {
-    try {
-      int code = await storage.read(changeLanguage);
-      return getLanguageEnumModal(code);
-    } catch (e) {
-      return ChooseLanguage.english;
+  // get saved language code
+  Future<Language> getSavedLanguage() async {
+    bool hasLanguage = storage.hasData(currentLanguage);
+    if (hasLanguage) {
+      String language = await storage.read(currentLanguage);
+      return languageFromString(language);
+    } else {
+      return Language.en;
     }
   }
 
-  getLanguageCodeModal(ChooseLanguage chooseLanguage) {
-    switch (chooseLanguage) {
-      case ChooseLanguage.english:
-        return 0;
-      case ChooseLanguage.hebrew:
-        return 1;
-      default:
-        return 0;
-    }
-  }
-
-  ChooseLanguage getLanguageEnumModal(int code) {
-    switch (code) {
-      case 0:
-        return ChooseLanguage.english;
-      case 1:
-        return ChooseLanguage.hebrew;
-      default:
-        return ChooseLanguage.english;
-    }
-  }
-
-  saveLocalLanguageData(ChooseLanguage chooseLanguage) async {
-    storage.write(changeLanguage, getLanguageCodeModal(chooseLanguage));
+  // save language code
+  Future<void> saveLanguageCode(String language) async {
+    await storage.write(currentLanguage, language);
   }
 }

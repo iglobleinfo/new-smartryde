@@ -1,5 +1,4 @@
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
-import 'package:smart_ryde/app/modules/authentication/model/login_data_model.dart';
 import 'package:smart_ryde/app/modules/home_booking/view/home_booking_screen.dart';
 import 'package:smart_ryde/export.dart';
 
@@ -17,7 +16,7 @@ class HomeScreen extends GetView<HomeController> {
             listTile(
                 context: context,
                 icon: iconClock,
-                text: 'Booking',
+                text: keyBooking.tr,
                 onTap: () {
                   if (PreferenceManger().getStatusUserLogin() ?? false) {
                     Get.toNamed(AppRoutes.myBooking);
@@ -26,14 +25,14 @@ class HomeScreen extends GetView<HomeController> {
             listTile(
                 context: context,
                 icon: iconFeedback,
-                text: 'Drop A Feedback',
+                text: keyDropAFeedback.tr,
                 onTap: () {
                   Get.toNamed(AppRoutes.feedback);
                 }),
             listTile(
                 context: context,
                 icon: iconStar,
-                text: 'Rate Us',
+                text: keyRateUs.tr,
                 onTap: () async {
                   final InAppReview inAppReview = InAppReview.instance;
                   if (await inAppReview.isAvailable()) {
@@ -78,6 +77,31 @@ class HomeScreen extends GetView<HomeController> {
                       size: 26,
                     ).paddingAll(12),
                   ),
+                  actionWidget: [
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.selectLanguage);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(8.r),
+                        child: Row(
+                          children: [
+                            Text(
+                              Get.locale!.languageCode.toUpperCase(),
+                              style: textStyleDisplayMedium(context).copyWith(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 14,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down_rounded,
+                              size: 25.r,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 drawer: customDrawer(context),
                 body: Stack(
@@ -183,7 +207,7 @@ class HomeScreen extends GetView<HomeController> {
                       ],
                     )
                   : Text(
-                      'Please Login/Signup',
+                      keyLoginSignUp.tr,
                       style: textStyleDisplayMedium(context).copyWith(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,
