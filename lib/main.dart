@@ -19,7 +19,6 @@ class GlobalVariable {
 }
 
 Future<void> main() async {
-  initApp();
   WidgetsFlutterBinding.ensureInitialized();
   APIRepository();
   DependencyInjection.init();
@@ -29,6 +28,7 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light,
   );
+  initApp();
 }
 
 initApp() async {
@@ -44,6 +44,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale locale = TranslationService.getLocaleFromLanguage(appLanguage);
+    debugPrint('Locale ${locale.languageCode}');
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           enableLog: true,
           logWriterCallback: LoggerX.write,
-          locale: TranslationService.getLocaleFromLanguage(appLanguage),
+          locale: locale,
           fallbackLocale: TranslationService.fallbackLocale,
           translations: TranslationService(),
           builder: EasyLoading.init(),

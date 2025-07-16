@@ -1,4 +1,3 @@
-
 const Map<String, String> zhCN = {
   'userLogin': '用户登录',
   'userSignUp': '用户注册',
@@ -37,9 +36,17 @@ const Map<String, String> zhCN = {
   'selectDestination': '选择目的地站点',
   'keyPressToExitApp': "再按一次将应用程序移至后台",
   'keyNoResultFound': "未找到结果",
-  'keyEnglish': "英语",
-  'keySelectLanguage': "选择语言",
-  'keyChangeLanguage': "更改语言",
-  'keyPreferredLang': "首选语言",
-  'keySelectYourDestiny': "选择你的命运",
+  "keyEnglish": "英语",
+  "keySimplifiedChinese": "简体中文",
+  "keyTraditionalChinese": "繁體中文",
+  "keySelectLanguage": "选择语言",
+  "keyChangeLanguage": "更改语言",
+  "keyPreferredLang": "首选语言",
+  "keyBooking": "预订",
+  "keyDropAFeedback": "提交反馈",
+  "keyRateUs": "为我们评分",
+  "keyLoginSignUp": "请登录/注册",
+  "keySelectYourDestiny": "选择你的命运",
+  "keySelectYourArea": "选择您的区域",
+  "keySelectYourStop": "选择您的站点"
 };
