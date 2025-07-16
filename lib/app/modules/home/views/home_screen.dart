@@ -80,7 +80,11 @@ class HomeScreen extends GetView<HomeController> {
                   actionWidget: [
                     InkWell(
                       onTap: () {
-                        Get.toNamed(AppRoutes.selectLanguage);
+                       final result= Get.toNamed(AppRoutes.selectLanguage);
+                       if(result!=null)
+                         {
+
+                         }
                       },
                       child: Container(
                         padding: EdgeInsets.all(8.r),

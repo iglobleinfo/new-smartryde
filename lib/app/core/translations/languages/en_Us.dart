@@ -47,4 +47,7 @@ const Map<String, String> enUS = {
   'keyDropAFeedback': "Drop A Feedback",
   'keyRateUs': "Rate Us",
   'keyLoginSignUp': "Please Login/Signup",
+  'keySelectYourDestiny': "Select Your Destiny",
+  'keySelectYourArea': "Select Your Area",
+  'keySelectYourStop': "Select Your Stop",
 };

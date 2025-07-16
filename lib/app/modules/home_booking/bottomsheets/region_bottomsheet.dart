@@ -77,13 +77,21 @@ class RegionBottomsheet extends StatelessWidget {
                 RegionList listData = list[index];
                 return GestureDetector(
                   onTap: () {
-                    selectedRegion.call(listData.nameEng ?? '');
+                    selectedRegion.call(appLanguage == Language.en
+                        ? listData.nameEng ?? ''
+                        : appLanguage == Language.sch
+                        ? listData.nameChiSim ?? ''
+                        : listData.nameChi ?? '');
                     selectedRegionId.call(listData.regionId ?? 0);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextView(
-                      text: listData.nameEng ?? '',
+                      text: appLanguage == Language.en
+                          ? listData.nameEng ?? ''
+                          : appLanguage == Language.sch
+                          ? listData.nameChiSim ?? ''
+                          : listData.nameChi ?? '',
                       textAlign: TextAlign.start,
                       textStyle: textStyleBodyMedium(context).copyWith(
                           fontSize: 17,

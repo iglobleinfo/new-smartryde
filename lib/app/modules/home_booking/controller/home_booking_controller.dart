@@ -100,6 +100,10 @@ class HomeBookingController extends GetxController {
     if (PreferenceManger().getStatusUserLogin() ?? false) {
       hitGetBookmark();
     }
+    destiny1Controller.clear();
+    pickUp1RegionId = null;
+    pickUp1DistrictId=null;
+    pickUp1StopId=null;
     FocusManager.instance.primaryFocus!.unfocus();
     APIRepository.getDistrictApi().then((DistrictResponseModel? value) async {
       districtResponseModel = value;

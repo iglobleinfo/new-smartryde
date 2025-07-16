@@ -79,13 +79,21 @@ class StopBottomsheet extends StatelessWidget {
                 StopList listData = list[index];
                 return GestureDetector(
                   onTap: () {
-                    selectedStop.call(listData.ename ?? '');
-                    selectedStopId.call(listData.id??0);
+                    selectedStop.call(appLanguage == Language.en
+                        ? listData.ename ?? ''
+                        : appLanguage == Language.sch
+                            ? listData.chName ?? ''
+                            : listData.schName ?? '');
+                    selectedStopId.call(listData.id ?? 0);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextView(
-                      text: listData.ename ?? '',
+                      text: appLanguage == Language.en
+                          ? listData.ename ?? ''
+                          : appLanguage == Language.sch
+                              ? listData.chName ?? ''
+                              : listData.schName ?? '',
                       textAlign: TextAlign.start,
                       textStyle: textStyleBodyMedium(context).copyWith(
                           fontSize: 17,

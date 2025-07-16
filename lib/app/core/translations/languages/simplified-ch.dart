@@ -41,4 +41,5 @@ const Map<String, String> zhCN = {
   'keySelectLanguage': "选择语言",
   'keyChangeLanguage': "更改语言",
   'keyPreferredLang': "首选语言",
+  'keySelectYourDestiny': "选择你的命运",
 };

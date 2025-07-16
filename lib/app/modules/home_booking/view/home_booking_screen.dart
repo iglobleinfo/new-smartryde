@@ -271,7 +271,7 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                           ),
                           TextFieldWidget(
                             textColor: Colors.grey,
-                            hint: 'Select Your Destiny',
+                            hint: keySelectYourDestiny.tr,
                             hintStyle: textStyleBodyMedium(context).copyWith(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.grey,
@@ -313,7 +313,7 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                           controller.pickUp1DistrictId != null
                               ? TextFieldWidget(
                                   textColor: Colors.grey,
-                                  hint: 'Select Your Area',
+                                  hint: keySelectYourArea.tr,
                                   hintStyle: textStyleBodyMedium(context)
                                       .copyWith(
                                           fontWeight: FontWeight.w400,

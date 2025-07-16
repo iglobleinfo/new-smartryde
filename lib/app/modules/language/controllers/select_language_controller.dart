@@ -1,3 +1,4 @@
+import 'package:smart_ryde/app/modules/home_booking/controller/home_booking_controller.dart';
 import 'package:smart_ryde/app/modules/language/model/language_model.dart';
 
 import '../../../../export.dart';
@@ -45,6 +46,7 @@ class SelectLanguageController extends GetxController {
     appLanguage = language;
     await _preferenceManger.saveLanguageCode(language.name);
     Get.updateLocale(Locale(language.name));
+    Get.find<HomeBookingController>().hitGetDistrict();
     Get.back();
   }
 }

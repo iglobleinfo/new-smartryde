@@ -50,6 +50,9 @@ const String keyBooking = 'keyBooking';
 const String keyDropAFeedback = 'keyDropAFeedback';
 const String keyRateUs = 'keyRateUs';
 const String keyLoginSignUp = 'keyLoginSignUp';
+const String keySelectYourDestiny = 'keySelectYourDestiny';
+const String keySelectYourArea = 'keySelectYourArea';
+const String keySelectYourStop = 'keySelectYourStop';
 
 
 /// **********************************************************************

@@ -76,13 +76,21 @@ class DestinyBottomsheet extends StatelessWidget {
                 DistrictList listData = list[index];
                 return GestureDetector(
                   onTap: () {
-                    selectedDistrict.call(listData.nameEng ?? '');
-                    selectedDistrictId.call(listData.districtId??0);
+                    selectedDistrict.call(appLanguage == Language.en
+                        ? listData.nameEng ?? ''
+                        : appLanguage == Language.sch
+                            ? listData.nameChiSim ?? ''
+                            : listData.nameChi ?? '');
+                    selectedDistrictId.call(listData.districtId ?? 0);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextView(
-                      text: listData.nameEng ?? '',
+                      text: appLanguage == Language.en
+                          ? listData.nameEng ?? ''
+                          : appLanguage == Language.sch
+                          ? listData.nameChiSim ?? ''
+                          : listData.nameChi ?? '',
                       textAlign: TextAlign.start,
                       textStyle: textStyleBodyMedium(context).copyWith(
                           fontSize: 17,
