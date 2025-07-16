@@ -41,4 +41,10 @@ const Map<String, String> zhHK = {
   'keyChangeLanguage': "更改語言",
   'keyPreferredLang': "偏好語言",
   'keySelectYourDestiny': "選擇你的命運",
+  'keySelectYourArea': "選擇你的地區",
+  'keySelectYourStop': "選擇你的站點",
+  'keyCurrent': "目前",
+  'keyCancelled': "已取消",
+  'keyPast': "過去",
+
 };

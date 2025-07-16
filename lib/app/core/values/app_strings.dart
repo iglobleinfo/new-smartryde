@@ -53,6 +53,10 @@ const String keyLoginSignUp = 'keyLoginSignUp';
 const String keySelectYourDestiny = 'keySelectYourDestiny';
 const String keySelectYourArea = 'keySelectYourArea';
 const String keySelectYourStop = 'keySelectYourStop';
+const String keyCurrent = 'keyCurrent';
+const String keyCancelled = 'keyCancelled';
+const String keyPast = 'keyPast';
+
 
 
 /// **********************************************************************

@@ -42,4 +42,9 @@ const Map<String, String> zhCN = {
   'keyChangeLanguage': "更改语言",
   'keyPreferredLang': "首选语言",
   'keySelectYourDestiny': "选择你的命运",
+  'keySelectYourArea': "选择你的地区",
+  'keySelectYourStop': "选择你的站点",
+  'keyCurrent': "目前",
+  'keyCancelled': "已取消",
+  'keyPast': "过去",
 };

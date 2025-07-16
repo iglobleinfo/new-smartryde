@@ -92,7 +92,7 @@ class HomeDestinyScreen extends GetView<HomeDestinyController> {
                   ),
                   TextFieldWidget(
                     textColor: Colors.grey,
-                    hint: 'Select Your Destiny',
+                    hint: keySelectYourDestiny.tr,
                     hintStyle: textStyleBodyMedium(context).copyWith(
                         fontWeight: FontWeight.w400,
                         color: Colors.grey,
@@ -133,7 +133,7 @@ class HomeDestinyScreen extends GetView<HomeDestinyController> {
                   controller.pickUp1DistrictId != null
                       ? TextFieldWidget(
                           textColor: Colors.grey,
-                          hint: 'Select Your Area',
+                          hint: keySelectYourArea.tr,
                           hintStyle: textStyleBodyMedium(context).copyWith(
                               fontWeight: FontWeight.w400,
                               color: Colors.grey,
@@ -174,7 +174,7 @@ class HomeDestinyScreen extends GetView<HomeDestinyController> {
                   controller.pickUp1RegionId != null
                       ? TextFieldWidget(
                           textColor: Colors.grey,
-                          hint: 'Select Your Stop',
+                          hint: keySelectYourStop.tr,
                           hintStyle: textStyleBodyMedium(context).copyWith(
                               fontWeight: FontWeight.w400,
                               color: Colors.grey,

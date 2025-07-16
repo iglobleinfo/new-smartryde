@@ -50,4 +50,7 @@ const Map<String, String> enUS = {
   'keySelectYourDestiny': "Select Your Destiny",
   'keySelectYourArea': "Select Your Area",
   'keySelectYourStop': "Select Your Stop",
+  'keyCurrent': "Current",
+  'keyCancelled': "Cancelled",
+  'keyPast': "Past",
 };
