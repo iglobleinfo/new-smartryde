@@ -356,7 +356,7 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                           controller.pickUp1RegionId != null
                               ? TextFieldWidget(
                                   textColor: Colors.grey,
-                                  hint: 'Select Your Stop',
+                                  hint: keySelectYourStop.tr,
                                   hintStyle: textStyleBodyMedium(context)
                                       .copyWith(
                                           fontWeight: FontWeight.w400,

@@ -48,5 +48,8 @@ const Map<String, String> zhHK = {
   'keyLoginSignUp': "請登入/註冊",
   'keySelectYourDestiny': "選擇你的命運",
   'keySelectYourArea': "選擇您的區域",
-  'keySelectYourStop': "選擇您的站點"
+  'keySelectYourStop': "選擇您的站點",
+  'keyCurrent': "目前",
+  'keyCancelled': "已取消",
+  'keyPast': "過去",
 };

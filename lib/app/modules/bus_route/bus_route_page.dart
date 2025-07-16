@@ -208,7 +208,11 @@ class BusRouteBottomSheet extends StatelessWidget {
                         ],
                       ),
                       title: Text(
-                        stop.ename ?? '',
+                        appLanguage == Language.en
+                            ? stop.ename ?? ''
+                            : appLanguage == Language.sch
+                            ? stop.schName ?? ''
+                            : stop.chName ?? '' ,
                         style: TextStyle(
                           fontWeight:
                               isCurrent ? FontWeight.bold : FontWeight.normal,
