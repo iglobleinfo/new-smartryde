@@ -53,4 +53,10 @@ const Map<String, String> enUS = {
   'keyCurrent': "Current",
   'keyCancelled': "Cancelled",
   'keyPast': "Past",
+  'keyDeleteAll': 'Delete All',
+  'keySelectATripThatSuitsPreference': 'Select a trip that suits your preference',
+  'noBusSelectedTryLater': 'No Bus available right now. Please try again later!',
+  'keyTotalBookedSeats': 'Total Booked Seats:',
+  'keyBookingNo': 'Booking No:',
+  'keySorryBusFull': 'Sorry, The Bus Is Full',
 };

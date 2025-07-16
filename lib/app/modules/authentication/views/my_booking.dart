@@ -19,7 +19,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
             return Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: CustomAppBar(
-                appBarTitleText: 'Booking',
+                appBarTitleText: keyBooking.tr,
                 textColor: primaryColor,
                 actionWidget: [
                   if (controller.index == 1)
@@ -28,7 +28,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                         controller.hitDeleteAllCancelBooking();
                       },
                       child: Text(
-                        'Delete All',
+                        keyDeleteAll.tr,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -56,7 +56,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextView(
-                      text: 'Select a trip that suits your preference',
+                      text: keySelectATripThatSuitsPreference.tr,
                       textStyle: textStyleLabelSmall(context).copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -156,8 +156,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                         ),
                         Center(
                           child: TextView(
-                            text:
-                                'No Bus available right now. Please try again later!',
+                            text: keyNoBusSelectedTryLater.tr,
                             textStyle: textStyleLabelSmall(context).copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
@@ -235,11 +234,14 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             SizedBox(
                                               width: 150,
                                               child: TextView(
-                                                text:appLanguage == Language.en
+                                                text: appLanguage == Language.en
                                                     ? busData.fromEng ?? ''
-                                                    : appLanguage == Language.sch
-                                                    ? busData.fromChSim ?? ''
-                                                    : busData.fromCh ?? '' ,  /*busData.enRouteName!
+                                                    : appLanguage ==
+                                                            Language.sch
+                                                        ? busData.fromChSim ??
+                                                            ''
+                                                        : busData.fromCh ?? '',
+                                                /*busData.enRouteName!
                                                     .split(')')
                                                     .first
                                                     .split('(')
@@ -270,9 +272,11 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                 textAlign: TextAlign.start,
                                                 text: appLanguage == Language.en
                                                     ? busData.toEng ?? ''
-                                                    : appLanguage == Language.sch
-                                                    ? busData.toChSim ?? ''
-                                                    : busData.toCh ?? '' , /*busData.enRouteName!
+                                                    : appLanguage ==
+                                                            Language.sch
+                                                        ? busData.toChSim ?? ''
+                                                        : busData.toCh ?? '',
+                                                /*busData.enRouteName!
                                                     .split('to')
                                                     .last
                                                     .split('(')
@@ -306,7 +310,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             ),
                                             TextView(
                                               text:
-                                                  'Total Booked Seats:${busData.totalSeat}',
+                                                  '${keyTotalBookedSeats.tr}${busData.totalSeat}',
                                               textStyle:
                                                   textStyleLabelSmall(context)
                                                       .copyWith(
@@ -319,7 +323,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             ),
                                             TextView(
                                               text:
-                                                  'Booking No:${busData.refrenceNumber}',
+                                                  '${keyBookingNo.tr}${busData.refrenceNumber}',
                                               textStyle:
                                                   textStyleLabelSmall(context)
                                                       .copyWith(
@@ -444,8 +448,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                         ),
                         Center(
                           child: TextView(
-                            text:
-                                'No Bus available right now. Please try again later!',
+                            text: keyNoBusSelectedTryLater.tr,
                             textStyle: textStyleLabelSmall(context).copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
@@ -525,7 +528,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                       height: 40,
                                                       child: TextView(
                                                         text:
-                                                            'Sorry, The Bus Is Full',
+                                                            keySorryBusFull.tr,
                                                         textStyle:
                                                             textStyleLabelSmall(
                                                                     context)
@@ -553,9 +556,12 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                               child: TextView(
                                                 text: appLanguage == Language.en
                                                     ? busData.fromEng ?? ''
-                                                    : appLanguage == Language.sch
-                                                    ? busData.fromChSim ?? ''
-                                                    : busData.fromCh ?? '' /*busData.enRouteName!
+                                                    : appLanguage ==
+                                                            Language.sch
+                                                        ? busData.fromChSim ??
+                                                            ''
+                                                        : busData.fromCh ??
+                                                            '' /*busData.enRouteName!
                                                     .split(')')
                                                     .first
                                                     .split('(')
@@ -585,11 +591,13 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                               width: 150,
                                               child: TextView(
                                                 textAlign: TextAlign.start,
-                                                text:appLanguage == Language.en
+                                                text: appLanguage == Language.en
                                                     ? busData.toEng ?? ''
-                                                    : appLanguage == Language.sch
-                                                    ? busData.toChSim ?? ''
-                                                    : busData.toCh ?? '' /*busData.enRouteName!
+                                                    : appLanguage ==
+                                                            Language.sch
+                                                        ? busData.toChSim ?? ''
+                                                        : busData.toCh ??
+                                                            '' /*busData.enRouteName!
                                                     .split('to')
                                                     .last
                                                     .split('(')
@@ -624,7 +632,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             ),
                                             TextView(
                                               text:
-                                                  'Total Booked Seats:${busData.totalSeat}',
+                                                  '${keyTotalBookedSeats.tr}${busData.totalSeat}',
                                               textStyle:
                                                   textStyleLabelSmall(context)
                                                       .copyWith(
@@ -637,7 +645,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             ),
                                             TextView(
                                               text:
-                                                  'Booking No:${busData.refrenceNumber}',
+                                                  '${keyBookingNo.tr}${busData.refrenceNumber}',
                                               textStyle:
                                                   textStyleLabelSmall(context)
                                                       .copyWith(
@@ -669,7 +677,8 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                           width: 120,
                                                           height: 30,
                                                           child: TextView(
-                                                            text: keyCancelled.tr,
+                                                            text:
+                                                                keyCancelled.tr,
                                                             textStyle:
                                                                 textStyleLabelSmall(
                                                                         context)
@@ -731,8 +740,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                         ),
                         Center(
                           child: TextView(
-                            text:
-                                'No Bus available right now. Please try again later!',
+                            text: keyNoBusSelectedTryLater.tr,
                             textStyle: textStyleLabelSmall(context).copyWith(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
@@ -811,7 +819,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                       height: 40,
                                                       child: TextView(
                                                         text:
-                                                            'Sorry, The Bus Is Full',
+                                                            keySorryBusFull.tr,
                                                         textStyle:
                                                             textStyleLabelSmall(
                                                                     context)
@@ -839,9 +847,12 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                               child: TextView(
                                                 text: appLanguage == Language.en
                                                     ? busData.fromEng ?? ''
-                                                    : appLanguage == Language.sch
-                                                    ? busData.fromChSim ?? ''
-                                                    : busData.fromCh ?? ''/*busData.enRouteName!
+                                                    : appLanguage ==
+                                                            Language.sch
+                                                        ? busData.fromChSim ??
+                                                            ''
+                                                        : busData.fromCh ??
+                                                            '' /*busData.enRouteName!
                                                     .split(')')
                                                     .first
                                                     .split('(')
@@ -873,9 +884,11 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                 textAlign: TextAlign.start,
                                                 text: appLanguage == Language.en
                                                     ? busData.toEng ?? ''
-                                                    : appLanguage == Language.sch
-                                                    ? busData.toChSim ?? ''
-                                                    : busData.toCh ?? '' /*busData.enRouteName!
+                                                    : appLanguage ==
+                                                            Language.sch
+                                                        ? busData.toChSim ?? ''
+                                                        : busData.toCh ??
+                                                            '' /*busData.enRouteName!
                                                     .split('to')
                                                     .last
                                                     .split('(')
@@ -910,7 +923,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             ),
                                             TextView(
                                               text:
-                                                  'Total Booked Seats:${busData.totalSeat}',
+                                                  '${keyTotalBookedSeats.tr}${busData.totalSeat}',
                                               textStyle:
                                                   textStyleLabelSmall(context)
                                                       .copyWith(
@@ -923,7 +936,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                             ),
                                             TextView(
                                               text:
-                                                  'Booking No:${busData.refrenceNumber}',
+                                                  '${keyBookingNo.tr}${busData.refrenceNumber}',
                                               textStyle:
                                                   textStyleLabelSmall(context)
                                                       .copyWith(
@@ -957,7 +970,8 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                           width: 120,
                                                           height: 30,
                                                           child: TextView(
-                                                            text: keyCancelled.tr,
+                                                            text:
+                                                                keyCancelled.tr,
                                                             textStyle:
                                                                 textStyleLabelSmall(
                                                                         context)

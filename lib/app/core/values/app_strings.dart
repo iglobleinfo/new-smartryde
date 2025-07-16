@@ -56,7 +56,13 @@ const String keySelectYourStop = 'keySelectYourStop';
 const String keyCurrent = 'keyCurrent';
 const String keyCancelled = 'keyCancelled';
 const String keyPast = 'keyPast';
-
+const String keyDeleteAll = 'keyDeleteAll';
+const String keySelectATripThatSuitsPreference =
+    'keySelectATripThatSuitsPreference';
+const String keyNoBusSelectedTryLater = 'noBusSelectedTryLater';
+const String keyTotalBookedSeats = 'keyTotalBookedSeats';
+const String keyBookingNo = 'keyBookingNo';
+const String keySorryBusFull = 'keySorryBusFull';
 
 
 /// **********************************************************************
@@ -130,4 +136,3 @@ const String stringAlreadyHaveAccount = "Already have an account? ";
 const String stringSignIn = "Sign In";
 const String stringFAQs = "FAQs";
 const String strNoImage = "No images selected";
-

@@ -52,4 +52,10 @@ const Map<String, String> zhHK = {
   'keyCurrent': "目前",
   'keyCancelled': "已取消",
   'keyPast': "過去",
+  'keyDeleteAll': "刪除全部",
+  'keySelectATripThatSuitsPreference': "選擇符合您偏好的行程",
+  'noBusSelectedTryLater': "選擇符合您偏好的行程",
+  'keyTotalBookedSeats': "已預訂座位總數：",
+  'keyBookingNo': "預訂編號：",
+  'keySorryBusFull': "抱歉，巴士已滿員",
 };
