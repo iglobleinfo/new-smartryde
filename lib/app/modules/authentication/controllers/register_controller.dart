@@ -189,7 +189,7 @@ class RegisterController extends GetxController {
   /*===================================================================== SignUp API Call  ==========================================================*/
   hitSignUpAPI(context) {
     if (nameController.text.isEmpty) {
-      toast('Please enter your name'.tr);
+      toast(enterName.tr);
       return;
     }
     String? result = phoneTextFieldValidator(
@@ -199,7 +199,7 @@ class RegisterController extends GetxController {
       return;
     }
     if (!GetUtils.isEmail(emailController.text)) {
-      toast('Enter a valid email');
+      toast(keyEnterValidEmail.tr);
       return;
     }
     if (passwordController.text.isEmpty) {

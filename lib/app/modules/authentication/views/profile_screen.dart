@@ -21,7 +21,7 @@ class ProfileScreen extends GetView<ProfileController> {
             height: 30,
           ),
           TextView(
-                  text: 'Edit Profile',
+                  text: keyEditProfile.tr,
                   maxLine: 1,
                   textStyle: textStyleTitle(context).copyWith(fontSize: 22))
               .marginOnly(bottom: margin_5),
@@ -36,7 +36,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   height: 15,
                 ),
                 TextView(
-                        text: 'Name',
+                        text: keyName.tr,
                         maxLine: 1,
                         textStyle: textStyleTitle(context))
                     .marginOnly(bottom: margin_5),
@@ -63,7 +63,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   height: 15,
                 ),
                 TextView(
-                        text: 'Email',
+                        text: keyEmail.tr,
                         maxLine: 1,
                         textStyle: textStyleTitle(context))
                     .marginOnly(bottom: margin_5),
@@ -79,7 +79,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   height: 15,
                 ),
                 TextView(
-                        text: 'Phone Number',
+                        text: keyPhone.tr,
                         maxLine: 1,
                         textStyle: textStyleTitle(context))
                     .marginOnly(bottom: margin_5),
@@ -134,7 +134,7 @@ class ProfileScreen extends GetView<ProfileController> {
                       child: MaterialButtonWidget(
                         minWidth: Get.width,
                         fontsize: 14,
-                        buttonText: 'Save Changes'.tr.toUpperCase(),
+                        buttonText: keySave.tr.toUpperCase(),
                         onPressed: () {
                           if (formGlobalKey.currentState!.validate()) {
                             controller.hitUpdateProfileAPI(context);

@@ -25,7 +25,6 @@ class VerifyOtpController extends GetxController {
     );
     if (successResponse != null) {
       customLoader.hide();
-      toast('Otp Verified');
       Get.until((Route route) => route.settings.name == AppRoutes.onboarding);
     }
   }
@@ -36,10 +35,10 @@ class VerifyOtpController extends GetxController {
     FocusManager.instance.primaryFocus!.unfocus();
     APIRepository.generateOtpApi(phoneNumber).then((value) async {
       customLoader.hide();
-      toast('OTP send successfully');
+      toast(keyOtpSendSuccessfully.tr);
     }).onError((error, stackTrace) {
       customLoader.hide();
-      toast(error);
+      toast(keyInvalidOtpSend.tr);
     });
   }
 }

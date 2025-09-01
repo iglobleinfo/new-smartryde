@@ -80,7 +80,7 @@ class MyProfileController extends GetxController {
       return;
     }
     if (!GetUtils.isEmail(emailController.text)) {
-      toast('Enter a valid email');
+      toast(keyEnterValidEmail.tr);
       return;
     }
     customLoader.show(context);
@@ -102,7 +102,7 @@ class MyProfileController extends GetxController {
         Get.put(HomeController()).getData();
       }
       Get.back();
-      toast('Profile updated successfully');
+      toast(keyProfileUpdated.tr);
       update();
     }).onError((error, stackTrace) {
       customLoader.hide();

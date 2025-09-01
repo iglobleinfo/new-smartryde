@@ -18,7 +18,7 @@ class HomeScreen2 extends GetView<HomeController2> {
             listTile(
                 context: context,
                 icon: iconClock,
-                text: 'Booking',
+                text: keyBooking.tr,
                 onTap: () {
                   if (PreferenceManger().getStatusUserLogin() ?? false) {
                     Get.toNamed(AppRoutes.myBooking);
@@ -27,14 +27,14 @@ class HomeScreen2 extends GetView<HomeController2> {
             listTile(
                 context: context,
                 icon: iconFeedback,
-                text: 'Drop A Feedback',
+                text: keyDropAFeedback.tr,
                 onTap: () {
                   Get.toNamed(AppRoutes.feedback);
                 }),
             listTile(
                 context: context,
                 icon: iconStar,
-                text: 'Rate Us',
+                text: keyRateUs.tr,
                 onTap: () async {
                   final InAppReview inAppReview = InAppReview.instance;
                   if (await inAppReview.isAvailable()) {
@@ -66,6 +66,7 @@ class HomeScreen2 extends GetView<HomeController2> {
               resizeToAvoidBottomInset: false,
               appBar: CustomAppBar(
                 appBarTitleText: 'SmartRyde',
+                onTap: () {},
                 leadingIcon: getInkWell(
                   onTap: () {
                     controller.scaffoldKey.currentState!.openDrawer();
@@ -77,6 +78,7 @@ class HomeScreen2 extends GetView<HomeController2> {
                 ),
               ),
               drawer: customDrawer(context),
+              drawerEnableOpenDragGesture: false,
               body: Stack(
                 children: [
                   Stack(
@@ -182,7 +184,7 @@ class HomeScreen2 extends GetView<HomeController2> {
                       ],
                     )
                   : Text(
-                      'Please Login/Signup',
+                      keyLoginSignUp.tr,
                       style: textStyleDisplayMedium(context).copyWith(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,

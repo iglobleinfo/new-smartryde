@@ -53,7 +53,7 @@ class ForgotPasswordController extends GetxController {
           update();
         }
       });
-      toast('OTP send successfully');
+      toast(keyOtpSendSuccessfully.tr);
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);
@@ -94,7 +94,7 @@ class ForgotPasswordController extends GetxController {
       toast(stringPasswordChangedSuccessfully.tr);
     }).onError((error, stackTrace) {
       customLoader.hide();
-      toast(error);
+      // toast(error);
     });
   }
 

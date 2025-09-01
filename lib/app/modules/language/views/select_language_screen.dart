@@ -85,7 +85,7 @@ class SelectLanguageScreen extends GetView<SelectLanguageController> {
                 LanguageModel model = controller.languageList[index];
                 return InkWell(
                   onTap: () {
-                    controller.changeLanguage(model.language);
+                    controller.changeLanguage(model.language,context);
                   },
                   child: Column(
                     children: [

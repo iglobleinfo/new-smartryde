@@ -68,6 +68,7 @@ class HomeScreen extends GetView<HomeController> {
                 resizeToAvoidBottomInset: false,
                 appBar: CustomAppBar(
                   appBarTitleText: 'SmartRyde',
+                   onTap: () {},
                   leadingIcon: getInkWell(
                     onTap: () {
                       controller.scaffoldKey.currentState!.openDrawer();
@@ -80,11 +81,8 @@ class HomeScreen extends GetView<HomeController> {
                   actionWidget: [
                     InkWell(
                       onTap: () {
-                       final result= Get.toNamed(AppRoutes.selectLanguage);
-                       if(result!=null)
-                         {
-
-                         }
+                        final result = Get.toNamed(AppRoutes.selectLanguage);
+                        if (result != null) {}
                       },
                       child: Container(
                         padding: EdgeInsets.all(8.r),

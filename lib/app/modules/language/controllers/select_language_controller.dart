@@ -1,5 +1,7 @@
+import 'package:smart_ryde/app/modules/authentication/model/login_data_model.dart';
 import 'package:smart_ryde/app/modules/home_booking/controller/home_booking_controller.dart';
 import 'package:smart_ryde/app/modules/language/model/language_model.dart';
+import 'package:smart_ryde/model/error_response_model.dart';
 
 import '../../../../export.dart';
 import '../../../core/values/route_arguments.dart';
@@ -30,6 +32,22 @@ class SelectLanguageController extends GetxController {
     LanguageModel(language: Language.tch, name: keyTraditionalChinese.tr),
   ];
 
+  /*===================================================================== Update Language API Call  ==========================================================*/
+  hitUpdateLangAPI(context) async {
+    customLoader.show(context);
+    LoginDataModel? userData = await PreferenceManger().getUserData();
+    APIRepository.updateLanguageApiCall(
+      userId: userData!.id.toString(),
+    ).then((ErrorMessageResponseModel? value) async {
+      customLoader.hide();
+      // PreferenceManger().saveUserData(loginModel!.data!);
+      update();
+    }).onError((error, stackTrace) {
+      customLoader.hide();
+      toast(error);
+    });
+  }
+
   @override
   void onInit() {
     if (Get.arguments != null) {
@@ -41,9 +59,12 @@ class SelectLanguageController extends GetxController {
   }
 
   //=====================================change language function=================
-  void changeLanguage(Language language) async {
+  void changeLanguage(Language language, BuildContext context) async {
     selectLanguage.value = language;
     appLanguage = language;
+    if (PreferenceManger().getStatusUserLogin() ?? false) {
+      hitUpdateLangAPI(context);
+    }
     await _preferenceManger.saveLanguageCode(language.name);
     Get.updateLocale(Locale(language.name));
     Get.find<HomeBookingController>().hitGetDistrict();

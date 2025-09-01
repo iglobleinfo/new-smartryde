@@ -146,7 +146,7 @@ class LoginScreen extends GetView<LoginController> {
                 Get.toNamed(AppRoutes.forgotPassword);
               },
               child: TextView(
-                text: 'Forgot Password?',
+                text: keyForgot.tr,
                 textStyle: textStyleLabelLarge(context).copyWith(
                   color: appClickableTextColor,
                   decoration: TextDecoration.underline,

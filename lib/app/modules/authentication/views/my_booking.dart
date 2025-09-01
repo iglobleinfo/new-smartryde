@@ -7,6 +7,76 @@ import '../controllers/my_booking_controller.dart';
 class MyBookingListScreen extends GetView<MyBookingController> {
   const MyBookingListScreen({super.key});
 
+  void showDeleteDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          keySureDelete.tr,
+          style: TextStyle(
+            fontSize: 14,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Close dialog
+            },
+            child: Text(
+              keyNo.tr,
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              // Do something on confirm
+              controller.hitDeleteAllCancelBooking();
+              Get.back();
+            },
+            child: Text(
+              keyYes.tr,
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showSingleDeleteDialog(String ticketId) {
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          keySureSingleDelete.tr,
+          style: TextStyle(
+            fontSize: 14,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back(); // Close dialog
+            },
+            child: Text(
+              keyNo.tr,
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              // Do something on confirm
+              controller.hitDeleteCancelBooking(ticketId);
+              Get.back();
+            },
+            child: Text(
+              keyYes.tr,
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegionWidget(
@@ -25,7 +95,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                   if (controller.index == 1)
                     getInkWell(
                       onTap: () {
-                        controller.hitDeleteAllCancelBooking();
+                        showDeleteDialog();
                       },
                       child: Text(
                         keyDeleteAll.tr,
@@ -352,6 +422,9 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                         'busData': busData
                                                       },
                                                     );
+                                                    // controller
+                                                    //     .hitGetBusVerificationApi(
+                                                    //         busData);
                                                   },
                                                   child: Container(
                                                     alignment: Alignment.center,
@@ -359,7 +432,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                     width: 130,
                                                     height: 30,
                                                     child: TextView(
-                                                      text: 'Track The Bus',
+                                                      text: keyTrackBus.tr,
                                                       textStyle:
                                                           textStyleLabelSmall(
                                                                   context)
@@ -388,7 +461,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                     width: 120,
                                                     height: 30,
                                                     child: TextView(
-                                                      text: 'Cancel Booking',
+                                                      text: keyCancelBooking.tr,
                                                       textStyle:
                                                           textStyleLabelSmall(
                                                                   context)
@@ -696,6 +769,22 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                               ],
                                             )
                                           ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            showSingleDeleteDialog(
+                                                busData.ticketId.toString());
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            size: 28,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ],
                                     ),

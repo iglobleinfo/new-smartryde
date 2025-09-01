@@ -207,11 +207,14 @@ class LoginController extends GetxController {
       customLoader.hide();
       PreferenceManger().isUserLogin(true);
       PreferenceManger().saveUserData(loginModel!.data!);
+      appLanguage = languageFromApi(loginModel!.data!.language??'');
+      await PreferenceManger().saveLanguageCode(appLanguage.name);
+      Get.updateLocale(Locale(appLanguage.name));
       loader.value = false;
       Get.find<HomeController>().getData();
       Get.find<HomeBookingController>().hitGetDistrict();
       Get.until((Route route) => route.isFirst);
-      toast('Logged In');
+      toast(keyLoggedIn.tr);
     }).onError((error, stackTrace) {
       customLoader.hide();
       loader.value = false;

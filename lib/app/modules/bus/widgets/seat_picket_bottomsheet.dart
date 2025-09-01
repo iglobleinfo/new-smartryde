@@ -32,7 +32,7 @@ class SeatPicker extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: TextView(
-                  text: 'Select An Option',
+                  text: keySelectAnOption.tr,
                   textStyle: textStyleBodyLarge(context).copyWith(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
@@ -47,7 +47,7 @@ class SeatPicker extends StatelessWidget {
                   },
                   child: TextView(
                     textAlign: TextAlign.center,
-                    text: 'Close',
+                    text: keyClose.tr,
                     textStyle: textStyleBodyLarge(context).copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w300,

@@ -32,11 +32,6 @@ class HomeBookingController extends GetxController {
   @override
   void onInit() {
     // destiny1Controller.text = 'Select Your Destiny';
-    destiny2Controller.text = 'Select Your Destiny';
-    region1Controller.text = 'Select Your Area';
-    region2Controller.text = 'Select Your Area';
-    stop1Controller.text = 'Select Your Stop';
-    stop2Controller.text = 'Select Your Stop';
     customLoader = CustomLoader();
 
     super.onInit();
@@ -100,6 +95,7 @@ class HomeBookingController extends GetxController {
     if (PreferenceManger().getStatusUserLogin() ?? false) {
       hitGetBookmark();
     }
+    districtList.clear();
     destiny1Controller.clear();
     pickUp1RegionId = null;
     pickUp1DistrictId=null;

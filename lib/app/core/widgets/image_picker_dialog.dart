@@ -1,10 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_ryde/app/core/values/text_styles.dart';
 
 import '../utils/image_picker_and_cropper.dart';
+import '../values/app_strings.dart';
 
 class ImagePickerDialog extends StatelessWidget {
   ImagePickerDialog({
@@ -22,7 +24,7 @@ class ImagePickerDialog extends StatelessWidget {
             children: <Widget>[
               SizedBox(width: 12),
               Text(
-                'Profile picture',
+                keyProfilePic.tr,
                 style: textStyleTitle(_context),
               ),
             ],
@@ -44,9 +46,9 @@ class ImagePickerDialog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           getCameraGalleryIcon(
-              title: 'camera', icon: Icon(Icons.camera), index: 0),
+              title: keyCamera.tr, icon: Icon(Icons.camera), index: 0),
           getCameraGalleryIcon(
-            title: 'Gallery',
+            title: keyGallery.tr,
             icon: Icon(Icons.image),
             index: 1,
           ),

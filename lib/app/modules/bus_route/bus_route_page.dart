@@ -160,7 +160,7 @@ class BusRouteBottomSheet extends StatelessWidget {
                             ),
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: TextView(
-                              text: 'Map',
+                              text: keyMap.tr,
                               textStyle: textStyleLabelSmall(context).copyWith(
                                 fontSize: 13,
                                 color: Colors.white,

@@ -12,138 +12,149 @@ class BusListScreen extends GetView<BusController> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegionWidget(
-      statusBarColor: primaryColor,
-      statusBarBrightness: Brightness.dark,
-      child: SafeArea(
-        child: GetBuilder<BusController>(
-          init: BusController(),
-          builder: (controller) {
-            return Scaffold(
-              resizeToAvoidBottomInset: false,
-              appBar: CustomAppBar(
-                actionWidget: [
-                  getInkWell(
+    return WillPopScope(
+      onWillPop: () async {
+        // This code runs when the Android bottom back button is pressed
+        Get.find<HomeBookingController>().hitGetBookmark();
+        Get.back(result: true);
+        // Return false if you want to stop normal back navigation
+        // Return true if you still want the page to pop
+        return false;
+      },
+      child: AnnotatedRegionWidget(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.dark,
+        child: SafeArea(
+          child: GetBuilder<BusController>(
+            init: BusController(),
+            builder: (controller) {
+              return Scaffold(
+                resizeToAvoidBottomInset: false,
+                appBar: CustomAppBar(
+                  actionWidget: [
+                    getInkWell(
+                      onTap: () {
+                        if (!controller.isBookmark) {
+                          controller.hitBookmarkApi(context);
+                          controller.update();
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            controller.isBookmark
+                                ? Icons.bookmark
+                                : Icons.bookmark_border,
+                            color: Colors.black,
+                            size: 26,
+                          ),
+                          Text(
+                            keyBookmark.tr,
+                            style: TextStyle(fontSize: 18),
+                          )
+                        ],
+                      ).paddingAll(12),
+                    ),
+                  ],
+                  // appBarTitleText: 'SmartRyde',
+                  leadingIcon: getInkWell(
                     onTap: () {
-                      controller.hitBookmarkApi(context);
-                      controller.update();
+                      Get.find<HomeBookingController>().hitGetBookmark();
+                      Get.back(result: true);
                     },
-                    child: Row(
-                      children: [
-                        Icon(
-                          controller.isBookmark
-                              ? Icons.bookmark
-                              : Icons.bookmark_border,
-                          color: Colors.black,
-                          size: 26,
-                        ),
-                        Text(
-                          'Bookmark',
-                          style: TextStyle(fontSize: 18),
-                        )
-                      ],
+                    child: Icon(
+                      Icons.arrow_back_outlined,
+                      color: Colors.grey,
+                      size: 26,
                     ).paddingAll(12),
                   ),
-                ],
-                // appBarTitleText: 'SmartRyde',
-                leadingIcon: getInkWell(
-                  onTap: () {
-                    debugPrint('dsddsdsdsds');
-                    Get.find<HomeBookingController>().hitGetBookmark();
-                    Get.back(result: true);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_outlined,
-                    color: Colors.grey,
-                    size: 26,
-                  ).paddingAll(12),
                 ),
-              ),
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextView(
-                          text: 'Select a trip that suits your preference',
-                          textStyle: textStyleLabelSmall(context).copyWith(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
+                body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.w, vertical: 10.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextView(
+                            text: keySelectATripThatSuitsPreference.tr,
+                            textStyle: textStyleLabelSmall(context).copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        SizedBox(
-                          height: 30,
-                          child: ListView.builder(
-                            scrollDirection:
-                                Axis.horizontal, // Horizontal scroll direction
-                            itemCount: controller.dateList.length,
-                            itemBuilder: (context, index) {
-                              String chipLabel =
-                                  controller.dateList[index]['date'];
-                              bool isSelected = controller.selectedDate ==
-                                  chipLabel; // Check if this date is selected
+                          SizedBox(
+                            height: 15,
+                          ),
+                          SizedBox(
+                            height: 30,
+                            child: ListView.builder(
+                              scrollDirection: Axis
+                                  .horizontal, // Horizontal scroll direction
+                              itemCount: controller.dateList.length,
+                              itemBuilder: (context, index) {
+                                String chipLabel =
+                                    controller.dateList[index]['date'];
+                                bool isSelected = controller.selectedDate ==
+                                    chipLabel; // Check if this date is selected
 
-                              return GestureDetector(
-                                onTap: () {
-                                  // Set the selected date, or deselect if tapped again
-                                  controller.selectedDate =
-                                      (isSelected ? null : chipLabel)!;
-                                  controller.busList.clear();
-                                  controller.hitGetBusList();
-                                  controller.update();
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  margin: EdgeInsets.only(
-                                      right: 8.0), // Space between chips
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                    color: isSelected
-                                        ? primaryColor
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                      width: 0.4,
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Set the selected date, or deselect if tapped again
+                                    controller.selectedDate =
+                                        (isSelected ? null : chipLabel)!;
+                                    controller.busList.clear();
+                                    controller.hitGetBusList();
+                                    controller.update();
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    margin: EdgeInsets.only(
+                                        right: 8.0), // Space between chips
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 5),
+                                    decoration: BoxDecoration(
                                       color: isSelected
-                                          ? Colors.blue
-                                          : Colors.grey,
+                                          ? primaryColor
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        width: 0.4,
+                                        color: isSelected
+                                            ? Colors.blue
+                                            : Colors.grey,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      DateFormat('dd MMMM')
+                                          .format(DateTime.parse(chipLabel)),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: isSelected
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
                                   ),
-                                  child: Text(
-                                    DateFormat('dd MMMM')
-                                        .format(DateTime.parse(chipLabel)),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: isSelected
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                      ],
+                          SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  busList(context),
-                ],
-              ),
-            );
-          },
+                    busList(context),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -175,8 +186,7 @@ class BusListScreen extends GetView<BusController> {
                           ),
                           Center(
                             child: TextView(
-                              text:
-                                  'No Bus available right now. Please try again later!',
+                              text: keyNoBusSelectedTryLater.tr,
                               textStyle: textStyleLabelSmall(context).copyWith(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
@@ -262,7 +272,8 @@ class BusListScreen extends GetView<BusController> {
                                                           height: 40,
                                                           child: TextView(
                                                             text:
-                                                                'Sorry, The Bus Is Full',
+                                                                keySorryBusFull
+                                                                    .tr,
                                                             textStyle:
                                                                 textStyleLabelSmall(
                                                                         context)
@@ -377,7 +388,7 @@ class BusListScreen extends GetView<BusController> {
                                                   ),
                                                 ),
                                                 TextView(
-                                                  text: 'Schedule Time',
+                                                  text: keyScheduleTime.tr,
                                                   textStyle:
                                                       textStyleLabelSmall(
                                                               context)
@@ -396,11 +407,11 @@ class BusListScreen extends GetView<BusController> {
                                                 Container(
                                                   alignment: Alignment.center,
                                                   color: primaryColor,
-                                                  width: 80,
-                                                  height: 30,
+                                                  width: 100,
+                                                  height: 50,
                                                   child: TextView(
                                                     text:
-                                                        'ETA:${busData.deptTime.toString().split(' ').last.split('.').first.replaceAll(':00', '')}',
+                                                        '${keyETA.tr}:${busData.deptTime.toString().split(' ').last.split('.').first.replaceAll(':00', '')}',
                                                     textStyle:
                                                         textStyleLabelSmall(
                                                                 context)

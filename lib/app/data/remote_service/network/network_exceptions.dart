@@ -41,25 +41,7 @@ class NetworkExceptions {
             case DioExceptionType.badResponse:
               switch (error.response!.statusCode) {
                 case 400:
-                  Map<String, dynamic> data = error.response?.data;
-
-                  if (data.values.elementAt(3).runtimeType == String) {
-                    return messageData = data.values.elementAt(3);
-                  } else {
-                    Map<String, dynamic> datas = data.values.elementAt(3);
-                    if (data.values.elementAt(3) == null) {
-                      var dataValue = ErrorMessageResponseModel.fromJson(
-                              error.response?.data)
-                          .message;
-                      if (dataValue == null) {
-                        return messageData = stringUnAuthRequest;
-                      } else {
-                        return messageData = dataValue;
-                      }
-                    } else {
-                      return messageData = datas.values.first[0];
-                    }
-                  }
+                  return messageData = error.response?.data['message'] ?? '';
                 case 401:
                   storage.remove(LOCALKEY_token);
                   PreferenceManger().clearLoginData();
@@ -101,7 +83,7 @@ class NetworkExceptions {
             case DioExceptionType.badResponse:
             case DioExceptionType.connectionError:
               return messageData =
-              'Something went wrong, Please try again later.';
+                  'Something went wrong, Please try again later.';
               // TODO: Handle this case.
               break;
           }

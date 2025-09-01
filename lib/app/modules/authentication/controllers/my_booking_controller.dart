@@ -107,11 +107,30 @@ class MyBookingController extends GetxController
     update();
   }
 
+  Future<void> hitGetBusVerificationApi(BookingList busData) async {
+    APIRepository.getBusVerificationApi(busData.tripRecordId.toString())
+        .then((ErrorMessageResponseModel? value) async {
+      Get.toNamed(
+        AppRoutes.liveTracking,
+        arguments: {'busData': busData},
+      );
+      update();
+    }).onError((error, stackTrace) {
+      debugPrint(stackTrace.toString());
+      debugPrint(error.toString());
+      customLoader.hide();
+      toast(error);
+    });
+    update();
+  }
+
   Future<void> hitCancelBooking(String ticketId) async {
+    isLoader = true;
     APIRepository.cancelBookingApi(
             endPointCancelBooking + ticketId, userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
       hitGetBookingList();
+      isLoader = false;
       update();
     }).onError((error, stackTrace) {
       isLoader = false;
@@ -123,9 +142,27 @@ class MyBookingController extends GetxController
   }
 
   Future<void> hitDeleteAllCancelBooking() async {
+    isLoader = true;
     APIRepository.deleteCancelBookingApi(userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
       hitGetBookingList();
+      isLoader = false;
+      update();
+    }).onError((error, stackTrace) {
+      isLoader = false;
+      debugPrint(stackTrace.toString());
+      customLoader.hide();
+      toast(error);
+    });
+    update();
+  }
+
+  Future<void> hitDeleteCancelBooking(String ticketId) async {
+    isLoader = true;
+    APIRepository.deleteBookingApi(ticketId, userData!.id.toString())
+        .then((ErrorMessageResponseModel? value) async {
+      hitGetBookingList();
+      isLoader = false;
       update();
     }).onError((error, stackTrace) {
       isLoader = false;

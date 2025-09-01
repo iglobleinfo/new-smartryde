@@ -8,6 +8,7 @@ enum Language {
   tch,
 }
 
+// for local purpose
 Language languageFromString(String value) {
   switch (value) {
     case 'en':
@@ -18,5 +19,30 @@ Language languageFromString(String value) {
       return Language.tch;
     default:
       return Language.en; // default fallback
+  }
+}
+
+// for Api purpose
+Language languageFromApi(String value) {
+  switch (value) {
+    case 'ENG':
+      return Language.en;
+    case 'SCH':
+      return Language.sch;
+    case 'TCH':
+      return Language.tch;
+    default:
+      return Language.en; // default fallback
+  }
+}
+
+String stringFromLanguage(Language value) {
+  switch (value) {
+    case Language.en:
+      return 'ENG';
+    case Language.sch:
+      return 'SCH';
+    case Language.tch:
+      return 'TCH';
   }
 }

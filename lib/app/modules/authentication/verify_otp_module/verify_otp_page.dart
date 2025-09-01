@@ -84,7 +84,7 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                       controller.hitGenerateOtpAPI(context);
                     },
                     outlineColor: appButtonColor,
-                    text: 'Resend'.tr.toUpperCase(),
+                    text: keyResend.tr.toUpperCase(),
                     textStyle: textStyleButton(context).copyWith(
                       color: appButtonColor,
                       fontWeight: FontWeight.normal,
@@ -96,7 +96,7 @@ class VerifyOtpPage extends GetView<VerifyOtpController> {
                   child: Align(
                     alignment: Alignment.center,
                     child: MaterialButtonWidget(
-                      buttonText: 'Verify'.toUpperCase(),
+                      buttonText: keyVerify.tr.toUpperCase(),
                       onPressed: () {
                         controller.verifyOtp(context);
                       },

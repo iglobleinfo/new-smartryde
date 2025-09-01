@@ -172,7 +172,7 @@ class RegisterScreen extends GetView<RegisterController> {
           Align(
             alignment: Alignment.center,
             child: MaterialButtonWidget(
-              buttonText: stringSignUp.tr.toUpperCase(),
+              buttonText: keySignUp.tr.toUpperCase(),
               onPressed: () {
                 if (formGlobalKey.currentState!.validate()) {
                   controller.hitSignUpAPI(context);

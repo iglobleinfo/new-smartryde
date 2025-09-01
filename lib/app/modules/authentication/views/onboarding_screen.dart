@@ -24,7 +24,7 @@ class OnboardingScreen extends StatelessWidget {
                       left: 15,
                     ),
                     child: TextView(
-                      text: 'WELCOME ONBOARD TO\nSmartRyde',
+                      text: keyWelcome.tr,
                       textAlign: TextAlign.start,
                       textStyle: textStyleDisplayLarge(context).copyWith(
                         fontWeight: FontWeight.w500,
@@ -38,7 +38,7 @@ class OnboardingScreen extends StatelessWidget {
               height: margin_20.h,
             ),
             TextView(
-              text: 'Please Login/Signup',
+              text: keyLoginSignUp.tr,
               textStyle: textStyleDisplayLarge(context).copyWith(
                 fontWeight: FontWeight.w500,
               ),
@@ -71,7 +71,7 @@ class OnboardingScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: MaterialButtonWidget(
-                      buttonText: stringSignUp.tr.toUpperCase(),
+                      buttonText: keySignUp.tr,
                       onPressed: () {
                         Get.toNamed(AppRoutes.signUp);
                       },

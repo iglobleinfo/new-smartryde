@@ -13,6 +13,7 @@ class BusBookingScreen extends GetView<BookSeatController> {
       statusBarColor: primaryColor,
       statusBarBrightness: Brightness.dark,
       child: SafeArea(
+        bottom: false,
         child: GetBuilder<BookSeatController>(
           init: BookSeatController(),
           builder: (controller) {

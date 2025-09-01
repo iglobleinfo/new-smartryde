@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:smart_ryde/app/core/values/app_strings.dart';
 import 'package:smart_ryde/app/core/values/dimens.dart';
 import 'package:smart_ryde/app/core/values/text_styles.dart';
 import 'package:smart_ryde/app/core/widgets/text_view.dart';
@@ -28,7 +30,7 @@ class BottomPhonePicker extends StatelessWidget {
                 width: 20,
               ),
               TextView(
-                text: 'Select Country Code',
+                text: keySelectCountry.tr,
                 textStyle: textStyleBodyLarge(context).copyWith(fontSize: 18),
               ),
             ],

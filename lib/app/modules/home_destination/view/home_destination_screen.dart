@@ -23,11 +23,10 @@ class HomeDestinyScreen extends GetView<HomeDestinyController> {
           bottomNavigationBar: controller.pickUp1StopId != null
               ? MaterialButtonWidget(
                   minWidth: Get.width,
-                  buttonText: 'Search for suitable bus'.toUpperCase(),
+                  buttonText: keySearchBus.tr.toUpperCase(),
                   onPressed: () {
                     if (matchId == controller.pickUp1StopId.toString()) {
-                      toast(
-                          'Pickup stop and Destination stop cannot be the same');
+                      toast(keyPickAndStop.tr);
                     } else {
                       if (PreferenceManger().getStatusUserLogin() ?? false) {
                         Get.toNamed(AppRoutes.busList, arguments: {
@@ -109,6 +108,7 @@ class HomeDestinyScreen extends GetView<HomeDestinyController> {
                           selectedDistrictId: (districtId) {
                             controller.pickUp1DistrictId = districtId;
                             controller.pickUp1RegionId = null;
+                            controller.pickUp1StopId = null;
                             controller.region1Controller.clear();
                             controller.stop1Controller.clear();
                             controller.hitGetRegion();

@@ -1,7 +1,7 @@
 import 'package:smart_ryde/app/core/utils/time_ago.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+// import 'package:syncfusion_flutter_calendar/calendar.dart';
+// import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../export.dart';
 import '../values/app_global_values.dart';
 
@@ -195,163 +195,163 @@ bottomSheetWidget({builder, icon, Function()? onTap, bool? buttonVisible}) {
       });
 }
 
-calendarWidget(
-    {void Function(DateRangePickerSelectionChangedArgs)? onSelectionChanged,
-    Widget Function(BuildContext, DateRangePickerCellDetails)? cellBuilder,
-    PickerDateRange? value}) {
-  return Container(
-    decoration: const BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black12,
-          blurRadius: 20.0,
-        ),
-      ],
-    ),
-    child: Center(
-      child: SfDateRangePicker(
-        headerHeight: height_70,
-        view: DateRangePickerView.month,
-        selectionMode: DateRangePickerSelectionMode.range,
-        monthCellStyle: const DateRangePickerMonthCellStyle(
-          textStyle: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        selectionTextStyle: const TextStyle(
-          color: Colors.white,
-        ),
-        startRangeSelectionColor: colorAppColors,
-        endRangeSelectionColor: colorAppColors,
-        rangeSelectionColor: textFieldBgClr,
-        cellBuilder: cellBuilder,
-        todayHighlightColor: Colors.black,
-        rangeTextStyle: TextStyle(
-          color: Colors.black,
-          fontSize: font_15,
-        ),
-        headerStyle: DateRangePickerHeaderStyle(
-          backgroundColor: colorAppColors,
-          textAlign: TextAlign.center,
-          textStyle: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: font_25),
-        ),
-        backgroundColor: Colors.white,
-        selectionShape: DateRangePickerSelectionShape.rectangle,
-        onSelectionChanged: onSelectionChanged,
-        initialSelectedRange:
-            value /* PickerDateRange(DateTime.now().subtract(const Duration(days: 4)), DateTime.now().add(const Duration(days: 3)))*/,
-      ),
-    ),
-  );
-}
-
-calendarView() {
-  return Container(
-    height: height_300,
-    decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          const BoxShadow(
-            color: Colors.black12,
-            blurRadius: 2,
-            offset: Offset(
-              1,
-              1,
-            ),
-          ),
-          const BoxShadow(
-            color: Colors.black12,
-            blurRadius: 2,
-            offset: Offset(
-              1,
-              1,
-            ),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10)),
-    child: SfCalendar(
-      dataSource: MeetingDataSource(
-        _getDataSource(),
-      ),
-      controller: _calendarController,
-      cellBorderColor: Colors.transparent,
-      initialSelectedDate: DateTime.now(),
-      todayHighlightColor: colorAppColors,
-      minDate: DateTime(2019, 10, 10, 9, 0, 0),
-      headerStyle: const CalendarHeaderStyle(
-          textAlign: TextAlign.center,
-          backgroundColor: colorAppColors,
-          textStyle: TextStyle(
-              fontSize: 25,
-              fontStyle: FontStyle.normal,
-              letterSpacing: 5,
-              color: Colors.white,
-              fontWeight: FontWeight.w500)),
-      viewHeaderStyle: ViewHeaderStyle(
-        backgroundColor: textFieldBgClr,
-        dayTextStyle: const TextStyle(
-          color: colorAppColors,
-          fontSize: 20,
-        ),
-        dateTextStyle: const TextStyle(
-          color: colorAppColors,
-          fontSize: 25,
-        ),
-      ),
-      view: CalendarView.month,
-      monthViewSettings: const MonthViewSettings(
-        appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-      ),
-    ),
-  ).paddingAll(10);
-}
-
-final CalendarController _calendarController = CalendarController();
-
-List<Meeting> _getDataSource() {
-  final List<Meeting> meetings = <Meeting>[];
-  final DateTime today = DateTime.now();
-  final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 9, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 2));
-  meetings.add(Meeting(
-      'Conference', startTime, endTime, const Color(0xFF0F8644), false));
-  return meetings;
-}
-
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> source) {
-    appointments = source;
-  }
-
-  @override
-  DateTime getStartTime(int index) {
-    return appointments![index].from;
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    return appointments![index].to;
-  }
-
-  @override
-  String getSubject(int index) {
-    return appointments![index].eventName;
-  }
-
-  @override
-  Color getColor(int index) {
-    return appointments![index].background;
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return appointments![index].isAllDay;
-  }
-}
+// calendarWidget(
+//     {void Function(DateRangePickerSelectionChangedArgs)? onSelectionChanged,
+//     Widget Function(BuildContext, DateRangePickerCellDetails)? cellBuilder,
+//     PickerDateRange? value}) {
+//   return Container(
+//     decoration: const BoxDecoration(
+//       boxShadow: [
+//         BoxShadow(
+//           color: Colors.black12,
+//           blurRadius: 20.0,
+//         ),
+//       ],
+//     ),
+//     child: Center(
+//       child: SfDateRangePicker(
+//         headerHeight: height_70,
+//         view: DateRangePickerView.month,
+//         selectionMode: DateRangePickerSelectionMode.range,
+//         monthCellStyle: const DateRangePickerMonthCellStyle(
+//           textStyle: TextStyle(
+//             color: Colors.black,
+//           ),
+//         ),
+//         selectionTextStyle: const TextStyle(
+//           color: Colors.white,
+//         ),
+//         startRangeSelectionColor: colorAppColors,
+//         endRangeSelectionColor: colorAppColors,
+//         rangeSelectionColor: textFieldBgClr,
+//         cellBuilder: cellBuilder,
+//         todayHighlightColor: Colors.black,
+//         rangeTextStyle: TextStyle(
+//           color: Colors.black,
+//           fontSize: font_15,
+//         ),
+//         headerStyle: DateRangePickerHeaderStyle(
+//           backgroundColor: colorAppColors,
+//           textAlign: TextAlign.center,
+//           textStyle: TextStyle(
+//               color: Colors.white,
+//               fontWeight: FontWeight.bold,
+//               fontSize: font_25),
+//         ),
+//         backgroundColor: Colors.white,
+//         selectionShape: DateRangePickerSelectionShape.rectangle,
+//         onSelectionChanged: onSelectionChanged,
+//         initialSelectedRange:
+//             value /* PickerDateRange(DateTime.now().subtract(const Duration(days: 4)), DateTime.now().add(const Duration(days: 3)))*/,
+//       ),
+//     ),
+//   );
+// }
+//
+// calendarView() {
+//   return Container(
+//     height: height_300,
+//     decoration: BoxDecoration(
+//         color: Colors.white,
+//         boxShadow: [
+//           const BoxShadow(
+//             color: Colors.black12,
+//             blurRadius: 2,
+//             offset: Offset(
+//               1,
+//               1,
+//             ),
+//           ),
+//           const BoxShadow(
+//             color: Colors.black12,
+//             blurRadius: 2,
+//             offset: Offset(
+//               1,
+//               1,
+//             ),
+//           ),
+//         ],
+//         borderRadius: BorderRadius.circular(10)),
+//     child: SfCalendar(
+//       dataSource: MeetingDataSource(
+//         _getDataSource(),
+//       ),
+//       controller: _calendarController,
+//       cellBorderColor: Colors.transparent,
+//       initialSelectedDate: DateTime.now(),
+//       todayHighlightColor: colorAppColors,
+//       minDate: DateTime(2019, 10, 10, 9, 0, 0),
+//       headerStyle: const CalendarHeaderStyle(
+//           textAlign: TextAlign.center,
+//           backgroundColor: colorAppColors,
+//           textStyle: TextStyle(
+//               fontSize: 25,
+//               fontStyle: FontStyle.normal,
+//               letterSpacing: 5,
+//               color: Colors.white,
+//               fontWeight: FontWeight.w500)),
+//       viewHeaderStyle: ViewHeaderStyle(
+//         backgroundColor: textFieldBgClr,
+//         dayTextStyle: const TextStyle(
+//           color: colorAppColors,
+//           fontSize: 20,
+//         ),
+//         dateTextStyle: const TextStyle(
+//           color: colorAppColors,
+//           fontSize: 25,
+//         ),
+//       ),
+//       view: CalendarView.month,
+//       monthViewSettings: const MonthViewSettings(
+//         appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+//       ),
+//     ),
+//   ).paddingAll(10);
+// }
+//
+// final CalendarController _calendarController = CalendarController();
+//
+// List<Meeting> _getDataSource() {
+//   final List<Meeting> meetings = <Meeting>[];
+//   final DateTime today = DateTime.now();
+//   final DateTime startTime =
+//       DateTime(today.year, today.month, today.day, 9, 0, 0);
+//   final DateTime endTime = startTime.add(const Duration(hours: 2));
+//   meetings.add(Meeting(
+//       'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+//   return meetings;
+// }
+//
+// class MeetingDataSource extends CalendarDataSource {
+//   MeetingDataSource(List<Meeting> source) {
+//     appointments = source;
+//   }
+//
+//   @override
+//   DateTime getStartTime(int index) {
+//     return appointments![index].from;
+//   }
+//
+//   @override
+//   DateTime getEndTime(int index) {
+//     return appointments![index].to;
+//   }
+//
+//   @override
+//   String getSubject(int index) {
+//     return appointments![index].eventName;
+//   }
+//
+//   @override
+//   Color getColor(int index) {
+//     return appointments![index].background;
+//   }
+//
+//   @override
+//   bool isAllDay(int index) {
+//     return appointments![index].isAllDay;
+//   }
+// }
 
 class Meeting {
   Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);

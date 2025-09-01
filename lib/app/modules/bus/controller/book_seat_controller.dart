@@ -60,7 +60,7 @@ class BookSeatController extends GetxController {
     APIRepository.bookTicketApi(bookingRequest).then((value) async {
       customLoader.hide();
       Get.to(BookingConfirmScreen(stopName: fromName??'',));
-      toast('Booked successfully'.tr);
+      toast(keyBookedSuccess.tr);
     }).onError((error, stackTrace) {
       customLoader.hide();
       toast(error);

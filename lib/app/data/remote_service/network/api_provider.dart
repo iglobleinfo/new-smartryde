@@ -89,6 +89,7 @@ class APIRepository {
       );
       return response;
     } catch (e, str) {
+      toast(keyInvalidOtpSend.tr);
       return Future.error(
         NetworkExceptions.getDioException(e, str),
       );
@@ -111,7 +112,6 @@ class APIRepository {
       return response;
     } catch (e, str) {
       customLoader.hide();
-      toast('Incorrect OTP');
       return Future.error(
         NetworkExceptions.getDioException(e, str),
       );
@@ -124,6 +124,21 @@ class APIRepository {
     try {
       final response = await dioClient!.put(endPointSignUp, data: dataBody);
       return LoginResponseModel.fromJson(response);
+    } catch (e, str) {
+      return Future.error(NetworkExceptions.getDioException(e, str));
+    }
+  }
+
+  /*===================================================================== update Language API Call  ==========================================================*/
+  static Future<ErrorMessageResponseModel?> updateLanguageApiCall({
+    required String userId,
+  }) async {
+    try {
+      final response =
+          await dioClient!.put(endPointChangeLang + userId, queryParameters: {
+        "langCode": stringFromLanguage(appLanguage),
+      });
+      return ErrorMessageResponseModel.fromJson(response);
     } catch (e, str) {
       return Future.error(NetworkExceptions.getDioException(e, str));
     }
@@ -190,12 +205,48 @@ class APIRepository {
     }
   }
 
+  /*===================================================================== Get Bus Verification API Call  ==========================================================*/
+  static Future<ErrorMessageResponseModel?> getBusVerificationApi(
+      String tripId) async {
+    try {
+      final response = await dioClient!.get(
+        endPointGetBusVerification + tripId,
+        skipAuth: false,
+      );
+      return ErrorMessageResponseModel.fromJson(response);
+    } catch (e, str) {
+      debugPrint(e.toString());
+      debugPrint(str.toString());
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
   /*===================================================================== Delete Cancel All Bookings API Call  ==========================================================*/
   static Future<ErrorMessageResponseModel?> deleteCancelBookingApi(
       String userId) async {
     try {
       final response = await dioClient!.get(
         endPointDeleteCancelBooking,
+        skipAuth: false,
+        queryParameters: {'userId': userId},
+      );
+      return ErrorMessageResponseModel.fromJson(response);
+    } catch (e, str) {
+      debugPrint(e.toString());
+      debugPrint(str.toString());
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  } /*===================================================================== Delete Cancel Bookings API Call  ==========================================================*/
+
+  static Future<ErrorMessageResponseModel?> deleteBookingApi(
+      String ticketId, String userId) async {
+    try {
+      final response = await dioClient!.get(
+        endPointDeleteBooking + ticketId,
         skipAuth: false,
         queryParameters: {'userId': userId},
       );
@@ -400,7 +451,8 @@ class APIRepository {
       final response = await dioClient!.post(endPointForgot, data: dataBody);
       return MyAccountModel.fromJson(response);
     } catch (e, str) {
-      return Future.error(NetworkExceptions.getDioException(e, str));
+      toast(keyInvalidOtpSend.tr);
+      // return Future.error(NetworkExceptions.getDioException(e, str));
     }
   }
 

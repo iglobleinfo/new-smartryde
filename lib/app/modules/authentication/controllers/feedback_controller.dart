@@ -73,8 +73,12 @@ class FeedbackController extends GetxController {
       toast(stringPasswordEmptyValidation.tr);
       return;
     }
+    if (dateTimeController.text.isEmpty) {
+      toast(keySelectDate.tr);
+      return;
+    }
     if (!GetUtils.isEmail(emailController.text)) {
-      toast('Enter a valid email');
+      toast(keyEnterValidEmail.tr);
       return;
     }
     customLoader.show(context);
@@ -93,7 +97,7 @@ class FeedbackController extends GetxController {
         .then((MessageResponseModel? value) async {
       Get.until((route) => route.isFirst);
       customLoader.hide();
-      toast('Feedback submitted successfully');
+      toast(keyFeedSubmit.tr);
       update();
     }).onError((error, stackTrace) {
       customLoader.hide();

@@ -17,7 +17,7 @@ class MyProfileScreen extends GetView<MyProfileController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomBackButton(
-            title: 'My Profile',
+            title: keyMyProfile.tr,
             onTap: () {
               Get.back();
               Get.find<HomeController>().getData();
@@ -101,7 +101,7 @@ class MyProfileScreen extends GetView<MyProfileController> {
                           SizedBox(height: 10),
                           listTile(
                             context: context,
-                            text: 'EDIT PROFILE DETAILS',
+                            text: keyEditProfileDetails.tr,
                             onTap: () {
                               Get.toNamed(
                                 AppRoutes.editProfile,
@@ -113,13 +113,13 @@ class MyProfileScreen extends GetView<MyProfileController> {
                           ),
                           listTile(
                             context: context,
-                            text: 'LOGOUT',
+                            text: keyLogOut.tr,
                             onTap: () {
                               PreferenceManger().isUserLogin(false);
                               PreferenceManger().clearLoginData();
                               Get.find<HomeController>().getData();
                               Get.back();
-                              toast('Logout successfully');
+                              toast(keyLogoutSuccess.tr);
                             },
                           ),
                           Divider(

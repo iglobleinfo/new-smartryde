@@ -26,7 +26,7 @@ class _StopLocationPageState extends State<StopLocationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        appBarTitleText: 'Stop Location',
+        appBarTitleText: keyStopLocation.tr,
         leadingIcon: getInkWell(
           onTap: () {
             Get.back();

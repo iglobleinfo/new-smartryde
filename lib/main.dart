@@ -1,3 +1,4 @@
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:smart_ryde/app/core/values/app_global_values.dart';
 import 'package:smart_ryde/app/data/internet_check/dependency.dart';
 import 'package:smart_ryde/app/routes/app_pages.dart';
@@ -32,11 +33,11 @@ Future<void> main() async {
 }
 
 initApp() async {
-  runZonedGuarded(() {
+  // runZonedGuarded(() {
     runApp(MyApp());
-  }, (error, stack) {
-    debugPrint("error Received $error");
-  });
+  // }, (error, stack) {
+  //   debugPrint("error Received $error");
+  // });
 }
 
 class MyApp extends StatelessWidget {

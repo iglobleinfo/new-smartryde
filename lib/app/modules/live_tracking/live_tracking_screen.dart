@@ -28,7 +28,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        appBarTitleText: 'Live Tracking',
+        appBarTitleText: keyLiveTracking.tr,
         leadingIcon: getInkWell(
           onTap: () {
             Get.back();
@@ -47,7 +47,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
             AnimatedMarker(
               staticMarkers: controller.markers,
               animatedMarkers: controller.markers,
-              duration: const Duration(seconds: 1),
+              duration: const Duration(seconds: 5),
               fps: 15,
               curve: Curves.easeOut,
               builder: (context, animatedMarkers) {
@@ -56,7 +56,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                   onMapCreated: controller.onMapInitialize,
                   initialCameraPosition: CameraPosition(
                     target: controller.currentLatLng.value,
-                    zoom: 18,
+                    zoom: 17,
                   ),
                   markers: animatedMarkers,
                 );
@@ -116,7 +116,14 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                       SizedBox(
                         width: 150,
                         child: TextView(
-                          text: busData.fromEng,
+                          text: appLanguage == Language.en
+                              ? busData.fromEng ?? ''
+                              : appLanguage ==
+                              Language.sch
+                              ? busData.fromChSim ??
+                              ''
+                              : busData.fromCh ??
+                              '',
                           textAlign: TextAlign.start,
                           maxLine: 2,
                           textStyle: textStyleLabelSmall(context).copyWith(
@@ -139,7 +146,14 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                         width: 150,
                         child: TextView(
                           textAlign: TextAlign.start,
-                          text: busData.toEng,
+                          text: appLanguage == Language.en
+                              ? busData.toEng ?? ''
+                              : appLanguage ==
+                              Language.sch
+                              ? busData.toChSim ??
+                              ''
+                              : busData.toCh ??
+                              '',
                           textStyle: textStyleLabelSmall(context).copyWith(
                             fontSize: 12,
                             color: busData.totalSeat == 0
@@ -160,7 +174,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                         ),
                       ),
                       TextView(
-                        text: 'Total Booked Seats:${busData.totalSeat}',
+                        text: '${keyTotalBookedSeats.tr}${busData.totalSeat}',
                         textStyle: textStyleLabelSmall(context).copyWith(
                           fontSize: 12,
                           color: busData.totalSeat == 0
@@ -170,7 +184,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                         ),
                       ),
                       TextView(
-                        text: 'Booking No:${busData.refrenceNumber}',
+                        text: '${keyBookingNo.tr}${busData.refrenceNumber}',
                         textStyle: textStyleLabelSmall(context).copyWith(
                           fontSize: 12,
                           color: busData.totalSeat == 0

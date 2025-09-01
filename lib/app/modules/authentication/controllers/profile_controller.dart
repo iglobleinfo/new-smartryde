@@ -54,7 +54,7 @@ class ProfileController extends GetxController {
       return;
     }
     if (!GetUtils.isEmail(emailController.text)) {
-      toast('Enter a valid email');
+      toast(keyEnterValidEmail.tr);
       return;
     }
     customLoader.show(context);
@@ -77,7 +77,7 @@ class ProfileController extends GetxController {
         Get.put(MyProfileController()).getData();
       }
       Get.until((route) => route.isFirst);
-      toast('Profile updated successfully');
+      toast(keyProfileUpdated.tr);
       update();
     }).onError((error, stackTrace) {
       customLoader.hide();
