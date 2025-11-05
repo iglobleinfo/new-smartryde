@@ -1,17 +1,20 @@
 // Project imports:
+import 'dart:io';
+
+import '../../../push_notification_manager.dart';
+
 class AuthRequestModel {
   static loginReq({
     required String phoneNumber,
     required String password,
-    deviceToken,
     deviceType,
     deviceName,
   }) {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['username'] = phoneNumber;
     data['password'] = password;
-    data['fcmToken'] = 'deviceToken';
-    data['platform'] = 'android';
+    data['fcmToken'] = deviceToken;
+    data['platform'] = Platform.isAndroid?'Android':'iOS';
     return data;
   }
 

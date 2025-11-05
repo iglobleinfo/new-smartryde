@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:smart_ryde/app/modules/authentication/model/booking_response.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/app/modules/live_tracking/model/bus_detail_response.dart';
 import 'package:smart_ryde/app/core/services/mqtt_service.dart';
@@ -18,7 +19,7 @@ class LiveTrackingController extends GetxController
   StreamSubscription<TrackData>? _trackDataStream;
   StreamSubscription<SmartRydeData>? _smartRydeStream;
   RxSet<Marker> markers = RxSet<Marker>();
-  late BookingList busData;
+  late Content busData;
   LatLng? _previousLatLng;
 
   // *******************************************
@@ -62,7 +63,7 @@ class LiveTrackingController extends GetxController
   }
 
   Future<void> _fetchIotaSmartDeviceId() async {
-    String busNumber = busData.busNumber;
+    String busNumber = busData.busNumber??'';
     APIRepository.fetchBusDetail(busNumber)
         .then((BusDetailResponse? busDetail) {
       if (busDetail?.data?.iotaSmartDeviceId != null) {

@@ -1,4 +1,4 @@
-package com.example.smart_ryde
+package com.igloble.minibus
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -10,6 +10,7 @@ import 'package:smart_ryde/model/responseModal/home_model.dart';
 
 import '../../../../export.dart';
 import '../../../../model/responseModal/bookmark_response_model.dart';
+import '../../../modules/authentication/model/booking_response.dart';
 import '../../../modules/live_tracking/model/bus_detail_response.dart';
 import 'dio_client.dart';
 
@@ -196,6 +197,22 @@ class APIRepository {
         skipAuth: false,
       );
       return BookingListResponse.fromJson(response);
+    } catch (e, str) {
+      debugPrint(e.toString());
+      debugPrint(str.toString());
+      return Future.error(
+        NetworkExceptions.getDioException(e, str),
+      );
+    }
+  }
+
+  static Future<BookingResponseModel?> getBookingApi(
+      String userId, String bookingType, int page) async {
+    try {
+      final response = await dioClient!.get(endPointGetBooking + userId,
+          skipAuth: false,
+          queryParameters: {'bookingType': bookingType, 'pageNumber': page});
+      return BookingResponseModel.fromJson(response);
     } catch (e, str) {
       debugPrint(e.toString());
       debugPrint(str.toString());

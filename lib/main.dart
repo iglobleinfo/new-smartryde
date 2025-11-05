@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_file.dart';
 import 'package:smart_ryde/app/core/values/app_global_values.dart';
 import 'package:smart_ryde/app/data/internet_check/dependency.dart';
+import 'package:smart_ryde/app/data/push_notification_manager.dart';
 import 'package:smart_ryde/app/routes/app_pages.dart';
 import '../../export.dart';
 import 'app/core/translations/translation_service.dart';
+import 'firebase_options.dart';
 
 var log = Logger();
 GetStorage storage = GetStorage();
@@ -21,6 +24,10 @@ class GlobalVariable {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  PushNotificationsManager().init();
   APIRepository();
   DependencyInjection.init();
   await GetStorage.init();
@@ -34,7 +41,7 @@ Future<void> main() async {
 
 initApp() async {
   // runZonedGuarded(() {
-    runApp(MyApp());
+  runApp(MyApp());
   // }, (error, stack) {
   //   debugPrint("error Received $error");
   // });

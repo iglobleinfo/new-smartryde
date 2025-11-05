@@ -1,4 +1,5 @@
 import 'package:smart_ryde/app/core/widgets/annotated_region_widget.dart';
+import 'package:smart_ryde/app/modules/authentication/model/booking_response.dart';
 import 'package:smart_ryde/app/modules/authentication/model/my_booking_response.dart';
 import 'package:smart_ryde/export.dart';
 
@@ -146,7 +147,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                               unselectedLabelColor: primaryColor,
                               indicatorColor: primaryColor,
                               labelStyle: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 16.5, fontWeight: FontWeight.bold),
                               unselectedLabelStyle: TextStyle(fontSize: 16),
                               indicatorSize: TabBarIndicatorSize.tab,
                               indicator: UnderlineTabIndicator(
@@ -212,7 +213,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                     backgroundColor: Colors.white,
                   ),
                 )
-              : controller.currentBookingList.isEmpty
+              : controller.bookingDataList.isEmpty
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -239,13 +240,13 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                       ],
                     )
                   : ListView.builder(
-                      itemCount: controller.currentBookingList.length,
+                      itemCount: controller.bookingDataList.length,
+                      controller: controller.currentScrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
                       padding: EdgeInsets.only(bottom: 20),
                       itemBuilder: (BuildContext context, int index) {
-                        BookingList busData =
-                            controller.currentBookingList[index];
+                        Content busData = controller.bookingDataList[index];
                         return Column(
                           children: [
                             DecoratedBox(
@@ -412,7 +413,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 SizedBox(
-                                                  width: 5,
+                                                  width: 0,
                                                 ),
                                                 GestureDetector(
                                                   onTap: () {
@@ -507,7 +508,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                     backgroundColor: Colors.white,
                   ),
                 )
-              : controller.cancelledBookingList.isEmpty
+              : controller.bookingDataList.isEmpty
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -534,13 +535,13 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                       ],
                     )
                   : ListView.builder(
-                      itemCount: controller.cancelledBookingList.length,
+                      itemCount: controller.bookingDataList.length,
+                      controller: controller.cancelledScrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
                       padding: EdgeInsets.only(bottom: 20),
                       itemBuilder: (BuildContext context, int index) {
-                        BookingList busData =
-                            controller.cancelledBookingList[index];
+                        Content busData = controller.bookingDataList[index];
                         return Column(
                           children: [
                             DecoratedBox(
@@ -815,7 +816,7 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                     backgroundColor: Colors.white,
                   ),
                 )
-              : controller.pastBookingList.isEmpty
+              : controller.bookingDataList.isEmpty
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -842,12 +843,13 @@ class MyBookingListScreen extends GetView<MyBookingController> {
                       ],
                     )
                   : ListView.builder(
-                      itemCount: controller.pastBookingList.length,
+                      itemCount: controller.bookingDataList.length,
+                      controller: controller.pastScrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
                       padding: EdgeInsets.only(bottom: 20),
                       itemBuilder: (BuildContext context, int index) {
-                        BookingList busData = controller.pastBookingList[index];
+                        Content busData = controller.bookingDataList[index];
                         return Column(
                           children: [
                             DecoratedBox(

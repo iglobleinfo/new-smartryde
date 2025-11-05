@@ -16,6 +16,7 @@ const endPointSaveBookMark = "/user/save-bookmark";
 const endPointGetBookMark = "/user/bookmark";
 const endPointGetUser = "/user/";
 const endPointGetMyBooking = "/user/my-bookings/";
+const endPointGetBooking = "/user/bookings/";
 const endPointGetBusVerification = "/bus/verifyTracking/";
 const endPointCancelBooking = "/booking/cancel/";
 const endPointDeleteCancelBooking = "/booking/delete-canceled";

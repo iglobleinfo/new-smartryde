@@ -1,5 +1,6 @@
 import 'package:animated_marker/animated_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:smart_ryde/app/modules/authentication/model/booking_response.dart';
 import 'package:smart_ryde/app/modules/live_tracking/live_tracking_controller.dart';
 import '../../../export.dart';
 import '../authentication/model/my_booking_response.dart';
@@ -70,7 +71,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
   }
 
   Widget busDetail(BuildContext context) {
-    BookingList busData = controller.busData;
+    Content busData = controller.busData;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(

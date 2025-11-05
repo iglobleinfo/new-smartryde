@@ -4,6 +4,7 @@ import 'package:smart_ryde/app/modules/bus/model/bus_response.dart';
 import 'package:smart_ryde/export.dart';
 import 'package:smart_ryde/model/error_response_model.dart';
 
+import '../model/booking_response.dart';
 import '../model/login_data_model.dart';
 
 class MyBookingController extends GetxController
@@ -47,16 +48,26 @@ class MyBookingController extends GetxController
     },
   ];
 
-  BookingListResponse? bookingListResponse;
-  List<BookingList> bookingList = [];
-  List<BookingList> currentBookingList = [];
-  List<BookingList> cancelledBookingList = [];
-  List<BookingList> pastBookingList = [];
+  // BookingListResponse? bookingListResponse;
+  BookingResponseModel? bookingResponseModel;
+  BookingData? bookingData;
+  int page = 0;
+  List<Content> bookingDataList = [];
+  ScrollController currentScrollController = ScrollController();
+  ScrollController cancelledScrollController = ScrollController();
+  ScrollController pastScrollController = ScrollController();
+  // List<BookingList> bookingList = [];
+  // List<BookingList> currentBookingList = [];
+  // List<BookingList> cancelledBookingList = [];
+  // List<BookingList> pastBookingList = [];
   LoginDataModel? userData;
 
   @override
   void onInit() {
     tabController = TabController(length: 3, vsync: this);
+    listenerCurrentScrollControllers();
+    listenerCancelledScrollControllers();
+    listenerPastScrollControllers();
     customLoader = CustomLoader();
     super.onInit();
   }
@@ -69,30 +80,69 @@ class MyBookingController extends GetxController
 
   @override
   void onReady() {
-    hitGetBookingList();
+    hitGetBookingData();
     update();
   }
 
-  Future<void> hitGetBookingList() async {
+  listenerCurrentScrollControllers() async {
+    currentScrollController.addListener(() {
+      if (currentScrollController.position.pixels ==
+          currentScrollController.position.maxScrollExtent) {
+        if ((page + 1) * 20 <= bookingDataList.length) {
+          page++;
+          debugPrint('page:::$page');
+          hitGetBookingData(isLoading: false);
+        }
+      }
+    });
+  }
+
+  listenerCancelledScrollControllers() async {
+    cancelledScrollController.addListener(() {
+      if (cancelledScrollController.position.pixels ==
+          cancelledScrollController.position.maxScrollExtent) {
+        if ((page + 1) * 20 <= bookingDataList.length) {
+          page++;
+          debugPrint('page:::$page');
+          hitGetBookingData(isLoading: false);
+        }
+      }
+    });
+  }
+
+  listenerPastScrollControllers() async {
+    pastScrollController.addListener(() {
+      if (pastScrollController.position.pixels ==
+          pastScrollController.position.maxScrollExtent) {
+        if ((page + 1) * 20 <= bookingDataList.length) {
+          page++;
+          debugPrint('page:::$page');
+          hitGetBookingData(isLoading: false);
+        }
+      }
+    });
+  }
+
+  String bookingType = 'current';
+
+  Future<void> hitGetBookingData({bool? isLoading}) async {
     userData = await PreferenceManger().getUserData();
-    isLoader = true;
-    bookingList.clear();
-    currentBookingList.clear();
-    cancelledBookingList.clear();
-    pastBookingList.clear();
-    APIRepository.getMyBookingApi(userData!.id.toString())
-        .then((BookingListResponse? value) async {
-      bookingListResponse = value;
-      if (bookingListResponse?.data != null) {
-        bookingList.addAll(bookingListResponse!.data ?? []);
-        for (int i = 0; i < bookingList.length; i++) {
-          if (bookingList[i].canceled ?? false) {
-            cancelledBookingList.add(bookingList[i]);
-          } else if (bookingList[i].tripEnd ?? false) {
-            pastBookingList.add(bookingList[i]);
-          } else if (!(bookingList[i].tripEnd ?? false) &&
-              !(bookingList[i].canceled ?? false)) {
-            currentBookingList.add(bookingList[i]);
+
+    if (page == 0) {
+      isLoader = true;
+      bookingDataList.clear();
+    }
+    APIRepository.getBookingApi(userData!.id.toString(), bookingType, page)
+        .then((BookingResponseModel? value) async {
+      if (value != null) {
+        bookingResponseModel = value;
+        debugPrint('bookingResponseModel::$bookingResponseModel');
+        if (bookingResponseModel?.data != null) {
+          bookingData = bookingResponseModel!.data;
+          if (bookingData != null) {
+            debugPrint(
+                'bookingData?.content ?? []::${bookingData?.content?.length ?? []}');
+            bookingDataList.addAll(bookingData?.content ?? []);
           }
         }
       }
@@ -106,6 +156,41 @@ class MyBookingController extends GetxController
     });
     update();
   }
+
+  /// Old My Booking Api
+  // Future<void> hitGetBookingList() async {
+  //   userData = await PreferenceManger().getUserData();
+  //   isLoader = true;
+  //   bookingList.clear();
+  //   currentBookingList.clear();
+  //   cancelledBookingList.clear();
+  //   pastBookingList.clear();
+  //   APIRepository.getMyBookingApi(userData!.id.toString())
+  //       .then((BookingListResponse? value) async {
+  //     bookingListResponse = value;
+  //     if (bookingListResponse?.data != null) {
+  //       bookingList.addAll(bookingListResponse!.data ?? []);
+  //       for (int i = 0; i < bookingList.length; i++) {
+  //         if (bookingList[i].canceled ?? false) {
+  //           cancelledBookingList.add(bookingList[i]);
+  //         } else if (bookingList[i].tripEnd ?? false) {
+  //           pastBookingList.add(bookingList[i]);
+  //         } else if (!(bookingList[i].tripEnd ?? false) &&
+  //             !(bookingList[i].canceled ?? false)) {
+  //           currentBookingList.add(bookingList[i]);
+  //         }
+  //       }
+  //     }
+  //     isLoader = false;
+  //     update();
+  //   }).onError((error, stackTrace) {
+  //     isLoader = false;
+  //     debugPrint(stackTrace.toString());
+  //     customLoader.hide();
+  //     toast(error);
+  //   });
+  //   update();
+  // }
 
   Future<void> hitGetBusVerificationApi(BookingList busData) async {
     APIRepository.getBusVerificationApi(busData.tripRecordId.toString())
@@ -129,7 +214,7 @@ class MyBookingController extends GetxController
     APIRepository.cancelBookingApi(
             endPointCancelBooking + ticketId, userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
-      hitGetBookingList();
+      hitGetBookingData();
       isLoader = false;
       update();
     }).onError((error, stackTrace) {
@@ -145,7 +230,7 @@ class MyBookingController extends GetxController
     isLoader = true;
     APIRepository.deleteCancelBookingApi(userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
-      hitGetBookingList();
+      hitGetBookingData();
       isLoader = false;
       update();
     }).onError((error, stackTrace) {
@@ -161,7 +246,7 @@ class MyBookingController extends GetxController
     isLoader = true;
     APIRepository.deleteBookingApi(ticketId, userData!.id.toString())
         .then((ErrorMessageResponseModel? value) async {
-      hitGetBookingList();
+      hitGetBookingData();
       isLoader = false;
       update();
     }).onError((error, stackTrace) {
@@ -175,6 +260,15 @@ class MyBookingController extends GetxController
 
   void onTabChange(int selectedIndex) {
     index = selectedIndex;
+    page = 0;
+    if (index == 0) {
+      bookingType = 'current';
+    } else if (index == 1) {
+      bookingType = 'canceled';
+    } else {
+      bookingType = 'past';
+    }
+    hitGetBookingData();
     update();
   }
 }

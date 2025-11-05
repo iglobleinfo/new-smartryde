@@ -451,7 +451,7 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
     return Container(
       constraints: BoxConstraints(
         minHeight: 0,
-        maxHeight: context.height * 0.5,
+        maxHeight: context.height * 0.3,
       ),
       width: double.infinity,
       child: PreferenceManger().getStatusUserLogin() ?? false
@@ -483,7 +483,7 @@ class HomeBookingScreen extends GetView<HomeBookingController> {
                         ],
                       ),
                     ),
-                    Expanded(
+                    Flexible(
                       child: ListView.builder(
                           itemCount: controller.bookmarkList.length,
                           shrinkWrap: true,
