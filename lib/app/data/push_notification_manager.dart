@@ -66,8 +66,9 @@ class PushNotificationsManager {
 
   onMessage() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print("message2  action ${message}");
-      print(number.toString());
+      print("Remote Message::: ${message.toMap()}");
+      print("notification title ${message.notification?.title}");
+      print("notification  body ${message.notification?.body}");
       // app foreground
       var notification = message.data;
       var androids = AndroidInitializationSettings("ic_drawable");
@@ -76,8 +77,6 @@ class PushNotificationsManager {
 
       flutterLocalNotificationsPlugin.initialize(platform,
           onDidReceiveNotificationResponse: (NotificationResponse data) {
-        print("message3 local ${message.data['detail']}");
-        print("message4 local ${message.notification}");
         notificationRedirection(message.data);
       });
 
@@ -89,6 +88,7 @@ class PushNotificationsManager {
           groupKey: "smart_ryde",
           setAsGroupSummary: true,
           groupAlertBehavior: GroupAlertBehavior.all,
+          styleInformation: BigTextStyleInformation(''),
           playSound: true,
           enableVibration: true,
         );
@@ -96,10 +96,13 @@ class PushNotificationsManager {
         var platformChannelSpecifics = NotificationDetails(
             android: androidPlatformChannelSpecifics,
             iOS: iOSPlatformChannelSpecifics);
-        var jsonData = message.data;
+        var jsonData = message.notification;
         var rng = Random();
-        await flutterLocalNotificationsPlugin.show(rng.nextInt(1000),
-            jsonData["title"]??'N/A', jsonData["message"]??'N/A', platformChannelSpecifics,
+        await flutterLocalNotificationsPlugin.show(
+            rng.nextInt(1000),
+            jsonData?.title ?? '',
+            jsonData?.body ?? '',
+            platformChannelSpecifics,
             payload: jsonEncode(notification));
       }
     });
